@@ -1,0 +1,26 @@
+/* Custom styling */
+body {
+  font-family: "Cairo", sans-serif;
+}
+
+/* Custom width for class "min" */
+/* For small screens (under 768px) */
+@media (max-width: 767px) {
+  .min {
+    width: 50%;
+  }
+}
+
+/* For medium screens (768px to 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .min {
+    width: 25%;
+  }
+}
+
+/* For large screens (greater than 1024px) */
+@media (min-width: 1025px) {
+  .min {
+    width: 20%;
+  }
+}
