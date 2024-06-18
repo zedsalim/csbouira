@@ -3,6 +3,13 @@ body {
   font-family: "Cairo", sans-serif;
 }
 
+/* for fixed-top navbar */
+body::before {
+  display: block;
+  content: "";
+  height: 80px;
+}
+
 /* Custom width for class "min" */
 /* For small screens (under 768px) */
 @media (max-width: 767px) {

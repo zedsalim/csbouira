@@ -28,7 +28,9 @@
   </head>
   <body>
     <!-- NavBar -->
-    <nav class="navbar navbar-expand-lg navbar-light py-3">
+    <nav
+      class="navbar bg-light navbar-expand-lg navbar-light py-2 fixed-top shadow-sm"
+    >
       <div class="container">
         <a href="#" class="navbar-brand"
           ><img src="assets/images/csb-nav-logo.png" alt="CSB Logo"
@@ -63,20 +65,20 @@
               </ul>
             </li>
             <li class="nav-item me-4">
-              <a href="#" class="nav-link">About</a>
+              <a href="#about" class="nav-link">About</a>
             </li>
             <li class="nav-item me-4">
-              <a href="#" class="nav-link">Contact</a>
+              <a href="#contact" class="nav-link">Contact</a>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link">Contribute</a>
+              <a href="#contribute" class="nav-link">Contribute</a>
             </li>
           </ul>
         </div>
       </div>
     </nav>
     <!-- Header -->
-    <section class="bg-dark text-light p-md-5 p-3 text-center">
+    <section class="bg-dark text-light p-md-5 p-3 text-center mb-5">
       <div class="container">
         <div
           class="d-sm-flex flex-column align-items-center justify-content-between"
@@ -314,9 +316,10 @@
           </div>
         </div>
       </div>
+      <span id="about"></span>
     </section>
     <!-- About us -->
-    <section class="bg-light text-dark p-md-5 pt-4 text-end mt-4">
+    <section class="bg-light text-dark p-md-5 pt-5 text-end mt-4">
       <div class="container">
         <h2 class="text-center mb-sm-5 mt-lg-1 mb-4">
           <span class="text-primary"
@@ -343,10 +346,11 @@
           </div>
         </div>
       </div>
+      <span id="contact"></span>
     </section>
 
     <!-- Contact us -->
-    <section class="contact p-4">
+    <section class="contact p-5">
       <div class="container">
         <h2 class="text-center mb-sm-5 mt-lg-1 mb-4">
           <span class="text-primary"
@@ -383,11 +387,46 @@
               </div>
               <div class="d-grid">
                 <button type="submit" class="btn btn-primary text-white mt-3">
-                  Submit
+                  أرسل
                 </button>
               </div>
             </form>
           </div>
+        </div>
+      </div>
+      <span id="contribute"></span>
+    </section>
+    <!-- Contribute -->
+    <section class="bg-light text-dark p-md-5 p-3 text-center mt-4">
+      <div class="container">
+        <h2 class="text-center mb-4">
+          <span class="text-primary"><i class="bi bi-github"></i></span>
+          Contribute
+        </h2>
+
+        <div
+          class="d-sm-flex flex-column align-items-center justify-content-between"
+        >
+          <div>
+            <p dir="rtl" class="fs-3 my-4">
+              ساهموا في تطوير الموقع وتحسينه عبر منصة GitHub وكونوا جزءاً من
+              فريقنا.
+            </p>
+          </div>
+          <div
+            class="github-card"
+            data-github="zedsalim/univbouira"
+            data-width="320"
+            data-height=""
+            data-theme="default"
+          ></div>
+          <script src="//cdn.jsdelivr.net/github-cards/latest/widget.js"></script>
+          <a
+            href="https://github.com/zedsalim/univbouira"
+            target="_blank"
+            class="mt-3 btn btn-lg btn-primary"
+            >إظغط هنا</a
+          >
         </div>
       </div>
     </section>
