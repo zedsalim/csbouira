@@ -84,20 +84,20 @@ document.getElementById("form").addEventListener("submit", function (e) {
         var response = JSON.parse(xhr.responseText);
         if (response.result === "success") {
           responseDiv.classList.add("alert", "alert-success", "mt-3");
-          responseDiv.innerHTML = "<b>File uploaded successfully!</b>";
+          responseDiv.innerHTML = "<strong>تم رفع الملف بنجتح!</strong>";
         } else {
           responseDiv.classList.add("alert", "alert-danger", "mt-3");
-          responseDiv.innerHTML = "<b>File upload failed!</b>";
+          responseDiv.innerHTML = "<strong>خطأ في رفع الملفظ</strong>";
         }
       } catch (e) {
         responseDiv.classList.add("alert", "alert-danger", "mt-3");
         responseDiv.innerHTML =
-          "<b>File upload encountered an error, but it may have been uploaded successfully. Please check the Google Sheet.</b>";
+          "<strong>خطأ في رفع الملف! يرجى مراسلتنا إن تكرر الخطأ</strong>";
       }
     } else {
       responseDiv.classList.add("alert", "alert-danger", "mt-3");
       responseDiv.innerHTML =
-        "<b>File upload encountered an error, but it may have been uploaded successfully. Please check the Google Sheet.</b>";
+        "<strong>خطأ في رفع الملف! يرجى مراسلتنا إن تكرر الخطأ</strong>";
     }
     submitButton.disabled = false;
     spinner.className = "";
@@ -107,7 +107,7 @@ document.getElementById("form").addEventListener("submit", function (e) {
     var responseDiv = document.getElementById("response");
     responseDiv.classList.add("alert", "alert-danger", "mt-3");
     responseDiv.innerHTML =
-      "<b>File upload encountered an error, but it may have been uploaded successfully. Please check the Google Sheet.</b>";
+      "<strong>خطأ في رفع الملف! يرجى مراسلتنا إن تكرر الخطأ</strong>";
     submitButton.disabled = false;
     spinner.className = "";
   };
