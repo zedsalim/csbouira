@@ -71,7 +71,7 @@ document.getElementById("form").addEventListener("submit", function (e) {
   var xhr = new XMLHttpRequest();
   xhr.open(
     "POST",
-    "https://script.google.com/macros/s/AKfycbxdPwrqiacxq-aOzaqjcKEY_TH0iaMFgz7wdBceY44VKcM97LUtPIjNA4JNzghNxTo9Nw/exec",
+    "https://script.google.com/macros/s/AKfycbzJ7Imj-Oh7yu3pQk46UchrmRYtdINJ_-IArcwVjFgxQPG0d0sLcyx_HZiNhHyp7byalQ/exec",
   );
 
   xhr.onload = function () {
