@@ -44,7 +44,6 @@ form.addEventListener("submit", (e) => {
 });
 
 // Upload files form
-// URL of your Google Apps Script
 document.getElementById("uploadfile").addEventListener("change", function () {
   var file = this.files[0];
   var fr = new FileReader();
@@ -72,28 +71,36 @@ document.getElementById("form").addEventListener("submit", function (e) {
   );
 
   xhr.onload = function () {
+    var responseDiv = document.getElementById("response");
+    responseDiv.innerHTML = "";
+    responseDiv.className = "";
+
     if (xhr.status === 200) {
       try {
         var response = JSON.parse(xhr.responseText);
         if (response.result === "success") {
-          document.getElementById("response").innerHTML =
-            "<b>File uploaded successfully!</b>";
+          responseDiv.classList.add("alert", "alert-success", "mt-3");
+          responseDiv.innerHTML = "<b>File uploaded successfully!</b>";
         } else {
-          document.getElementById("response").innerHTML =
-            "<b>File upload failed!</b>";
+          responseDiv.classList.add("alert", "alert-danger", "mt-3");
+          responseDiv.innerHTML = "<b>File upload failed!</b>";
         }
       } catch (e) {
-        document.getElementById("response").innerHTML =
+        responseDiv.classList.add("alert", "alert-danger", "mt-3");
+        responseDiv.innerHTML =
           "<b>File upload encountered an error, but it may have been uploaded successfully. Please check the Google Sheet.</b>";
       }
     } else {
-      document.getElementById("response").innerHTML =
+      responseDiv.classList.add("alert", "alert-danger", "mt-3");
+      responseDiv.innerHTML =
         "<b>File upload encountered an error, but it may have been uploaded successfully. Please check the Google Sheet.</b>";
     }
   };
 
   xhr.onerror = function () {
-    document.getElementById("response").innerHTML =
+    var responseDiv = document.getElementById("response");
+    responseDiv.classList.add("alert", "alert-danger", "mt-3");
+    responseDiv.innerHTML =
       "<b>File upload encountered an error, but it may have been uploaded successfully. Please check the Google Sheet.</b>";
   };
 
