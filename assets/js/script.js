@@ -11,11 +11,11 @@
 // Contact Us Form
 const scriptURL =
   "https://script.google.com/macros/s/AKfycbxzKTlh8C8QI9gbVmAI1smNS5dAi7ODB_z0phqQg92464uTvlYFuSkS5BtsE68-BuxhcQ/exec";
-const form = document.forms["csb-contact-form"];
-const submitButton = form.querySelector('button[type="submit"]');
-const spinner = submitButton.querySelector("span");
-const contactResult = document.getElementById("contact-result");
-const resultMessage = contactResult.querySelector("strong");
+var form = document.forms["csb-contact-form"];
+var submitButton = document.getElementById("submit-contact");
+var spinner = submitButton.querySelector("span");
+var contactResult = document.getElementById("contact-result");
+var resultMessage = contactResult.querySelector("strong");
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -61,10 +61,12 @@ document.getElementById("uploadfile").addEventListener("change", function () {
 });
 
 document.getElementById("form").addEventListener("submit", function (e) {
-  e.preventDefault(); // Prevent form from submitting the traditional way
+  e.preventDefault();
   var formData = new FormData(document.getElementById("form"));
-  var submitButton = document.getElementById("submit");
-  submitButton.disabled = true; // Disable the button
+  var submitButton = document.getElementById("submit-upload");
+  var spinner = submitButton.querySelector("span");
+  submitButton.disabled = true;
+  spinner.className = "spinner-border spinner-border-sm";
 
   var xhr = new XMLHttpRequest();
   xhr.open(
@@ -97,7 +99,8 @@ document.getElementById("form").addEventListener("submit", function (e) {
       responseDiv.innerHTML =
         "<b>File upload encountered an error, but it may have been uploaded successfully. Please check the Google Sheet.</b>";
     }
-    submitButton.disabled = false; // Re-enable the button
+    submitButton.disabled = false;
+    spinner.className = "";
   };
 
   xhr.onerror = function () {
@@ -105,7 +108,8 @@ document.getElementById("form").addEventListener("submit", function (e) {
     responseDiv.classList.add("alert", "alert-danger", "mt-3");
     responseDiv.innerHTML =
       "<b>File upload encountered an error, but it may have been uploaded successfully. Please check the Google Sheet.</b>";
-    submitButton.disabled = false; // Re-enable the button
+    submitButton.disabled = false;
+    spinner.className = "";
   };
 
   xhr.send(formData);

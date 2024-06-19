@@ -396,7 +396,11 @@
                 ></textarea>
               </div>
               <div class="d-grid">
-                <button type="submit" class="btn btn-primary text-white mt-3">
+                <button
+                  id="submit-contact"
+                  type="submit"
+                  class="btn btn-primary text-white mt-3"
+                >
                   أرسل <span></span>
                 </button>
                 <div dir="rtl" id="contact-result">
@@ -523,12 +527,14 @@
               /><br />
               <div id="data"></div>
               <div class="d-grid">
-                <input
-                  id="submit"
+                <button
+                  id="submit-upload"
                   type="submit"
                   class="btn btn-primary text-white mt-3"
                   value="Upload"
-                />
+                >
+                  Upload <span id="spinner-upload"></span>
+                </button>
               </div>
             </form>
             <div id="response"></div>
