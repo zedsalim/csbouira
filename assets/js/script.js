@@ -12,9 +12,11 @@
 const scriptURL =
   "https://script.google.com/macros/s/AKfycbxzKTlh8C8QI9gbVmAI1smNS5dAi7ODB_z0phqQg92464uTvlYFuSkS5BtsE68-BuxhcQ/exec";
 const form = document.forms["csb-contact-form"];
+const submitButton = form.querySelector('button[type="submit"]');
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
+  submitButton.disabled = true;
   fetch(scriptURL, { method: "POST", body: new FormData(form) })
     .then((response) => response.json())
     .then((response) => {
@@ -25,5 +27,8 @@ form.addEventListener("submit", (e) => {
         throw new Error(response.error);
       }
     })
-    .catch((error) => console.error("خطأ في الإرسال!", error.message));
+    .catch((error) => {
+      console.error("خطأ في الإرسال!", error.message);
+      submitButton.disabled = false;
+    });
 });
