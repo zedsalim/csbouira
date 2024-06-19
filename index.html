@@ -459,7 +459,7 @@
                 id="name"
                 class="form-control form-control-lg"
                 name="name"
-                placehoder="Your Name"
+                placeholder="Your Name"
                 required
               /><br />
               <input
@@ -476,6 +476,7 @@
                 id="module"
                 name="module"
                 class="form-control form-control-lg"
+                placeholder="Exemple: Analyse"
                 required
               /><br />
               <label class="form-label fs-5" for="filetype">File Type:</label>
@@ -521,12 +522,14 @@
                 required
               /><br />
               <div id="data"></div>
-              <input
-                id="submit"
-                type="submit"
-                class="btn btn-primary text-white mt-3"
-                value="Upload"
-              />
+              <div class="d-grid">
+                <input
+                  id="submit"
+                  type="submit"
+                  class="btn btn-primary text-white mt-3"
+                  value="Upload"
+                />
+              </div>
             </form>
             <div id="response"></div>
           </div>

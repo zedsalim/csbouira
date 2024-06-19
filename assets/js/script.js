@@ -63,6 +63,8 @@ document.getElementById("uploadfile").addEventListener("change", function () {
 document.getElementById("form").addEventListener("submit", function (e) {
   e.preventDefault(); // Prevent form from submitting the traditional way
   var formData = new FormData(document.getElementById("form"));
+  var submitButton = document.getElementById("submit");
+  submitButton.disabled = true; // Disable the button
 
   var xhr = new XMLHttpRequest();
   xhr.open(
@@ -95,6 +97,7 @@ document.getElementById("form").addEventListener("submit", function (e) {
       responseDiv.innerHTML =
         "<b>File upload encountered an error, but it may have been uploaded successfully. Please check the Google Sheet.</b>";
     }
+    submitButton.disabled = false; // Re-enable the button
   };
 
   xhr.onerror = function () {
@@ -102,6 +105,7 @@ document.getElementById("form").addEventListener("submit", function (e) {
     responseDiv.classList.add("alert", "alert-danger", "mt-3");
     responseDiv.innerHTML =
       "<b>File upload encountered an error, but it may have been uploaded successfully. Please check the Google Sheet.</b>";
+    submitButton.disabled = false; // Re-enable the button
   };
 
   xhr.send(formData);
