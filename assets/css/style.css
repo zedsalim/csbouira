@@ -1,6 +1,6 @@
 /* Custom styling */
 body {
-  font-family: "Cairo", sans-serif;
+  font-family: "Cairo", sans-serif !important;
 }
 
 /* for fixed-top navbar */
