@@ -84,7 +84,7 @@ document.getElementById("form").addEventListener("submit", function (e) {
         var response = JSON.parse(xhr.responseText);
         if (response.result === "success") {
           responseDiv.classList.add("alert", "alert-success", "mt-3");
-          responseDiv.innerHTML = "<strong>تم رفع الملف بنجتح!</strong>";
+          responseDiv.innerHTML = "<strong>تم رفع الملف بنجاح</strong>";
         } else {
           responseDiv.classList.add("alert", "alert-danger", "mt-3");
           responseDiv.innerHTML = "<strong>خطأ في رفع الملفظ</strong>";
