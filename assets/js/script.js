@@ -42,3 +42,60 @@ form.addEventListener("submit", (e) => {
       spinner.className = "";
     });
 });
+
+// Upload files form
+// URL of your Google Apps Script
+document.getElementById("uploadfile").addEventListener("change", function () {
+  var file = this.files[0];
+  var fr = new FileReader();
+  fr.fileName = file.name;
+  fr.onload = function (e) {
+    var html =
+      '<input type="hidden" name="data" value="' +
+      e.target.result.replace(/^.*,/, "") +
+      '" >';
+    html += '<input type="hidden" name="mimetype" value="' + file.type + '" >';
+    html += '<input type="hidden" name="filename" value="' + file.name + '" >';
+    document.getElementById("data").innerHTML = html;
+  };
+  fr.readAsDataURL(file);
+});
+
+document.getElementById("form").addEventListener("submit", function (e) {
+  e.preventDefault(); // Prevent form from submitting the traditional way
+  var formData = new FormData(document.getElementById("form"));
+
+  var xhr = new XMLHttpRequest();
+  xhr.open(
+    "POST",
+    "https://script.google.com/macros/s/AKfycbxdPwrqiacxq-aOzaqjcKEY_TH0iaMFgz7wdBceY44VKcM97LUtPIjNA4JNzghNxTo9Nw/exec",
+  );
+
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      try {
+        var response = JSON.parse(xhr.responseText);
+        if (response.result === "success") {
+          document.getElementById("response").innerHTML =
+            "<b>File uploaded successfully!</b>";
+        } else {
+          document.getElementById("response").innerHTML =
+            "<b>File upload failed!</b>";
+        }
+      } catch (e) {
+        document.getElementById("response").innerHTML =
+          "<b>File upload encountered an error, but it may have been uploaded successfully. Please check the Google Sheet.</b>";
+      }
+    } else {
+      document.getElementById("response").innerHTML =
+        "<b>File upload encountered an error, but it may have been uploaded successfully. Please check the Google Sheet.</b>";
+    }
+  };
+
+  xhr.onerror = function () {
+    document.getElementById("response").innerHTML =
+      "<b>File upload encountered an error, but it may have been uploaded successfully. Please check the Google Sheet.</b>";
+  };
+
+  xhr.send(formData);
+});

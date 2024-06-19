@@ -372,7 +372,7 @@
                 <input
                   type="text"
                   class="form-control form-control-lg"
-                  name="name"
+                  name="name-contact"
                   placeholder="Name"
                   required
                 />
@@ -381,7 +381,7 @@
                 <input
                   type="email"
                   class="form-control form-control-lg"
-                  name="email"
+                  name="email-contact"
                   placeholder="Email"
                   required
                 />
@@ -389,7 +389,7 @@
               <div class="mb-3">
                 <textarea
                   class="form-control form-control-lg"
-                  name="message"
+                  name="message-contact"
                   rows="6"
                   placeholder="Message"
                   required
@@ -441,6 +441,99 @@
         </div>
       </div>
     </section>
+
+    <!-- Send Files -->
+    <section class="contact p-5">
+      <div class="container">
+        <h2 class="text-center mb-sm-5 mt-lg-1 mb-4">
+          <span class="text-primary"
+            ><i class="bi bi-file-earmark-arrow-up-fill"></i
+          ></span>
+          إرفع الملف الخاص بك
+        </h2>
+        <div class="row">
+          <div class="col-12">
+            <form dir="rtl" id="form" method="post">
+              <input
+                type="text"
+                id="name"
+                class="form-control form-control-lg"
+                name="name"
+                placehoder="Your Name"
+                required
+              /><br />
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="form-control form-control-lg"
+                placeholder="Email"
+                required
+              /><br />
+              <label class="form-label fs-5" for="module">Module Name:</label>
+              <input
+                type="text"
+                id="module"
+                name="module"
+                class="form-control form-control-lg"
+                required
+              /><br />
+              <label class="form-label fs-5" for="filetype">File Type:</label>
+              <select
+                id="filetype"
+                name="filetype"
+                class="form-select"
+                required
+              >
+                <option value="Cours">Cours</option>
+                <option value="TD">TD</option>
+                <option value="TP">TP</option>
+                <option value="Test">Test</option>
+                <option value="Examen">Examen</option>
+                <option value="Other">Other</option></select
+              ><br />
+              <label class="form-label fs-5" for="grade">Grade:</label>
+              <select id="grade" name="grade" class="form-select" required>
+                <option value="L1">L1</option>
+                <option value="L2">L2</option>
+                <option value="L3">L3</option>
+                <option value="M1">M1</option>
+                <option value="M2">M2</option></select
+              ><br />
+              <label class="form-label fs-5" for="semestre">Semestre:</label>
+              <select
+                id="semestre"
+                name="semestre"
+                class="form-select"
+                required
+              >
+                <option value="1">1</option>
+                <option value="2">2</option></select
+              ><br />
+              <label for="uploadfile" class="form-label fs-5"
+                >Upload a file:</label
+              >
+              <input
+                name="file"
+                id="uploadfile"
+                type="file"
+                class="form-control"
+                required
+              /><br />
+              <div id="data"></div>
+              <input
+                id="submit"
+                type="submit"
+                class="btn btn-primary text-white mt-3"
+                value="Upload"
+              />
+            </form>
+            <div id="response"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Map -->
     <section>
       <div class="container">
