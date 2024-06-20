@@ -7,7 +7,7 @@ body {
 body::before {
   display: block;
   content: "";
-  height: 80px;
+  height: 75px;
 }
 
 /* Custom width for class "min" */

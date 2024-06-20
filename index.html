@@ -28,10 +28,10 @@
     />
     <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico" />
   </head>
-  <body>
+  <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="10">
     <!-- NavBar -->
     <nav
-      class="navbar bg-light navbar-expand-lg navbar-light py-2 fixed-top shadow-sm"
+      class="navbar bg-light navbar-expand-lg navbar-light fixed-top shadow-sm"
     >
       <div class="container">
         <a href="#" class="navbar-brand"
@@ -52,7 +52,7 @@
             <li class="nav-item dropdown me-4">
               <a
                 class="nav-link dropdown-toggle"
-                href="#"
+                href="grades-scroll"
                 role="button"
                 data-bs-toggle="dropdown"
               >
@@ -67,13 +67,13 @@
               </ul>
             </li>
             <li class="nav-item me-4">
-              <a href="#about" class="nav-link">About</a>
+              <a href="#about-scroll" class="nav-link">About</a>
             </li>
             <li class="nav-item me-4">
-              <a href="#contact" class="nav-link">Contact</a>
+              <a href="#contact-scroll" class="nav-link">Contact</a>
             </li>
             <li class="nav-item">
-              <a href="#contribute" class="nav-link">Contribute</a>
+              <a href="#contribute-scroll" class="nav-link">Contribute</a>
             </li>
           </ul>
         </div>
@@ -113,15 +113,18 @@
       </div>
     </section>
     <!-- Grades -->
-    <section>
+    <section id="grades-scroll" class="p-md-4">
       <div class="container">
-        <h2 class="text-center mt-4">
+        <h2 class="text-center mt-1">
           <span class="text-primary"
             ><i class="fa-solid fa-graduation-cap"></i
           ></span>
           Grades
         </h2>
-        <div class="my-4 accordion accordion-flush" id="accordionFlushExample">
+        <div
+          class="my-4 pb-5 accordion accordion-flush"
+          id="accordionFlushExample"
+        >
           <div class="accordion-item">
             <h2 class="accordion-header" id="flush-headingOne">
               <button
@@ -327,19 +330,18 @@
           </div>
         </div>
       </div>
-      <span id="about"></span>
     </section>
     <!-- About us -->
-    <section class="bg-light text-dark p-md-5 pt-5 text-end mt-4">
+    <section id="about-scroll" class="bg-light text-dark p-md-5 pt-4 text-end">
       <div class="container">
-        <h2 class="text-center mb-sm-5 mt-lg-1 mb-4">
+        <h2 class="text-center mt-5 mb-5">
           <span class="text-primary"
             ><i class="bi bi-file-earmark-person"></i
           ></span>
           About Us
         </h2>
-        <div class="row align-items-center justify-content-between">
-          <div class="col-md">
+        <div class="row align-items-center justify-content-between pb-5">
+          <div class="col-md py-2">
             <img
               src="assets/images/about-us.svg"
               class="img-fluid"
@@ -361,18 +363,17 @@
           </div>
         </div>
       </div>
-      <span id="contact"></span>
     </section>
     <!-- Contact us -->
-    <section class="contact p-5">
+    <section id="contact-scroll" class="p-md-5 pt-4">
       <div class="container">
-        <h2 class="text-center mb-sm-5 mt-lg-1 mb-4">
+        <h2 class="text-center mt-5 mb-5">
           <span class="text-primary"
             ><i class="fa-solid fa-paper-plane"></i
           ></span>
           Contact Us
         </h2>
-        <div class="row">
+        <div class="row pb-5">
           <div class="col-12">
             <form action="" method="POST" name="csb-contact-form">
               <div class="mb-3">
@@ -418,18 +419,20 @@
           </div>
         </div>
       </div>
-      <span id="contribute"></span>
     </section>
     <!-- Contribute -->
-    <section class="bg-light text-dark p-md-5 p-3 text-center mt-4">
+    <section
+      id="contribute-scroll"
+      class="bg-light text-dark p-md-5 pt-4 text-center"
+    >
       <div class="container">
-        <h2 class="text-center mb-4">
+        <h2 class="text-center mt-5 mb-3">
           <span class="text-primary"><i class="bi bi-github"></i></span>
           Contribute
         </h2>
 
         <div
-          class="d-sm-flex flex-column align-items-center justify-content-between"
+          class="pb-5 d-sm-flex flex-column align-items-center justify-content-between"
         >
           <div>
             <p dir="rtl" class="fs-3 my-4">
