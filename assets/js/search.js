@@ -14,14 +14,26 @@ async function searchFiles() {
     return;
   }
 
+  const list = document.createElement("ul");
+  list.className = "list-group mt-3";
   files.forEach((file) => {
+    const listItem = document.createElement("li");
+    listItem.className =
+      "fs-5 list-group-item d-flex justify-content-between align-items-center";
+
     const fileLink = document.createElement("a");
     fileLink.href = file.url;
     fileLink.textContent = file.name;
     fileLink.target = "_blank";
+    fileLink.className = "text-primary";
+    fileLink.setAttribute("id", "custom-link");
 
-    const listItem = document.createElement("div");
+    const icon = document.createElement("i");
+    icon.className = "h3 bi bi-file-earmark-pdf-fill me-2";
+    fileLink.insertBefore(icon, fileLink.firstChild);
+
     listItem.appendChild(fileLink);
-    resultsDiv.appendChild(listItem);
+    list.appendChild(listItem);
   });
+  resultsDiv.appendChild(list);
 }
