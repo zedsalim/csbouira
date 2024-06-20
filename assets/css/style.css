@@ -10,6 +10,25 @@ body::before {
   height: 75px;
 }
 
+/* Back to top button */
+#btn-back-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  opacity: 0;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.2s ease;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+#btn-back-to-top.show {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
 /* Custom width for class "min" */
 /* For small screens (under 768px) */
 @media (max-width: 767px) {
