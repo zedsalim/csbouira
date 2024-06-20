@@ -109,7 +109,7 @@ document.getElementById("form").addEventListener("submit", function (e) {
           responseDiv.innerHTML = "<strong>تم رفع الملف بنجاح</strong>";
         } else {
           responseDiv.classList.add("alert", "alert-danger", "mt-3");
-          responseDiv.innerHTML = "<strong>خطأ في رفع الملفظ</strong>";
+          responseDiv.innerHTML = "<strong>خطأ في رفع الملف</strong>";
         }
       } catch (e) {
         responseDiv.classList.add("alert", "alert-danger", "mt-3");
