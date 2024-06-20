@@ -76,9 +76,76 @@
               <a href="#contribute-scroll" class="nav-link">Contribute</a>
             </li>
           </ul>
+          <!-- Search button nav  -->
+          <a
+            href=""
+            type="button"
+            data-bs-toggle="modal"
+            data-bs-target="#myModal"
+            class="d-flex"
+            id="custom-link"
+          >
+            <input
+              class="form-control me-2"
+              type="text"
+              placeholder="Search"
+              readonly
+            />
+            <button class="btn btn-primary" type="button">
+              <i class="bi bi-search"></i>
+            </button>
+          </a>
         </div>
       </div>
     </nav>
+    <!-- Search Modal -->
+    <div class="modal fade" id="myModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title">Search for files</h4>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+
+          <!-- Modal body -->
+          <div class="modal-body">
+            <!-- Put the search output here ######## -->
+            <span class="d-flex">
+              <input
+                class="form-control me-2"
+                id="searchQuery"
+                type="text"
+                placeholder="Exemple: Algo"
+              />
+              <button
+                class="btn btn-primary"
+                type="button"
+                onclick="searchFiles()"
+              >
+                Search
+              </button>
+            </span>
+            <div id="search-results"></div>
+          </div>
+
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-danger"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- Header -->
     <section class="bg-dark text-light p-md-5 p-3 text-center mb-5">
       <div class="container">
@@ -616,5 +683,6 @@
     </section>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/script.js"></script>
+    <script src="assets/js/search.js"></script>
   </body>
 </html>

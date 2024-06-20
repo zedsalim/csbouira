@@ -3,6 +3,10 @@ body {
   font-family: "Cairo", sans-serif !important;
 }
 
+#custom-link {
+  text-decoration: none;
+}
+
 /* for fixed-top navbar */
 body::before {
   display: block;
