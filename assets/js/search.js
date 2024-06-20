@@ -29,7 +29,7 @@ async function searchFiles() {
     fileLink.setAttribute("id", "custom-link");
 
     const icon = document.createElement("i");
-    icon.className = "h3 bi bi-file-earmark-pdf-fill me-2";
+    icon.className = "h3 bi bi-file-earmark-text-fill me-2";
     fileLink.insertBefore(icon, fileLink.firstChild);
 
     listItem.appendChild(fileLink);
