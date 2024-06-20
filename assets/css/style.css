@@ -3,8 +3,25 @@ body {
   font-family: "Cairo", sans-serif !important;
 }
 
-#custom-link {
+/* Style for truncating long file names */
+.custom-link-container {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.custom-link {
   text-decoration: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  flex-shrink: 1;
+}
+
+.custom-link i {
+  flex-shrink: 0;
 }
 
 /* for fixed-top navbar */
@@ -52,5 +69,13 @@ body::before {
 @media (min-width: 1025px) {
   .min {
     width: 20%;
+  }
+}
+
+/* Large modal for larg screens */
+@media (min-width: 768px) {
+  .modal-xl {
+    width: 90%;
+    max-width: 1200px;
   }
 }

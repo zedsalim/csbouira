@@ -21,18 +21,21 @@ async function searchFiles() {
     listItem.className =
       "fs-5 list-group-item d-flex justify-content-between align-items-center";
 
+    const fileLinkContainer = document.createElement("div");
+    fileLinkContainer.className = "custom-link-container";
+
     const fileLink = document.createElement("a");
     fileLink.href = file.url;
     fileLink.textContent = file.name;
     fileLink.target = "_blank";
-    fileLink.className = "text-primary";
-    fileLink.setAttribute("id", "custom-link");
+    fileLink.className = "text-primary custom-link";
 
     const icon = document.createElement("i");
     icon.className = "h3 bi bi-file-earmark-text-fill me-2";
     fileLink.insertBefore(icon, fileLink.firstChild);
 
-    listItem.appendChild(fileLink);
+    fileLinkContainer.appendChild(fileLink);
+    listItem.appendChild(fileLinkContainer);
     list.appendChild(listItem);
   });
   resultsDiv.appendChild(list);
