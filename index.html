@@ -103,17 +103,16 @@
         <div class="modal-content">
           <!-- Modal Header -->
           <div class="modal-header">
-            <h4 class="modal-title">Search for files</h4>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-            ></button>
+            <h4 class="modal-title m-auto">إبحث عن الملفات</h4>
+            <!-- <button -->
+            <!--   type="button" -->
+            <!--   class="btn-close" -->
+            <!--   data-bs-dismiss="modal" -->
+            <!-- ></button> -->
           </div>
 
           <!-- Modal body -->
           <div class="modal-body">
-            <!-- Put the search output here ######## -->
             <span class="d-flex">
               <input
                 class="form-control me-2"
@@ -123,10 +122,11 @@
               />
               <button
                 class="btn btn-primary"
+                id="searchButton"
                 type="button"
                 onclick="searchFiles()"
               >
-                Search
+                إبحث <span id="spinner-upload"></span>
               </button>
             </span>
             <div id="search-results"></div>
