@@ -55,12 +55,13 @@ body::before {
 }
 
 /* grades cards hover effect */
+.card-hover-effect {
+  transition: all 0.3s ease-in-out;
+}
 .card-hover-effect:hover {
   background-color: #009bd6;
   border: none;
-}
-.card-hover-effect {
-  transition: all 0.5s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 .card-hover-effect:hover .card-text,
 .card-hover-effect:hover .card-title {
