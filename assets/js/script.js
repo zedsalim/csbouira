@@ -136,3 +136,17 @@ document.getElementById("form").addEventListener("submit", function (e) {
 
   xhr.send(formData);
 });
+
+// ----- File Count id cards -----
+fetch(
+  "https://script.google.com/macros/s/AKfycbwrueSpr6LcL75-HFz6PozkJOE1nWNetrX6nAipnuMLupOfB33pdah5AF1NLNns6-mz/exec",
+)
+  .then((response) => response.json())
+  .then((data) => {
+    document.getElementById("licence1").textContent = data.Licence1;
+    document.getElementById("licence2").textContent = data.Licence2;
+    document.getElementById("licence3").textContent = data.Licence3;
+    document.getElementById("master1").textContent = data.Master1;
+    document.getElementById("master2").textContent = data.Master2;
+  })
+  .catch((error) => console.error("Error:", error));
