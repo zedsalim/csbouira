@@ -12,6 +12,10 @@ body {
   text-overflow: ellipsis;
 }
 
+#custom-link {
+  text-decoration: none;
+}
+
 .custom-link {
   text-decoration: none;
   text-overflow: ellipsis;
@@ -48,6 +52,24 @@ body::before {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
+}
+
+/* grades cards hover effect */
+.card-hover-effect:hover {
+  background-color: #009bd6;
+  border: none;
+}
+.card-hover-effect {
+  transition: all 0.5s;
+}
+.card-hover-effect:hover .card-text,
+.card-hover-effect:hover .card-title {
+  color: #fff;
+}
+
+.card-hover-effect:hover .badge {
+  background-color: #fff !important;
+  color: #212529;
 }
 
 /* Custom width for class "min" */
