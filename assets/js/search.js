@@ -57,9 +57,9 @@ async function searchFiles() {
 }
 // Enter key press to search
 var search = document.getElementById("searchQuery");
-search.addEventListener("keypress", function(event) {
-  if (event.key === "Enter") {
-    event.preventDefault();
+search.addEventListener("keypress", function(e) {
+  if (e.key === "Enter") {
+    e.preventDefault();
     document.getElementById("searchButton").click();
   }
 });
