@@ -55,3 +55,11 @@ async function searchFiles() {
   searchButton.disabled = false;
   spinner.className = "";
 }
+// Enter key press to search
+var search = document.getElementById("searchQuery");
+search.addEventListener("keypress", function(e) {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    document.getElementById("searchButton").click();
+  }
+});
