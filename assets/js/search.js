@@ -1,3 +1,4 @@
+// Search for files in Google Drive
 async function searchFiles() {
   const query = document.getElementById("searchQuery").value;
   const searchButton = document.getElementById("searchButton");
@@ -17,7 +18,7 @@ async function searchFiles() {
 
   const response = await fetch(
     "https://script.google.com/macros/s/AKfycbxTTPqNVHnV42xwWZw2z5IBnJj5WAVuM71Jm_4kmfxNAaXI6ntJJ4PcmqqiJl6tuvvHqg/exec?query=" +
-      encodeURIComponent(query),
+      encodeURIComponent(query)
   );
   const files = await response.json();
 
@@ -55,9 +56,10 @@ async function searchFiles() {
   searchButton.disabled = false;
   spinner.className = "";
 }
-// Enter key press to search
+
+// Enter key event listener for search input
 var search = document.getElementById("searchQuery");
-search.addEventListener("keypress", function(e) {
+search.addEventListener("keypress", function (e) {
   if (e.key === "Enter") {
     e.preventDefault();
     document.getElementById("searchButton").click();

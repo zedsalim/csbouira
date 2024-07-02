@@ -3,6 +3,13 @@ body {
   font-family: "Cairo", sans-serif !important;
 }
 
+.custom-hr {
+  width: 95%;
+  height: 3px;
+  background-color: #26aadc;
+  margin: 18px auto;
+}
+
 /* Style for truncating long file names */
 .custom-link-container {
   display: flex;
@@ -41,9 +48,7 @@ body::before {
   bottom: 20px;
   right: 20px;
   opacity: 0;
-  transition:
-    opacity 0.3s ease,
-    visibility 0.2s ease;
+  transition: opacity 0.3s ease, visibility 0.2s ease;
   visibility: hidden;
   pointer-events: none;
 }
