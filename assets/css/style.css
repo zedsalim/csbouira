@@ -78,6 +78,28 @@ body::before {
   color: #212529;
 }
 
+#adhkar {
+  font-size: 1.1rem;
+  position: fixed;
+  top: 95px;
+  right: 10px;
+  color: #343a40;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 999;
+}
+
+#closeAdhkar {
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
 /* Custom width for class "min" */
 /* For small screens (under 768px) */
 @media (max-width: 767px) {
