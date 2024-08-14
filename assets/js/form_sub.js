@@ -2,7 +2,7 @@
 
 // Contact Us Form
 const scriptURL =
-  "https://script.google.com/macros/s/AKfycbxzKTlh8C8QI9gbVmAI1smNS5dAi7ODB_z0phqQg92464uTvlYFuSkS5BtsE68-BuxhcQ/exec";
+  "https://script.google.com/macros/s/AKfycbyhESXND32G4g4irsLkP1h2_CbqS6PRtP97fDbunVbLeybVeFl3o6tCf5q7zcWIYlwwTw/exec";
 var form = document.forms["csb-contact-form"];
 var submitButton = document.getElementById("submit-contact");
 var spinner = submitButton.querySelector("span");
@@ -18,7 +18,7 @@ form.addEventListener("submit", (e) => {
     .then((response) => {
       if (response.result === "success") {
         contactResult.className = "alert alert-success mt-3";
-        resultMessage.textContent = "شكرا لك تم الإرسال بنجاح";
+        resultMessage.textContent = "تم الإرسال بنجاح";
         form.reset();
       } else {
         throw new Error(response.error);
@@ -63,7 +63,7 @@ document.getElementById("form").addEventListener("submit", function (e) {
   var xhr = new XMLHttpRequest();
   xhr.open(
     "POST",
-    "https://script.google.com/macros/s/AKfycbzJ7Imj-Oh7yu3pQk46UchrmRYtdINJ_-IArcwVjFgxQPG0d0sLcyx_HZiNhHyp7byalQ/exec"
+    "https://script.google.com/macros/s/AKfycbymvhBv48hENmx11fNfP-0QULKoZPOZPP--fyDFiYRb72CEQRICCL-iIJ1k0UQzltk4Tg/exec"
   );
 
   xhr.onload = function () {
@@ -76,7 +76,8 @@ document.getElementById("form").addEventListener("submit", function (e) {
         var response = JSON.parse(xhr.responseText);
         if (response.result === "success") {
           responseDiv.classList.add("alert", "alert-success", "mt-3");
-          responseDiv.innerHTML = "<strong>تم رفع الملف بنجاح</strong>";
+          responseDiv.innerHTML =
+            "<strong>شكرا لك، تم رفع الملف بنجاح</strong>";
         } else {
           responseDiv.classList.add("alert", "alert-danger", "mt-3");
           responseDiv.innerHTML = "<strong>خطأ في رفع الملف</strong>";

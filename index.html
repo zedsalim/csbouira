@@ -648,24 +648,39 @@
             <label class="form-label fs-5" for="filetype">نوع الملف:</label>
             <select id="filetype" name="filetype" class="form-select" required>
               <option value="Cours">Cours</option>
+              <option value="Résumé">Résumé</option>
               <option value="TD">TD</option>
               <option value="TP">TP</option>
               <option value="Test">Test</option>
               <option value="Examen">Examen</option>
-              <option value="Other">Other</option></select
-            ><br />
+              <option value="Other">Other</option>
+            </select>
+
+            <br />
             <label class="form-label fs-5" for="grade">السنة:</label>
             <select id="grade" name="grade" class="form-select" required>
-              <option value="L1">L1</option>
-              <option value="L2">L2</option>
-              <option value="L3">L3</option>
-              <option value="M1">M1</option>
-              <option value="M2">M2</option></select
-            ><br />
+              <optgroup label="Licence">
+                <option value="Licence 1">Licence 1</option>
+                <option value="Licence 2">Licence 2</option>
+                <option value="Licence 3 SI">Licence 3 SI</option>
+              </optgroup>
+              <optgroup label="Master 1">
+                <option value="Master 1 GSI">Master 1 GSI</option>
+                <option value="Master 1 ISIL">Master 1 ISIL</option>
+                <option value="Master 1 IA">Master 1 IA</option>
+              </optgroup>
+              <optgroup label="Master 2">
+                <option value="Master 2 GSI">Master 2 GSI</option>
+                <option value="Master 2 ISIL">Master 2 ISIL</option>
+                <option value="Master 2 IA">Master 2 IA</option>
+              </optgroup>
+            </select>
+
+            <br />
             <label class="form-label fs-5" for="semestre">الفصل:</label>
             <select id="semestre" name="semestre" class="form-select" required>
-              <option value="1">1</option>
-              <option value="2">2</option></select
+              <option value="Semestre 1">1</option>
+              <option value="Semestre 2">2</option></select
             ><br />
             <label for="uploadfile" class="form-label fs-5">إختر الملف:</label>
             <input
