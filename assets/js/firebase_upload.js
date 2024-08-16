@@ -60,7 +60,6 @@ document.getElementById("form").addEventListener("submit", async (event) => {
             progressBar.setAttribute("aria-valuenow", progress.toFixed(0));
           },
           (error) => {
-            console.error(`Failed to upload "${file.name}":`, error);
             alertsDiv.innerHTML = `<div class="alert alert-danger" role="alert">
                       خطأ في رفع هذا الملف "${file.name}". حاول مرة أخرى.
                     </div>`;
@@ -126,7 +125,6 @@ document.getElementById("form").addEventListener("submit", async (event) => {
         });
     }
   } else {
-    console.log("No files selected for upload.");
     alertsDiv.innerHTML = `<div class="alert alert-warning" role="alert">
     لم تختر الملفات التي تريد رفعها
             </div>`;
