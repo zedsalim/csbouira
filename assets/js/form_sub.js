@@ -63,7 +63,7 @@ document.getElementById("form").addEventListener("submit", function (e) {
   var xhr = new XMLHttpRequest();
   xhr.open(
     "POST",
-    "https://script.google.com/macros/s/AKfycbyeI_8Oi4BzyMBtzz-TIqWxUsKVGasilIQvEt3dmi9sTIRSrC1UdtxPcVlhPwCkt8Ai/exec"
+    "https://script.google.com/macros/s/AKfycbwxYhfCgJlmaPkhZvvkdur9kElx06qcsHsFwHyBDZRXif1otJ3Mn0sf2-4hsGSrXLDj4g/exec"
   );
 
   xhr.onload = function () {
