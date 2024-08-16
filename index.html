@@ -36,7 +36,7 @@
     />
     <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico" />
     <style>
-      .spinner-border {
+      .spinnerHidden {
         margin-left: 5px;
         display: none;
       }
@@ -698,7 +698,9 @@
               <option value="Semestre 1">1</option>
               <option value="Semestre 2">2</option></select
             ><br />
-            <label for="uploadfile" class="form-label fs-5">إختر الملف:</label>
+            <label for="uploadfile" class="form-label fs-5"
+              >إختر الملفات:</label
+            >
             <input
               name="file"
               id="uploadfile"
@@ -720,7 +722,7 @@
                 أرسل
                 <span
                   id="spinner-upload"
-                  class="spinner-border spinner-border-sm"
+                  class="spinner-border spinner-border-sm spinnerHidden"
                 ></span>
               </button>
             </div>

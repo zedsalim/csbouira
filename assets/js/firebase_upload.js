@@ -21,7 +21,7 @@ document.getElementById("form").addEventListener("submit", async (event) => {
   const files = fileInput.files;
   const fileLinksDiv = document.getElementById("response");
   const submitButton = document.getElementById("submit-upload");
-  const spinner = document.getElementById("spinner-upload");
+  const spinner = document.getElementById("spinnerHidden");
   const alertsDiv = document.getElementById("alerts");
 
   fileLinksDiv.innerHTML = "";
