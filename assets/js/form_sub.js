@@ -2,7 +2,7 @@
 
 // Contact Us Form
 const scriptURL =
-  "https://script.google.com/macros/s/AKfycbyhESXND32G4g4irsLkP1h2_CbqS6PRtP97fDbunVbLeybVeFl3o6tCf5q7zcWIYlwwTw/exec";
+  "https://script.google.com/macros/s/AKfycbx0LHpwOaIdiUOSgHRwObCABVbyHcsxcFFqjAz04nU56R244NRWSUBFob-IP7fJzvcayQ/exec";
 var form = document.forms["csb-contact-form"];
 var submitButton = document.getElementById("submit-contact");
 var spinner = submitButton.querySelector("span");
@@ -63,7 +63,7 @@ document.getElementById("form").addEventListener("submit", function (e) {
   var xhr = new XMLHttpRequest();
   xhr.open(
     "POST",
-    "https://script.google.com/macros/s/AKfycbymvhBv48hENmx11fNfP-0QULKoZPOZPP--fyDFiYRb72CEQRICCL-iIJ1k0UQzltk4Tg/exec"
+    "https://script.google.com/macros/s/AKfycbyeI_8Oi4BzyMBtzz-TIqWxUsKVGasilIQvEt3dmi9sTIRSrC1UdtxPcVlhPwCkt8Ai/exec"
   );
 
   xhr.onload = function () {
