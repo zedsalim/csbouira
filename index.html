@@ -4,6 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>CS Bouira</title>
+    <script
+      type="module"
+      src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js"
+    ></script>
+    <script
+      type="module"
+      src="https://www.gstatic.com/firebasejs/10.13.0/firebase-storage.js"
+    ></script>
     <link href="assets/css/style.css" rel="stylesheet" />
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
     <link
@@ -27,6 +35,16 @@
       rel="stylesheet"
     />
     <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico" />
+    <style>
+      .spinner-border {
+        margin-left: 5px;
+        display: none;
+      }
+      .progress {
+        margin-top: 10px;
+        height: 20px;
+      }
+    </style>
   </head>
   <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="10">
     <!-- NavBar -->
@@ -655,7 +673,6 @@
               <option value="Examen">Examen</option>
               <option value="Other">Other</option>
             </select>
-
             <br />
             <label class="form-label fs-5" for="grade">السنة:</label>
             <select id="grade" name="grade" class="form-select" required>
@@ -675,7 +692,6 @@
                 <option value="Master 2 IA">Master 2 IA</option>
               </optgroup>
             </select>
-
             <br />
             <label class="form-label fs-5" for="semestre">الفصل:</label>
             <select id="semestre" name="semestre" class="form-select" required>
@@ -688,9 +704,11 @@
               id="uploadfile"
               type="file"
               class="form-control"
+              multiple
               required
             /><br />
-            <div id="data"></div>
+            <div id="alerts"></div>
+            <!-- Placeholder for alerts -->
             <div id="response"></div>
             <div class="d-grid">
               <button
@@ -699,7 +717,11 @@
                 class="btn btn-primary text-white mt-3"
                 value="Upload"
               >
-                أرسل <span id="spinner-upload"></span>
+                أرسل
+                <span
+                  id="spinner-upload"
+                  class="spinner-border spinner-border-sm"
+                ></span>
               </button>
             </div>
           </form>
@@ -708,10 +730,11 @@
     </section>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/script.js"></script>
-    <script src="assets/js/form_sub.js"></script>
+    <script src="assets/js/contact_form.js"></script>
     <script src="assets/js/files_count.js"></script>
     <script src="assets/js/search.js"></script>
     <script src="assets/js/adhkar.js"></script>
     <script src="assets/js/in-progress.js"></script>
+    <script type="module" src="assets/js/firebase_upload.js"></script>
   </body>
 </html>
