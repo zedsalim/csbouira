@@ -103,7 +103,7 @@ document.getElementById("form").addEventListener("submit", async (event) => {
       submissionData.append("fileLinks", JSON.stringify(fileURLs));
 
       fetch(
-        "https://script.google.com/macros/s/AKfycbx6i-f_pqWu9zpY3kYfDSyP0JT9Dhve19yAr6O5quBTIClvh3hswYsEvflhLIJVMXqCpQ/exec",
+        "https://script.google.com/macros/s/AKfycbyYhqREcnMeiXS2GQij4GOrRzd4TJwQ6ycipdkhsJK9dWd4f4do4gnDtuOgQOvj5xmfPA/exec",
         {
           method: "POST",
           body: submissionData,
@@ -113,7 +113,7 @@ document.getElementById("form").addEventListener("submit", async (event) => {
         // .then((text) => {
         .then(() => {
           alertsDiv.innerHTML = `<div class="alert alert-success" role="alert">
-        تم رفع الملفات بنجاح! ستصلكم رسالة شكر في الإيميل الخاص بكم.
+        تم رفع جميع الملفات بنجاح! شكرا.
       </div>`;
         })
         .catch((error) => {

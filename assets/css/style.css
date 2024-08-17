@@ -105,6 +105,16 @@ body::before {
   color: #000;
 }
 
+/* hide info alert */
+#infoAlert {
+  transition: opacity 1s ease-out;
+  opacity: 1;
+}
+
+#infoAlert.hideInfo {
+  opacity: 0;
+}
+
 /* Custom width for class "min" */
 /* For small screens (under 768px) */
 @media (max-width: 767px) {

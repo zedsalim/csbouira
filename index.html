@@ -203,6 +203,7 @@
             </p>
             <button
               class="btn btn-lg btn-primary text-white"
+              id="uploadButton"
               type="button"
               data-bs-toggle="offcanvas"
               data-bs-target="#offcanvas-upload"
@@ -455,6 +456,7 @@
                 data-bs-toggle="offcanvas"
                 data-bs-target="#offcanvas-upload"
                 type="button"
+                id="uploadButtonLink"
               >
                 إضغط هنا </a
               >.
@@ -637,6 +639,9 @@
           ></button>
         </div>
         <div class="offcanvas-body">
+          <div dir="rtl" class="alert alert-info" id="infoAlert">
+            <strong>ملاحظة:</strong> يمكنكم رفع أكثر من ملف في آن واحد.
+          </div>
           <form dir="rtl" id="form" method="post">
             <input
               type="text"
@@ -738,5 +743,25 @@
     <script src="assets/js/adhkar.js"></script>
     <script src="assets/js/in-progress.js"></script>
     <script type="module" src="assets/js/firebase_upload.js"></script>
+    <!-- hide info alert -->
+    <script>
+      function handleClick(event) {
+        event.preventDefault();
+        setTimeout(function () {
+          const alertDiv = document.getElementById("infoAlert");
+          alertDiv.classList.add("hideInfo");
+
+          setTimeout(function () {
+            alertDiv.style.display = "none";
+          }, 500);
+        }, 3000);
+      }
+      document
+        .getElementById("uploadButton")
+        .addEventListener("click", handleClick);
+      document
+        .getElementById("uploadButtonLink")
+        .addEventListener("click", handleClick);
+    </script>
   </body>
 </html>
