@@ -22,29 +22,29 @@ Welcome to **CS Bouira**! This project is a centralized resource for Computer Sc
 <details>
   <summary><b>Organized Modules (Click me)</b>: Browse through each year's modules to find relevant resources.</summary>
   
-  [organized-modules.webm](https://github.com/user-attachments/assets/7506568a-7982-4f64-bf31-8c67551b2493)
-  
+  [organized-modules.webm](https://github.com/user-attachments/assets/b99ea1bb-4264-41a5-b510-d88d03c698f4)
+
 </details>
 
 <details>
   <summary><b>Search (Click me)</b>: Quickly locate specific modules, files, or resources using the search bar.</summary>
   
-  [search-feature.webm](https://github.com/user-attachments/assets/3c6c852c-d244-4b61-86a4-037de0d1c568)
-  
+  [search-feature.webm](https://github.com/user-attachments/assets/ded759ca-47f7-4f42-bfa7-7c2922b5f404)
+
 </details>
 
 <details>
   <summary><b>Student Contributions (Click me)</b>: Share files such as course materials, exercises, exams, and other documents to support your fellow students.</summary>
   
-  [student-contributions.webm](https://github.com/user-attachments/assets/553ba0d6-044e-4840-9bfc-8e35c5173324)
-  
+  [student-contributions.webm](https://github.com/user-attachments/assets/9e727317-d29c-42d5-873a-4773dad748a1)
+
 </details>
 
 <details>
   <summary><b>Contact Us (Click me)</b>: Use the contact form to share feedback, suggestions, or ideas.</summary>
   
-  [contact-us.webm](https://github.com/user-attachments/assets/d4cdf685-942b-40e0-b837-d8f470c8e68b)
-  
+  [contact-us.webm](https://github.com/user-attachments/assets/83e48197-98a6-4407-838b-c702494415ff)
+
 </details>
 
 ## 🤝 Contributing
