@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://csbouira.xyz" target="_blank">
-    <img src="https://0x0.st/X45f.png" alt="Study Hub Logo" width="400">
+    <img src="./assets/images/csb-github-logo.png" alt="CSB Logo" width="400">
   </a>
 </p>
 <hr/>
