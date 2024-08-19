@@ -72,7 +72,7 @@ A special thanks to those who have contributed by uploading valuable files and r
 
 <ul>
 <li><strong><a href="https://github.com/daaaaaaanyyyyy" target="_blank">Dany Yakoubi</a></strong>: special uploader and core team member</li>
-<li><strong><a href="https://github.com/ryannnaka" target="_blank">Faid Djamelddine</a></strong>: special uploader(ထ)</li>
+<li><strong><a href="https://github.com/ryannnaka" target="_blank">Faid Djamelddine</a></strong>: special uploader</li>
 </ul>
 
 <!-- START FILE_UPLOADS -->
