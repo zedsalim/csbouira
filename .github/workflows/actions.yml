@@ -33,7 +33,7 @@ jobs:
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
-          git add README.md assets/html/team.html
+          git add README.md assets/html/our-journey.html
           git commit -m "Update README.md and our-journey.html with latest data" || echo "No changes to commit"
           git push
         env:
