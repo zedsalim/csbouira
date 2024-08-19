@@ -32,6 +32,8 @@ github_html = """
 <tr>
 """
 
+team_github_html = ""
+
 total_commits = 0
 
 for contributor in github_data:
@@ -47,6 +49,15 @@ for contributor in github_data:
         f"<span>{commits} commits</span>"
         f"</td>\n"
     )
+    team_github_html += (
+        f'<div class="px-5 mb-4 mb-md-0">'
+        f'<a href="https://github.com/{owner}/{repo}/graphs/contributors" target="_blank" id="custom-link">'
+        f'<img src="{avatar_url}" alt="{name} Avatar" class="rounded-circle mb-2" width="100" height="100" />'
+        f'<h5>{name}</h5>'
+        f'</a>'
+        f'<p class="text-muted">{commits} commits</p>'
+        f'</div>\n'
+    )
 
 github_html += "</tr>\n</table>\n"
 
@@ -54,10 +65,17 @@ github_html += "</tr>\n</table>\n"
 script_html = """
 <ul>
 """
+team_script_html = ""
+
 for name, uploads in google_script_data.items():
     # Capitalize each word in the name
     formatted_name = " ".join(word.capitalize() for word in name.split())
     script_html += f"<li><strong>{formatted_name}</strong>: total files uploaded ({uploads}).</li>\n"
+    team_script_html += (
+        f'<li class="list-group-item">'
+        f'<strong>{formatted_name}</strong>: total files uploaded ({uploads}).'
+        f'</li>\n'
+    )
 script_html += "</ul>\n"
 
 # Read the existing README.md and inject content
@@ -68,7 +86,7 @@ except FileNotFoundError:
     print("README.md not found.")
     exit(1)
 
-# Replace GitHub Contributors section
+# Replace GitHub Contributors section in README.md
 start_placeholder_github = "<!-- START GITHUB_CONTRIBUTORS -->"
 end_placeholder_github = "<!-- END GITHUB_CONTRIBUTORS -->"
 start_idx_github = content.find(start_placeholder_github)
@@ -95,7 +113,7 @@ else:
         + end_placeholder_github
     )
 
-# Replace File Uploads section
+# Replace File Uploads section in README.md
 start_placeholder_script = "<!-- START FILE_UPLOADS -->"
 end_placeholder_script = "<!-- END FILE_UPLOADS -->"
 start_idx_script = content.find(start_placeholder_script)
@@ -125,3 +143,69 @@ else:
 # Save the updated content to README.md
 with open("README.md", "w") as readme:
     readme.write(content)
+
+# Read the existing our-journey.html and inject content
+try:
+    with open("./assets/html/our-journey.html", "r") as team_file:
+        team_content = team_file.read()
+except FileNotFoundError:
+    print("our-journey.html not found.")
+    exit(1)
+
+# Replace GitHub Contributors section in our-journey.html
+start_placeholder_team_github = "<!-- HTML START GITHUB_CONTRIBUTORS -->"
+end_placeholder_team_github = "<!-- HTML END GITHUB_CONTRIBUTORS -->"
+start_idx_team_github = team_content.find(start_placeholder_team_github)
+end_idx_team_github = team_content.find(end_placeholder_team_github)
+
+if start_idx_team_github != -1 and end_idx_team_github != -1:
+    end_idx_team_github += len(end_placeholder_team_github)
+    team_content = (
+        team_content[:start_idx_team_github]
+        + start_placeholder_team_github
+        + "\n"
+        + team_github_html
+        + "\n"
+        + end_placeholder_team_github
+        + team_content[end_idx_team_github:]
+    )
+else:
+    team_content += (
+        "\n"
+        + start_placeholder_team_github
+        + "\n"
+        + team_github_html
+        + "\n"
+        + end_placeholder_team_github
+    )
+
+# Replace File Uploads section in our-journey.html
+start_placeholder_team_script = "<!-- HTML START FILE_UPLOADS -->"
+end_placeholder_team_script = "<!-- HTML END FILE_UPLOADS -->"
+start_idx_team_script = team_content.find(start_placeholder_team_script)
+end_idx_team_script = team_content.find(end_placeholder_team_script)
+
+if start_idx_team_script != -1 and end_idx_team_script != -1:
+    end_idx_team_script += len(end_placeholder_team_script)
+    team_content = (
+        team_content[:start_idx_team_script]
+        + start_placeholder_team_script
+        + "\n"
+        + team_script_html
+        + "\n"
+        + end_placeholder_team_script
+        + team_content[end_idx_team_script:]
+    )
+else:
+    team_content += (
+        "\n"
+        + start_placeholder_team_script
+        + "\n"
+        + team_script_html
+        + "\n"
+        + end_placeholder_team_script
+    )
+
+# Save the updated content to our-journey.html
+with open("./assets/html/our-journey.html", "w") as team_file:
+    team_file.write(team_content)

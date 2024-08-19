@@ -1,4 +1,4 @@
-name: Update README
+name: Update README and Our-Journey Page
 
 on:
   schedule:
@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  update-readme:
+  update-readme-and-team:
     runs-on: ubuntu-latest
 
     steps:
@@ -33,9 +33,8 @@ jobs:
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
-          git status
-          git add README.md
-          git commit -m "Update README.md with latest data" || echo "No changes to commit"
+          git add README.md assets/html/team.html
+          git commit -m "Update README.md and our-journey.html with latest data" || echo "No changes to commit"
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

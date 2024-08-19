@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Our Journey</title>
+    <link href="../css/style.css" rel="stylesheet" />
+    <link href="../css/bootstrap.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css"
+      integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/x-icon" href="../images/favicon.ico" />
+  </head>
+  <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="10">
+    <!-- NavBar -->
+    <nav
+      class="navbar bg-light navbar-expand-lg navbar-light fixed-top shadow-sm"
+    >
+      <div class="container">
+        <a href="../../index.html" class="navbar-brand"
+          ><img src="../images/csb-nav-logo.png" alt="CSB Logo"
+        /></a>
+        <button
+          class="navbar-toggler"
+          data-bs-toggle="collapse"
+          data-bs-target="#navCollapse"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navCollapse">
+          <ul class="navbar-nav m-auto">
+            <li class="nav-item me-3">
+              <a href="../../index.html" class="nav-link">Home</a>
+            </li>
+            <li class="nav-item dropdown me-3">
+              <a
+                class="nav-link dropdown-toggle"
+                href="grades-scroll"
+                role="button"
+                data-bs-toggle="dropdown"
+              >
+                Grades</a
+              >
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" href="../html/licence1.html"
+                    >Licence 1</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="../html/licence2.html"
+                    >Licence 2</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="../html/licence3.html"
+                    >Licence 3</a
+                  >
+                </li>
+                <li><a class="dropdown-item disabled" href="#">Master 1</a></li>
+                <li><a class="dropdown-item disabled" href="#">Master 2</a></li>
+              </ul>
+            </li>
+            <li class="nav-item me-3">
+              <a href="../../index.html#about-scroll" class="nav-link">About</a>
+            </li>
+            <li class="nav-item me-3">
+              <a href="../../index.html#contact-scroll" class="nav-link"
+                >Contact</a
+              >
+            </li>
+            <li class="nav-item me-3">
+              <a href="../../index.html#contribute-scroll" class="nav-link"
+                >Contribute</a
+              >
+            </li>
+            <li class="nav-item me-3">
+              <a href="./our-journey.html" class="nav-link active">Story</a>
+            </li>
+          </ul>
+          <!-- Search button nav  -->
+          <a
+            href=""
+            type="button"
+            data-bs-toggle="modal"
+            data-bs-target="#myModal"
+            class="d-flex custom-link"
+          >
+            <input
+              class="form-control me-2"
+              type="text"
+              placeholder="Search"
+              readonly
+            />
+            <button class="btn btn-primary text-white" type="button">
+              <i class="bi bi-search"></i>
+            </button>
+          </a>
+        </div>
+      </div>
+    </nav>
+    <!-- Search Modal -->
+    <div class="modal fade" id="myModal">
+      <div class="modal-dialog modal-dialog-scrollable modal-xl">
+        <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title m-auto">إبحث عن الملفات</h4>
+            <!-- <button -->
+            <!--   type="button" -->
+            <!--   class="btn-close" -->
+            <!--   data-bs-dismiss="modal" -->
+            <!-- ></button> -->
+          </div>
+          <!-- Modal body -->
+          <div class="modal-body">
+            <span class="d-flex">
+              <input
+                class="form-control me-2"
+                id="searchQuery"
+                type="text"
+                placeholder="Exemples: Algo, TP Algo, Examen Algo ..."
+              />
+              <button
+                class="btn btn-primary text-white"
+                id="searchButton"
+                type="button"
+                onclick="searchFiles()"
+              >
+                إبحث <span id="spinner-upload"></span>
+              </button>
+            </span>
+            <div id="search-results"></div>
+          </div>
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-danger"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Adhkar Notification -->
+    <div id="adhkar">
+      <span id="adhkarText">الحمد للّه</span>
+      <button id="closeAdhkar">X</button>
+    </div>
+    <div class="container my-5">
+      <!-- Project Story Section -->
+      <section id="project-story">
+        <h1 class="text-center mb-4">The Story of CS Bouira</h1>
+        <p class="fs-4 lead text-justify" dir="rtl">
+          في 15-06-2023، بدأنا في بناء موقع <b>"CS Bouira"</b>، موقع يهدف إلى أن
+          يكون منصة شاملة لمشاركة الموارد الدراسية لجميع سنوات قسم الإعلام الآلي
+          في جامعتنا، حيث بدأ الطالبين <b>Salim Zaidi</b> و
+          <b>Dany Yakoubi</b> بجمع وتنسيق الملفات ورفعها وربطها بالموقع.
+        </p>
+        <p class="fs-4 lead text-justify" dir="rtl">
+          على الرغم من أن التصميم الأولي للموقع لم يكن مثاليا، إلا أن الموقع حقق
+          نجاحًا كبيرًا بين الطلاب، خاصة خلال فترة الامتحانات.
+        </p>
+        <p class="fs-4 lead text-justify" dir="rtl">
+          بعد عام تحديدا في 18-06-2024، قررنا إعادة بناء الموقع بالكامل بتصميم
+          أفضل ووظائف جديدة. أصبح بإمكان الطلاب رفع الملفات، الاتصال بنا مباشرة،
+          والبحث عن الموارد عبر شريط البحث. كما أضفنا إسم نطاق مخصص
+          <a href="https://csbouira.xyz" id="custom-link">csbouira.xyz</a>.
+        </p>
+        <p class="fs-4 text-justify" dir="rtl">
+          والأن بدأ بعض الأعضاء الجدد بالإنضمام إلينا للمساهمة في المشروع، لذلك
+          إذا كنت ترغب في الانضمام إلى فريقنا والمساهمة معنا، فلا تتردد في
+          الاتصال بنا.
+        </p>
+      </section>
+
+      <!-- Team Members Section -->
+      <section id="team-members" class="mt-5">
+        <h2 class="text-center mb-4">Our Team Members</h2>
+
+        <!-- Founder -->
+        <div class="row mb-4">
+          <div class="col-md-12">
+            <h3 class="text-center mt-3">Founder</h3>
+            <div class="card text-center">
+              <div class="card-body">
+                <a
+                  href="https://github.com/zedsalim"
+                  target="_blank"
+                  id="custom-link"
+                >
+                  <img
+                    src="https://avatars.githubusercontent.com/u/121177411?v=4"
+                    alt="Avatar"
+                    class="rounded-circle mb-2"
+                    width="200"
+                    height="200"
+                  />
+                  <h5 class="card-title">Salim Zaidi</h5>
+                </a>
+                <p class="card-text text-muted">
+                  Founder, developer, and mega-uploader.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Core Team Members -->
+        <div class="row">
+          <h3 class="text-center mt-3">Core Team Members</h3>
+          <div class="col-md-3 m-auto mb-2">
+            <div class="card text-center">
+              <div class="card-body">
+                <a
+                  href="https://github.com/daaaaaaanyyyyy"
+                  target="_blank"
+                  id="custom-link"
+                >
+                  <img
+                    src="https://avatars.githubusercontent.com/u/123634915?v=4"
+                    alt="Avatar"
+                    class="rounded-circle mb-2"
+                    width="100"
+                    height="100"
+                  />
+                  <h5 class="card-title">Dany Yakoubi</h5>
+                </a>
+                <p class="card-text text-muted">
+                  Early core team member and mega-uploader.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 m-auto mb-2">
+            <div class="card text-center">
+              <div class="card-body">
+                <a
+                  href="https://github.com/rayaneca"
+                  target="_blank"
+                  id="custom-link"
+                >
+                  <img
+                    src="https://avatars.githubusercontent.com/u/136390029?v=4"
+                    alt="Avatar"
+                    class="rounded-circle mb-2"
+                    width="100"
+                    height="100"
+                  />
+                  <h5 class="card-title">Rayane Bouafia</h5>
+                </a>
+                <p class="card-text text-muted">Master 1 ISIL uploader.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 m-auto mb-2">
+            <div class="card text-center">
+              <div class="card-body">
+                <a
+                  href="https://github.com/manelgh8"
+                  target="_blank"
+                  id="custom-link"
+                >
+                  <img
+                    src="https://avatars.githubusercontent.com/u/108812624?v=4"
+                    alt="Avatar"
+                    class="rounded-circle mb-2"
+                    width="100"
+                    height="100"
+                  />
+                  <h5 class="card-title">Manel Ghazi</h5>
+                </a>
+                <p class="card-text text-muted">Master 1 GSI uploader.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 m-auto mb-2">
+            <div class="card text-center">
+              <div class="card-body">
+                <a
+                  href="https://github.com/adjoumarwa"
+                  target="_blank"
+                  id="custom-link"
+                >
+                  <img
+                    src="https://avatars.githubusercontent.com/u/104981100?v=4"
+                    alt="Avatar"
+                    class="rounded-circle mb-2"
+                    width="100"
+                    height="100"
+                  />
+                  <h5 class="card-title">Marwa Adjou</h5>
+                </a>
+                <p class="card-text text-muted">Master 1 ISIL uploader.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Source Code Contributors Section -->
+      <section id="contributors" class="mt-5">
+        <h2 class="text-center mb-4">Source Code Contributors</h2>
+        <div
+          class="text-center d-flex flex-column flex-md-row align-items-center justify-content-center"
+        >
+          <!-- HTML START GITHUB_CONTRIBUTORS -->
+
+          <!-- HTML END GITHUB_CONTRIBUTORS -->
+        </div>
+      </section>
+
+      <!-- File Uploaders Section -->
+      <section id="file-uploaders" class="mt-md-5 mt-2">
+        <h2 class="text-center mb-4">File Uploaders</h2>
+        <ul class="list-group">
+          <!-- HTML START FILE_UPLOADS -->
+
+          <!-- HTML END FILE_UPLOADS -->
+        </ul>
+      </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="p-5 mt-5 bg-dark text-white text-center position-relative">
+      <div class="container">
+        <p class="lead">
+          Copyright &copy; 2024:
+          <a
+            class="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+            href="https://github.com/zedsalim"
+            target="_blank"
+            >Salim Zaidi</a
+          >
+        </p>
+        <!-- Back to top button -->
+        <button
+          type="button"
+          class="btn btn-primary btn-floating btn-lg text-white rounded-5"
+          id="btn-back-to-top"
+        >
+          <i class="fas fa-arrow-up"></i>
+        </button>
+      </div>
+    </footer>
+    <script src="../js/bootstrap.bundle.min.js"></script>
+    <script src="../js/script.js"></script>
+    <script src="../js/search.js"></script>
+    <script src="../js/adhkar.js"></script>
+  </body>
+</html>
