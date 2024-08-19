@@ -71,7 +71,8 @@ We appreciate the efforts of everyone who has contributed to the source code of 
 A special thanks to those who have contributed by uploading valuable files and resources. Your contributions help make this hub more comprehensive and useful. Here are some of the key contributors:
 
 <ul>
-<li><strong><a href="https://github.com/daaaaaaanyyyyy" target="_blank">Dany Yakoubi</a></strong>: special uploader and core team member, total files uploaded (ထ)</li>
+<li><strong><a href="https://github.com/daaaaaaanyyyyy" target="_blank">Dany Yakoubi</a></strong>: special uploader and core team member</li>
+<li><strong><a href="https://github.com/ryannnaka" target="_blank">Faid Djamelddine</a></strong>: special uploader(ထ)</li>
 </ul>
 
 <!-- START FILE_UPLOADS -->
