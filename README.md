@@ -59,7 +59,7 @@ We appreciate the efforts of everyone who has contributed to the source code of 
 
 <table>
 <tr>
-<td style="text-align: center; width: 100px;"><a href="https://github.com/zedsalim/csbouira/graphs/contributors" target="_blank"><img src="https://avatars.githubusercontent.com/u/121177411?v=4" alt="zedsalim" style="width: 80px; height: 80px;"/></a><br/><span>86 commits</span></td>
+<td style="text-align: center; width: 100px;"><a href="https://github.com/zedsalim/csbouira/graphs/contributors" target="_blank"><img src="https://avatars.githubusercontent.com/u/121177411?v=4" alt="zedsalim" style="width: 80px; height: 80px;"/></a><br/><span>91 commits</span></td>
 <td style="text-align: center; width: 100px;"><a href="https://github.com/zedsalim/csbouira/graphs/contributors" target="_blank"><img src="https://avatars.githubusercontent.com/u/115380198?v=4" alt="Rayanleo" style="width: 80px; height: 80px;"/></a><br/><span>2 commits</span></td>
 </tr>
 </table>
@@ -81,6 +81,7 @@ A special thanks to those who have contributed by uploading valuable files and r
 <li><strong>Anonymous</strong>: total files uploaded (1).</li>
 <li><strong>Bacha Samy</strong>: total files uploaded (3).</li>
 <li><strong>Aya</strong>: total files uploaded (20).</li>
+<li><strong>Faid Djamelddine</strong>: total files uploaded (Unlimited).</li>
 </ul>
 
 <!-- END FILE_UPLOADS -->
