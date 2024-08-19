@@ -4,7 +4,7 @@ owner = "zedsalim"
 repo = "csbouira"
 
 github_url = f"https://api.github.com/repos/{owner}/{repo}/contributors"
-google_script_url = "https://script.google.com/macros/s/AKfycbwXRLovDns--omO2YTAdoxtPmgH7S5vLzQHxEA4YIKcb4Tygcygk7r9yiv9W008YoP-/exec"
+google_script_url = "https://script.google.com/macros/s/AKfycbz1tT_xA4-vFG0PEWIN8rJbsx2_YPUvJ46_v2hV6Hcv4HfxFYyjusyX4MR_P7yD6smq/exec"
 
 try:
     github_response = requests.get(github_url)
