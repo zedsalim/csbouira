@@ -103,7 +103,7 @@ document.getElementById("form").addEventListener("submit", async (event) => {
       submissionData.append("fileLinks", JSON.stringify(fileURLs));
 
       fetch(
-        "https://script.google.com/macros/s/AKfycbwSE9SNVBjqYxXJfz_bj-jWL9BCHpmwDEi5obDeQ0yGkILmvlbutUj4F0bLwb5cqzrzbg/exec",
+        "https://script.google.com/macros/s/AKfycbxVjnnq8oIIjtHTaIXSUJgzClP3vFlbrtLQxjaaSUTS0n7NBD1nDIJgIu3fYWI4vlsUkA/exec",
         {
           method: "POST",
           body: submissionData,
