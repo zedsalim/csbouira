@@ -1,4 +1,8 @@
 /* Custom styling */
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: "Cairo", sans-serif !important;
 }
