@@ -4,7 +4,7 @@ owner = "zedsalim"
 repo = "csbouira"
 
 github_url = f"https://api.github.com/repos/{owner}/{repo}/contributors"
-google_script_url = "https://script.google.com/macros/s/AKfycbz1tT_xA4-vFG0PEWIN8rJbsx2_YPUvJ46_v2hV6Hcv4HfxFYyjusyX4MR_P7yD6smq/exec"
+google_script_url = "https://script.google.com/macros/s/AKfycbzaQmLGrHZRZQH0nWkVN2G_ox_G292n3t04kGL8kyNiPc6J3SHMQ6aHQ7_dkkwpt21y/exec"
 
 try:
     github_response = requests.get(github_url)
@@ -23,7 +23,7 @@ except requests.exceptions.RequestException as e:
     exit(1)
 except requests.exceptions.JSONDecodeError as e:
     print("Error decoding JSON from Google Script app:")
-    print(google_script_response.text)  # Print the raw response for debugging
+    print(google_script_response.text)
     exit(1)
 
 # Create HTML content for GitHub contributors
