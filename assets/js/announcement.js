@@ -1,4 +1,9 @@
 function createModal() {
+  const closeCount = parseInt(localStorage.getItem("modalCloseCount")) || 0;
+  if (closeCount >= 2) {
+    return;
+  }
+
   const backdrop = document.createElement("div");
   backdrop.className = "modal-backdrop fade show";
 
@@ -71,6 +76,9 @@ function closeModal() {
   if (modalElement) {
     modalElement.remove();
   }
+
+  const closeCount = parseInt(localStorage.getItem("modalCloseCount")) || 0;
+  localStorage.setItem("modalCloseCount", closeCount + 1);
 }
 
 document.addEventListener("DOMContentLoaded", createModal);
