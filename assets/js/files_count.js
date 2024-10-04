@@ -8,7 +8,7 @@ const localStorageKeys = {
   master1_ia: "master1_ia",
   master2_gsi: "master2_gsi",
   master2_isil: "master2_isil",
-  master2_ia: "master2_gsi",
+  master2_ia: "master2_ia",
 };
 
 function loadFromCache() {
