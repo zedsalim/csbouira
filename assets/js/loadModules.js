@@ -92,16 +92,23 @@ function generateModules(modules, semesterId) {
 
 function generateSubModules(submodules) {
   return Object.entries(submodules)
-    .map(
-      ([subName, subData]) => `
-    <li class="list-group-item">
-      <a class="fs-5 link-offset-2 link-underline link-underline-opacity-0" href="${subData.link}" target="_blank">
-        <i class="bi bi-file-earmark-text-fill me-2"></i>
-        ${subName}
-      </a>
-    </li>
-  `
-    )
+    .map(([subName, subData]) => {
+      const trimmedSubName = subName.trim().normalize();
+      const isEmpty = trimmedSubName.toLowerCase().includes("(empty)");
+
+      return `
+          <li class="list-group-item">
+            <a class="${
+              isEmpty ? "text-muted" : "test-class"
+            } fs-5 link-offset-2 link-underline link-underline-opacity-0" href="${
+        subData.link
+      }" target="_blank">
+              <i class="bi bi-file-earmark-text-fill me-2"></i>
+              ${subName}
+            </a>
+          </li>
+        `;
+    })
     .join("");
 }
 
