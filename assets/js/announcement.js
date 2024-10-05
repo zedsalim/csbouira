@@ -1,5 +1,6 @@
 function createModal() {
-  const closeCount = parseInt(localStorage.getItem("modalCloseCount")) || 0;
+  const closeCount =
+    parseInt(localStorage.getItem("announcementCloseCount")) || 0;
   if (closeCount >= 2) {
     return;
   }
@@ -37,7 +38,7 @@ function createModal() {
   bodyText.setAttribute("dir", "rtl");
   bodyText.className = "fs-4";
   bodyText.textContent =
-    "نبحث عن طلبة L1 و L2 للمساعدة في رفع ملفاتهم الدراسية. إذا كنت مهتمًا تواصل معنا.";
+    "نبحث عن طلبة L1 للمساعدة في رفع ملفاتهم الدراسية. إذا كنت مهتمًا تواصل معنا.";
   modalBody.appendChild(bodyText);
 
   const modalFooter = document.createElement("div");
@@ -77,8 +78,9 @@ function closeModal() {
     modalElement.remove();
   }
 
-  const closeCount = parseInt(localStorage.getItem("modalCloseCount")) || 0;
-  localStorage.setItem("modalCloseCount", closeCount + 1);
+  const closeCount =
+    parseInt(localStorage.getItem("announcementCloseCount")) || 0;
+  localStorage.setItem("announcementCloseCount", closeCount + 1);
 }
 
 document.addEventListener("DOMContentLoaded", createModal);
