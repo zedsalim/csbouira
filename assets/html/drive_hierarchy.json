@@ -1954,7 +1954,7 @@
     "S09": {
       "link": "https://drive.google.com/drive/folders/1zYX_LBZomjB4v7VjsD691MGQ95jgmBzj",
       "subfolders": {
-        "Concepts fondamentaux de l'informatique cognitive": {
+        "Deep Learning ": {
           "link": "https://drive.google.com/drive/folders/1QzF_8x5lUJ22o40GZfA30fAhyizknaak",
           "subfolders": {
             "Cours (empty)": {
@@ -1969,37 +1969,12 @@
               "link": "https://drive.google.com/drive/folders/1TQvFSZ7Q4erGWmYhHVHUogbYMwwBwJPw",
               "subfolders": {}
             },
-            "TDs & TPs (empty)": {
-              "link": "https://drive.google.com/drive/folders/1K7mlX-LtbyboAIa55EhjB9xkT2kTitUO",
-              "subfolders": {}
-            },
             "Tests (empty)": {
               "link": "https://drive.google.com/drive/folders/1tJbE8vkXB5ydwxaBL6igw01qHB1sZ0AO",
               "subfolders": {}
-            }
-          }
-        },
-        "Droit des nouvelles technologies de l'information et de la communication": {
-          "link": "https://drive.google.com/drive/folders/1MgJ42STHX8DTsaGoPbnwxH3qZnEgak-s",
-          "subfolders": {
-            "Cours (empty)": {
-              "link": "https://drive.google.com/drive/folders/1JC4NC2DvkTD3gJ9mA6udwoRRLo1qwJgh",
-              "subfolders": {}
             },
-            "Exams (empty)": {
-              "link": "https://drive.google.com/drive/folders/1_MdhNIx_mpa-rJhSlrEgsz1zjp9QYTcq",
-              "subfolders": {}
-            },
-            "Résumé (empty)": {
-              "link": "https://drive.google.com/drive/folders/1qVK-Y_w5QpcS6YJfvuKhUL45EIibds8T",
-              "subfolders": {}
-            },
-            "TDs & TPs (empty)": {
-              "link": "https://drive.google.com/drive/folders/1eGKGUvFpEUztBPhjSbPzLZt_6Byn0DR2",
-              "subfolders": {}
-            },
-            "Tests (empty)": {
-              "link": "https://drive.google.com/drive/folders/1GfFasd1bR4BzzaBFcU7I1ob2bdgONOmh",
+            "TPs (empty)": {
+              "link": "https://drive.google.com/drive/folders/1K7mlX-LtbyboAIa55EhjB9xkT2kTitUO",
               "subfolders": {}
             }
           }
@@ -2019,12 +1994,29 @@
               "link": "https://drive.google.com/drive/folders/15rqdrkRhr2Cmht7Kao5HuZyb2isNYiA_",
               "subfolders": {}
             },
-            "TDs & TPs ": {
-              "link": "https://drive.google.com/drive/folders/1X1eMZxwGLuDVr0eIpQLjowuQqOga-dMB",
-              "subfolders": {}
-            },
             "Tests (empty)": {
               "link": "https://drive.google.com/drive/folders/13_ew6Ai2HTNncA7JhFzGL1lmKxxjX50U",
+              "subfolders": {}
+            },
+            "TPs": {
+              "link": "https://drive.google.com/drive/folders/1X1eMZxwGLuDVr0eIpQLjowuQqOga-dMB",
+              "subfolders": {}
+            }
+          }
+        },
+        "Méthodologie de recherche et de documentation ": {
+          "link": "https://drive.google.com/drive/folders/1MgJ42STHX8DTsaGoPbnwxH3qZnEgak-s",
+          "subfolders": {
+            "Cours (empty)": {
+              "link": "https://drive.google.com/drive/folders/1JC4NC2DvkTD3gJ9mA6udwoRRLo1qwJgh",
+              "subfolders": {}
+            },
+            "Exams (empty)": {
+              "link": "https://drive.google.com/drive/folders/1_MdhNIx_mpa-rJhSlrEgsz1zjp9QYTcq",
+              "subfolders": {}
+            },
+            "Résumé (empty)": {
+              "link": "https://drive.google.com/drive/folders/1qVK-Y_w5QpcS6YJfvuKhUL45EIibds8T",
               "subfolders": {}
             }
           }
@@ -2044,7 +2036,7 @@
               "link": "https://drive.google.com/drive/folders/1amnko61w9hGkfo7k2d54GFqO8d5soBvH",
               "subfolders": {}
             },
-            "TDs & TPs (empty)": {
+            "TDs (empty)": {
               "link": "https://drive.google.com/drive/folders/1T1FojxTfzMfQi8k-JLqGJ0aBCRPHWW3z",
               "subfolders": {}
             },
@@ -2069,17 +2061,17 @@
               "link": "https://drive.google.com/drive/folders/1zXjZTnYD3aEndTrsWSg_0kzkRVSEWaHO",
               "subfolders": {}
             },
-            "TDs & TPs (empty)": {
-              "link": "https://drive.google.com/drive/folders/1IfHOsO5D2agBp2m_B_qgpOr072K1p3lJ",
-              "subfolders": {}
-            },
             "Tests (empty)": {
               "link": "https://drive.google.com/drive/folders/1j4BW3Q09bhpXAoV4etAtWYcMu9WKc_nc",
+              "subfolders": {}
+            },
+            "TPs (empty)": {
+              "link": "https://drive.google.com/drive/folders/1IfHOsO5D2agBp2m_B_qgpOr072K1p3lJ",
               "subfolders": {}
             }
           }
         },
-        "Représentation des connaissances": {
+        "Sécurité des systèmes d'information ": {
           "link": "https://drive.google.com/drive/folders/1u1o7n4hAoI7ekYWntFVmnkYt3_mUX9Tk",
           "subfolders": {
             "Cours (empty)": {
@@ -2094,12 +2086,12 @@
               "link": "https://drive.google.com/drive/folders/1cVR6Kji0l5YNxd_upwFAaUoDVaoWeiFw",
               "subfolders": {}
             },
-            "TDs & TPs (empty)": {
-              "link": "https://drive.google.com/drive/folders/1NA7S5qWJvQL9hY7hXu1B0sn_1mqdDKZR",
-              "subfolders": {}
-            },
             "Tests (empty)": {
               "link": "https://drive.google.com/drive/folders/1fvvITlZ4QmTY2yZOBYw5Gwo-dNoesgJ7",
+              "subfolders": {}
+            },
+            "TPs (empty)": {
+              "link": "https://drive.google.com/drive/folders/1NA7S5qWJvQL9hY7hXu1B0sn_1mqdDKZR",
               "subfolders": {}
             }
           }
@@ -2119,12 +2111,12 @@
               "link": "https://drive.google.com/drive/folders/1i6Z9Xi6P58P8O7v4Vj4BAzY73gbciv3b",
               "subfolders": {}
             },
-            "TDs & TPs (empty)": {
-              "link": "https://drive.google.com/drive/folders/157e29Od5RjnAwIr9ikWqdLgZLJA8GksA",
-              "subfolders": {}
-            },
             "Tests (empty)": {
               "link": "https://drive.google.com/drive/folders/1jtZYiJaf53xIVkOm-LGsjrXjTXumsoCg",
+              "subfolders": {}
+            },
+            "TPs (empty)": {
+              "link": "https://drive.google.com/drive/folders/157e29Od5RjnAwIr9ikWqdLgZLJA8GksA",
               "subfolders": {}
             }
           }
