@@ -6,7 +6,7 @@ import {
   getDownloadURL,
 } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-storage.js";
 
-import { firebaseConfig } from "./apikeys.js";
+import { firebaseConfig, API_KEYS } from "./apikeys.js";
 
 const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
@@ -16,7 +16,6 @@ document.getElementById("form").addEventListener("submit", async (event) => {
 
   const form = event.target;
   const formData = new FormData(form);
-
   const fileInput = form.querySelector("#uploadfile");
   const files = fileInput.files;
   const fileLinksDiv = document.getElementById("response");
@@ -61,7 +60,7 @@ document.getElementById("form").addEventListener("submit", async (event) => {
           },
           (error) => {
             alertsDiv.innerHTML = `<div class="alert alert-danger" role="alert">
-                      خطأ في رفع هذا الملف "${file.name}". حاول مرة أخرى.
+                      خطأ في رفع هذا الملف "${file.name}". حاول مرة أخرى. ${error.message}
                     </div>`;
             reject(error);
           },
@@ -76,7 +75,7 @@ document.getElementById("form").addEventListener("submit", async (event) => {
               resolve();
             } catch (error) {
               alertsDiv.innerHTML = `<div class="alert alert-danger" role="alert">
-                        خطأ عند إسخراج الرابط الخاص بالملف "${file.name}". حاول مرة أخرى.
+                        خطأ عند إسخراج الرابط الخاص بالملف "${file.name}". حاول مرة أخرى. ${error.message}
                       </div>`;
               reject(error);
             }
@@ -102,32 +101,29 @@ document.getElementById("form").addEventListener("submit", async (event) => {
       submissionData.append("semestre", formData.get("semestre"));
       submissionData.append("fileLinks", JSON.stringify(fileURLs));
 
-      fetch(
-        "https://script.google.com/macros/s/AKfycbxVjnnq8oIIjtHTaIXSUJgzClP3vFlbrtLQxjaaSUTS0n7NBD1nDIJgIu3fYWI4vlsUkA/exec",
-        {
+      try {
+        const response = await fetch(API_KEYS.CSB_FIREBASE, {
           method: "POST",
           body: submissionData,
-        }
-      )
-        .then((response) => response.text())
-        // .then((text) => {
-        .then(() => {
-          alertsDiv.innerHTML = `<div class="alert alert-success" role="alert">
-        تم رفع جميع الملفات بنجاح! شكرا.
-      </div>`;
-        })
-        .catch((error) => {
-          const alertsDiv = document.getElementById("alertsDiv");
-          alertsDiv.innerHTML = `<div class="alert alert-danger" role="alert">
-      Error: ${error.message}
-      يرجى مراسلتنا عند ظهور هذا الخطأ.
-    </div>`;
         });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        alertsDiv.innerHTML = `<div class="alert alert-success" role="alert">
+          تم رفع جميع الملفات بنجاح! شكرا.
+        </div>`;
+      } catch (error) {
+        alertsDiv.innerHTML = `<div class="alert alert-danger" role="alert">
+          خطأ في إرسال البيانات. يرجى المحاولة مرة أخرى (راسلنا إذا ظهر هذا الخطأ). ${error.message}
+        </div>`;
+      }
     }
   } else {
     alertsDiv.innerHTML = `<div class="alert alert-warning" role="alert">
-    لم تختر الملفات التي تريد رفعها
-            </div>`;
+      لم تختر الملفات التي تريد رفعها
+    </div>`;
   }
 
   submitButton.disabled = false;
