@@ -1,10 +1,7 @@
 import requests
-
-owner = "zedsalim"
-repo = "csbouira"
-
-github_url = f"https://api.github.com/repos/{owner}/{repo}/contributors"
-google_script_url = "https://script.google.com/macros/s/AKfycbzaQmLGrHZRZQH0nWkVN2G_ox_G292n3t04kGL8kyNiPc6J3SHMQ6aHQ7_dkkwpt21y/exec"
+import os
+github_url = f"https://api.github.com/repos/zedsalim/csbouira/contributors"
+google_script_url = os.getenv("UPLOADERS")
 
 try:
     github_response = requests.get(github_url)

@@ -24,6 +24,8 @@ jobs:
           pip install requests
 
       - name: Run update script
+        env:
+          UPLOADERS: ${{ secrets.UPLOADERS }}
         run: python update_readme.py
 
       - name: Check for changes
