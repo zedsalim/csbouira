@@ -64,3 +64,6 @@ search.addEventListener("keypress", function (e) {
     document.getElementById("searchButton").click();
   }
 });
+
+// Add click event listener to search button
+document.getElementById("searchButton").addEventListener("click", searchFiles);
