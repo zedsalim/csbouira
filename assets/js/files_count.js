@@ -1,3 +1,5 @@
+import { API_KEYS } from "./apikeys.js";
+
 // ----- File Count Badge Inside Grades Cards -----
 const localStorageKeys = {
   licence1: "licence1",
@@ -22,9 +24,7 @@ function loadFromCache() {
 
 loadFromCache();
 
-fetch(
-  "https://script.google.com/macros/s/AKfycbyg6r3JS9A7XOafgX48uVMWU0TKsbrFqQGF4VCUcd3L_Rcax9FIMYcOTiqFn0DyAhjo/exec"
-)
+fetch(API_KEYS.FILE_COUNT)
   .then((response) => response.json())
   .then((data) => {
     document.getElementById("licence1").textContent = data.Licence1;
