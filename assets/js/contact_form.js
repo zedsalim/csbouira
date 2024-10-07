@@ -1,6 +1,7 @@
+import { API_KEYS } from "./apikeys.js";
+
 // Contact Us Form
-const scriptURL =
-  "https://script.google.com/macros/s/AKfycbxc5wwVvl9wjIH3IZaPL1Q4-ea2s9k1MK7GIBEov4N_sgpuWJvdS4FtKZfXEnMJC8fwOQ/exec";
+const scriptURL = API_KEYS.CONTACT_US;
 var form = document.forms["csb-contact-form"];
 var submitButton = document.getElementById("submit-contact");
 var spinner = submitButton.querySelector("span");
