@@ -1,6 +1,10 @@
 import requests
 import os
-github_url = f"https://api.github.com/repos/zedsalim/csbouira/contributors"
+
+owner = "zedsalim"
+repo = "csbouira"
+
+github_url = f"https://api.github.com/repos/{owner}/{repo}/contributors"
 google_script_url = os.getenv("UPLOADERS")
 
 try:
