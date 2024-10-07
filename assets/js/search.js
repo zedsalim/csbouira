@@ -1,3 +1,5 @@
+import { API_KEYS } from "./apikeys.js";
+
 // Search for files in Google Drive
 async function searchFiles() {
   const query = document.getElementById("searchQuery").value;
@@ -16,10 +18,7 @@ async function searchFiles() {
   searchButton.disabled = true;
   spinner.className = "spinner-border spinner-border-sm";
 
-  const response = await fetch(
-    "https://script.google.com/macros/s/AKfycbxTTPqNVHnV42xwWZw2z5IBnJj5WAVuM71Jm_4kmfxNAaXI6ntJJ4PcmqqiJl6tuvvHqg/exec?query=" +
-      encodeURIComponent(query)
-  );
+  const response = await fetch(API_KEYS.SEARCH + encodeURIComponent(query));
   const files = await response.json();
 
   if (files.length === 0) {
