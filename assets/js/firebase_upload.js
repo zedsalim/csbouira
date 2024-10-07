@@ -6,7 +6,7 @@ import {
   getDownloadURL,
 } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-storage.js";
 
-import firebaseConfig from "./apikeys.js";
+import { firebaseConfig } from "./apikeys.js";
 
 const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
