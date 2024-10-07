@@ -1,8 +1,9 @@
 import json
-
 import requests
+import os
 
-url = "https://script.google.com/macros/s/AKfycbwGxORruvFeEdalhtt6Mionj6p4COR9Usz8BQ-CueQoZAzz4ayylafH2bsrBsArPlco/exec"
+url = os.getenv("DRIVE_HIERARCHY")
+
 response = requests.get(url)
 
 if response.status_code == 200:

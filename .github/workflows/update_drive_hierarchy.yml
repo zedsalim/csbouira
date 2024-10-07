@@ -24,6 +24,8 @@ jobs:
           pip install requests
 
       - name: Run update script
+        env:
+          DRIVE_HIERARCHY: ${{ secrets.DRIVE_HIERARCHY }}
         run: python update_drive_hierarchy.py
 
       - name: Check for changes
