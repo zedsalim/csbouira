@@ -16,6 +16,10 @@ async function loadModules(year) {
       return;
     }
 
+    if (year === "2ème Année Licence") {
+      injectPrKamalBalVideos(yearData);
+    }
+
     const section = document.createElement("section");
     section.classList.add("container", "pt-5");
 
@@ -64,6 +68,21 @@ async function loadModules(year) {
     container.appendChild(section);
   } catch (error) {
     // console.error("Error loading JSON data:", error);
+  }
+}
+
+function injectPrKamalBalVideos(yearData) {
+  for (const semester in yearData) {
+    const semesterData = yearData[semester];
+
+    if (semesterData.subfolders && semesterData.subfolders["Base De Donnees"]) {
+      semesterData.subfolders["Base De Donnees"].subfolders[
+        "Pr KAMAL BAL's Videos"
+      ] = {
+        link: "https://drive.google.com/drive/u/2/folders/1Ik4gMqTszRocoOdzSpoQRiDcV5SOTIPU",
+        subfolders: {},
+      };
+    }
   }
 }
 
