@@ -35,8 +35,8 @@ jobs:
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
-          git add ./assets/html/drive_hierarchy.json
-          git commit -m "Update drive_hierarch_backup_copyy.json with latest data" || echo "No changes to commit"
+          git add ./assets/html/drive_hierarchy_backup_copy.json
+          git commit -m "Update drive_hierarchy_backup_copy.json with latest data" || echo "No changes to commit"
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
