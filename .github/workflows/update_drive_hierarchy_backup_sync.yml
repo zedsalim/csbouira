@@ -1,4 +1,4 @@
-name: Update Drive Hierarchy JSON
+name: Update Drive Hierarchy JSON Backup Sync
 
 on:
   schedule:
