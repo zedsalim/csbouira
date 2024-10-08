@@ -25,7 +25,7 @@ jobs:
 
       - name: Run update script
         env:
-          DRIVE_HIERARCHY: ${{ secrets.DRIVE_HIERARCHY_BACKUP_COPY }}
+          DRIVE_HIERARCHY_BACKUP_COPY: ${{ secrets.DRIVE_HIERARCHY_BACKUP_COPY }}
         run: python update_drive_hierarchy_backup_copy.py
 
       - name: Check for changes
