@@ -2,7 +2,7 @@ name: Update README and Our-Journey Page
 
 on:
   schedule:
-    - cron: "0 5,10,15,21 * * *"
+    - cron: "0 0,12 * * *"
   workflow_dispatch:
 
 jobs:
