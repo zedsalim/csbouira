@@ -27,8 +27,11 @@ loadFromCache();
 fetch(API_KEYS.FILE_COUNT)
   .then((response) => response.json())
   .then((data) => {
+    // Add +15 of Pr KAMAl BAL's Videos to L2 total files
+    const adjustedLicence2Count = data.Licence2 + 15;
+
     document.getElementById("licence1").textContent = data.Licence1;
-    document.getElementById("licence2").textContent = data.Licence2;
+    document.getElementById("licence2").textContent = adjustedLicence2Count;
     document.getElementById("licence3").textContent = data.Licence3;
     document.getElementById("master1_gsi").textContent = data.Master1_GSI;
     document.getElementById("master1_isil").textContent = data.Master1_ISIL;
@@ -38,7 +41,7 @@ fetch(API_KEYS.FILE_COUNT)
     document.getElementById("master2_ia").textContent = data.Master2_IA;
 
     localStorage.setItem(localStorageKeys.licence1, data.Licence1);
-    localStorage.setItem(localStorageKeys.licence2, data.Licence2);
+    localStorage.setItem(localStorageKeys.licence2, adjustedLicence2Count);
     localStorage.setItem(localStorageKeys.licence3, data.Licence3);
     localStorage.setItem(localStorageKeys.master1_gsi, data.Master1_GSI);
     localStorage.setItem(localStorageKeys.master1_isil, data.Master1_ISIL);
