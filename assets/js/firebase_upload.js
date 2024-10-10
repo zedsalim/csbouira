@@ -114,6 +114,8 @@ document.getElementById("form").addEventListener("submit", async (event) => {
         alertsDiv.innerHTML = `<div class="alert alert-success" role="alert">
           تم رفع جميع الملفات بنجاح! شكرا.
         </div>`;
+
+        fileInput.value = "";
       } catch (error) {
         alertsDiv.innerHTML = `<div class="alert alert-danger" role="alert">
           خطأ في إرسال البيانات. يرجى المحاولة مرة أخرى (راسلنا إذا ظهر هذا الخطأ). ${error.message}
