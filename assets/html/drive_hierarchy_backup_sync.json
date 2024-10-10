@@ -681,6 +681,10 @@
         "Génie Logiciel": {
           "link": "https://drive.google.com/drive/folders/1ldpnAlzAj9jFR96p5MwIXRkU8whPw7a7",
           "subfolders": {
+            "Books": {
+              "link": "https://drive.google.com/drive/folders/11-A78tFMkSPHC1hwvT8y8F3DsHzo-Kbz",
+              "subfolders": {}
+            },
             "Cours": {
               "link": "https://drive.google.com/drive/folders/1L8YJ66VJQtsSuOaJ_W0gBw9CcPu4VIbu",
               "subfolders": {}
@@ -2038,8 +2042,8 @@
               "link": "https://drive.google.com/drive/folders/1Wun_0RD7tB2Q8Rbwmld8jT3M3YNyJN0v",
               "subfolders": {}
             },
-            "TDs (empty)": {
-              "link": "https://drive.google.com/drive/folders/1ICgywm6LrpUOGL3w98TbaRRSpANV08F2",
+            "TDs": {
+              "link": "https://drive.google.com/drive/folders/1xh7Bm7jPbgf2lXaHEFAfPDas3qGdBWR8",
               "subfolders": {}
             },
             "Tests (empty)": {
