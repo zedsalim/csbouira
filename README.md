@@ -87,7 +87,6 @@ A special thanks to those who have contributed by uploading valuable files and r
 <li><strong>Kemache Mahdi</strong>: total files uploaded (87).</li>
 <li><strong>Feradji Houria</strong>: total files uploaded (5).</li>
 <li><strong>Aissani Assia</strong>: total files uploaded (1).</li>
-<li><strong>Hamanache.nihal</strong>: total files uploaded (1).</li>
 </ul>
 
 <!-- END FILE_UPLOADS -->
