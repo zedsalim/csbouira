@@ -498,6 +498,10 @@
               "link": "https://drive.google.com/drive/folders/15X18dMOX7-Jfq9cW2JtsmZWMpqvcHLNZ",
               "subfolders": {}
             },
+            "Résumé": {
+              "link": "https://drive.google.com/drive/folders/1-6Pgt4l3fYR3R9NMHySU9ZosoQ7BG4JF",
+              "subfolders": {}
+            },
             "TDs & TPs": {
               "link": "https://drive.google.com/drive/folders/1Baz4dYHPgw6xBj_SPd7iQDzFkWn_ozkR",
               "subfolders": {}
@@ -649,6 +653,10 @@
             },
             "Exams": {
               "link": "https://drive.google.com/drive/folders/1Ghssci07sQGVgSjKWPa3XRm6U7JBCcil",
+              "subfolders": {}
+            },
+            "Résumé": {
+              "link": "https://drive.google.com/drive/folders/11h6YexB4H0mRfIrUro118XoSwROSSJBi",
               "subfolders": {}
             },
             "TDs & TPs": {
@@ -845,8 +853,8 @@
               "link": "https://drive.google.com/drive/folders/1sYEkHattaw7nQBTTfLRJ2emzsy6SeGVo",
               "subfolders": {}
             },
-            "Tests (1 file)": {
-              "link": "https://drive.google.com/drive/folders/18geqRd-Jq51NKWQnb-I-QsnvdonJIwDq",
+            "Tests": {
+              "link": "https://drive.google.com/drive/folders/1_IRqwygs65j18rTI8jh40zgUdTr7ahO2",
               "subfolders": {}
             },
             "TPs": {
@@ -1385,102 +1393,77 @@
             }
           }
         },
-        "Fondements de l’intelligence artificielle": {
-          "link": "https://drive.google.com/drive/folders/1pAv6FienppQHhDlydBduzjGaQEbFYy1q",
+        "Architectures orientées services": {
+          "link": "https://drive.google.com/drive/folders/1R60s2B95vehouw6BpF04djLK2tOFqBFT",
           "subfolders": {
-            "Cours (empty)": {
-              "link": "https://drive.google.com/drive/folders/1rDJK3yIhzbMjzD-CpcwW6gxcBQ1LFdWG",
+            "Cours": {
+              "link": "https://drive.google.com/drive/folders/1fQ24yoUjdWQEBX5QDB-gBnh6nFWcRzhY",
               "subfolders": {}
             },
             "Exams (empty)": {
-              "link": "https://drive.google.com/drive/folders/1RXV5lhYQ09TaANgHk6jKvsIqVTLy6del",
+              "link": "https://drive.google.com/drive/folders/1TkLc5nKn9qh4fmhjPENj0g4xRrbWCldj",
               "subfolders": {}
             },
             "Résumé (empty)": {
-              "link": "https://drive.google.com/drive/folders/1eFBN0UySesTBz327bFaYWJ27ohkDrCBs",
+              "link": "https://drive.google.com/drive/folders/1aW7n3_vJTw08LvOC6SvgoocqQG1LWS7L",
               "subfolders": {}
             },
-            "TDs & TPs (empty)": {
-              "link": "https://drive.google.com/drive/folders/1DBGDqgT_wOevZpF39cH5yIIoO-UkXpyD",
+            "TDs & TPs ": {
+              "link": "https://drive.google.com/drive/folders/1REAvd5Kc2V0kBn85vODwuJ5AKaT_BqZJ",
               "subfolders": {}
             },
             "Tests (empty)": {
-              "link": "https://drive.google.com/drive/folders/1V_OXulLD2tIH7Ni7jpyAzWt95GtJ_357",
+              "link": "https://drive.google.com/drive/folders/1ZQ4fjGsnxUiYONbksdXODVY31axKEm61",
               "subfolders": {}
             }
           }
         },
-        "Ingénierie Dirigée par les Modèle": {
-          "link": "https://drive.google.com/drive/folders/1ycY-rQhn1NsLCfJ5JCedJVdqwetyIGlA",
+        "Cloud computing": {
+          "link": "https://drive.google.com/drive/folders/1vgaTARTAtYUqXBC2j3yfO38-CdVRbkDX",
           "subfolders": {
-            "Cours (empty)": {
-              "link": "https://drive.google.com/drive/folders/1ZXE42eHrCZdHfuZ07yXZXiLs8gvzDpgh",
+            "Cours": {
+              "link": "https://drive.google.com/drive/folders/1xZY5-u7uuHM-wSPBF5nwkus1R2i5pI93",
               "subfolders": {}
             },
             "Exams (empty)": {
-              "link": "https://drive.google.com/drive/folders/1JIfnYaYEk6KWNLBS26PAvzeXUZS8YAvq",
+              "link": "https://drive.google.com/drive/folders/1_gQW2EIII6pDUXmkaJevowcia1hy33In",
               "subfolders": {}
             },
             "Résumé (empty)": {
-              "link": "https://drive.google.com/drive/folders/1QvRNGswKrAZs-yjqe53jqucPuo2nYzuN",
+              "link": "https://drive.google.com/drive/folders/1pRLADukuO5KEeHIiAFV7iBmrbPYQ7TLE",
               "subfolders": {}
             },
             "TDs & TPs (empty)": {
-              "link": "https://drive.google.com/drive/folders/14klxmZCtaFDrtHsrQO37mjp9tCdlJa_C",
+              "link": "https://drive.google.com/drive/folders/1-81QJyJk692uR8-nIlsFkRodub4zopp7",
               "subfolders": {}
             },
             "Tests (empty)": {
-              "link": "https://drive.google.com/drive/folders/13pUj07hVqqNXLISZbtCax7IUeVV4WlwR",
+              "link": "https://drive.google.com/drive/folders/1y3YhdRu2n_w02s_qfBXk_PmpYzwxy8YJ",
               "subfolders": {}
             }
           }
         },
-        "Introduction au CloudComputing": {
-          "link": "https://drive.google.com/drive/folders/1Xcygj2hhLsQBFiCicILKHnEcO2hSGdK4",
+        "Management stratégiques des entreprises": {
+          "link": "https://drive.google.com/drive/folders/1zjtJr52hRAiAK1g0CcmDIj-EqPC3cqre",
           "subfolders": {
             "Cours (empty)": {
-              "link": "https://drive.google.com/drive/folders/1nu-LzkdKl1R2GIYYDN_7hBEgSwJg7v-Y",
+              "link": "https://drive.google.com/drive/folders/1cbjjYOQIZGfMVcSJkSyuOvT-01V2AZsg",
               "subfolders": {}
             },
             "Exams (empty)": {
-              "link": "https://drive.google.com/drive/folders/1wfWrhc-4d1LTA9FK1sW-7PmIHSandGBL",
+              "link": "https://drive.google.com/drive/folders/1eRxyW6Ydj6y8vDPxDlBO7nHJfaAwtpnn",
               "subfolders": {}
             },
             "Résumé (empty)": {
-              "link": "https://drive.google.com/drive/folders/1Shwo-Lr8wl5Qs_oYh55RyxZhHNURzvS6",
+              "link": "https://drive.google.com/drive/folders/1AgMk2CoZE4M3tVQA4kK35G6zr7Ktse-b",
               "subfolders": {}
             },
             "TDs & TPs (empty)": {
-              "link": "https://drive.google.com/drive/folders/1NGo3GRe0bVwKe2jZe2hoipt2N7tqkATa",
+              "link": "https://drive.google.com/drive/folders/1Itkvcz6o9xNJiUVVjxYRulsn1m-zw6Qw",
               "subfolders": {}
             },
             "Tests (empty)": {
-              "link": "https://drive.google.com/drive/folders/1cBVEg3MAItj6XqPz8TR6pcTR1e6gYva9",
-              "subfolders": {}
-            }
-          }
-        },
-        "Introduction aux Architectures Orientées Services": {
-          "link": "https://drive.google.com/drive/folders/1I5yewTumotKBJmijVqJ62S8RLQvghCrn",
-          "subfolders": {
-            "Cours (empty)": {
-              "link": "https://drive.google.com/drive/folders/1oorRgGfFTXWJII3IHdt8xIk1bAnPiIsA",
-              "subfolders": {}
-            },
-            "Exams (empty)": {
-              "link": "https://drive.google.com/drive/folders/1OyTO2feX8dEsCG7wEpI4b3Kxhcec06Jm",
-              "subfolders": {}
-            },
-            "Résumé (empty)": {
-              "link": "https://drive.google.com/drive/folders/1cNNPod1f4BkQg35uPpXydlfxfOgkra0S",
-              "subfolders": {}
-            },
-            "TDs & TPs (empty)": {
-              "link": "https://drive.google.com/drive/folders/12Km3oxFvJocsOYxFMYCRAYIDP7B3QC38",
-              "subfolders": {}
-            },
-            "Tests (empty)": {
-              "link": "https://drive.google.com/drive/folders/1SaDxJoAeWrrqhPGl8rIuE4e9FHo_M-IF",
+              "link": "https://drive.google.com/drive/folders/1xxd4Uw7bpQH9wSozoZAfPOoRHcN1TYN4",
               "subfolders": {}
             }
           }
@@ -1488,24 +1471,49 @@
         "Structures de données avancées": {
           "link": "https://drive.google.com/drive/folders/124E07q3bllysKATXE4YolvRWirYfUw8Y",
           "subfolders": {
-            "Cours (empty)": {
-              "link": "https://drive.google.com/drive/folders/1JJf-gAXjDkqtg-ITWgBI9Z6fh7wbtaPI",
+            "Cours ": {
+              "link": "https://drive.google.com/drive/folders/1jssUsBjqFc0jWakvJGHjXRy8ROTeBRqt",
               "subfolders": {}
             },
-            "Exams (empty)": {
-              "link": "https://drive.google.com/drive/folders/1eqZRKiksQB-2HGj9BOMxgWFU7REwslNu",
+            "Exams ": {
+              "link": "https://drive.google.com/drive/folders/15TB0yqOT8MsKeNWthyk2nBzXSxvJject",
               "subfolders": {}
             },
             "Résumé (empty)": {
               "link": "https://drive.google.com/drive/folders/10hJSTEcmRZCuP3VOeeBdhQ2H0p-DWw4o",
               "subfolders": {}
             },
-            "TDs & TPs (empty)": {
-              "link": "https://drive.google.com/drive/folders/1Iu8MVgiqY8c0CcN-p2280c6dvJaNUUzu",
+            "TDs & TPs": {
+              "link": "https://drive.google.com/drive/folders/1GzaXep4aBvPqNLNX38IMx19tBYKylYwc",
               "subfolders": {}
             },
             "Tests (empty)": {
               "link": "https://drive.google.com/drive/folders/1-HKAIYTA9611RhJkm5H2Lb5l-tHKHwUA",
+              "subfolders": {}
+            }
+          }
+        },
+        "Systèmes d'exploitation": {
+          "link": "https://drive.google.com/drive/folders/1YKEvOuUdW90s3X3lX6oGQUV_CuTOsn7w",
+          "subfolders": {
+            "Cours ": {
+              "link": "https://drive.google.com/drive/folders/1skO-rGxJEwKe-ewFqKGmE2PVEtT_pNsS",
+              "subfolders": {}
+            },
+            "Exams (empty)": {
+              "link": "https://drive.google.com/drive/folders/16UIWp5nhgx1M744TgD-0bMMMD29wKzV0",
+              "subfolders": {}
+            },
+            "Résumé (empty)": {
+              "link": "https://drive.google.com/drive/folders/1ktcRqVdwqSvUt_zFyKcpO-YaCxXXl8ll",
+              "subfolders": {}
+            },
+            "TDs & TPs ": {
+              "link": "https://drive.google.com/drive/folders/1SWPoI1GiO8wECzjaoDI82JpweEU7UqIg",
+              "subfolders": {}
+            },
+            "Tests (empty)": {
+              "link": "https://drive.google.com/drive/folders/1BuNq1dMLJ3Au4wNRgj6bKTvrDOiXvoX9",
               "subfolders": {}
             }
           }
