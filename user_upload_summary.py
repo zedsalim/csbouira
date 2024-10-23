@@ -19,8 +19,24 @@ folders = [
 ]
 
 user_emails = os.getenv("UPLOADER_EMAILS").split(",")
+uploaders = [
+    "salim.zaidi",
+    "dany.yakoubi",
+    "gaya.tamdjiat",
+    "rayane.bouafia",
+    "yanis.addar",
+    "sabri.benarouche",
+    "manel.ghazi",
+    "marwa.adjou",
+    "aldjia.arar",
+    "wahiba.sahraoui",
+    "bekhti.bouchra",
+]
 
-total_file_counts = {email: 0 for email in user_emails}
+if len(user_emails) != len(uploaders):
+    raise ValueError("The number of emails must match the number of uploader names.")
+
+total_file_counts = {name: 0 for name in uploaders}
 
 
 def run_google_script_for_folder(folder_name, emails):
@@ -35,8 +51,10 @@ def run_google_script_for_folder(folder_name, emails):
         results = response.json()
 
         for email, count in results.items():
-            if email in total_file_counts:
-                total_file_counts[email] += count
+            if email in user_emails:
+                index = user_emails.index(email)
+                uploader_name = uploaders[index]
+                total_file_counts[uploader_name] += count
     else:
         print(f"Failed for folder: {folder_name}, status: {response.status_code}")
 
