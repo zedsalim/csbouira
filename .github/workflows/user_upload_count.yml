@@ -34,8 +34,8 @@ jobs:
         run: |
           git config --local user.name "github-actions"
           git config --local user.email "github-actions@github.com"
-          git add ./assets/html/total_user_file_counts.json
-          git commit -m "Update total_user_file_counts.json"
+          git add ./assets/html/total_user_file_counts.json || true
+          git diff --cached --quiet || git commit -m "Update total_user_file_counts.json"
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
