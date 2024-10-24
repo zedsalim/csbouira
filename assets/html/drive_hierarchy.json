@@ -2537,7 +2537,183 @@
   "Master 2 IA": {
     "S09": {
       "link": "https://drive.google.com/drive/folders/1ZapRdYyr6Sw1_91ybuEDYESLtnEbY8o0",
-      "subfolders": {}
+      "subfolders": {
+        "Application de Deep Learning": {
+          "link": "https://drive.google.com/drive/folders/1tH8lalY8Ylwh8i6CQ6BfHUP4_E7cMZkG",
+          "subfolders": {
+            "Cours (empty)": {
+              "link": "https://drive.google.com/drive/folders/13N50xrKL_0iEXWo6uWeKG3CgIhFmwlXr",
+              "subfolders": {}
+            },
+            "Exams (empty)": {
+              "link": "https://drive.google.com/drive/folders/13mm6jLqIaDqV92p7F_lr6g9fyT8GGtYJ",
+              "subfolders": {}
+            },
+            "Résumé (empty)": {
+              "link": "https://drive.google.com/drive/folders/1szr3XynpWHzDuA9qoJvkqEzxFpRUlp9T",
+              "subfolders": {}
+            },
+            "TDs & TPs (empty)": {
+              "link": "https://drive.google.com/drive/folders/1rSijhZ4yUbGyUuyKmmaeFBI0T5CNe9Qu",
+              "subfolders": {}
+            },
+            "Tests (empty)": {
+              "link": "https://drive.google.com/drive/folders/18bZFLh0Y1xWrz9MV84PiQPdlR_MJ3EWS",
+              "subfolders": {}
+            }
+          }
+        },
+        "Calcul intensif ": {
+          "link": "https://drive.google.com/drive/folders/1MjfOSmFqE-lU5RHjCcQuDSXScX5HHmtr",
+          "subfolders": {
+            "Cours (empty)": {
+              "link": "https://drive.google.com/drive/folders/1sUifP6Fz_HJHp_8ktODONWg65TBrw4QJ",
+              "subfolders": {}
+            },
+            "Exams (empty)": {
+              "link": "https://drive.google.com/drive/folders/1MCUKGuYZOj_kR8sV72zV7luN-F8S7hh7",
+              "subfolders": {}
+            },
+            "Résumé (empty)": {
+              "link": "https://drive.google.com/drive/folders/19PGQmN266yM2KoypeHg1yphGzuv1dmt4",
+              "subfolders": {}
+            },
+            "TDs & TPs (empty)": {
+              "link": "https://drive.google.com/drive/folders/1sDk_LHKy2unV8zqX5HYC4AeRAh363xlB",
+              "subfolders": {}
+            },
+            "Tests (empty)": {
+              "link": "https://drive.google.com/drive/folders/1dmYboouSxJDEcBPzr7wg-Kkf4Adw_T3R",
+              "subfolders": {}
+            }
+          }
+        },
+        "Méthodes d'optimisation": {
+          "link": "https://drive.google.com/drive/folders/18r3twt8yCpsCy7AgVu6DL50kZmTse5U0",
+          "subfolders": {
+            "Cours (empty)": {
+              "link": "https://drive.google.com/drive/folders/1qd0KnBRbKvKpPlBBkitp7YIZpIfuArhN",
+              "subfolders": {}
+            },
+            "Exams (empty)": {
+              "link": "https://drive.google.com/drive/folders/15kmTw9shFQ7tGxQnxB8f9Njhrm6E7Wtm",
+              "subfolders": {}
+            },
+            "Résumé (empty)": {
+              "link": "https://drive.google.com/drive/folders/1HwMnZh6FmB-dqFByA84dr2_zBske84Se",
+              "subfolders": {}
+            },
+            "TDs & TPs (empty)": {
+              "link": "https://drive.google.com/drive/folders/1Q2CngauCKASx9_ITM8DfhH0t4i1DZqY9",
+              "subfolders": {}
+            },
+            "Tests (empty)": {
+              "link": "https://drive.google.com/drive/folders/1XHvbew1ei0_Q47LNl00yZMC_EKTFm4zT",
+              "subfolders": {}
+            }
+          }
+        },
+        "Modèles stochastiques pour la simulation": {
+          "link": "https://drive.google.com/drive/folders/1JPV7Her36QmmBfrMq32cdORz-KomekA6",
+          "subfolders": {
+            "Cours (empty)": {
+              "link": "https://drive.google.com/drive/folders/1LX-ENlT3gP1kfpAWTqMshp-2XP3CmvoC",
+              "subfolders": {}
+            },
+            "Exams (empty)": {
+              "link": "https://drive.google.com/drive/folders/1fIRZ6ZoF5BBXfK8Umzc8ePRpARD6MOau",
+              "subfolders": {}
+            },
+            "Résumé (empty)": {
+              "link": "https://drive.google.com/drive/folders/12MJbjfml8AQRmBHrK70jBcxfXF4uEyGs",
+              "subfolders": {}
+            },
+            "TDs & TPs (empty)": {
+              "link": "https://drive.google.com/drive/folders/1xhq3l_GvQxzteMVMK3hEw0vo0kzo2koZ",
+              "subfolders": {}
+            },
+            "Tests (empty)": {
+              "link": "https://drive.google.com/drive/folders/1B6OT_vvWAOUt5Z8rHsGGeM9OkM6FVzzt",
+              "subfolders": {}
+            }
+          }
+        },
+        "Programmation pour le Big Data": {
+          "link": "https://drive.google.com/drive/folders/1MntLh-RPZ7veGgaAqhOcxezmW434Vcsy",
+          "subfolders": {
+            "Cours (empty)": {
+              "link": "https://drive.google.com/drive/folders/16SAuUZ_Bwa2mtCz_t-UkCyySoxlL_J33",
+              "subfolders": {}
+            },
+            "Exams (empty)": {
+              "link": "https://drive.google.com/drive/folders/1GXIzcjTnfQ0sen-QXXTIWObSE1jROBVf",
+              "subfolders": {}
+            },
+            "Résumé (empty)": {
+              "link": "https://drive.google.com/drive/folders/1F05QbXsEkUR5JmB_Bseu52ahBruUAi7Y",
+              "subfolders": {}
+            },
+            "TDs & TPs (empty)": {
+              "link": "https://drive.google.com/drive/folders/1HoXFwn5TcGpy5wYM-5uhKljYf-EYuyxq",
+              "subfolders": {}
+            },
+            "Tests (empty)": {
+              "link": "https://drive.google.com/drive/folders/1w-pqtcdILZ2nNgkFhl5v_AoicqLyjA-n",
+              "subfolders": {}
+            }
+          }
+        },
+        "Robotique": {
+          "link": "https://drive.google.com/drive/folders/1P3O5kzYvfk0kAYIn5Kz28GpOeWSZ2bib",
+          "subfolders": {
+            "Cours (empty)": {
+              "link": "https://drive.google.com/drive/folders/1lrgjPdm93uo7jXUOiJAsVLK02SBxq69U",
+              "subfolders": {}
+            },
+            "Exams (empty)": {
+              "link": "https://drive.google.com/drive/folders/14yW7kCZTDbdAP0PqUW9GYeYQ7JXi-U4m",
+              "subfolders": {}
+            },
+            "Résumé (empty)": {
+              "link": "https://drive.google.com/drive/folders/1yj6FFLjDww3jymgnIf5icwYNiaEnyGnz",
+              "subfolders": {}
+            },
+            "TDs & TPs (empty)": {
+              "link": "https://drive.google.com/drive/folders/1jdEK0HGHSWMdbEmdQ0y6YV4aVuZmlovg",
+              "subfolders": {}
+            },
+            "Tests (empty)": {
+              "link": "https://drive.google.com/drive/folders/1If1WhAVY-QgWXmyQpjz4lVkT5sPEUgYi",
+              "subfolders": {}
+            }
+          }
+        },
+        "Vision artificielle": {
+          "link": "https://drive.google.com/drive/folders/1S-1oiWcIupKDsnvubyo-UNYjRucaBfcj",
+          "subfolders": {
+            "Cours (empty)": {
+              "link": "https://drive.google.com/drive/folders/10nwu1xmZAH2VT-WsTDB69OpitO2P01PJ",
+              "subfolders": {}
+            },
+            "Exams (empty)": {
+              "link": "https://drive.google.com/drive/folders/1445eUlAtjs70nj2Sp_E0BDhqocA1IBrq",
+              "subfolders": {}
+            },
+            "Résumé (empty)": {
+              "link": "https://drive.google.com/drive/folders/1vOzFIudvn6IJKCadQTnfhC9KWLXp2nZz",
+              "subfolders": {}
+            },
+            "TDs & TPs (empty)": {
+              "link": "https://drive.google.com/drive/folders/1Yv4xD1fBs2R4inWXEry8UxngoVL9vpCG",
+              "subfolders": {}
+            },
+            "Tests (empty)": {
+              "link": "https://drive.google.com/drive/folders/1cUhPBamG_b4VEqWHyp22z8VkMoylSf8n",
+              "subfolders": {}
+            }
+          }
+        }
+      }
     }
   }
 }
