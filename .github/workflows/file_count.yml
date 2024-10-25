@@ -2,7 +2,7 @@ name: Get Total Files
 
 on:
   schedule:
-    - cron: "0 8,16,23 * * *"
+    - cron: "0 9,16,23 * * *"
   workflow_dispatch:
 
 jobs:
