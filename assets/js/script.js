@@ -34,4 +34,21 @@ function switchLanguage(lang) {
 
   document.head.appendChild(script);
 }
+
+/*---- Dark mode toggle ---- 
+
+const darkModeToggle = document.getElementById('darkModeToggle');
+const header = document.querySelector('.navbar');
+
+darkModeToggle.addEventListener('click', () => {
+  document.body.classList.toggle('dark-mode');
+  header.classList.toggle('dark-mode');
+
+  if (document.body.classList.contains('dark-mode')) {
+    darkModeToggle.textContent = 'Light Mode';
+  } else {
+    darkModeToggle.textContent = 'Dark Mode';   
+
+  }
+});
 */

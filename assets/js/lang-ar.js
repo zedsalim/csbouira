@@ -5,4 +5,4 @@ const translations = {
     licence1: "السنة الأولى",
     licence2: "السنة الثانية",
     uploadButton: "اضغط هنا"
-};
+}

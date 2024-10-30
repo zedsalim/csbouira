@@ -5,6 +5,7 @@ html {
 
 body {
   font-family: "Cairo", sans-serif !important;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
 .custom-hr {
@@ -148,3 +149,13 @@ body::before {
     max-width: 1200px;
   }
 }
+
+.language-switcher button:hover {
+  color: #007bff;
+}
+/* Dark mode
+.dark-mode {
+  background-color: #23272b;
+  color: #fff;
+}
+*/
