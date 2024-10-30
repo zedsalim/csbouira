@@ -148,3 +148,7 @@ body::before {
     max-width: 1200px;
   }
 }
+
+.language-switcher button:hover {
+  color: #007bff;
+}
