@@ -16,7 +16,8 @@ body {
 }
 
 /* Link truncation */
-.custom-link-container, .custom-link {
+.custom-link-container,
+.custom-link {
   display: flex;
   align-items: center;
   white-space: nowrap;
@@ -28,6 +29,10 @@ body {
 
 .custom-link i {
   flex-shrink: 0;
+}
+
+#custom-link {
+  text-decoration: none;
 }
 
 /* Navbar spacing for fixed-top */
@@ -78,7 +83,8 @@ body::before {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   color: #fff;
 }
-.card-hover-effect:hover .card-text, .card-hover-effect:hover .card-title {
+.card-hover-effect:hover .card-text,
+.card-hover-effect:hover .card-title {
   color: #fff;
 }
 .card-hover-effect:hover .badge {
