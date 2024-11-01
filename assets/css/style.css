@@ -5,6 +5,7 @@ html {
 
 body {
   font-family: "Cairo", sans-serif !important;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .custom-hr {
@@ -14,24 +15,14 @@ body {
   margin: 18px auto;
 }
 
-/* Style for truncating long file names */
-.custom-link-container {
+/* Link truncation */
+.custom-link-container, .custom-link {
   display: flex;
   align-items: center;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-
-#custom-link {
   text-decoration: none;
-}
-
-.custom-link {
-  text-decoration: none;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
   flex-shrink: 1;
 }
 
@@ -39,10 +30,10 @@ body {
   flex-shrink: 0;
 }
 
-/* for fixed-top navbar */
+/* Navbar spacing for fixed-top */
 body::before {
-  display: block;
   content: "";
+  display: block;
   height: 75px;
 }
 
@@ -52,9 +43,9 @@ body::before {
   bottom: 80px;
   right: 20px;
   opacity: 0;
-  transition: opacity 0.3s ease, visibility 0.2s ease;
   visibility: hidden;
   pointer-events: none;
+  transition: opacity 0.3s, visibility 0.2s;
 }
 
 #btn-back-to-top.show {
@@ -78,33 +69,32 @@ body::before {
   font-size: 24px;
 }
 
-/* grades cards hover effect */
+/* Card hover effect */
 .card-hover-effect {
-  transition: all 0.3s ease-in-out;
+  transition: all 0.3s;
 }
 .card-hover-effect:hover {
   background-color: #009bd6;
-  border: none;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-.card-hover-effect:hover .card-text,
-.card-hover-effect:hover .card-title {
   color: #fff;
 }
-
+.card-hover-effect:hover .card-text, .card-hover-effect:hover .card-title {
+  color: #fff;
+}
 .card-hover-effect:hover .badge {
   background-color: #fff !important;
   color: #212529;
 }
 
+/* Fixed Adhkar box */
 #adhkar {
   font-size: 1.1rem;
   position: fixed;
   top: 95px;
   right: 10px;
-  color: #343a40;
   background-color: #fff;
   padding: 10px;
+  color: #343a40;
   border-radius: 5px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   z-index: 999;
@@ -119,14 +109,15 @@ body::before {
   cursor: pointer;
 }
 
+/* Accordion styling */
 #Books-headingZero .accordion-button {
   background-color: #e5e5e5;
   color: #000;
 }
 
-/* hide info alert */
+/* Alert fade-out */
 #infoAlert {
-  transition: opacity 1s ease-out;
+  transition: opacity 1s;
   opacity: 1;
 }
 
@@ -134,32 +125,28 @@ body::before {
   opacity: 0;
 }
 
-/* Custom width for class "min" */
-/* For small screens (under 768px) */
-@media (max-width: 767px) {
-  .min {
-    width: 50%;
-  }
+/* Responsive width for class "min" */
+.min {
+  width: 50%;
 }
 
-/* For medium screens (768px to 1024px) */
-@media (min-width: 768px) and (max-width: 1024px) {
+@media (min-width: 768px) {
   .min {
     width: 25%;
   }
+  .modal-xl {
+    width: 90%;
+    max-width: 1200px;
+  }
 }
 
-/* For large screens (greater than 1024px) */
 @media (min-width: 1025px) {
   .min {
     width: 20%;
   }
 }
 
-/* Large modal for larg screens */
-@media (min-width: 768px) {
-  .modal-xl {
-    width: 90%;
-    max-width: 1200px;
-  }
+/* Language switcher */
+.language-switcher button:hover {
+  color: #007bff;
 }
