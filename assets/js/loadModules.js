@@ -88,26 +88,31 @@ function injectPrKamalBalVideos(yearData) {
 
 function generateModules(modules, semesterId) {
   return Object.entries(modules)
-    .map(
-      ([moduleName, moduleData], index) => `
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="flush-heading-${semesterId}-${index}">
-        <button class="fs-5 accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-${semesterId}-${index}" aria-expanded="false" aria-controls="flush-collapse-${semesterId}-${index}">
-          ${moduleName}
-        </button>
-      </h2>
-      <div id="flush-collapse-${semesterId}-${index}" class="accordion-collapse collapse" aria-labelledby="flush-heading-${semesterId}-${index}" data-bs-parent="#accordionFlush-${semesterId}">
-        <div class="accordion-body">
-          <ul class="list-group list-group-flush">
-            ${generateSubModules(moduleData.subfolders)}
-          </ul>
+    .map(([moduleName, moduleData], index) => {
+      const allSubmodulesEmpty = Object.keys(moduleData.subfolders).every(subName =>
+        subName.trim().toLowerCase().includes("(empty)")
+      );
+      const displayModuleName = allSubmodulesEmpty ? `${moduleName} (empty)` : moduleName;
+      return `
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="flush-heading-${semesterId}-${index}">
+            <button class="fs-5 accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-${semesterId}-${index}" aria-expanded="false" aria-controls="flush-collapse-${semesterId}-${index}">
+              ${displayModuleName}
+            </button>
+          </h2>
+          <div id="flush-collapse-${semesterId}-${index}" class="accordion-collapse collapse" aria-labelledby="flush-heading-${semesterId}-${index}" data-bs-parent="#accordionFlush-${semesterId}">
+            <div class="accordion-body">
+              <ul class="list-group list-group-flush">
+                ${generateSubModules(moduleData.subfolders)}
+              </ul>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  `
-    )
+      `;
+    })
     .join("");
 }
+
 
 function generateSubModules(submodules) {
   return Object.entries(submodules)
