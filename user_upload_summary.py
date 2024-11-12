@@ -26,6 +26,7 @@ uploaders = [
     "rayane.bouafia",
     "yanis.addar",
     "sabri.benarouche",
+    "adjou.abdeldjalil",
     "manel.ghazi",
     "marwa.adjou",
     "aldjia.arar",
