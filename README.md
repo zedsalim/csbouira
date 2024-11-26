@@ -91,6 +91,7 @@ A special thanks to those who have contributed by uploading valuable files and r
 <li><strong>Abderraouf Belkacemi</strong>: total files uploaded (1).</li>
 <li><strong>Fatima</strong>: total files uploaded (3).</li>
 <li><strong>Bouadjina Haroun</strong>: total files uploaded (1).</li>
+<li><strong>Boukharouba Hanane</strong>: total files uploaded (1).</li>
 </ul>
 
 <!-- END FILE_UPLOADS -->
