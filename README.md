@@ -94,6 +94,7 @@ A special thanks to those who have contributed by uploading valuable files and r
 <li><strong>Boukharouba Hanane</strong>: total files uploaded (1).</li>
 <li><strong>Amara Sami Anis</strong>: total files uploaded (Unlimited).</li>
 <li><strong>Ibtihal</strong>: total files uploaded (1).</li>
+<li><strong>Kenza</strong>: total files uploaded (11).</li>
 </ul>
 
 <!-- END FILE_UPLOADS -->
