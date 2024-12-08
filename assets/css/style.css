@@ -162,7 +162,11 @@ body::before {
   }
 }
 
-/* Language switcher */
-.language-switcher button:hover {
-  color: #007bff;
+.section-full {
+  height: calc(100vh - 70px);
+  /* width: 100vw; */
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
