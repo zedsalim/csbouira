@@ -10,7 +10,7 @@ async function loadModules(year) {
 
     if (!yearData) {
       container.innerHTML = `
-      <div class="container pt-5" dir="rtl">
+      <div data-aos="fade-down" class="container pt-5" dir="rtl">
       <div class="alert alert-warning fs-4" role="alert">${year} غير متاح حاليا</div>
       </div>`;
       return;
@@ -24,6 +24,7 @@ async function loadModules(year) {
     section.classList.add("container", "pt-5");
 
     const heading = document.createElement("h2");
+    heading.setAttribute("data-aos", "fade-down");
     heading.classList.add("text-center", "mb-5");
     heading.innerHTML = `
       <span class="text-primary"><i class="fa-solid fa-graduation-cap"></i></span>
@@ -38,6 +39,8 @@ async function loadModules(year) {
       const semesterData = yearData[semester];
       const semesterId = semester.replace(/\s+/g, "-");
       const semesterCard = document.createElement("div");
+      semesterCard.setAttribute("data-aos", "fade-down");
+      semesterCard.setAttribute("data-aos-delay", "250");
       semesterCard.classList.add(
         "card",
         "border-0",
@@ -66,6 +69,7 @@ async function loadModules(year) {
 
     section.appendChild(semesterContainer);
     container.appendChild(section);
+    AOS.refreshHard();
   } catch (error) {
     // console.error("Error loading JSON data:", error);
   }
@@ -89,10 +93,12 @@ function injectPrKamalBalVideos(yearData) {
 function generateModules(modules, semesterId) {
   return Object.entries(modules)
     .map(([moduleName, moduleData], index) => {
-      const allSubmodulesEmpty = Object.keys(moduleData.subfolders).every(subName =>
-        subName.trim().toLowerCase().includes("(empty)")
+      const allSubmodulesEmpty = Object.keys(moduleData.subfolders).every(
+        (subName) => subName.trim().toLowerCase().includes("(empty)")
       );
-      const displayModuleName = allSubmodulesEmpty ? `${moduleName} (empty)` : moduleName;
+      const displayModuleName = allSubmodulesEmpty
+        ? `${moduleName} (empty)`
+        : moduleName;
       return `
         <div class="accordion-item">
           <h2 class="accordion-header" id="flush-heading-${semesterId}-${index}">
@@ -112,7 +118,6 @@ function generateModules(modules, semesterId) {
     })
     .join("");
 }
-
 
 function generateSubModules(submodules) {
   return Object.entries(submodules)

@@ -20,6 +20,7 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -216,11 +217,16 @@
     <!-- ###### Dynamic Modules ###### -->
 
     <section class="container">
-      <h3 class="text-center mt-4 mb-4">
+      <h3 data-aos="fade-down" class="text-center mt-4 mb-4">
         <span class="text-primary"> </span>
         Youtube Channels & Websites
       </h3>
-      <div class="accordion" id="accordionExample">
+      <div
+        data-aos="fade-down"
+        data-aos-delay="200"
+        class="accordion"
+        id="accordionExample"
+      >
         <!-- Systèmes d'exploitation Section -->
         <div class="accordion-item">
           <h2 class="accordion-header" id="OS-heading">
@@ -672,5 +678,7 @@
       referrerpolicy="no-referrer"
     ></script>
     <script src="../js/darkmode.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="../js/aos_init.js"></script>
   </body>
 </html>
