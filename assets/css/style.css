@@ -1,11 +1,13 @@
 /* Custom styling */
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
   font-family: "Cairo", sans-serif !important;
   transition: background-color 0.3s, color 0.3s;
+  overflow-x: hidden;
 }
 
 .custom-hr {
