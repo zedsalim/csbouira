@@ -78,17 +78,39 @@ body::before {
 
 /* Card hover effect */
 .card-hover-effect {
-  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  z-index: 1;
 }
-.card-hover-effect:hover {
+
+.card-hover-effect::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 0;
+  height: 0;
   background-color: #009bd6;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  color: #fff;
+  transition: all 0.3s ease;
+  z-index: -1;
 }
+
+.card-hover-effect:hover::before {
+  width: 100%;
+  height: 100%;
+}
+
+.card-hover-effect:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
 .card-hover-effect:hover .card-text,
 .card-hover-effect:hover .card-title {
   color: #fff;
+  transition: color 0.3s ease 0.1s;
 }
+
 .card-hover-effect:hover .badge {
   background-color: #fff !important;
   color: #212529;
