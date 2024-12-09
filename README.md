@@ -59,7 +59,7 @@ We appreciate the efforts of everyone who has contributed to the source code of 
 
 <table>
 <tr>
-<td style="text-align: center; width: 100px;"><a href="https://github.com/zedsalim/csbouira/graphs/contributors" target="_blank"><img src="https://avatars.githubusercontent.com/u/121177411?v=4" alt="zedsalim" style="width: 80px; height: 80px;"/></a><br/><span>187 commits</span></td>
+<td style="text-align: center; width: 100px;"><a href="https://github.com/zedsalim/csbouira/graphs/contributors" target="_blank"><img src="https://avatars.githubusercontent.com/u/121177411?v=4" alt="zedsalim" style="width: 80px; height: 80px;"/></a><br/><span>195 commits</span></td>
 <td style="text-align: center; width: 100px;"><a href="https://github.com/zedsalim/csbouira/graphs/contributors" target="_blank"><img src="https://avatars.githubusercontent.com/u/127874935?v=4" alt="magnetarstar-hub" style="width: 80px; height: 80px;"/></a><br/><span>10 commits</span></td>
 </tr>
 </table>
