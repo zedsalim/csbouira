@@ -51,7 +51,7 @@ for contributor in github_data:
         f"</td>\n"
     )
     team_github_html += (
-        f'<div class="px-5 mb-4 mb-md-0">'
+        f'<div data-aos="fade-down" data-aos-delay="150" class="px-5 mb-4 mb-md-0">'
         f'<a href="https://github.com/{owner}/{repo}/graphs/contributors" target="_blank" id="custom-link">'
         f'<img src="{avatar_url}" alt="{name} Avatar" class="rounded-circle mb-2" width="100" height="100" />'
         f'<h5>{name}</h5>'
