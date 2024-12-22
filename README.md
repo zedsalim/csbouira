@@ -96,6 +96,8 @@ A special thanks to those who have contributed by uploading valuable files and r
 <li><strong>Kenza</strong>: total files uploaded (11).</li>
 <li><strong>Salah</strong>: total files uploaded (1).</li>
 <li><strong>Raouf Rezouali</strong>: total files uploaded (8).</li>
+<li><strong>Halima</strong>: total files uploaded (1).</li>
+<li><strong>Slimani Wissal</strong>: total files uploaded (1).</li>
 </ul>
 
 <!-- END FILE_UPLOADS -->
