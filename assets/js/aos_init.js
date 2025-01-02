@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     delay: 0,
     duration: 900,
     easing: "ease",
-    once: false,
+    once: true,
     mirror: false,
     // anchorPlacement: "top-bottom",
   });
