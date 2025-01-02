@@ -6,6 +6,6 @@ document.addEventListener("DOMContentLoaded", () => {
     easing: "ease",
     once: false,
     mirror: true,
-    anchorPlacement: "top-bottom",
+    // anchorPlacement: "top-bottom",
   });
 });
