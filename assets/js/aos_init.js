@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
     duration: 900,
     easing: "ease",
     once: false,
-    mirror: true,
+    mirror: false,
     // anchorPlacement: "top-bottom",
   });
 });
