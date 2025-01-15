@@ -98,7 +98,7 @@ A special thanks to those who have contributed by uploading valuable files and r
 <li><strong>Raouf Rezouali</strong>: total files uploaded (8).</li>
 <li><strong>Slimani Wissal</strong>: total files uploaded (1).</li>
 <li><strong>Mohammed Ouail Saadi</strong>: total files uploaded (7).</li>
-<li><strong>Amani Madi</strong>: total files uploaded (2).</li>
+<li><strong>Amanzougaghene Nacim</strong>: total files uploaded (1).</li>
 </ul>
 
 <!-- END FILE_UPLOADS -->
