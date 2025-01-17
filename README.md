@@ -99,6 +99,7 @@ A special thanks to those who have contributed by uploading valuable files and r
 <li><strong>Slimani Wissal</strong>: total files uploaded (1).</li>
 <li><strong>Mohammed Ouail Saadi</strong>: total files uploaded (7).</li>
 <li><strong>Amanzougaghene Nacim</strong>: total files uploaded (1).</li>
+<li><strong>Madris Omega</strong>: total files uploaded (5).</li>
 </ul>
 
 <!-- END FILE_UPLOADS -->
