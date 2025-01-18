@@ -110,8 +110,8 @@
               "link": "https://drive.google.com/drive/folders/1JU4_ohJeK7p2c_I9dRJRsUVNX1RrdHj5",
               "subfolders": {}
             },
-            "Tests (empty)": {
-              "link": "https://drive.google.com/drive/folders/1BxUoh0zqKFfvzYly5fOdlTUnvzDBwIX0",
+            "Tests": {
+              "link": "https://drive.google.com/drive/folders/1_2fNnSCHOv642pgRC6LwlXUqhNNXcMsR",
               "subfolders": {}
             }
           }
@@ -839,6 +839,10 @@
             },
             "Exams": {
               "link": "https://drive.google.com/drive/folders/1AX_iDmq4IvB1YLVRYgoQ7NwHwydSQeo5",
+              "subfolders": {}
+            },
+            "Résumé": {
+              "link": "https://drive.google.com/drive/folders/1ZUQEvZ5mlF3FE7TxqSlzrK0Ynn2AdNPi",
               "subfolders": {}
             },
             "TDs & TPs": {
