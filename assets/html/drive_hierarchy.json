@@ -871,12 +871,12 @@
               "link": "https://drive.google.com/drive/folders/17UigYgTYNtbSTX2Ux9e7R2iJKFx72uBC",
               "subfolders": {}
             },
-            "Tests": {
-              "link": "https://drive.google.com/drive/folders/1HwJrIFpSO0UmFwjziNRfmEY6Xkc_Rxss",
+            "TDs & TPs": {
+              "link": "https://drive.google.com/drive/folders/1MX-uuHI9fiy3y5q97PTPYEuhlxoXe-eC",
               "subfolders": {}
             },
-            "TPs": {
-              "link": "https://drive.google.com/drive/folders/1MX-uuHI9fiy3y5q97PTPYEuhlxoXe-eC",
+            "Tests": {
+              "link": "https://drive.google.com/drive/folders/1HwJrIFpSO0UmFwjziNRfmEY6Xkc_Rxss",
               "subfolders": {}
             }
           }
@@ -888,8 +888,12 @@
               "link": "https://drive.google.com/drive/folders/1jPfX_t8ddK7WuC_15_N9SJ6sVVFhzYSy",
               "subfolders": {}
             },
-            "Exams (empty)": {
+            "Exams": {
               "link": "https://drive.google.com/drive/folders/1TLSrAukf9LPrGPTdQGFRJjDAWabaSO91",
+              "subfolders": {}
+            },
+            "Résumé": {
+              "link": "https://drive.google.com/drive/folders/1M05hKdZ6gsamzAwTzyS5g6Bagm7g8Kz9",
               "subfolders": {}
             }
           }
@@ -903,6 +907,10 @@
             },
             "Exams": {
               "link": "https://drive.google.com/drive/folders/1_q83vWzvu_tv7yI7KLP1E3mJiALWovMu",
+              "subfolders": {}
+            },
+            "Résumé": {
+              "link": "https://drive.google.com/drive/folders/1JcndO5dyWL1Bnty-ofA9gN-OwOu5ul6W",
               "subfolders": {}
             },
             "Tests": {
@@ -926,8 +934,16 @@
               "link": "https://drive.google.com/drive/folders/17s8TPbUl33yDLS8owDnjupmby_KOViEp",
               "subfolders": {}
             },
-            "Tests (1 file)": {
+            "Résumé": {
+              "link": "https://drive.google.com/drive/folders/1IwuQVtObozmiF85IDcvEDNI1gQKZlHZ-",
+              "subfolders": {}
+            },
+            "Tests": {
               "link": "https://drive.google.com/drive/folders/1CxxQksCh4rLcagrCSmq2gLNRj8fPUG1w",
+              "subfolders": {}
+            },
+            "TPs": {
+              "link": "https://drive.google.com/drive/folders/1oEtgRvqfpBkv4KAL8RFxO5KIYIjmGoCe",
               "subfolders": {}
             }
           }
@@ -943,7 +959,7 @@
               "link": "https://drive.google.com/drive/folders/1_I7gV0Ec47yl40HjNRZvZNNhx_ogWcYj",
               "subfolders": {}
             },
-            "Tests (empty)": {
+            "Tests": {
               "link": "https://drive.google.com/drive/folders/1i6Un0fQADtyQ9AMDmTwh0Qpu59VO0ggB",
               "subfolders": {}
             }
@@ -960,7 +976,11 @@
               "link": "https://drive.google.com/drive/folders/1AtbPXDXRKNzYQwKpyCTdhnIcLOjMoxlV",
               "subfolders": {}
             },
-            "Tests (1 file)": {
+            "TDs": {
+              "link": "https://drive.google.com/drive/folders/1Oil6VnN6s3B1y10KuwGAcY-isZhs74JC",
+              "subfolders": {}
+            },
+            "Tests": {
               "link": "https://drive.google.com/drive/folders/1SgF7M7BHpY2DXiU6DPMgnm_L0kSFIkXN",
               "subfolders": {}
             }
