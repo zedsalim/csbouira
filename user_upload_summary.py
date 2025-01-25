@@ -24,14 +24,9 @@ uploaders = [
     "dany.yakoubi",
     "gaya.tamdjiat",
     "rayane.bouafia",
-    "yanis.addar",
-    "sabri.benarouche",
-    "adjou.abdeldjalil",
     "manel.ghazi",
     "marwa.adjou",
     "aldjia.arar",
-    "wahiba.sahraoui",
-    "bekhti.bouchra",
 ]
 
 if len(user_emails) != len(uploaders):
