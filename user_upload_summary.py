@@ -27,6 +27,7 @@ uploaders = [
     "manel.ghazi",
     "marwa.adjou",
     "aldjia.arar",
+    "nacerbey.amel",
 ]
 
 if len(user_emails) != len(uploaders):
