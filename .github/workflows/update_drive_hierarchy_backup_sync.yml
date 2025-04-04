@@ -26,7 +26,7 @@ jobs:
       - name: Run update script
         env:
           DRIVE_HIERARCHY_BACKUP_SYNC: ${{ secrets.DRIVE_HIERARCHY_BACKUP_SYNC }}
-        run: python update_drive_hierarchy_backup_sync.py
+        run: python _scripts/update_drive_hierarchy_backup_sync.py
 
       - name: Check for changes
         run: git status

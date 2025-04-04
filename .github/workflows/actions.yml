@@ -26,7 +26,7 @@ jobs:
       - name: Run update script
         env:
           UPLOADERS: ${{ secrets.UPLOADERS }}
-        run: python update_readme.py
+        run: python _scripts/update_readme.py
 
       - name: Check for changes
         run: git status

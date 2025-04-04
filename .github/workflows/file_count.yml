@@ -26,4 +26,4 @@ jobs:
         env:
           WEB_APP_URL: ${{ secrets.WEB_APP_URL }}
         run: |
-          python file_count.py
+          python _scripts/file_count.py

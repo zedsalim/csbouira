@@ -18,7 +18,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: "3.11"
+          python-version: "3.9"
 
       - name: Install dependencies
         run: |
@@ -28,7 +28,7 @@ jobs:
         env:
           UPLOADER_FILE_COUNT: ${{ secrets.UPLOADER_FILE_COUNT }}
           UPLOADER_EMAILS: ${{ secrets.UPLOADER_EMAILS }}
-        run: python user_upload_summary.py
+        run: python _scripts/user_upload_summary.py
 
       - name: Commit and push changes
         run: |
