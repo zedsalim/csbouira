@@ -77,6 +77,15 @@ body::before {
   font-size: 24px;
 }
 
+/* Invert icons for visibility in dark mode */
+.dark-mode-transition .navbar-toggler {
+  filter: invert(1);
+}
+
+.dark-mode-transition .accordion-button::after {
+  filter: invert(1);
+}
+
 /* Card hover effect */
 .card-hover-effect {
   position: relative;
