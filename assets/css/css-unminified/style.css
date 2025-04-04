@@ -78,10 +78,8 @@ body::before {
 }
 
 /* Invert icons for visibility in dark mode */
-.dark-mode-transition .navbar-toggler {
-  filter: invert(1);
-}
-
+.dark-mode-transition .navbar-toggler,
+.dark-mode-transition .btn-close,
 .dark-mode-transition .accordion-button::after {
   filter: invert(1);
 }
