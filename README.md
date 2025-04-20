@@ -59,7 +59,7 @@ We appreciate the efforts of everyone who has contributed to the source code of 
 
 <table>
 <tr>
-<td style="text-align: center; width: 100px;"><a href="https://github.com/zedsalim/csbouira/graphs/contributors" target="_blank"><img src="https://avatars.githubusercontent.com/u/121177411?v=4" alt="zedsalim" style="width: 80px; height: 80px;"/></a><br/><span>211 commits</span></td>
+<td style="text-align: center; width: 100px;"><a href="https://github.com/zedsalim/csbouira/graphs/contributors" target="_blank"><img src="https://avatars.githubusercontent.com/u/121177411?v=4" alt="zedsalim" style="width: 80px; height: 80px;"/></a><br/><span>212 commits</span></td>
 <td style="text-align: center; width: 100px;"><a href="https://github.com/zedsalim/csbouira/graphs/contributors" target="_blank"><img src="https://avatars.githubusercontent.com/u/127874935?v=4" alt="magnetarstar-hub" style="width: 80px; height: 80px;"/></a><br/><span>10 commits</span></td>
 <td style="text-align: center; width: 100px;"><a href="https://github.com/zedsalim/csbouira/graphs/contributors" target="_blank"><img src="https://avatars.githubusercontent.com/u/123634915?v=4" alt="daaaaaaanyyyyy" style="width: 80px; height: 80px;"/></a><br/><span>1 commits</span></td>
 </tr>
@@ -104,7 +104,6 @@ A special thanks to those who have contributed by uploading valuable files and r
 <li><strong>Sara</strong>: total files uploaded (1).</li>
 <li><strong>Amira</strong>: total files uploaded (2).</li>
 <li><strong>Ritadje</strong>: total files uploaded (16).</li>
-<li><strong>Amara Anis Sami</strong>: total files uploaded (1).</li>
 </ul>
 
 <!-- END FILE_UPLOADS -->
