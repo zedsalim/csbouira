@@ -90,7 +90,7 @@ A special thanks to those who have contributed by uploading valuable files and r
 <li><strong>Dribine Feriel</strong>: total files uploaded (1).</li>
 <li><strong>Abderraouf Belkacemi</strong>: total files uploaded (1).</li>
 <li><strong>Fatima</strong>: total files uploaded (7).</li>
-<li><strong>Bouadjina Haroun</strong>: total files uploaded (1).</li>
+<li><strong>Bouadjina Haroun</strong>: total files uploaded (3).</li>
 <li><strong>Boukharouba Hanane</strong>: total files uploaded (1).</li>
 <li><strong>Amara Sami Anis</strong>: total files uploaded (Unlimited).</li>
 <li><strong>Ibtihal</strong>: total files uploaded (1).</li>
@@ -103,7 +103,7 @@ A special thanks to those who have contributed by uploading valuable files and r
 <li><strong>Madris Omega</strong>: total files uploaded (5).</li>
 <li><strong>Sara</strong>: total files uploaded (1).</li>
 <li><strong>Amira</strong>: total files uploaded (2).</li>
-<li><strong>Ritadje</strong>: total files uploaded (16).</li>
+<li><strong>Ritadje</strong>: total files uploaded (38).</li>
 <li><strong>Amara Anis Sami</strong>: total files uploaded (3).</li>
 <li><strong>Dina</strong>: total files uploaded (7).</li>
 <li><strong>Djalil</strong>: total files uploaded (1).</li>
