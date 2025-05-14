@@ -90,7 +90,7 @@ A special thanks to those who have contributed by uploading valuable files and r
 <li><strong>Dribine Feriel</strong>: total files uploaded (1).</li>
 <li><strong>Abderraouf Belkacemi</strong>: total files uploaded (1).</li>
 <li><strong>Fatima</strong>: total files uploaded (7).</li>
-<li><strong>Bouadjina Haroun</strong>: total files uploaded (3).</li>
+<li><strong>Bouadjina Haroun</strong>: total files uploaded (4).</li>
 <li><strong>Boukharouba Hanane</strong>: total files uploaded (1).</li>
 <li><strong>Amara Sami Anis</strong>: total files uploaded (Unlimited).</li>
 <li><strong>Ibtihal</strong>: total files uploaded (1).</li>
