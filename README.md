@@ -102,8 +102,8 @@ A special thanks to those who have contributed by uploading valuable files and r
 <li><strong>Amanzougaghene Nacim</strong>: total files uploaded (2).</li>
 <li><strong>Madris Omega</strong>: total files uploaded (5).</li>
 <li><strong>Sara</strong>: total files uploaded (1).</li>
-<li><strong>Amira</strong>: total files uploaded (2).</li>
-<li><strong>Ritadje</strong>: total files uploaded (38).</li>
+<li><strong>Amira</strong>: total files uploaded (5).</li>
+<li><strong>Ritadje</strong>: total files uploaded (52).</li>
 <li><strong>Amara Anis Sami</strong>: total files uploaded (3).</li>
 <li><strong>Dina</strong>: total files uploaded (7).</li>
 <li><strong>Djalil</strong>: total files uploaded (1).</li>
