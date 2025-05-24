@@ -1538,6 +1538,31 @@
             }
           }
         },
+        "Gestion de l'incertain": {
+          "link": "https://drive.google.com/drive/folders/1J2_sMNZRLZcVwSeaq03rF_oQjJT4n_cx",
+          "subfolders": {
+            "courses": {
+              "link": "https://drive.google.com/drive/folders/17drsizhVAV3r-AazopZeXeO5LszWd5rJ",
+              "subfolders": {}
+            },
+            "Exams": {
+              "link": "https://drive.google.com/drive/folders/18SLtC1dC53gjibLMGvBOTAA5GLqHqcAE",
+              "subfolders": {}
+            },
+            "Resume": {
+              "link": "https://drive.google.com/drive/folders/1-JtkfUdE7xoLdma4JPKGGH3gYpP7MMP8",
+              "subfolders": {}
+            },
+            "TD's": {
+              "link": "https://drive.google.com/drive/folders/1JEsqL_g6cX5EqqUy0KasHkBK1tbAHVko",
+              "subfolders": {}
+            },
+            "Tests": {
+              "link": "https://drive.google.com/drive/folders/1yKYIwJFgmXtj_cIdVBOju7PZiuIIokbR",
+              "subfolders": {}
+            }
+          }
+        },
         "Inforgraphie": {
           "link": "https://drive.google.com/drive/folders/1sunK2zExKGdUFn6IocZe81mHPjIfeDvG",
           "subfolders": {
@@ -1559,6 +1584,48 @@
             },
             "Tests (empty)": {
               "link": "https://drive.google.com/drive/folders/1Ei6nui6vGfRMh7ounxwKY1NOvqnuTi3N",
+              "subfolders": {}
+            }
+          }
+        },
+        "Internet of Things": {
+          "link": "https://drive.google.com/drive/folders/1W7AA8q2anxLLAq3WIQslLFwO7eP7sCpy",
+          "subfolders": {
+            "Cours (empty)": {
+              "link": "https://drive.google.com/drive/folders/1q4njP51cqtnAJA0-froQhTskJPJcAtOC",
+              "subfolders": {}
+            },
+            "Exams (empty)": {
+              "link": "https://drive.google.com/drive/folders/1d-lcx1iscTj3D_JGIi1iIcuJK-g_S3Ld",
+              "subfolders": {}
+            },
+            "Résumé (empty)": {
+              "link": "https://drive.google.com/drive/folders/1lJk9JyV8RF4yav5GlXhU0n9_AMIz6BY_",
+              "subfolders": {}
+            }
+          }
+        },
+        "Les Middlewares pour les systèmes répartis": {
+          "link": "https://drive.google.com/drive/folders/16vzg9l6v07fio6rRxw2HI5IOqu-FYwGW",
+          "subfolders": {
+            "Cours ": {
+              "link": "https://drive.google.com/drive/folders/19uZRB5nkc9BfNecW8NNQapGJL-kE9-Dp",
+              "subfolders": {}
+            },
+            "Exams (empty)": {
+              "link": "https://drive.google.com/drive/folders/1MgCb7ISkiLg8cxNahz67qWGBx7GJnUrr",
+              "subfolders": {}
+            },
+            "Résumé (empty)": {
+              "link": "https://drive.google.com/drive/folders/1sIa2bQ6ncx1Ay3OaGo12APqdeWgiHzUg",
+              "subfolders": {}
+            },
+            "TDs & TPs (empty)": {
+              "link": "https://drive.google.com/drive/folders/1MMe2D-2Ayj_QAA6_qm5acz58BPW6l4b5",
+              "subfolders": {}
+            },
+            "Tests (empty)": {
+              "link": "https://drive.google.com/drive/folders/1LKln6AISep8mJrdUbUaym5eXWrGCpfsD",
               "subfolders": {}
             }
           }
@@ -1659,6 +1726,31 @@
             },
             "Tests (empty)": {
               "link": "https://drive.google.com/drive/folders/1Xgakj6KpFEJRyO_RxdINUgptDHrtjgxd",
+              "subfolders": {}
+            }
+          }
+        },
+        "Modélisation et Architectures logicielles": {
+          "link": "https://drive.google.com/drive/folders/1d6jugVHJ3qOsDenfsgeazV1mxS1aulTT",
+          "subfolders": {
+            "courses": {
+              "link": "https://drive.google.com/drive/folders/1JPblQZGIsKi6U2T3b5E_M7V4vjvT1xgl",
+              "subfolders": {}
+            },
+            "Exams": {
+              "link": "https://drive.google.com/drive/folders/1n2u1R2lHcuyuem44XyKxV7DgtCKREblk",
+              "subfolders": {}
+            },
+            "Resume ": {
+              "link": "https://drive.google.com/drive/folders/1sSOqMOIsXVmpSXpqqIh-NtYSjylsiEeG",
+              "subfolders": {}
+            },
+            "TD's/TP's": {
+              "link": "https://drive.google.com/drive/folders/1AnBX946yX6C6Q32q2bPZu65KXS-dy0m4",
+              "subfolders": {}
+            },
+            "Tests": {
+              "link": "https://drive.google.com/drive/folders/1sXxQ1QZy0s3FRixPRsNgVVO2RYIt7AsD",
               "subfolders": {}
             }
           }
