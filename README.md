@@ -109,6 +109,7 @@ A special thanks to those who have contributed by uploading valuable files and r
 <li><strong>Djalil</strong>: total files uploaded (1).</li>
 <li><strong>Dallal Oulefki</strong>: total files uploaded (1).</li>
 <li><strong>Moon</strong>: total files uploaded (13).</li>
+<li><strong>Nihad</strong>: total files uploaded (6).</li>
 </ul>
 
 <!-- END FILE_UPLOADS -->
