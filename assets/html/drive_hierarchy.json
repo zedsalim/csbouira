@@ -1606,35 +1606,10 @@
     "S08": {
       "link": "https://drive.google.com/drive/folders/1KLe1deRUlrxZAfry531NCs4giewVvMHI",
       "subfolders": {
-        "Bases de données avancées": {
-          "link": "https://drive.google.com/drive/folders/1EQ2DmB2PMNkb93gA2CQtzE9qXPDq4qsU",
-          "subfolders": {
-            "Cours (empty)": {
-              "link": "https://drive.google.com/drive/folders/1SwpZ-4VscG0IHBt4_VzUgCwzZWvOtiXz",
-              "subfolders": {}
-            },
-            "Exams (empty)": {
-              "link": "https://drive.google.com/drive/folders/12u-kWDsSXJIwVMoaajh9pc21SkAqv8z4",
-              "subfolders": {}
-            },
-            "Résumé (empty)": {
-              "link": "https://drive.google.com/drive/folders/1DqxgUh2tzRAIV0_KIFVcV1aGbthfHl8V",
-              "subfolders": {}
-            },
-            "TDs & TPs (empty)": {
-              "link": "https://drive.google.com/drive/folders/1Kvhqwxtc69HWhHDhefTtsqgsVBgdUonV",
-              "subfolders": {}
-            },
-            "Tests (empty)": {
-              "link": "https://drive.google.com/drive/folders/1YRh6rMFPbPBd_q2bMO30_sohgHNk0awC",
-              "subfolders": {}
-            }
-          }
-        },
-        "Fouille de données": {
+        "Analyse de données": {
           "link": "https://drive.google.com/drive/folders/1L0abGcDmhbx6jvUx2EbQHbX4PJcs524u",
           "subfolders": {
-            "Cours (empty)": {
+            "Cours ": {
               "link": "https://drive.google.com/drive/folders/1W1gH0Kb7CLAMjy0mgBOu1QhidGDsbz_U",
               "subfolders": {}
             },
@@ -1646,12 +1621,37 @@
               "link": "https://drive.google.com/drive/folders/1kGmu2jH0PDDqhWNM6c4m1ES9TrE47_JO",
               "subfolders": {}
             },
-            "TDs & TPs (empty)": {
+            "TDs & TPs ": {
               "link": "https://drive.google.com/drive/folders/17HqvaPdfHMGtCg7rD4ame7P9oGe22RAI",
               "subfolders": {}
             },
-            "Tests (empty)": {
+            "Tests ": {
               "link": "https://drive.google.com/drive/folders/16khLrLQbDHzN0X47aJlp00BOdI3qJwCC",
+              "subfolders": {}
+            }
+          }
+        },
+        "Bases de données avancées": {
+          "link": "https://drive.google.com/drive/folders/1EQ2DmB2PMNkb93gA2CQtzE9qXPDq4qsU",
+          "subfolders": {
+            "Cours ": {
+              "link": "https://drive.google.com/drive/folders/1SwpZ-4VscG0IHBt4_VzUgCwzZWvOtiXz",
+              "subfolders": {}
+            },
+            "Exams (empty)": {
+              "link": "https://drive.google.com/drive/folders/12u-kWDsSXJIwVMoaajh9pc21SkAqv8z4",
+              "subfolders": {}
+            },
+            "Résumé (empty)": {
+              "link": "https://drive.google.com/drive/folders/1DqxgUh2tzRAIV0_KIFVcV1aGbthfHl8V",
+              "subfolders": {}
+            },
+            "TDs & TPs ": {
+              "link": "https://drive.google.com/drive/folders/1Kvhqwxtc69HWhHDhefTtsqgsVBgdUonV",
+              "subfolders": {}
+            },
+            "Tests ": {
+              "link": "https://drive.google.com/drive/folders/1YRh6rMFPbPBd_q2bMO30_sohgHNk0awC",
               "subfolders": {}
             }
           }
@@ -1659,7 +1659,7 @@
         "Introduction au traitement automatique des langues naturelles": {
           "link": "https://drive.google.com/drive/folders/1obsxI3VoNFCGk1qWw7MxJH_5qv4LiDWf",
           "subfolders": {
-            "Cours (empty)": {
+            "Cours ": {
               "link": "https://drive.google.com/drive/folders/1JOBdhMYMnDyRvUmWoMlH-53Wj6HXWi74",
               "subfolders": {}
             },
@@ -1671,11 +1671,11 @@
               "link": "https://drive.google.com/drive/folders/1ZlN737W9l3tzggiEbVi8lVpbsH5F89OG",
               "subfolders": {}
             },
-            "TDs & TPs (empty)": {
+            "TDs & TPs ": {
               "link": "https://drive.google.com/drive/folders/1xbpswMd7O0eiRGSiEc60bIqI6Ql1ZZb_",
               "subfolders": {}
             },
-            "Tests (empty)": {
+            "Tests ": {
               "link": "https://drive.google.com/drive/folders/1RINlcIhW-sbyaORSon6niNMaI6xCDeoc",
               "subfolders": {}
             }
@@ -1709,11 +1709,11 @@
         "Modélisation et architectures logicielles": {
           "link": "https://drive.google.com/drive/folders/1mqSKm2Cmk8ScDPKowxC_YH2bQ9uB5rSJ",
           "subfolders": {
-            "Cours (empty)": {
+            "Cours ": {
               "link": "https://drive.google.com/drive/folders/1BAy-hVajGRo6603qgRZUjkQkn0Jlfaka",
               "subfolders": {}
             },
-            "Exams (empty)": {
+            "Exams ": {
               "link": "https://drive.google.com/drive/folders/1dAywbtk90qP2JIpNGf9IKLPwwaekbI8w",
               "subfolders": {}
             },
@@ -1721,11 +1721,11 @@
               "link": "https://drive.google.com/drive/folders/1CJzAY2woceHLPRg-55A58u4-bqafOV2_",
               "subfolders": {}
             },
-            "TDs & TPs (empty)": {
+            "TDs & TPs ": {
               "link": "https://drive.google.com/drive/folders/1rjn6WHlSWAodp_9T1R-hwziwa2qV0B3S",
               "subfolders": {}
             },
-            "Tests (empty)": {
+            "Tests ": {
               "link": "https://drive.google.com/drive/folders/13lfUrwvEm4xXKlHVnrrqFwb60bDUciEs",
               "subfolders": {}
             }
