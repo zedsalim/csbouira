@@ -78,7 +78,17 @@ A special thanks to those who have contributed by uploading valuable files and r
 <!-- START FILE_UPLOADS -->
 
 <ul>
+<li><strong>Samy Bacha</strong>: total files uploaded (Unlimited).</li>
 <li><strong>Faid Djameleddine</strong>: total files uploaded (Unlimited).</li>
+<li><strong>Tamdjiat Med Gaya</strong>: total files uploaded (Unlimited).</li>
+<li><strong>Rayane Bouafia</strong>: total files uploaded (Unlimited).</li>
+<li><strong>Amara Sami Anis</strong>: total files uploaded (Unlimited).</li>
+<li><strong>Manel Ghazi</strong>: total files uploaded (Unlimited).</li>
+<li><strong>Marwa Adjou</strong>: total files uploaded (Unlimited).</li>
+<li><strong>Aldjia Arar</strong>: total files uploaded (Unlimited).</li>
+<li><strong>Nacerbey Amel</strong>: total files uploaded (Unlimited).</li>
+<li><strong>Alouache Lyna</strong>: total files uploaded (Unlimited).</li>
+<li><strong>Melouk Djouiria</strong>: total files uploaded (Unlimited).</li>
 <li><strong>Anonymous</strong>: total files uploaded (1).</li>
 <li><strong>Khellal Yacine</strong>: total files uploaded (3).</li>
 <li><strong>Bacha Samy</strong>: total files uploaded (23).</li>
@@ -92,7 +102,6 @@ A special thanks to those who have contributed by uploading valuable files and r
 <li><strong>Fatima</strong>: total files uploaded (7).</li>
 <li><strong>Bouadjina Haroun</strong>: total files uploaded (4).</li>
 <li><strong>Boukharouba Hanane</strong>: total files uploaded (1).</li>
-<li><strong>Amara Sami Anis</strong>: total files uploaded (Unlimited).</li>
 <li><strong>Ibtihal</strong>: total files uploaded (1).</li>
 <li><strong>Kenza</strong>: total files uploaded (11).</li>
 <li><strong>Salah</strong>: total files uploaded (1).</li>
