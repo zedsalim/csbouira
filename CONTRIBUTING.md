@@ -16,5 +16,4 @@ Welcome! We welcome code improvements and educational resource uploads.
 - Provide a valid email for communication.
 
 ## Support
-email contact@salimzaidi.site.
-
+email: csbouira@proton.me.
