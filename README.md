@@ -120,6 +120,7 @@ A special thanks to those who have contributed by uploading valuable files and r
 <li><strong>Moon</strong>: total files uploaded (13).</li>
 <li><strong>Nihad</strong>: total files uploaded (6).</li>
 <li><strong>Yasmine</strong>: total files uploaded (2).</li>
+<li><strong>Akkache Amira</strong>: total files uploaded (1).</li>
 </ul>
 
 <!-- END FILE_UPLOADS -->
