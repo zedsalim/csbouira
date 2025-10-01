@@ -2,7 +2,7 @@ name: Update Drive Hierarchy JSON
 
 on:
   schedule:
-    - cron: "30 5,10,15,22 * * *"
+    - cron: "30 2,6,10,14,18,22 * * *"
   workflow_dispatch:
 
 jobs:
