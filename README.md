@@ -123,6 +123,7 @@ A special thanks to those who have contributed by uploading valuable files and r
 <li><strong>Akkache Amira</strong>: total files uploaded (1).</li>
 <li><strong>Siham</strong>: total files uploaded (2).</li>
 <li><strong>Katia</strong>: total files uploaded (2).</li>
+<li><strong>Tibi</strong>: total files uploaded (1).</li>
 </ul>
 
 <!-- END FILE_UPLOADS -->
