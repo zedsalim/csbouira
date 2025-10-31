@@ -2171,202 +2171,181 @@
     "S09": {
       "link": "https://drive.google.com/drive/folders/1L2QHgLmYZrO6jYM5h71EA7cSG8tyuTl0",
       "subfolders": {
-        "Computational Intelligence": {
-          "link": "https://drive.google.com/drive/folders/1i1rO04D2iJJiPLJtG3MewdK-LCZ-dfUo",
-          "subfolders": {
-            "Cours (empty)": {
-              "link": "https://drive.google.com/drive/folders/1Q_7xaZ23e2N-BEey6YKihdifhVOP914Y",
-              "subfolders": {}
-            },
-            "Exams (empty)": {
-              "link": "https://drive.google.com/drive/folders/1XucBJ5UC67yeAtl4zRXSsc9TGyRhY4zz",
-              "subfolders": {}
-            },
-            "Résumé (empty)": {
-              "link": "https://drive.google.com/drive/folders/1_0x7PimricZFj9gplbxdKcxsENRfpZO0",
-              "subfolders": {}
-            },
-            "TDs & TPs (empty)": {
-              "link": "https://drive.google.com/drive/folders/1nGuc0DOHARZIVEVqqVg4Tc3YCyhUWS_J",
-              "subfolders": {}
-            },
-            "Tests (empty)": {
-              "link": "https://drive.google.com/drive/folders/1990NtGpfKLtXvLXtL2VM6JfF289dr6ju",
-              "subfolders": {}
-            }
-          }
-        },
-        "Concepts fondamentaux de l'informatique cognitive": {
-          "link": "https://drive.google.com/drive/folders/1ymTZaHzWFAchVzh9n5bTrxOxP5yFEgVZ",
-          "subfolders": {
-            "Cours (empty)": {
-              "link": "https://drive.google.com/drive/folders/1cClFSwrmMZR3C-aRNHw0791ao15woC6J",
-              "subfolders": {}
-            },
-            "Exams (empty)": {
-              "link": "https://drive.google.com/drive/folders/1H5ZQsqYA2haj4E7GVwz715Xkm5MkZN93",
-              "subfolders": {}
-            },
-            "Résumé (empty)": {
-              "link": "https://drive.google.com/drive/folders/1TZ5HqGlZnd5GGLPXk0hpKDC4ZgZNUDuh",
-              "subfolders": {}
-            },
-            "TDs & TPs (empty)": {
-              "link": "https://drive.google.com/drive/folders/1Ypj2MvBl_qoYor9gUhsIB-OdDmYlXw0S",
-              "subfolders": {}
-            },
-            "Tests (empty)": {
-              "link": "https://drive.google.com/drive/folders/1fiQcxGgV6ndg48P1l-K36XWc7O5cKWN7",
-              "subfolders": {}
-            }
-          }
-        },
-        "Droit des nouvelles technologies de l'information et de la communication": {
-          "link": "https://drive.google.com/drive/folders/1iHVk9ZGvJq8fKhsfTg9V00HwVGMoFBqH",
-          "subfolders": {
-            "Cours (empty)": {
-              "link": "https://drive.google.com/drive/folders/1k7Utwb7T__5vzq3jZxoNGbQ2pXCEwRDL",
-              "subfolders": {}
-            },
-            "Exams (empty)": {
-              "link": "https://drive.google.com/drive/folders/1EGhPb2K4PDpurZYYWTcE5yDeTl0DsLvx",
-              "subfolders": {}
-            },
-            "Résumé (empty)": {
-              "link": "https://drive.google.com/drive/folders/1EECQAS1FOIqpwJK8sVuzIIFbSOnwuwHy",
-              "subfolders": {}
-            },
-            "TDs & TPs (empty)": {
-              "link": "https://drive.google.com/drive/folders/1wjhpuAg1yRnF6YCPcIUlCorzP14MWKV9",
-              "subfolders": {}
-            },
-            "Tests (empty)": {
-              "link": "https://drive.google.com/drive/folders/1dKZ46Yd3t-FeiMYjpDozjv4FswA0rIG9",
-              "subfolders": {}
-            }
-          }
-        },
-        "Gestion de l’Incertain": {
-          "link": "https://drive.google.com/drive/folders/1XJUSYLKixT_GtnDWHD-V1WtyCNfbOpiY",
-          "subfolders": {
-            "Cours (empty)": {
-              "link": "https://drive.google.com/drive/folders/12l7zSP5Vx33pJooeHBZ9VlZznNqZGsIs",
-              "subfolders": {}
-            },
-            "Exams (empty)": {
-              "link": "https://drive.google.com/drive/folders/1OOZZor97R99MGvABzXFGHL13N5U8_WGb",
-              "subfolders": {}
-            },
-            "Résumé (empty)": {
-              "link": "https://drive.google.com/drive/folders/1fMGp9T0S8bRYrOMf7_QA-LBDLaUUNppV",
-              "subfolders": {}
-            },
-            "TDs & TPs (empty)": {
-              "link": "https://drive.google.com/drive/folders/1Q0qzslbzq8AXAmTYEWw_UWso-T9ySMGz",
-              "subfolders": {}
-            },
-            "Tests (empty)": {
-              "link": "https://drive.google.com/drive/folders/1igt9AeG4DKtleQS_hSy-Ygz9pxo4Iin2",
-              "subfolders": {}
-            }
-          }
-        },
-        "Les SoC (System On Chip)": {
-          "link": "https://drive.google.com/drive/folders/1nj6yQC-Pm4ds0sb7QhLR_eySGjPtgUtH",
+        "Big Data ": {
+          "link": "https://drive.google.com/drive/folders/1R9R86TlxSuRQwxFSoBvOlOnyMKKk-jKR",
           "subfolders": {
             "Cours": {
-              "link": "https://drive.google.com/drive/folders/1KzgXc1rRyltVXvqm-J1vvk2_Q3eYJDPf",
+              "link": "https://drive.google.com/drive/folders/1GUdaiLQQ-11zXBAA_K-gQjeG2wdU1C6x",
               "subfolders": {}
             },
-            "Exams (empty)": {
-              "link": "https://drive.google.com/drive/folders/1Xa-FF7pcQggSmTx-DHH-MdMjYKhpsb5d",
+            "Exams": {
+              "link": "https://drive.google.com/drive/folders/1719SuSkjxUNgr6nmX8xZ5GC_GIG3q8Pc",
               "subfolders": {}
             },
-            "Résumé (empty)": {
-              "link": "https://drive.google.com/drive/folders/19i5JBiumZtmWzTFGO-32SLZk3S89QT0h",
+            "Resume": {
+              "link": "https://drive.google.com/drive/folders/1iLR4xYw6bhWgEdDrWBKZbnyez_wOWNM3",
               "subfolders": {}
             },
-            "TDs & TPs (empty)": {
-              "link": "https://drive.google.com/drive/folders/1ziNCHc2eXxCHBzkIvVx3tCd0SfqiKN8p",
+            "Tests": {
+              "link": "https://drive.google.com/drive/folders/1qAAql0QwWDpcK007ewleAmRAV7AHWmwy",
               "subfolders": {}
             },
-            "Tests (empty)": {
-              "link": "https://drive.google.com/drive/folders/1kkxFqjM6JGzsDXoXr1itHwNulqblT721",
+            "TP's/TD's": {
+              "link": "https://drive.google.com/drive/folders/15GUgBlz9jUBNHdwskDhj3KfNks38CuNs",
               "subfolders": {}
             }
           }
         },
-        "Réseaux Mobiles": {
-          "link": "https://drive.google.com/drive/folders/1lvsdwLk_JzQRlG35HyoN1hG40Yv8JcBC",
+        "Blockchain": {
+          "link": "https://drive.google.com/drive/folders/1Ab51ze_WaMKRZXOoxPibTd5wGBijGjij",
           "subfolders": {
-            "Cours (empty)": {
-              "link": "https://drive.google.com/drive/folders/1u2sk0k3oVysjW2YcacmKET0VBNCzTzYF",
+            "Cours": {
+              "link": "https://drive.google.com/drive/folders/1zzRp_242apg_qZYAeWsoKOJ0lFjiROtE",
               "subfolders": {}
             },
-            "Exams (empty)": {
-              "link": "https://drive.google.com/drive/folders/1d79E5q329EcA2esnXMGGlqxVg3tmT2tt",
+            "Exams": {
+              "link": "https://drive.google.com/drive/folders/1mAAFvev9M83g76ftDhx4oejVkeUE330j",
               "subfolders": {}
             },
-            "Résumé (empty)": {
-              "link": "https://drive.google.com/drive/folders/1dI8p7HEp6m-LbD4lVIbdZ09LIvbhT2si",
+            "Resume": {
+              "link": "https://drive.google.com/drive/folders/1pLiWzZWCswni05cyZKD2wrWqnRmTj2Jb",
               "subfolders": {}
             },
-            "TDs & TPs (empty)": {
-              "link": "https://drive.google.com/drive/folders/1Ih17_xzn-wOK0LmMq7enD8vsHEzAfpoK",
+            "Tests": {
+              "link": "https://drive.google.com/drive/folders/1l-JbSgFT8_ahKL-0T1tRAGFB5x6LYF2U",
               "subfolders": {}
             },
-            "Tests (empty)": {
-              "link": "https://drive.google.com/drive/folders/1SwlmdvG5iKvCP2hesJnk45W0zQsJMlho",
+            "TP's/TD's": {
+              "link": "https://drive.google.com/drive/folders/1z1XM5lUaB4ciMcIUFySIe-8iyopWPWeP",
               "subfolders": {}
             }
           }
         },
-        "Systèmes embarqués": {
-          "link": "https://drive.google.com/drive/folders/14-8eAE_tEParIkLK5WCQz_weAAKSyiE3",
+        "Computational Intelligence ": {
+          "link": "https://drive.google.com/drive/folders/1Faxzw9xIx60bzx8qgq_DDYlKGQh5SSAy",
           "subfolders": {
-            "Cours (empty)": {
-              "link": "https://drive.google.com/drive/folders/1yqpqfkd_ad_kQkFfTJERJtVb27QINxlh",
+            "Cours": {
+              "link": "https://drive.google.com/drive/folders/1I7l9IF3VBpb8lq_ej7315aZAudWIzAy7",
               "subfolders": {}
             },
-            "Exams (empty)": {
-              "link": "https://drive.google.com/drive/folders/1hVUmi3vNPTlO2TeR_6TXNMeSktIs4MXV",
+            "Exams": {
+              "link": "https://drive.google.com/drive/folders/1Mrlm4u4BXWkVeMhBydLBKrzWqkiwONoP",
               "subfolders": {}
             },
-            "Résumé (empty)": {
-              "link": "https://drive.google.com/drive/folders/1FXd1DksZOAXRwZyUEZUiR93qJ9HVp2n7",
+            "Resume": {
+              "link": "https://drive.google.com/drive/folders/1QwfMp7grnQ9UMdJt9M_1vbkHblGYigDE",
               "subfolders": {}
             },
-            "TDs & TPs (empty)": {
-              "link": "https://drive.google.com/drive/folders/13wwrGFM9bkRkXX6sWzkSuKIzQ3Suk1zk",
+            "Tests": {
+              "link": "https://drive.google.com/drive/folders/1dX62NFwRbC2v_j2WduIEZgeYz53TptmF",
               "subfolders": {}
             },
-            "Tests (empty)": {
-              "link": "https://drive.google.com/drive/folders/1lVfIerTKxrLWrU24IOI2DVbS7Bd6ahng",
+            "TP's/TD's": {
+              "link": "https://drive.google.com/drive/folders/1xs_e6G7LGKfW_Jh3jP3hq6sRIityGgoo",
               "subfolders": {}
             }
           }
         },
-        "Validation formelle de Systèmes Informatiques": {
-          "link": "https://drive.google.com/drive/folders/1iPpogkBQc2-maAB2wTq2qj7_chH8oE8f",
+        "Deep Learning": {
+          "link": "https://drive.google.com/drive/folders/1bIOsB1cx4UW23biOdOJGFcNWH2otyEqd",
           "subfolders": {
-            "Cours (empty)": {
-              "link": "https://drive.google.com/drive/folders/1B9Qg_U1I7x2ojThfMB1aZhOL1OKOSrxk",
+            "Cours": {
+              "link": "https://drive.google.com/drive/folders/1FcIbsOzBaj6UPbAW_uuGb6AwtY2JWaBS",
               "subfolders": {}
             },
-            "Exams (empty)": {
-              "link": "https://drive.google.com/drive/folders/1DkdFraiWs-OS3nKySFIGzULy4Egc8DQr",
+            "Exams": {
+              "link": "https://drive.google.com/drive/folders/1X1q7IZySicg5upJS9jOChovDSdMT7e7m",
               "subfolders": {}
             },
-            "Résumé (empty)": {
-              "link": "https://drive.google.com/drive/folders/1ZWfU6ufFxnq3NyoG9_WY-zEY0oygXMSX",
+            "Resume": {
+              "link": "https://drive.google.com/drive/folders/1Z5tifeDonr-b9JSncV_lgLhATJg5Tvuy",
               "subfolders": {}
             },
-            "TDs & TPs (empty)": {
-              "link": "https://drive.google.com/drive/folders/1kbgRhQ-LWzvQ_w9ilL0fhMw39EhQeA0R",
+            "Tests": {
+              "link": "https://drive.google.com/drive/folders/1QPIJnisOfpQ6HKKvp-CvipPZNhiAo8PV",
               "subfolders": {}
             },
-            "Tests (empty)": {
-              "link": "https://drive.google.com/drive/folders/1Lc_hA5uO40e8nTnuwExW5IcG4Eu6pMQa",
+            "TP's/TD's": {
+              "link": "https://drive.google.com/drive/folders/1IemVXQNx4ENS4hNZX0hPQj7_jq-KuTVE",
+              "subfolders": {}
+            }
+          }
+        },
+        "Evaluation de performances ": {
+          "link": "https://drive.google.com/drive/folders/1wh91puS3urbZBYkNWs2b22x2HYwy8Pb2",
+          "subfolders": {
+            "Cours": {
+              "link": "https://drive.google.com/drive/folders/1ISnjA6wLSLPeoZrIFkAUajanobOxSayO",
+              "subfolders": {}
+            },
+            "Exams": {
+              "link": "https://drive.google.com/drive/folders/1v3uAq_2QM1QJ92X2_-GMHr8PEDgmhjSZ",
+              "subfolders": {}
+            },
+            "Resume": {
+              "link": "https://drive.google.com/drive/folders/15inG4MEcYnrZlD1DgGlEh3UnpbV43WS8",
+              "subfolders": {}
+            },
+            "Tests": {
+              "link": "https://drive.google.com/drive/folders/19DJDExnyd1N0eErjhyvcvRrV-sGHz3vv",
+              "subfolders": {}
+            },
+            "TP's/TD's": {
+              "link": "https://drive.google.com/drive/folders/1GU0kK6FXMqEo764BHzqymLIlaZ9bpGXu",
+              "subfolders": {}
+            }
+          }
+        },
+        "Methodolohie de recherche et de documentation": {
+          "link": "https://drive.google.com/drive/folders/1NgKrRTDep4UDP7ce_tRKKTKG_DnBy1yL",
+          "subfolders": {}
+        },
+        "Mobile Networks ": {
+          "link": "https://drive.google.com/drive/folders/1cMVlDytu3dRa3QH5kFTgVGTVUqJurvPT",
+          "subfolders": {
+            "Cours": {
+              "link": "https://drive.google.com/drive/folders/1eXZHZ95ZF79EqvFvbSLQFm0zZ6nRnLgt",
+              "subfolders": {}
+            },
+            "Exams": {
+              "link": "https://drive.google.com/drive/folders/16YSJcgCDY12aj1lpMPvPckHr29LVgwEb",
+              "subfolders": {}
+            },
+            "Resume": {
+              "link": "https://drive.google.com/drive/folders/1dXmRIFH9VeGuK5GFRpQKklvvdKh0xXj9",
+              "subfolders": {}
+            },
+            "Tests": {
+              "link": "https://drive.google.com/drive/folders/1Oh7leoUQQENQuxa8kAbfwuAEknmSo_GF",
+              "subfolders": {}
+            },
+            "TP's/TD's": {
+              "link": "https://drive.google.com/drive/folders/1O_KlFnk1cAKap_tHTs_vDUMPEgSQQTJa",
+              "subfolders": {}
+            }
+          }
+        },
+        "System On Chip": {
+          "link": "https://drive.google.com/drive/folders/1hQIHm-mk8gYyPLX9eitmcKydDqdvnk5o",
+          "subfolders": {
+            "Cours": {
+              "link": "https://drive.google.com/drive/folders/1TwlMEKhUE7GfSYsWHIW0pcmhefbHMj1R",
+              "subfolders": {}
+            },
+            "Exams": {
+              "link": "https://drive.google.com/drive/folders/1OXi5f8TFCOEyNMmXOM-jUqQNglPxa74s",
+              "subfolders": {}
+            },
+            "Resume": {
+              "link": "https://drive.google.com/drive/folders/1sKA2SGT3Hvg_eTkTstPtoKtH2IkI8Tjl",
+              "subfolders": {}
+            },
+            "Tests": {
+              "link": "https://drive.google.com/drive/folders/1I8Vr2gxzHF3O976Jsk4SKAmu_hw0VcSP",
+              "subfolders": {}
+            },
+            "TP's/TD's": {
+              "link": "https://drive.google.com/drive/folders/1OtUHuUb9tRUPb9UKXMh4z7SEgHSe5vdY",
               "subfolders": {}
             }
           }
