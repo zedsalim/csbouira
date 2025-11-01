@@ -2882,6 +2882,32 @@
     "S09": {
       "link": "https://drive.google.com/drive/folders/1KV_3RVrwgFEPm2GHzh6IViMMw3QqgIwE",
       "subfolders": {
+        "Big Data ": {
+          "link": "https://drive.google.com/drive/folders/1aK6GXIuNv2pvM73k0eYOyL9JFi_ZbpMw",
+          "subfolders": {
+            "Cours": {
+              "link": "https://drive.google.com/drive/folders/1qBs_G18A6hMHjZJs2GzJbt-zp_Zzn52F",
+              "subfolders": {}
+            },
+            "TP's/TD's": {
+              "link": "https://drive.google.com/drive/folders/1NO5ZwWrC7c-Y1ct-Kr0H84rtJ-pZgZ7u",
+              "subfolders": {}
+            }
+          }
+        },
+        "Blockchain": {
+          "link": "https://drive.google.com/drive/folders/1Yi61RCABMK111GB2USiJJpWZhLe6WYs5",
+          "subfolders": {
+            "Cours": {
+              "link": "https://drive.google.com/drive/folders/1u7nUN4amq8bxRNF4C6koIFqFeT7LmMqh",
+              "subfolders": {}
+            },
+            "TP's/TD's": {
+              "link": "https://drive.google.com/drive/folders/1poA1k-_J3MAjcj8dtaub9h0lgrA79Bcz",
+              "subfolders": {}
+            }
+          }
+        },
         "Computational Intelligence": {
           "link": "https://drive.google.com/drive/folders/1Lt6A5CYpPCJ5Cxy-UyIAsjXDtsfdto2T",
           "subfolders": {
@@ -2903,6 +2929,19 @@
             },
             "Tests (empty)": {
               "link": "https://drive.google.com/drive/folders/1J8h2lrnIqp99RKVwks7fUkO_k7YlunXT",
+              "subfolders": {}
+            }
+          }
+        },
+        "Computational Intelligence ": {
+          "link": "https://drive.google.com/drive/folders/14zoj8UeptNVUjhJV2igpP-N4MqIQO76O",
+          "subfolders": {
+            "Cours": {
+              "link": "https://drive.google.com/drive/folders/11BIeaqc9x-QsrSfTcx6TmvdeFiGuRxiz",
+              "subfolders": {}
+            },
+            "TP's/TD's": {
+              "link": "https://drive.google.com/drive/folders/1ZOVJLKWmxJ59CFNuFkcVbFBOWq1J8QL2",
               "subfolders": {}
             }
           }
@@ -2957,6 +2996,19 @@
             }
           }
         },
+        "Evaluation de performances ": {
+          "link": "https://drive.google.com/drive/folders/17v6eJjyvDFvt2YB_YhwcOiO296l5rzkJ",
+          "subfolders": {
+            "Cours": {
+              "link": "https://drive.google.com/drive/folders/1AcZmIiViYYHTBcHRdESKdva5dZ-60WnU",
+              "subfolders": {}
+            },
+            "TP's/TD's": {
+              "link": "https://drive.google.com/drive/folders/1JCd-wI-Cyr3ud8TAbyRx2NqJM759wzqF",
+              "subfolders": {}
+            }
+          }
+        },
         "Gestion de l’Incertain": {
           "link": "https://drive.google.com/drive/folders/1OubqzRG1YJVqg1oOCurOeIR181SLHZ1c",
           "subfolders": {
@@ -3007,6 +3059,15 @@
             }
           }
         },
+        "Mobile Networks ": {
+          "link": "https://drive.google.com/drive/folders/1WYvVqUS4ydrnvJyDWY0Eq9rQVKLh0zal",
+          "subfolders": {
+            "TP's/TD's": {
+              "link": "https://drive.google.com/drive/folders/1Tk3qkmvlUmA4BhEGdad_XLL8-wZtKZZZ",
+              "subfolders": {}
+            }
+          }
+        },
         "Réseaux Mobiles": {
           "link": "https://drive.google.com/drive/folders/1tNYjXkDMzCJB79BAVrId2r6pBLnGkCDX",
           "subfolders": {
@@ -3028,6 +3089,15 @@
             },
             "Tests (empty)": {
               "link": "https://drive.google.com/drive/folders/1YsCUhpbqu9bQ2IHOKdqf4LT9W1UkvrDi",
+              "subfolders": {}
+            }
+          }
+        },
+        "System On Chip": {
+          "link": "https://drive.google.com/drive/folders/1rCw3wwr-wir2Am3Kbj4ePiM6S7eeusUK",
+          "subfolders": {
+            "Cours": {
+              "link": "https://drive.google.com/drive/folders/1cXs_InrOOi5ZHyI_Z2U1haEhxBw_d742",
               "subfolders": {}
             }
           }
