@@ -17,35 +17,9 @@
 
 Welcome to **CS Bouira**! This project is a centralized resource for Computer Science students at Bouira University (Akli Mohand Oulhadj). It includes all the modules from first year to final year, useful resources for each module, allows students to upload files, and includes a search feature to quickly find what you need.
 
-## 🎯 Overview
+**API Access:** All resources are served via our [CSBouira API](https://api.csbouira.xyz/). Developers and students are free to use it to access files directly or integrate it into their own projects.
 
-<details>
-  <summary><b>Organized Modules (Click me)</b>: Browse through each year's modules to find relevant resources.</summary>
-  
-  [organized-modules.webm](https://github.com/user-attachments/assets/b99ea1bb-4264-41a5-b510-d88d03c698f4)
-
-</details>
-
-<details>
-  <summary><b>Search (Click me)</b>: Quickly locate specific modules, files, or resources using the search bar.</summary>
-  
-  [search-feature.webm](https://github.com/user-attachments/assets/ded759ca-47f7-4f42-bfa7-7c2922b5f404)
-
-</details>
-
-<details>
-  <summary><b>Student Contributions (Click me)</b>: Share files such as course materials, exercises, exams, and other documents to support your fellow students.</summary>
-  
-  [student-contributions.webm](https://github.com/user-attachments/assets/9e727317-d29c-42d5-873a-4773dad748a1)
-
-</details>
-
-<details>
-  <summary><b>Contact Us (Click me)</b>: Use the contact form to share feedback, suggestions, or ideas.</summary>
-  
-  [contact-us.webm](https://github.com/user-attachments/assets/83e48197-98a6-4407-838b-c702494415ff)
-
-</details>
+> **Note:** Please use the API responsibly and avoid excessive requests to ensure it remains fast and available for everyone.
 
 ## 🤝 Contributing
 
