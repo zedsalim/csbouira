@@ -9,7 +9,7 @@ for file in "$JS_DIR"/*.js; do
 
   out="${file%.js}.min.js"
 
-  uglifyjs "$file" -o "$out" -c -m
+  esbuild "$file" --minify --outfile="$out" --loader=js
   echo "Minified $file -> $out"
 
   filename=$(basename "$file")
