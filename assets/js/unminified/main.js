@@ -57,10 +57,9 @@ const renderYearCards = (years, containerId, icon) => {
     .map(
       (year) => `
         <div class="card p-6 cursor-pointer relative group" onclick="openYear('${year}')">
-          <!-- Badge -->
           <span id="badge-${year.replace(/\s+/g, '-').toLowerCase()}" 
-                class="absolute top-3 right-3 bg-blue-500 text-white text-xs font-semibold px-2 py-1 rounded-full shadow hidden">
-            0
+                class="absolute top-3 right-3 bg-blue-500 text-white text-xs font-semibold px-2 py-1 rounded-full shadow">
+            <div class="loading-small"></div>
           </span>
           
           <div class="flex items-center gap-4 mb-4">
@@ -79,6 +78,31 @@ const renderYearCards = (years, containerId, icon) => {
       `,
     )
     .join('');
+  years.forEach((year) => loadFileCount(year));
+};
+
+const loadFileCount = async (year) => {
+  try {
+    const response = await fetch(
+      `${API_BASE}?year=${encodeURIComponent(year)}`,
+    );
+    const data = await response.json();
+
+    const count = data._fileCount || 0;
+    showBadge(year, count);
+  } catch (error) {
+    console.warn(`Failed to load count for ${year}:`, error);
+    showBadge(year, 0);
+  }
+};
+
+const showBadge = (year, count) => {
+  const badge = document.getElementById(
+    `badge-${year.replace(/\s+/g, '-').toLowerCase()}`,
+  );
+  if (badge) {
+    badge.innerHTML = `<i class="fa-solid fa-file"></i> ${count}`;
+  }
 };
 
 const openYear = async (year, e) => {
@@ -305,74 +329,8 @@ const closeYearModal = () => {
   currentYear = '';
 };
 
-const waitForYearCards = async () => {
-  let attempts = 0;
-  while (!document.querySelector("[id^='badge-']") && attempts < 20) {
-    await new Promise((r) => setTimeout(r, 200));
-    attempts++;
-  }
-};
-
-const showBadge = (year, count) => {
-  const badge = document.getElementById(
-    `badge-${year.replace(/\s+/g, '-').toLowerCase()}`,
-  );
-  if (badge) {
-    badge.innerHTML = `<i class="fa-solid fa-file"></i> ${count}`;
-    badge.classList.remove('hidden');
-    badge.classList.add('block');
-  }
-};
-
-const countFilesRecursively = (data) => {
-  let count = 0;
-  if (data.files) count += data.files.length;
-  if (data.subfolders) {
-    for (const sub of Object.values(data.subfolders)) {
-      count += countFilesRecursively(sub);
-    }
-  }
-  return count;
-};
-
-const fetchFileCount = async (year) => {
-  const response = await fetch(`${API_BASE}?year=${encodeURIComponent(year)}`);
-  const data = await response.json();
-  return countFilesRecursively(data);
-};
-
-const showCachedCounts = async () => {
-  await waitForYearCards();
-
-  for (const year of yearList) {
-    const cacheKey = `fileCount-${year}`;
-    const cached = localStorage.getItem(cacheKey);
-    if (cached) {
-      showBadge(year, JSON.parse(cached));
-    }
-  }
-};
-
-const updateFileCounts = async () => {
-  for (const year of yearList) {
-    try {
-      const count = await fetchFileCount(year);
-      localStorage.setItem(`fileCount-${year}`, JSON.stringify(count));
-      showBadge(year, count);
-    } catch (error) {
-      console.warn(`Failed to update count for ${year}:`, error);
-    }
-  }
-};
-
 // Initialize years on page load
 loadYears();
-
-// Initialize badges on load
-(async () => {
-  await showCachedCounts();
-  updateFileCounts();
-})();
 
 // ===============================
 // Dropdowns & Mobile Menu
