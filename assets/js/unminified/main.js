@@ -27,6 +27,14 @@ if (localStorage.getItem('darkMode') === 'true') {
 // Drive API & Navigation
 // ===============================
 const API_BASE = 'https://api.csbouira.xyz/api/drive';
+const YEARS = {
+  licence: ['Licence 1', 'Licence 2', 'Licence 3 SI'],
+  master1: ['Master 1 GSI', 'Master 1 ISIL', 'Master 1 IA'],
+  master2: ['Master 2 GSI', 'Master 2 ISIL', 'Master 2 IA'],
+};
+
+const yearList = [...YEARS.licence, ...YEARS.master1, ...YEARS.master2];
+
 let currentPath = [];
 let currentYear = '';
 
@@ -35,13 +43,9 @@ const loadYears = async () => {
     const response = await fetch(API_BASE);
     await response.json();
 
-    const licence = ['Licence 1', 'Licence 2', 'Licence 3 SI'];
-    const master1 = ['Master 1 GSI', 'Master 1 ISIL', 'Master 1 IA'];
-    const master2 = ['Master 2 GSI', 'Master 2 ISIL', 'Master 2 IA'];
-
-    renderYearCards(licence, 'licence-cards', 'fas fa-book-open');
-    renderYearCards(master1, 'master1-cards', 'fas fa-graduation-cap');
-    renderYearCards(master2, 'master2-cards', 'fas fa-user-graduate');
+    renderYearCards(YEARS.licence, 'licence-cards', 'fas fa-book-open');
+    renderYearCards(YEARS.master1, 'master1-cards', 'fas fa-graduation-cap');
+    renderYearCards(YEARS.master2, 'master2-cards', 'fas fa-user-graduate');
   } catch (error) {
     console.error('Error loading years:', error);
   }
@@ -301,25 +305,6 @@ const closeYearModal = () => {
   currentYear = '';
 };
 
-// Initialize years on page load
-loadYears();
-
-// ===============================
-// Year File Count Badges
-// ===============================
-
-const yearList = [
-  'Licence 1',
-  'Licence 2',
-  'Licence 3 SI',
-  'Master 1 GSI',
-  'Master 1 ISIL',
-  'Master 1 IA',
-  'Master 2 GSI',
-  'Master 2 ISIL',
-  'Master 2 IA',
-];
-
 const waitForYearCards = async () => {
   let attempts = 0;
   while (!document.querySelector("[id^='badge-']") && attempts < 20) {
@@ -379,6 +364,9 @@ const updateFileCounts = async () => {
     }
   }
 };
+
+// Initialize years on page load
+loadYears();
 
 // Initialize badges on load
 (async () => {
