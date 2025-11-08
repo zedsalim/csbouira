@@ -196,8 +196,8 @@ const renderContent = (data) => {
         <div class="space-y-2">
     `;
 
-    const reversedFolders = Object.entries(data.subfolders).reverse();
-    for (const [name] of reversedFolders) {
+    const driveFolders = Object.entries(data.subfolders);
+    for (const [name] of driveFolders) {
       const isEmpty = name.includes('(empty)');
       const escapedName = name.replace(/'/g, "\\'").replace(/"/g, '\\"');
       html += `
