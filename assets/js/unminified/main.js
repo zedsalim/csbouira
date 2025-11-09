@@ -40,9 +40,6 @@ let currentYear = '';
 
 const loadYears = async () => {
   try {
-    const response = await fetch(API_BASE);
-    await response.json();
-
     renderYearCards(YEARS.licence, 'licence-cards', 'fas fa-book-open');
     renderYearCards(YEARS.master1, 'master1-cards', 'fas fa-graduation-cap');
     renderYearCards(YEARS.master2, 'master2-cards', 'fas fa-user-graduate');
