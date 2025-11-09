@@ -235,11 +235,20 @@ const renderContent = (data) => {
     `;
     data.files.forEach((file) => {
       const icon = getFileIcon(file.name);
+      const escapedFile = JSON.stringify(file).replace(/'/g, "\\'");
       html += `
-        <div class="file-item" onclick='openFile(${JSON.stringify(file)})'>
-          <i class="${icon}"></i>
-          <span class="flex-1">${file.name}</span>
-          <i class="fas fa-external-link-alt"></i>
+        <div class="file-item group">
+          <div class="flex items-center gap-3 flex-1" onclick='openFile(${escapedFile})'>
+            <i class="${icon}"></i>
+            <span class="flex-1">${file.name}</span>
+            <i class="action-btn fas fa-eye"></i>
+          </div>
+          <button 
+            onclick='event.stopPropagation(); downloadFile("${file.downloadLink}", "${file.name}")' 
+            class="action-btn ml-2"
+            title="Download file">
+            <i class="fas fa-download"></i>
+          </button>
         </div>
       `;
     });
@@ -310,20 +319,22 @@ const openFolder = (folderName) => {
 };
 
 const openFile = (file) => {
-  const fileId = extractFileId(file.link);
-  if (fileId) {
-    const previewUrl = `https://drive.google.com/file/d/${fileId}/preview`;
+  if (file.previewLink) {
     document.getElementById('modalTitle').textContent = file.name;
-    document.getElementById('fileViewer').src = previewUrl;
+    document.getElementById('fileViewer').src = file.previewLink;
     document.getElementById('fileModal').classList.add('active');
   } else {
     window.open(file.link, '_blank');
   }
 };
 
-const extractFileId = (link) => {
-  const match = link.match(/\/d\/([^/]+)/);
-  return match ? match[1] : null;
+const downloadFile = (downloadLink, fileName) => {
+  const a = document.createElement('a');
+  a.href = downloadLink;
+  a.download = fileName;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
 };
 
 const closeModal = () => {

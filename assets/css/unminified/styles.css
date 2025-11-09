@@ -81,6 +81,16 @@ textarea {
   box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2);
 }
 
+.file-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.file-item > div:first-child {
+  cursor: pointer;
+}
+
 /* ============================= */
 /*           BUTTONS             */
 /* ============================= */
@@ -110,6 +120,25 @@ textarea {
   background-color: var(--primary);
   color: var(--bg-light);
   transform: scale(1.05);
+}
+
+.action-btn {
+  padding: 0.5rem;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  border-radius: 0.375rem;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.action-btn:hover {
+  background: var(--primary-color);
+  color: white;
+  transform: scale(1.1);
 }
 
 /* ============================= */
