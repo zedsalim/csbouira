@@ -46,6 +46,7 @@ const loadYears = async () => {
     renderYearCards(YEARS.licence, 'licence-cards', 'fas fa-book-open');
     renderYearCards(YEARS.master1, 'master1-cards', 'fas fa-graduation-cap');
     renderYearCards(YEARS.master2, 'master2-cards', 'fas fa-user-graduate');
+    await loadAllFileCounts();
   } catch (error) {
     console.error('Error loading years:', error);
   }
@@ -78,21 +79,26 @@ const renderYearCards = (years, containerId, icon) => {
       `,
     )
     .join('');
-  years.forEach((year) => loadFileCount(year));
 };
 
-const loadFileCount = async (year) => {
+const loadAllFileCounts = async () => {
   try {
-    const response = await fetch(
-      `${API_BASE}?year=${encodeURIComponent(year)}`,
-    );
+    const response = await fetch(`${API_BASE}?path=_fileCounts`);
     const data = await response.json();
 
-    const count = data._fileCount || 0;
-    showBadge(year, count);
+    if (!data || typeof data !== 'object') {
+      console.warn('No valid _fileCounts data received');
+      yearList.forEach((year) => showBadge(year, null));
+      return;
+    }
+
+    yearList.forEach((year) => {
+      const count = data[year];
+      showBadge(year, count !== undefined ? count : null);
+    });
   } catch (error) {
-    console.warn(`Failed to load count for ${year}:`, error);
-    showBadge(year, 0);
+    console.error('Error loading file counts:', error);
+    yearList.forEach((year) => showBadge(year, null));
   }
 };
 
@@ -100,7 +106,12 @@ const showBadge = (year, count) => {
   const badge = document.getElementById(
     `badge-${year.replace(/\s+/g, '-').toLowerCase()}`,
   );
-  if (badge) {
+
+  if (!badge) return;
+
+  if (count === null || count === undefined) {
+    badge.innerHTML = `<i class="fa-solid fa-file"></i> –`;
+  } else {
     badge.innerHTML = `<i class="fa-solid fa-file"></i> ${count}`;
   }
 };
