@@ -37,6 +37,8 @@ const yearList = [...YEARS.licence, ...YEARS.master1, ...YEARS.master2];
 
 let currentPath = [];
 let currentYear = '';
+let currentFiles = [];
+let currentFileIndex = -1;
 
 const loadYears = async () => {
   try {
@@ -227,6 +229,7 @@ const renderContent = (data) => {
   }
 
   if (data.files && data.files.length > 0) {
+    currentFiles = data.files;
     html += `
       <div>
         <h3 class="text-xl font-semibold mb-4 flex items-center gap-2">
@@ -320,11 +323,16 @@ const openFolder = (folderName) => {
 };
 
 const openFile = (file) => {
+  if (!file) return;
+
+  currentFileIndex = currentFiles.findIndex((f) => f.name === file.name);
+
   if (file.previewLink) {
     document.getElementById('modalTitle').textContent = file.name;
     document.getElementById('fileViewer').src = file.previewLink;
     document.getElementById('fileModal').classList.add('active');
     updateBodyScrollLock();
+    updateSwiperButtons();
   } else {
     window.open(file.link, '_blank');
   }
@@ -342,6 +350,7 @@ const downloadFile = (downloadLink, fileName) => {
 const closeModal = () => {
   document.getElementById('fileModal').classList.remove('active');
   document.getElementById('fileViewer').src = '';
+  currentFileIndex = -1;
   updateBodyScrollLock();
 };
 
@@ -376,6 +385,37 @@ const updateBodyScrollLock = () => {
     document.body.classList.add('modal-open');
   } else {
     document.body.classList.remove('modal-open');
+  }
+};
+
+const showPrevFile = () => {
+  if (currentFileIndex > 0) {
+    currentFileIndex--;
+    openFile(currentFiles[currentFileIndex]);
+  }
+};
+
+const showNextFile = () => {
+  if (currentFileIndex < currentFiles.length - 1) {
+    currentFileIndex++;
+    openFile(currentFiles[currentFileIndex]);
+  }
+};
+
+const updateSwiperButtons = () => {
+  const prevBtn = document.getElementById('prevFileBtn');
+  const nextBtn = document.getElementById('nextFileBtn');
+
+  if (currentFileIndex <= 0) {
+    prevBtn.style.display = 'none';
+  } else {
+    prevBtn.style.display = 'block';
+  }
+
+  if (currentFileIndex >= currentFiles.length - 1) {
+    nextBtn.style.display = 'none';
+  } else {
+    nextBtn.style.display = 'block';
   }
 };
 

@@ -271,6 +271,36 @@ body.modal-open {
   height: 100%;
 }
 
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.4);
+  color: white;
+  border: none;
+  font-size: 2rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  z-index: 10;
+  transition:
+    background 0.2s,
+    transform 0.2s;
+}
+
+.nav-btn:hover {
+  background: rgba(0, 0, 0, 0.7);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.nav-btn.left {
+  left: 10px;
+}
+
+.nav-btn.right {
+  right: 10px;
+}
+
 /* ============================= */
 /*           BREADCRUMB          */
 /* ============================= */
@@ -420,5 +450,20 @@ nav {
 
   .breadcrumb-item {
     max-width: 100%;
+  }
+
+  .nav-btn {
+    font-size: 1.3rem;
+    padding: 0.3rem 0.6rem;
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  .nav-btn.left {
+    left: 6px;
+  }
+
+  .nav-btn.right {
+    right: 6px;
   }
 }
