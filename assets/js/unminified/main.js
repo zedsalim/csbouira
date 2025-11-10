@@ -119,6 +119,7 @@ const openYear = async (year, e) => {
   currentPath = [year];
   document.getElementById('yearModalTitle').textContent = year;
   document.getElementById('yearModal').classList.add('active');
+  updateBodyScrollLock();
   await loadContent(year);
 };
 
@@ -323,6 +324,7 @@ const openFile = (file) => {
     document.getElementById('modalTitle').textContent = file.name;
     document.getElementById('fileViewer').src = file.previewLink;
     document.getElementById('fileModal').classList.add('active');
+    updateBodyScrollLock();
   } else {
     window.open(file.link, '_blank');
   }
@@ -340,12 +342,41 @@ const downloadFile = (downloadLink, fileName) => {
 const closeModal = () => {
   document.getElementById('fileModal').classList.remove('active');
   document.getElementById('fileViewer').src = '';
+  updateBodyScrollLock();
 };
 
 const closeYearModal = () => {
   document.getElementById('yearModal').classList.remove('active');
+  updateBodyScrollLock();
   currentPath = [];
   currentYear = '';
+};
+
+const toggleFullScreen = () => {
+  const modal = document.getElementById('fileModal');
+  const fullscreenBtn = document.getElementById('fullscreenBtn');
+  const icon = fullscreenBtn.querySelector('i');
+
+  modal.classList.toggle('fullscreen');
+
+  if (modal.classList.contains('fullscreen')) {
+    icon.classList.remove('fa-expand');
+    icon.classList.add('fa-compress');
+    fullscreenBtn.title = 'Exit full screen';
+  } else {
+    icon.classList.remove('fa-compress');
+    icon.classList.add('fa-expand');
+    fullscreenBtn.title = 'Enter full screen';
+  }
+};
+
+const updateBodyScrollLock = () => {
+  const anyActiveModal = document.querySelectorAll('.modal.active').length > 0;
+  if (anyActiveModal) {
+    document.body.classList.add('modal-open');
+  } else {
+    document.body.classList.remove('modal-open');
+  }
 };
 
 // Initialize years on page load

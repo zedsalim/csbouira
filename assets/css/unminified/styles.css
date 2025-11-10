@@ -203,6 +203,11 @@ textarea {
 /* ============================= */
 /*            MODALS             */
 /* ============================= */
+body.modal-open {
+  overflow: hidden;
+  touch-action: none;
+}
+
 .modal {
   display: none;
   position: fixed;
@@ -212,6 +217,7 @@ textarea {
   align-items: center;
   justify-content: center;
   padding: 1rem;
+  transition: background 0.35s ease-in-out;
 }
 
 .modal.active {
@@ -227,6 +233,7 @@ textarea {
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  transition: all 0.35s ease-in-out;
 }
 
 #fileViewer {
@@ -245,6 +252,23 @@ textarea {
 
 #fileModal {
   z-index: 1100;
+}
+
+.modal.fullscreen {
+  padding: 0;
+  background: rgba(0, 0, 0, 0.85);
+}
+
+.modal.fullscreen .modal-content {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+  border-radius: 0 !important;
+}
+
+.modal.fullscreen #fileViewer {
+  height: 100%;
 }
 
 /* ============================= */

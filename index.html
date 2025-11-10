@@ -584,18 +584,32 @@
     <!-- ==== MODALS ==== -->
     <!-- File Viewer Modal -->
     <div id="fileModal" class="modal">
-      <div class="modal-content">
+      <div class="modal-content relative">
         <div
           class="flex justify-between items-center p-4 border-b"
           style="border-color: var(--border-light)"
         >
-          <h3 class="text-xl font-semibold" id="modalTitle">Document Viewer</h3>
-          <button
-            onclick="closeModal()"
-            class="text-2xl hover:text-red-500 transition"
-          >
-            &times;
-          </button>
+          <h3 class="text-lg sm:text-xl font-semibold" id="modalTitle">
+            Document Viewer
+          </h3>
+          <div class="flex items-center gap-4">
+            <button
+              id="fullscreenBtn"
+              onclick="toggleFullScreen()"
+              class="text-xl hover:text-blue-500 transition"
+              title="Enter full screen"
+            >
+              <i class="fas fa-expand"></i>
+            </button>
+
+            <button
+              onclick="closeModal()"
+              class="text-2xl hover:text-red-500 transition"
+              title="Close"
+            >
+              &times;
+            </button>
+          </div>
         </div>
         <iframe id="fileViewer" class="flex-1 w-full" frameborder="0"></iframe>
       </div>
