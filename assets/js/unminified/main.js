@@ -39,6 +39,7 @@ let currentPath = [];
 let currentYear = '';
 let currentFiles = [];
 let currentFileIndex = -1;
+let onlineResources = {};
 
 const loadYears = async () => {
   try {
@@ -46,6 +47,7 @@ const loadYears = async () => {
     renderYearCards(YEARS.master1, 'master1-cards', 'fas fa-graduation-cap');
     renderYearCards(YEARS.master2, 'master2-cards', 'fas fa-user-graduate');
     await loadAllFileCounts();
+    await loadOnlineResources();
   } catch (error) {
     console.error('Error loading years:', error);
   }
@@ -101,6 +103,16 @@ const loadAllFileCounts = async () => {
   }
 };
 
+const loadOnlineResources = async () => {
+  try {
+    const response = await fetch(`${API_BASE}?path=_onlineResources`);
+    onlineResources = await response.json();
+  } catch (err) {
+    console.error('Failed to load _onlineResources:', err);
+    onlineResources = {};
+  }
+};
+
 const showBadge = (year, count) => {
   const badge = document.getElementById(
     `badge-${year.replace(/\s+/g, '-').toLowerCase()}`,
@@ -143,6 +155,10 @@ const loadContent = async (year, path = '') => {
 
     updateBreadcrumb();
     renderContent(data);
+
+    if (currentPath.length === 1) {
+      insertOnlineResources(year);
+    }
   } catch (error) {
     content.innerHTML = `
       <div class="empty-state">
@@ -260,6 +276,82 @@ const renderContent = (data) => {
   }
 
   content.innerHTML = html;
+};
+
+const insertOnlineResources = (year) => {
+  let yearResources = onlineResources[year];
+  if (!yearResources) return;
+
+  let subjectGroups = {};
+
+  if (Array.isArray(yearResources)) {
+    subjectGroups['General'] = yearResources;
+  } else if (typeof yearResources === 'object') {
+    subjectGroups = yearResources;
+  }
+
+  if (Object.keys(subjectGroups).length === 0) return;
+
+  const container = document.getElementById('yearContent');
+
+  const accordion = `
+    <div class="mt-8">
+      <div class="mb-6">
+
+        <h3 class="text-lg md:text-xl font-semibold mb-4 flex items-center gap-2">
+          <i class="fas fa-globe text-red-500"></i>Videos & Websites
+        </h3>
+
+        <div class="space-y-2">
+          ${Object.entries(subjectGroups)
+            .map(
+              ([subject, resources]) => `
+            <div class="folder-item">
+              <button 
+                class="w-full flex justify-between items-center text-sm md:text-base"
+                onclick="this.parentElement.nextElementSibling.classList.toggle('hidden'); this.querySelector('.chevron-icon').classList.toggle('rotate-180');"
+              >
+                <span class="flex items-center gap-2">
+                  ${subject}
+                </span>
+                <i class="fas fa-chevron-down chevron-icon transition-transform"></i>
+              </button>
+            </div>
+
+            <div class="hidden ml-2 space-y-2 mb-2">
+              ${(Array.isArray(resources) ? resources : [])
+                .map(
+                  (r) => `
+                    <div class="border-b p-3 rounded-lg hover:shadow-md transition-shadow">
+                      <a href="${r.url || '#'}" target="_blank" class="font-semibold hover:underline text-xs md:text-sm flex items-center gap-2">
+                        <i class="fas fa-external-link-alt text-xs"></i>
+                        ${r.name || 'Unnamed Resource'}
+                      </a>
+                      <div class="text-xs md:text-sm text-gray-600 dark:text-gray-400 mt-1 flex items-center gap-2">
+                        <span class="inline-flex items-center gap-1">
+                          <i class="fas fa-tag text-xs"></i>
+                          ${r.type || 'Resource'}
+                        </span>
+                        <span class="text-gray-400">•</span>
+                        <span class="inline-flex items-center gap-1">
+                          <i class="fas fa-language text-xs"></i>
+                          ${r.language || 'N/A'}
+                        </span>
+                      </div>
+                    </div>
+                  `,
+                )
+                .join('')}
+            </div>
+          `,
+            )
+            .join('')}
+        </div>
+      </div>
+    </div>
+  `;
+
+  container.insertAdjacentHTML('beforeend', accordion);
 };
 
 const getFileIcon = (filename) => {
