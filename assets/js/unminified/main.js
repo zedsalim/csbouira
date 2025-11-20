@@ -131,7 +131,26 @@ const openYear = async (year, e) => {
   if (e) e.preventDefault();
   currentYear = year;
   currentPath = [year];
-  document.getElementById('yearModalTitle').textContent = year;
+  const modalTitle = document.getElementById('yearModalTitle');
+  modalTitle.innerHTML = `
+      <div class="flex items-center gap-3">
+        <span class="text-xl font-semibold">${year}</span>
+        <a 
+          href="#" 
+          id="driveLink" 
+          title="Open in Google Drive"
+          class="hidden sm:inline-flex items-center gap-1.5 
+                 px-2.5 py-1 text-xs 
+                 sm:gap-2 sm:px-3 sm:py-1.5 sm:text-sm
+                 rounded-md bg-blue-500
+                 text-white font-medium shadow-md
+                 hover:shadow-lg hover:opacity-90 transition-all duration-200"
+        >
+          <i class="fab fa-google-drive text-base sm:text-lg"></i>
+          <span class="hidden xs:inline sm:inline">Open in Drive</span>
+        </a>
+      </div>
+  `;
   document.getElementById('yearModal').classList.add('active');
   updateBodyScrollLock();
   await loadContent(year);
@@ -152,6 +171,17 @@ const loadContent = async (year, path = '') => {
 
     const response = await fetch(url);
     const data = await response.json();
+
+    const driveLink = document.getElementById('driveLink');
+    if (data.link) {
+      driveLink.href = data.link;
+      driveLink.style.display = 'inline-flex';
+      driveLink.target = '_blank';
+      driveLink.classList.add('active');
+    } else {
+      driveLink.style.display = 'none';
+      driveLink.classList.remove('active');
+    }
 
     updateBreadcrumb();
     renderContent(data);
