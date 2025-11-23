@@ -398,6 +398,22 @@ nav {
 }
 
 /* ============================= */
+/*        DHIKR SYSTEM          */
+/* ============================= */
+#dhikrBox {
+  background: #ffffff;
+  color: #111;
+  border: 1px solid #e5e7eb;
+}
+
+html.dark #dhikrBox {
+  background: #1f2937;
+  border-color: #374151;
+  color: #f3f4f6;
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.08);
+}
+
+/* ============================= */
 /*       LOADING SPINNER        */
 /* ============================= */
 .loading-small {

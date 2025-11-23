@@ -623,3 +623,82 @@ window.addEventListener('scroll', () => {
 backToTopBtn.addEventListener('click', () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
+
+// ===============================
+// DHIKR SYSTEM
+// ===============================
+const dhikr = [
+  'أستغفر اللّه',
+  'سبحان اللّه',
+  'الحمد للّه',
+  'لا إله إلا اللّه',
+  'اللّه أكبر',
+  'سبحان اللّه وبحمده',
+  'سبحان اللّه العظيم',
+  'لا حول ولا قوة إلا باللّه',
+  'اللّهم صل وسلم على نبينا محمد',
+  'لا إله إلا أنت سبحانك إني كنت من الظالمين',
+  'ربي اغفر لي ولوالدي وللمؤمنين',
+  'اللّه أكبر كبيرا',
+  'سبحان الله بكرة واصيلا',
+  'الحمد لله رب العالمين',
+  'أستغفر الله وأتوب إليه',
+  'إنّا لله وإنّا إليه راجعون',
+  'اللّهُمَّ إني أسألك الجنة',
+  'اللّهُمَّ إني أعوذ بك من النار',
+  'سبحانك اللهم وبحمدك',
+  'اللهم إني أسألك علمًا نافعًا',
+  'اللهم إني أسألك الهدى و التقى و العفاف و الغنى',
+  '3 x اعوذ بكلمات الله التامات من شر ما خلق',
+  'اللهم لاسهل إلا ماجعلته سهلا وأنت تجعل الحزن إذا شئت سهلا',
+  'اللهم اغفر لي ذنبي كله دقه وجله وأوله وآخره وعلانيته وسره',
+  'اللهم اني اعوذ بك من الهم والحزن',
+];
+
+const box = document.getElementById('dhikrBox');
+const text = document.getElementById('dhikrText');
+
+let rotateInterval;
+const ROTATE_DELAY = 10000;
+
+function showDhikr(d) {
+  text.textContent = d;
+  box.style.display = 'block';
+  setTimeout(() => (box.style.opacity = 1), 10);
+}
+
+function showRandomDhikr() {
+  const random = dhikr[Math.floor(Math.random() * dhikr.length)];
+  showDhikr(random);
+}
+
+function hideDhikr() {
+  box.style.opacity = 0;
+  clearInterval(rotateInterval);
+
+  setTimeout(() => {
+    box.style.display = 'none';
+
+    setTimeout(() => {
+      showRandomDhikr();
+      startAutoRotate();
+    }, 5000);
+  }, 700);
+}
+
+function startAutoRotate() {
+  rotateInterval = setInterval(() => {
+    box.style.opacity = 0;
+
+    setTimeout(() => {
+      const random = dhikr[Math.floor(Math.random() * dhikr.length)];
+      text.textContent = random;
+      box.style.opacity = 1;
+    }, 700);
+  }, ROTATE_DELAY);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  showRandomDhikr();
+  startAutoRotate();
+});
