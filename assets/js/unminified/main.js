@@ -658,47 +658,22 @@ const dhikr = [
 const box = document.getElementById('dhikrBox');
 const text = document.getElementById('dhikrText');
 
-let rotateInterval;
-const ROTATE_DELAY = 10000;
-
-function showDhikr(d) {
-  text.textContent = d;
+function showRandomDhikr() {
+  const random = dhikr[Math.floor(Math.random() * dhikr.length)];
+  text.textContent = random;
   box.style.display = 'block';
   setTimeout(() => (box.style.opacity = 1), 10);
 }
 
-function showRandomDhikr() {
-  const random = dhikr[Math.floor(Math.random() * dhikr.length)];
-  showDhikr(random);
-}
-
 function hideDhikr() {
   box.style.opacity = 0;
-  clearInterval(rotateInterval);
-
   setTimeout(() => {
     box.style.display = 'none';
-
-    setTimeout(() => {
-      showRandomDhikr();
-      startAutoRotate();
-    }, 5000);
   }, 700);
 }
 
-function startAutoRotate() {
-  rotateInterval = setInterval(() => {
-    box.style.opacity = 0;
-
-    setTimeout(() => {
-      const random = dhikr[Math.floor(Math.random() * dhikr.length)];
-      text.textContent = random;
-      box.style.opacity = 1;
-    }, 700);
-  }, ROTATE_DELAY);
-}
+box.addEventListener('click', hideDhikr);
 
 document.addEventListener('DOMContentLoaded', () => {
   showRandomDhikr();
-  startAutoRotate();
 });
