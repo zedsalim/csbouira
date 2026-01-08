@@ -12,6 +12,18 @@
   <a href="https://github.com/zedsalim/csbouira"><img src="https://img.shields.io/github/last-commit/zedsalim/csbouira" alt="Last Commit"></a>
     <a href="https://app.netlify.com/sites/csbouira/deploys"><img src="https://api.netlify.com/api/v1/badges/4368e490-c3cf-441a-aa6b-d043af2b3186/deploy-status" alt="Netlify Status"></a>
 </p>
+<h1>
+  Opensource project about "Your first pull request"
+  <img src="https://lh3.googleusercontent.com/proxy/RAmuMX5yw5BVVsOc2nqv6kZ6_gFkhaZ6E1Z-zF-OI9HgztzouAqgyl93nVoZBCa4yX9-_L5BD8ukmbfTRYdSc1zIRlfFZRoUv2DVbkAfCGxoI0u_aGc3SRXOhv-ngMM"
+       alt="Logo"
+       width="50"
+       style="vertical-align: middle;">
+</h1>
+
+⚠️ This repository is a fork created for an academic project.
+It is not intended for contributing back to the original project.
+
+The purpose of this fork is to practice open-source workflows
 
 # 📚 CS Bouira University Study Hub
 
