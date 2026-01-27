@@ -625,6 +625,74 @@ backToTopBtn.addEventListener('click', () => {
 });
 
 // ===============================
+// Contact Form
+// ===============================
+const GOOGLE_APPS_SCRIPT_URL =
+  'https://script.google.com/macros/s/AKfycbzmfa0TDm_Ec9CtZSpSvIv7knXucmv_67xyh6APXDnsdMnb-0NukESFq58ZbVlm0GqEcg/exec';
+
+const initContactForm = () => {
+  const form = document.getElementById('contactForm');
+  const submitBtn = document.getElementById('submitBtn');
+  const loading = document.getElementById('loading');
+  const responseMessage = document.getElementById('responseMessage');
+
+  if (!form) return;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
+
+    if (!name || !email || !message) {
+      showMessage('All fields required', 'error');
+      return;
+    }
+
+    submitBtn.disabled = true;
+    loading.classList.remove('hidden');
+    loading.classList.add('flex');
+    responseMessage.classList.add('hidden');
+
+    try {
+      await fetch(GOOGLE_APPS_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({ name, email, message }),
+      });
+
+      showMessage('Message sent successfully!', 'success');
+      form.reset();
+    } catch (error) {
+      showMessage('Failed to send message. Please try again.', 'error');
+      console.error('Error:', error);
+    } finally {
+      submitBtn.disabled = false;
+      loading.classList.add('hidden');
+      loading.classList.remove('flex');
+    }
+  });
+
+  const showMessage = (text, type) => {
+    responseMessage.textContent = text;
+    responseMessage.classList.remove('hidden');
+
+    if (type === 'success') {
+      responseMessage.className =
+        'p-2.5 rounded mt-2.5 bg-green-100 text-green-800 border border-green-200 dark:bg-green-900 dark:text-green-200 dark:border-green-800';
+      setTimeout(() => {
+        responseMessage.classList.add('hidden');
+      }, 5000);
+    } else {
+      responseMessage.className =
+        'p-2.5 rounded mt-2.5 bg-red-100 text-red-800 border border-red-200 dark:bg-red-900 dark:text-red-200 dark:border-red-800';
+    }
+  };
+};
+
+// ===============================
 // DHIKR SYSTEM
 // ===============================
 const dhikr = [
@@ -675,5 +743,6 @@ function hideDhikr() {
 box.addEventListener('click', hideDhikr);
 
 document.addEventListener('DOMContentLoaded', () => {
+  initContactForm();
   showRandomDhikr();
 });
