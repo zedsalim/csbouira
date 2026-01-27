@@ -150,6 +150,19 @@ textarea {
   transform: scale(1.1);
 }
 
+@keyframes shine {
+  0% {
+    background-position:
+      200% 0,
+      0 0;
+  }
+  100% {
+    background-position:
+      -100% 0,
+      0 0;
+  }
+}
+
 /* ============================= */
 /*           ACCORDION           */
 /* ============================= */

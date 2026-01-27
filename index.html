@@ -264,10 +264,14 @@
           studies of Bouira University
         </p>
         <a
-          href="#years"
-          class="hero-btn px-8 py-3 rounded-lg font-semibold shadow-md transition inline-block"
+          href="#"
+          class="hero-btn px-8 py-3 rounded-lg font-semibold shadow-md transition inline-block relative overflow-hidden before:absolute before:inset-0 before:rounded-[inherit] before:bg-[linear-gradient(45deg,transparent_25%,theme(colors.white/.4)_50%,transparent_75%,transparent_100%)] before:bg-[length:250%_250%,100%_100%] before:bg-[position:200%_0,0_0] before:bg-no-repeat before:animate-[shine_3s_ease-in-out_infinite] hover:before:bg-[position:-100%_0,0_0] hover:before:duration-[1500ms] hover:shadow-lg"
+          onclick="
+            openUploadModal();
+            return false;
+          "
         >
-          Explore Resources <i class="fas fa-arrow-right ml-2"></i>
+          Upload Resources <i class="fas fa-arrow-right ml-2"></i>
         </a>
       </div>
     </section>
@@ -340,7 +344,7 @@
                   class="text-blue-500 hover:underline"
                   id="uploadButtonLink"
                   onclick="
-                    alert('This feature will be implemented later.');
+                    openUploadModal();
                     return false;
                   "
                 >
@@ -682,6 +686,193 @@
       <i class="fas fa-arrow-up"></i>
     </button>
 
+    <!-- File Upload Modal -->
+    <div id="uploadModal" class="modal">
+      <div class="modal-content max-w-3xl">
+        <div
+          class="flex justify-between items-center p-4 border-b"
+          style="border-color: var(--border-light)"
+        >
+          <h3 class="text-xl font-semibold flex items-center gap-2">
+            <i class="fas fa-upload text-blue-500"></i>
+            Upload Educational Files
+          </h3>
+          <button
+            onclick="closeUploadModal()"
+            class="text-2xl hover:text-red-500 transition"
+            title="Close"
+          >
+            &times;
+          </button>
+        </div>
+        <div class="p-6 overflow-auto flex-1">
+          <form id="uploadForm" class="space-y-4">
+            <!-- Full Name -->
+            <div>
+              <label class="block mb-2 font-medium text-sm">Full Name *</label>
+              <input
+                type="text"
+                id="fullName"
+                class="w-full p-2.5 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600"
+                placeholder="Your Full Name"
+                required
+              />
+            </div>
+
+            <!-- Email -->
+            <div>
+              <label class="block mb-2 font-medium text-sm"
+                >Email Address *</label
+              >
+              <input
+                type="email"
+                id="uploadEmail"
+                class="w-full p-2.5 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600"
+                placeholder="your@email.com"
+                required
+              />
+            </div>
+
+            <!-- File Type -->
+            <div>
+              <label class="block mb-2 font-medium text-sm">File Type *</label>
+              <select
+                id="fileType"
+                class="w-full p-2.5 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600"
+                required
+              >
+                <option value="">-- Select File Type --</option>
+                <option value="Cours">Cours (Lecture)</option>
+                <option value="Summary">Summary (Résumé)</option>
+                <option value="TP">TP</option>
+                <option value="TD">TD</option>
+                <option value="Test">Test</option>
+                <option value="Exam">Exam</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            <!-- Module Name -->
+            <div>
+              <label class="block mb-2 font-medium text-sm"
+                >Module Name *</label
+              >
+              <input
+                type="text"
+                id="moduleName"
+                class="w-full p-2.5 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600"
+                placeholder="e.g., Algorithmique et structure de données"
+                required
+              />
+            </div>
+
+            <!-- Grade/Level -->
+            <div>
+              <label class="block mb-2 font-medium text-sm"
+                >Grade/Level *</label
+              >
+              <select
+                id="grade"
+                class="w-full p-2.5 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600"
+                required
+              >
+                <option value="">-- Select Grade --</option>
+                <optgroup label="Licence">
+                  <option value="Licence 1">Licence 1</option>
+                  <option value="Licence 2">Licence 2</option>
+                  <option value="Licence 3 SI">Licence 3 SI</option>
+                </optgroup>
+                <optgroup label="Master 1">
+                  <option value="Master 1 GSI">Master 1 GSI</option>
+                  <option value="Master 1 ISIL">Master 1 ISIL</option>
+                  <option value="Master 1 IA">Master 1 IA</option>
+                </optgroup>
+                <optgroup label="Master 2">
+                  <option value="Master 2 GSI">Master 2 GSI</option>
+                  <option value="Master 2 ISIL">Master 2 ISIL</option>
+                  <option value="Master 2 IA">Master 2 IA</option>
+                </optgroup>
+              </select>
+            </div>
+
+            <!-- Semester -->
+            <div>
+              <label class="block mb-2 font-medium text-sm">Semester *</label>
+              <select
+                id="semester"
+                class="w-full p-2.5 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600"
+                required
+              >
+                <option value="">-- Select Semester --</option>
+                <option value="S1">Semester 1 (S1)</option>
+                <option value="S2">Semester 2 (S2)</option>
+              </select>
+            </div>
+
+            <!-- File Upload -->
+            <div>
+              <label class="block mb-2 font-medium text-sm"
+                >Select Files (PDF, ZIP, Images, etc.) *</label
+              >
+              <input
+                type="file"
+                id="files"
+                multiple
+                class="w-full p-2.5 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600"
+                required
+              />
+              <p class="text-xs text-gray-500 dark:text-gray-400 mt-2">
+                Max file size per file: 25MB. You can select multiple files.
+              </p>
+              <div id="filesList" class="hidden mt-3"></div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="flex gap-3 pt-4">
+              <button
+                type="submit"
+                id="submitBtn"
+                class="flex-1 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2.5 px-4 rounded-md transition disabled:bg-gray-400 disabled:cursor-not-allowed"
+              >
+                Upload Files
+              </button>
+              <button
+                type="button"
+                onclick="
+                  document.getElementById('uploadForm').reset();
+                  selectedFiles = [];
+                  displayFilesList();
+                "
+                class="bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 font-semibold py-2.5 px-4 rounded-md transition"
+              >
+                Clear
+              </button>
+            </div>
+
+            <!-- Loading -->
+            <div
+              id="uploadLoading"
+              class="hidden items-center justify-center gap-2 py-2"
+            >
+              <div
+                class="w-5 h-5 border-2 border-gray-300 border-t-blue-500 rounded-full animate-spin"
+              ></div>
+              <span class="text-sm">Uploading...</span>
+            </div>
+
+            <!-- Response Message -->
+            <div
+              id="uploadResponseMessage"
+              class="hidden p-3 rounded-md text-sm"
+            ></div>
+
+            <!-- Progress Tracker -->
+            <div id="uploadProgress" class="hidden mt-4"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+
     <!-- Update Celebration Modal (Currently not used)-->
     <!-- <div -->
     <!--   id="updateModal" -->
@@ -741,5 +932,6 @@
     <!-- ==== SCRIPTS ==== -->
     <!-- <script src="assets/js/main.min.js"></script> -->
     <script src="assets/js/unminified/main.js"></script>
+    <script src="assets/js/unminified/upload.js"></script>
   </body>
 </html>
