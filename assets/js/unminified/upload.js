@@ -113,12 +113,12 @@ const initUploadForm = () => {
       ${files
         .map(
           (file, index) => `
-        <div class="mb-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-md" id="progress-${index}">
+        <div class="progress-item mb-3 p-3 rounded-md" id="progress-${index}" style="background: var(--bg-secondary-light); border: 1px solid var(--border-light);">
           <div class="text-sm font-medium mb-2 truncate" title="${file.name}">${file.name}</div>
-          <div class="w-full h-5 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+          <div class="w-full h-5 rounded-full overflow-hidden" style="background: var(--border-light);">
             <div class="h-full bg-blue-500 flex items-center justify-center text-white text-xs font-semibold transition-all duration-300" id="progress-bar-${index}" style="width: 0%">0%</div>
           </div>
-          <div class="text-xs mt-1 text-gray-600 dark:text-gray-400" id="status-${index}">Waiting...</div>
+          <div class="progress-status text-xs mt-1" id="status-${index}" style="color: var(--text-secondary-light);">Waiting...</div>
         </div>
       `,
         )
@@ -250,15 +250,15 @@ const displayFilesList = () => {
 
   filesList.classList.remove('hidden');
   filesList.innerHTML = `
-    <div class="p-3 bg-gray-50 dark:bg-gray-800 rounded-md">
+    <div class="p-3 rounded-md" style="background: var(--bg-secondary-light); border: 1px solid var(--border-light);">
       <div class="font-semibold text-sm mb-2">Selected Files (${selectedFiles.length}):</div>
       <div class="space-y-2">
         ${selectedFiles
           .map(
             (file, index) => `
-          <div class="flex items-center justify-between p-2 bg-white dark:bg-gray-700 rounded border dark:border-gray-600 text-sm">
+          <div class="flex items-center justify-between p-2 rounded text-sm" style="background: var(--bg-light); border: 1px solid var(--border-light);">
             <span class="flex-1 truncate" title="${file.name}">${file.name}</span>
-            <span class="text-xs text-gray-500 dark:text-gray-400 mx-2">${formatFileSize(file.size)}</span>
+            <span class="text-xs mx-2" style="color: var(--text-secondary-light);">${formatFileSize(file.size)}</span>
             <button type="button" onclick="removeFile(${index})" class="text-red-500 hover:text-red-700 font-bold">✕</button>
           </div>
         `,
@@ -301,11 +301,9 @@ const updateUploadProgress = (index, percent, status, isSuccess = null) => {
   if (statusEl) {
     statusEl.textContent = status;
     if (isSuccess === true) {
-      statusEl.classList.remove('text-gray-600', 'dark:text-gray-400');
-      statusEl.classList.add('text-green-600', 'dark:text-green-400');
+      statusEl.style.color = '#10b981'; // Green
     } else if (isSuccess === false) {
-      statusEl.classList.remove('text-gray-600', 'dark:text-gray-400');
-      statusEl.classList.add('text-red-600', 'dark:text-red-400');
+      statusEl.style.color = '#ef4444'; // Red
     }
   }
 };
@@ -409,4 +407,3 @@ const showUploadMessage = (text, type) => {
 document.addEventListener('DOMContentLoaded', () => {
   initUploadForm();
 });
-

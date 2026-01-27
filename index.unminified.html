@@ -713,7 +713,7 @@
               <input
                 type="text"
                 id="fullName"
-                class="w-full p-2.5 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600"
+                class="w-full p-2.5 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 placeholder="Your Full Name"
                 required
               />
@@ -727,7 +727,7 @@
               <input
                 type="email"
                 id="uploadEmail"
-                class="w-full p-2.5 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600"
+                class="w-full p-2.5 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 placeholder="your@email.com"
                 required
               />
@@ -738,7 +738,7 @@
               <label class="block mb-2 font-medium text-sm">File Type *</label>
               <select
                 id="fileType"
-                class="w-full p-2.5 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600"
+                class="w-full p-2.5 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 required
               >
                 <option value="">-- Select File Type --</option>
@@ -760,7 +760,7 @@
               <input
                 type="text"
                 id="moduleName"
-                class="w-full p-2.5 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600"
+                class="w-full p-2.5 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 placeholder="e.g., Algorithmique et structure de données"
                 required
               />
@@ -773,7 +773,7 @@
               >
               <select
                 id="grade"
-                class="w-full p-2.5 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600"
+                class="w-full p-2.5 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 required
               >
                 <option value="">-- Select Grade --</option>
@@ -800,7 +800,7 @@
               <label class="block mb-2 font-medium text-sm">Semester *</label>
               <select
                 id="semester"
-                class="w-full p-2.5 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600"
+                class="w-full p-2.5 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 required
               >
                 <option value="">-- Select Semester --</option>
@@ -818,10 +818,13 @@
                 type="file"
                 id="files"
                 multiple
-                class="w-full p-2.5 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600"
+                class="w-full p-2.5 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 required
               />
-              <p class="text-xs text-gray-500 dark:text-gray-400 mt-2">
+              <p
+                class="text-xs mt-2"
+                style="color: var(--text-secondary-light)"
+              >
                 Max file size per file: 25MB. You can select multiple files.
               </p>
               <div id="filesList" class="hidden mt-3"></div>
@@ -931,6 +934,7 @@
 
     <!-- ==== SCRIPTS ==== -->
     <!-- <script src="assets/js/main.min.js"></script> -->
+    <!-- <script src="assets/js/upload.min.js"></script> -->
     <script src="assets/js/unminified/main.js"></script>
     <script src="assets/js/unminified/upload.js"></script>
   </body>

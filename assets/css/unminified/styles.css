@@ -57,10 +57,44 @@ body {
   transition: all 0.3s ease;
 }
 
+/* ============================= */
+/* FORM INPUTS */
+/* ============================= */
+
 input,
-textarea {
-  border-color: var(--border-light);
-  background: var(--bg-secondary-light);
+textarea,
+select {
+  color: var(--text-light);
+  transition: all 0.3s ease;
+}
+
+/* Specific styling for form inputs in upload modal */
+#uploadForm input,
+#uploadForm textarea,
+#uploadForm select {
+  background: var(--bg-light);
+  border: 1px solid var(--border-light);
+  color: var(--text-light);
+}
+
+#uploadForm input::placeholder,
+#uploadForm textarea::placeholder {
+  color: var(--text-secondary-light);
+  opacity: 0.6;
+}
+
+/* Contact form inputs */
+#contactForm input,
+#contactForm textarea {
+  background: var(--bg-light);
+  border: 1px solid var(--border-light);
+  color: var(--text-light);
+}
+
+#contactForm input::placeholder,
+#contactForm textarea::placeholder {
+  color: var(--text-secondary-light);
+  opacity: 0.6;
 }
 
 /* ============================= */
