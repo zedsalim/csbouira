@@ -205,15 +205,13 @@ const updateBreadcrumb = () => {
   breadcrumb.innerHTML = currentPath
     .map(
       (item, index) => `
-        <span class="breadcrumb-item ${
-          index === currentPath.length - 1 ? 'active' : ''
+        <span class="breadcrumb-item ${index === currentPath.length - 1 ? 'active' : ''
         }" onclick="navigateToBreadcrumb(${index})">
           ${item}
-          ${
-            index < currentPath.length - 1
-              ? '<i class="fas fa-chevron-right mx-2"></i>'
-              : ''
-          }
+          ${index < currentPath.length - 1
+          ? '<i class="fas fa-chevron-right mx-2"></i>'
+          : ''
+        }
         </span>
       `,
     )
@@ -257,17 +255,22 @@ const renderContent = (data) => {
     for (const [name] of driveFolders) {
       const isEmpty = name.includes('(empty)');
       const escapedName = name.replace(/'/g, "\\'").replace(/"/g, '\\"');
+      const folderFavData = {
+        type: 'folder',
+        name: name,
+        year: currentYear,
+        path: [...currentPath, name].join('>subfolders>'),
+        folderPath: [...currentPath, name],
+      };
       html += `
-        <div class="folder-item ${isEmpty ? 'opacity-50' : ''}" ${
-          isEmpty ? '' : `onclick="openFolder('${escapedName}')"`
+        <div class="folder-item ${isEmpty ? 'opacity-50' : ''}" ${isEmpty ? '' : `onclick="openFolder('${escapedName}')"`
         }>
           <i class="fas fa-folder text-yellow-500"></i>
           <span class="flex-1">${name}</span>
-          ${
-            !isEmpty
-              ? '<i class="fas fa-chevron-right"></i>'
-              : '<span class="text-sm">(empty)</span>'
-          }
+          ${!isEmpty
+          ? (typeof createStarButton === 'function' ? createStarButton(folderFavData) : '') + '<i class="fas fa-chevron-right"></i>'
+          : '<span class="text-sm">(empty)</span>'
+        }
         </div>
       `;
     }
@@ -286,6 +289,16 @@ const renderContent = (data) => {
     data.files.forEach((file) => {
       const icon = getFileIcon(file.name);
       const escapedFile = JSON.stringify(file).replace(/'/g, "\\'");
+      const fileFavData = {
+        type: 'file',
+        name: file.name,
+        year: currentYear,
+        path: [...currentPath, file.name].join('>subfolders>'),
+        folderPath: [...currentPath],
+        link: file.link || '',
+        previewLink: file.previewLink || '',
+        downloadLink: file.downloadLink || '',
+      };
       html += `
         <div class="file-item group">
           <div class="flex items-center gap-3 flex-1" onclick='openFile(${escapedFile})'>
@@ -293,6 +306,7 @@ const renderContent = (data) => {
             <span class="flex-1">${file.name}</span>
             <i class="action-btn fas fa-eye"></i>
           </div>
+          ${typeof createStarButton === 'function' ? createStarButton(fileFavData) : ''}
           <button 
             onclick='event.stopPropagation(); downloadFile("${file.downloadLink}", "${file.name}")' 
             class="action-btn ml-2"
@@ -334,8 +348,8 @@ const insertOnlineResources = (year) => {
 
         <div class="space-y-2">
           ${Object.entries(subjectGroups)
-            .map(
-              ([subject, resources]) => `
+      .map(
+        ([subject, resources]) => `
             <div class="folder-item">
               <button 
                 class="w-full flex justify-between items-center text-sm md:text-base"
@@ -350,8 +364,8 @@ const insertOnlineResources = (year) => {
 
             <div class="hidden ml-2 space-y-2 mb-2">
               ${(Array.isArray(resources) ? resources : [])
-                .map(
-                  (r) => `
+            .map(
+              (r) => `
                     <div class="border-b p-3 rounded-lg hover:shadow-md transition-shadow">
                       <a href="${r.url || '#'}" target="_blank" class="font-semibold hover:underline text-xs md:text-sm flex items-center gap-2">
                         <i class="fas fa-external-link-alt text-xs"></i>
@@ -370,12 +384,12 @@ const insertOnlineResources = (year) => {
                       </div>
                     </div>
                   `,
-                )
-                .join('')}
-            </div>
-          `,
             )
             .join('')}
+            </div>
+          `,
+      )
+      .join('')}
         </div>
       </div>
     </div>

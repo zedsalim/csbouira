@@ -121,7 +121,7 @@ select {
   justify-content: space-between;
 }
 
-.file-item > div:first-child {
+.file-item>div:first-child {
   cursor: pointer;
 }
 
@@ -129,6 +129,7 @@ select {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
@@ -190,6 +191,7 @@ select {
       200% 0,
       0 0;
   }
+
   100% {
     background-position:
       -100% 0,
@@ -486,6 +488,7 @@ html.dark #dhikrBox {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
@@ -505,9 +508,75 @@ html.dark #dhikrBox {
 }
 
 /* ============================= */
+/*       FAVORITES / STARS        */
+/* ============================= */
+.star-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  color: var(--text-secondary-light);
+  padding: 0.35rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.star-btn:hover {
+  color: #f59e0b;
+  transform: scale(1.2);
+}
+
+.star-btn.starred {
+  color: #f59e0b;
+}
+
+.star-btn.star-pulse {
+  animation: starPulse 0.3s ease;
+}
+
+@keyframes starPulse {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.4);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.favorite-card {
+  transition: all 0.2s ease;
+}
+
+.favorite-card:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.15);
+}
+
+.favorite-remove-btn {
+  transition: opacity 0.2s ease, color 0.2s ease;
+}
+
+/* Show remove button on touch devices */
+@media (hover: none) {
+  .favorite-remove-btn {
+    opacity: 1 !important;
+  }
+}
+
+/* ============================= */
 /*           RESPONSIVE           */
 /* ============================= */
 @media (max-width: 640px) {
+
   .file-item span,
   .folder-item span {
     white-space: normal;
