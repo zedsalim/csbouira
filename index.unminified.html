@@ -263,18 +263,33 @@
           Your comprehensive academic resource platform for Computer Science
           studies of Bouira University
         </p>
-        <div class="flex flex-col items-center gap-3">
-          <a
-            href="#"
-            class="hero-btn px-8 py-3 rounded-lg font-semibold shadow-md transition inline-block relative overflow-hidden before:absolute before:inset-0 before:rounded-[inherit] before:bg-[linear-gradient(45deg,transparent_25%,theme(colors.white/.4)_50%,transparent_75%,transparent_100%)] before:bg-[length:250%_250%,100%_100%] before:bg-[position:200%_0,0_0] before:bg-no-repeat before:animate-[shine_3s_ease-in-out_infinite] hover:before:bg-[position:-100%_0,0_0] hover:before:duration-[1500ms] hover:shadow-lg"
-            onclick="
-              openUploadModal();
-              return false;
-            "
-          >
-            Upload Resources <i class="fas fa-arrow-right ml-2"></i>
-          </a>
+        <div class="flex flex-col items-center gap-4">
+          <!-- Main Buttons Row -->
+          <div class="flex flex-col sm:flex-row items-center gap-3">
+            <!-- Upload Resources Button -->
+            <a
+              href="#"
+              class="hero-btn px-8 py-3 rounded-lg font-semibold shadow-md transition inline-block relative overflow-hidden before:absolute before:inset-0 before:rounded-[inherit] before:bg-[linear-gradient(45deg,transparent_25%,theme(colors.white/.4)_50%,transparent_75%,transparent_100%)] before:bg-[length:250%_250%,100%_100%] before:bg-[position:200%_0,0_0] before:bg-no-repeat before:animate-[shine_3s_ease-in-out_infinite] hover:before:bg-[position:-100%_0,0_0] hover:before:duration-[1500ms] hover:shadow-lg"
+              onclick="
+                openUploadModal();
+                return false;
+              "
+            >
+              Upload Resources <i class="fas fa-arrow-right ml-2"></i>
+            </a>
 
+            <!-- Download APK Button -->
+            <a
+              href="https://github.com/zedsalim/csbouira/releases/tag/v1.0.0"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="hero-btn px-8 py-3 rounded-lg font-semibold shadow-md transition inline-block relative overflow-hidden bg-green-700 text-white hover:bg-green-600 before:absolute before:inset-0 before:rounded-[inherit] before:bg-[linear-gradient(45deg,transparent_25%,theme(colors.white/.4)_50%,transparent_75%,transparent_100%)] before:bg-[length:250%_250%,100%_100%] before:bg-[position:200%_0,0_0] before:bg-no-repeat before:animate-[shine_3s_ease-in-out_infinite] hover:before:bg-[position:-100%_0,0_0] hover:before:duration-[1500ms] hover:shadow-lg"
+            >
+              Download APK <i class="fas fa-download ml-2"></i>
+            </a>
+          </div>
+
+          <!-- Tech For Palestine Badge -->
           <a
             href="https://techforpalestine.org/"
             target="_blank"
@@ -955,9 +970,9 @@
     <!-- ==== SCRIPTS ==== -->
     <!-- <script src="assets/js/main.min.js"></script> -->
     <!-- <script src="assets/js/upload.min.js"></script> -->
+    <!-- <script src="assets/js/favorites.min.js"></script> -->
     <script src="assets/js/unminified/main.js"></script>
     <script src="assets/js/unminified/upload.js"></script>
     <script src="assets/js/unminified/favorites.js"></script>
   </body>
 </html>
-
