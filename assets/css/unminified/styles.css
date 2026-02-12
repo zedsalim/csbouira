@@ -121,7 +121,7 @@ select {
   justify-content: space-between;
 }
 
-.file-item>div:first-child {
+.file-item > div:first-child {
   cursor: pointer;
 }
 
@@ -562,7 +562,9 @@ html.dark #dhikrBox {
 }
 
 .favorite-remove-btn {
-  transition: opacity 0.2s ease, color 0.2s ease;
+  transition:
+    opacity 0.2s ease,
+    color 0.2s ease;
 }
 
 /* Show remove button on touch devices */
@@ -576,7 +578,6 @@ html.dark #dhikrBox {
 /*           RESPONSIVE           */
 /* ============================= */
 @media (max-width: 640px) {
-
   .file-item span,
   .folder-item span {
     white-space: normal;
@@ -608,3 +609,4 @@ html.dark #dhikrBox {
     right: 6px;
   }
 }
+

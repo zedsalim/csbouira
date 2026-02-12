@@ -205,13 +205,15 @@ const updateBreadcrumb = () => {
   breadcrumb.innerHTML = currentPath
     .map(
       (item, index) => `
-        <span class="breadcrumb-item ${index === currentPath.length - 1 ? 'active' : ''
+        <span class="breadcrumb-item ${
+          index === currentPath.length - 1 ? 'active' : ''
         }" onclick="navigateToBreadcrumb(${index})">
           ${item}
-          ${index < currentPath.length - 1
-          ? '<i class="fas fa-chevron-right mx-2"></i>'
-          : ''
-        }
+          ${
+            index < currentPath.length - 1
+              ? '<i class="fas fa-chevron-right mx-2"></i>'
+              : ''
+          }
         </span>
       `,
     )
@@ -263,14 +265,18 @@ const renderContent = (data) => {
         folderPath: [...currentPath, name],
       };
       html += `
-        <div class="folder-item ${isEmpty ? 'opacity-50' : ''}" ${isEmpty ? '' : `onclick="openFolder('${escapedName}')"`
+        <div class="folder-item ${isEmpty ? 'opacity-50' : ''}" ${
+          isEmpty ? '' : `onclick="openFolder('${escapedName}')"`
         }>
           <i class="fas fa-folder text-yellow-500"></i>
           <span class="flex-1">${name}</span>
-          ${!isEmpty
-          ? (typeof createStarButton === 'function' ? createStarButton(folderFavData) : '') + '<i class="fas fa-chevron-right"></i>'
-          : '<span class="text-sm">(empty)</span>'
-        }
+          ${
+            !isEmpty
+              ? (typeof createStarButton === 'function'
+                  ? createStarButton(folderFavData)
+                  : '') + '<i class="fas fa-chevron-right"></i>'
+              : '<span class="text-sm">(empty)</span>'
+          }
         </div>
       `;
     }
@@ -348,8 +354,8 @@ const insertOnlineResources = (year) => {
 
         <div class="space-y-2">
           ${Object.entries(subjectGroups)
-      .map(
-        ([subject, resources]) => `
+            .map(
+              ([subject, resources]) => `
             <div class="folder-item">
               <button 
                 class="w-full flex justify-between items-center text-sm md:text-base"
@@ -364,8 +370,8 @@ const insertOnlineResources = (year) => {
 
             <div class="hidden ml-2 space-y-2 mb-2">
               ${(Array.isArray(resources) ? resources : [])
-            .map(
-              (r) => `
+                .map(
+                  (r) => `
                     <div class="border-b p-3 rounded-lg hover:shadow-md transition-shadow">
                       <a href="${r.url || '#'}" target="_blank" class="font-semibold hover:underline text-xs md:text-sm flex items-center gap-2">
                         <i class="fas fa-external-link-alt text-xs"></i>
@@ -384,12 +390,12 @@ const insertOnlineResources = (year) => {
                       </div>
                     </div>
                   `,
-            )
-            .join('')}
+                )
+                .join('')}
             </div>
           `,
-      )
-      .join('')}
+            )
+            .join('')}
         </div>
       </div>
     </div>

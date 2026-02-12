@@ -3,7 +3,6 @@
 // ===============================
 const FAVORITES_KEY = 'csbouira_favorites';
 
-
 const getFavorites = () => {
   try {
     return JSON.parse(localStorage.getItem(FAVORITES_KEY)) || {};
@@ -15,7 +14,6 @@ const getFavorites = () => {
 const saveFavorites = (favorites) => {
   localStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites));
 };
-
 
 // Generate a unique key for a favorite item (file/folder).
 const getFavoriteKey = (item) => {
@@ -145,31 +143,33 @@ const renderFavoritesSection = () => {
             </button>
           </div>
           <div class="favorite-card-actions mt-3 pt-3 flex gap-2" style="border-top: 1px solid var(--border-light);">
-            ${fav.type === 'file'
-          ? `
+            ${
+              fav.type === 'file'
+                ? `
               <button onclick="event.stopPropagation(); openFavoriteFile(${JSON.stringify(fav).replace(/"/g, '&quot;')});"
                 class="flex-1 text-xs py-1.5 rounded-md transition font-medium"
                 style="background: var(--primary); color: white;">
                 <i class="fas fa-eye mr-1"></i> View
               </button>
-              ${fav.downloadLink
-            ? `
+              ${
+                fav.downloadLink
+                  ? `
               <button onclick="event.stopPropagation(); downloadFile('${fav.downloadLink}', '${fav.name.replace(/'/g, "\\'")}');"
                 class="text-xs py-1.5 px-3 rounded-md transition font-medium"
                 style="background: var(--bg-light); border: 1px solid var(--border-light);">
                 <i class="fas fa-download"></i>
               </button>`
-            : ''
-          }
+                  : ''
+              }
             `
-          : `
+                : `
               <button onclick="event.stopPropagation(); openFavoriteFolder(${JSON.stringify(fav).replace(/"/g, '&quot;')});"
                 class="flex-1 text-xs py-1.5 rounded-md transition font-medium"
                 style="background: var(--primary); color: white;">
                 <i class="fas fa-folder-open mr-1"></i> Open
               </button>
             `
-        }
+            }
           </div>
         </div>
       `;
@@ -203,7 +203,6 @@ const getFavFileIcon = (filename) => {
   };
   return icons[ext] || 'fas fa-file text-gray-500';
 };
-
 
 const openFavoriteFile = (fav) => {
   if (fav.previewLink) {
