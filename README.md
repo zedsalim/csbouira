@@ -19,7 +19,26 @@ Welcome to **CS Bouira**! This project is a centralized resource for Computer Sc
 
 **API Access:** All resources are served via our [CSBouira API](https://api.csbouira.xyz/). Developers and students are free to use it to access files directly or integrate it into their own projects.
 
-> **Note:** Please use the API responsibly and avoid excessive requests to ensure it remains fast and available for everyone.
+> ⚠️ Note: Please use the API responsibly and avoid excessive requests to ensure it remains fast and available for everyone.
+
+## 📱 Android App (APK Available)
+
+CS Bouira is now available as an Android application!
+
+You can download and install the official APK wrapper of the website directly from our GitHub Releases page:
+
+🔗 **Download here:**  
+https://github.com/zedsalim/csbouira/releases/tag/v1.0.0
+
+### 📦 About the App
+- Official Android APK wrapper of https://csbouira.xyz  
+- Lightweight and fast  
+- Easy access to all modules and resources  
+- Direct connection to the CSBouira API  
+
+> ⚠️ Note: You may need to enable "Install from Unknown Sources" in your Android settings to install the APK.
+
+We recommend downloading the APK only from the official GitHub releases page linked above.
 
 ## 🤝 Contributing
 
