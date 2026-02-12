@@ -193,7 +193,7 @@ class ContributorStatsUpdater:
 
         # Read README.md
         try:
-            with open("../README.md", "r", encoding="utf-8") as f:
+            with open("README.md", "r", encoding="utf-8") as f:
                 content = f.read()
         except FileNotFoundError:
             print("Error: README.md not found")
@@ -215,7 +215,7 @@ class ContributorStatsUpdater:
         )
 
         # Write updated README
-        with open("../README.md", "w", encoding="utf-8") as f:
+        with open("README.md", "w", encoding="utf-8") as f:
             f.write(content)
 
         print("✓ README.md updated successfully")
