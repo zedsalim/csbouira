@@ -66,7 +66,7 @@ A special thanks to those who have contributed by uploading valuable files and r
 <li><em>Alouache Lyna</em></li>
 <li><em>Faid Djameleddine</em></li>
 <li><em>Nacerbey Amel</em></li>
-<li><em>Tamdjiat Mphamed Gaya</em></li>
+<li><em>Tamdjiat Mohamed Gaya</em></li>
 </ul>
 <h3>👥 Contributors</h3>
 <ul>
