@@ -719,6 +719,8 @@ const closeContributorsModal = () => {
   const modal = document.getElementById('contributorsModal');
   if (modal) {
     modal.style.display = 'none';
+    document.body.style.overflow = '';
+    document.body.style.paddingRight = '';
   }
 };
 
@@ -744,6 +746,11 @@ const openContributorsModal = () => {
   const modal = document.getElementById('contributorsModal');
   if (modal) {
     modal.style.display = 'flex';
+
+    document.body.style.overflow = 'hidden';
+    const scrollBarWidth =
+      window.innerWidth - document.documentElement.clientWidth;
+    document.body.style.paddingRight = scrollBarWidth + 'px';
   }
 };
 

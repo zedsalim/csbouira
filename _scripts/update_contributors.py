@@ -25,7 +25,21 @@ class ContributorUpdater:
         try:
             response = requests.get(self.github_url, timeout=10)
             response.raise_for_status()
-            return response.json()
+            all_contributors = response.json()
+
+            # Filter out bots
+            contributors = [
+                contrib
+                for contrib in all_contributors
+                if not contrib["login"].lower().endswith("[bot]")
+                and "bot" not in contrib["login"].lower()
+            ]
+
+            print(
+                f"Found {len(all_contributors)} total contributors, {len(contributors)} after filtering bots"
+            )
+            return contributors
+
         except requests.exceptions.RequestException as e:
             print(f"Error fetching GitHub data: {e}")
             sys.exit(1)
@@ -154,7 +168,7 @@ class ContributorUpdater:
 
             github_cards.append(
                 f"""
-            <div class="flex flex-col items-center p-4 bg-gray-50 dark:bg-gray-800 rounded-lg hover:shadow-lg transition">
+            <div class="flex flex-col items-center p-4 card">
               <a href="{profile_url}" target="_blank" class="group">
                 <img 
                   src="{avatar_url}" 
@@ -162,8 +176,8 @@ class ContributorUpdater:
                   class="w-20 h-20 rounded-full border-2 border-blue-500 group-hover:scale-110 transition"
                 />
               </a>
-              <h4 class="mt-3 font-semibold text-gray-900 dark:text-white">{name}</h4>
-              <p class="text-sm text-gray-600 dark:text-gray-400">{commits} commits</p>
+              <h4 class="mt-3 font-semibold">{name}</h4>
+              <p class="text-sm text-gray-600 dark:text-gray-400 ">{commits} commits</p>
               <a 
                 href="{profile_url}" 
                 target="_blank" 
@@ -194,7 +208,7 @@ class ContributorUpdater:
               <h4 class="text-lg font-semibold text-blue-600 dark:text-blue-400 mb-3 flex items-center gap-2">
                 <i class="fas fa-wrench"></i> Maintainer
               </h4>
-              <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+              <ul class="space-y-2">
 {maintainer_items}
               </ul>
             </div>
@@ -215,7 +229,7 @@ class ContributorUpdater:
               <h4 class="text-lg font-semibold text-blue-600 dark:text-blue-400 mb-3 flex items-center gap-2">
                 <i class="fas fa-star"></i> Core Team
               </h4>
-              <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+              <ul class="space-y-2">
 {core_items}
               </ul>
             </div>
@@ -236,7 +250,7 @@ class ContributorUpdater:
               <h4 class="text-lg font-semibold text-blue-600 dark:text-blue-400 mb-3 flex items-center gap-2">
                 <i class="fas fa-star-half-alt"></i> Ex-Core Team
               </h4>
-              <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+              <ul class="space-y-2">
 {ex_core_items}
               </ul>
             </div>
@@ -257,7 +271,7 @@ class ContributorUpdater:
               <h4 class="text-lg font-semibold text-blue-600 dark:text-blue-400 mb-3 flex items-center gap-2">
                 <i class="fas fa-users"></i> Contributors
               </h4>
-              <ul class="space-y-2 text-gray-700 dark:text-gray-300 columns-2">
+              <ul class="space-y-2 columns-2">
 {contrib_items}
               </ul>
             </div>
@@ -275,7 +289,7 @@ class ContributorUpdater:
           class="flex justify-between items-center p-4 border-b"
           style="border-color: var(--border-light)"
         >
-          <h3 class="text-2xl font-bold flex items-center gap-2">
+          <h3 class="text-xl font-semibold flex items-center gap-2">
             <i class="fas fa-trophy text-red-500"></i>
             Our Amazing Contributors
           </h3>
@@ -288,7 +302,7 @@ class ContributorUpdater:
           </button>
         </div>
 
-        <div class="p-6 overflow-auto">
+        <div class="p-6 overflow-auto flex-1">
           <!-- Tabs -->
           <div class="flex gap-4 mb-6 border-b border-gray-300 dark:border-gray-700">
             <button
@@ -309,7 +323,7 @@ class ContributorUpdater:
 
           <!-- GitHub Contributors Tab -->
           <div id="githubContent" class="tab-content">
-            <p class="text-gray-600 dark:text-gray-400 mb-6">
+            <p class="  mb-6">
               Thank you to all the developers who have contributed code to this project! 💻
             </p>
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
@@ -328,7 +342,7 @@ class ContributorUpdater:
 
           <!-- Upload Contributors Tab -->
           <div id="uploadsContent" class="tab-content hidden">
-            <p class="text-gray-600 dark:text-gray-400 mb-6">
+            <p class="  mb-6">
               Special thanks to everyone who has uploaded educational materials! 📚
             </p>
             <div class="max-w-3xl mx-auto">
