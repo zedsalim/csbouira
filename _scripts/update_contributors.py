@@ -106,7 +106,7 @@ class ContributorStatsUpdater:
 
         # Owner Section
         if data["owner"]:
-            html_parts.append("<h3>💎 Owner</h3>")
+            html_parts.append("<h3>🔧 Maintainer</h3>")
             html_parts.append("<ul>")
             for name in data["owner"]:
                 html_parts.append(f"<li><strong><em>{name}</em></strong></li>")
