@@ -31,10 +31,11 @@ You can download and install the official APK wrapper of the website directly fr
 https://github.com/zedsalim/csbouira/releases/tag/v1.0.0
 
 ### 📦 About the App
-- Official Android APK wrapper of https://csbouira.xyz  
-- Lightweight and fast  
-- Easy access to all modules and resources  
-- Direct connection to the CSBouira API  
+
+- Official Android APK wrapper of https://csbouira.xyz
+- Lightweight and fast
+- Easy access to all modules and resources
+- Direct connection to the CSBouira API
 
 > ⚠️ Note: You may need to enable "Install from Unknown Sources" in your Android settings to install the APK.
 
@@ -107,7 +108,6 @@ A special thanks to those who have contributed by uploading valuable files and r
 <li>Kenza</li>
 <li>Mohand Larbi</li>
 <li>Moon</li>
-<li>Mourad</li>
 <li>Nacim Amanzougaghene</li>
 <li>Nihad</li>
 <li>Omega Madris</li>

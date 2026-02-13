@@ -713,6 +713,41 @@ const initContactForm = () => {
 };
 
 // ===============================
+// CONTRIBUTORS MODAL
+// ===============================
+const closeContributorsModal = () => {
+  const modal = document.getElementById('contributorsModal');
+  if (modal) {
+    modal.style.display = 'none';
+  }
+};
+
+const switchContributorTab = (tab) => {
+  const tabs = document.querySelectorAll('.contributor-tab');
+  tabs.forEach((btn) => btn.classList.remove('active'));
+
+  const activeTab = document.getElementById(tab + 'Tab');
+  if (activeTab) {
+    activeTab.classList.add('active');
+  }
+
+  const contents = document.querySelectorAll('.tab-content');
+  contents.forEach((content) => content.classList.add('hidden'));
+
+  const activeContent = document.getElementById(tab + 'Content');
+  if (activeContent) {
+    activeContent.classList.remove('hidden');
+  }
+};
+
+const openContributorsModal = () => {
+  const modal = document.getElementById('contributorsModal');
+  if (modal) {
+    modal.style.display = 'flex';
+  }
+};
+
+// ===============================
 // DHIKR SYSTEM
 // ===============================
 const dhikr = [
