@@ -51,7 +51,7 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add README.md index.html index.unminified.html
-          git commit -m "Auto-update contributors (README + HTML) [skip ci]"
+          git commit -m "Auto-update contributors (README + HTML)"
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
