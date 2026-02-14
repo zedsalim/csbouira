@@ -240,7 +240,7 @@ const renderSearchResults = (results, query) => {
                 link: item.link,
                 previewLink: item.previewLink,
                 downloadLink: item.downloadLink,
-            }).replace(/'/g, "\\'");
+            }).replace(/'/g, "&apos;");
 
             html += `
         <div class="file-item search-result-item group">
@@ -254,7 +254,7 @@ const renderSearchResults = (results, query) => {
           </div>
           ${item.downloadLink ? `
             <button 
-              onclick='event.stopPropagation(); downloadFile("${item.downloadLink}", "${item.name.replace(/'/g, "\\'")}")' 
+              onclick='event.stopPropagation(); downloadFile("${item.downloadLink}", "${item.name.replace(/'/g, "&apos;")}")' 
               class="action-btn ml-2 flex-shrink-0"
               title="Download file">
               <i class="fas fa-download"></i>
@@ -267,7 +267,7 @@ const renderSearchResults = (results, query) => {
                 year: item.year,
                 path: item.path,
                 apiPath: item.apiPath,
-            }).replace(/'/g, "\\'");
+            }).replace(/'/g, "&apos;");
 
             html += `
         <div class="folder-item search-result-item" onclick='openSearchFolder(${escapedFolder})'>

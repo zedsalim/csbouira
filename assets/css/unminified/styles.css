@@ -309,7 +309,7 @@ body.modal-open {
 }
 
 #fileModal {
-  z-index: 1100;
+  z-index: 1300;
 }
 
 .modal.fullscreen {
