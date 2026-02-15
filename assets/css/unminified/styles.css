@@ -587,6 +587,61 @@ html.dark #dhikrBox {
 }
 
 /* ============================= */
+/*            SEARCH              */
+/* ============================= */
+#searchModal {
+  z-index: 900;
+}
+
+.search-input {
+  background: var(--bg-light);
+  border: 1px solid var(--border-light);
+  color: var(--text-light);
+  transition: all 0.3s ease;
+}
+
+.search-input::placeholder {
+  color: var(--text-secondary-light);
+  opacity: 0.6;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(0, 155, 214, 0.15);
+}
+
+.search-filter-select {
+  background: var(--bg-light);
+  border: 1px solid var(--border-light);
+  color: var(--text-light);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.search-filter-select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(0, 155, 214, 0.15);
+}
+
+.search-highlight {
+  background-color: rgba(0, 155, 214, 0.2);
+  color: var(--primary);
+  padding: 0.05em 0.2em;
+  border-radius: 3px;
+  font-weight: 600;
+}
+
+.search-result-item {
+  transition: all 0.2s ease;
+}
+
+.search-result-item:hover {
+  transform: translateX(4px);
+}
+
+/* ============================= */
 /*           RESPONSIVE           */
 /* ============================= */
 @media (max-width: 640px) {
