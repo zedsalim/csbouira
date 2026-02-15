@@ -3,7 +3,6 @@
 // ===============================
 const FAVORITES_KEY = 'csbouira_favorites';
 
-
 const getFavorites = () => {
   try {
     return JSON.parse(localStorage.getItem(FAVORITES_KEY)) || {};
@@ -15,7 +14,6 @@ const getFavorites = () => {
 const saveFavorites = (favorites) => {
   localStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites));
 };
-
 
 // Generate a unique key for a favorite item (file/folder).
 const getFavoriteKey = (item) => {
@@ -203,7 +201,6 @@ const getFavFileIcon = (filename) => {
   };
   return icons[ext] || 'fas fa-file text-gray-500';
 };
-
 
 const openFavoriteFile = (fav) => {
   if (fav.previewLink) {

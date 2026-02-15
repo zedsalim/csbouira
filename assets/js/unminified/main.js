@@ -268,7 +268,9 @@ const renderContent = (data) => {
           <i class="fas fa-folder text-yellow-500"></i>
           <span class="flex-1">${name}</span>
           ${!isEmpty
-          ? (typeof createStarButton === 'function' ? createStarButton(folderFavData) : '') + '<i class="fas fa-chevron-right"></i>'
+          ? (typeof createStarButton === 'function'
+            ? createStarButton(folderFavData)
+            : '') + '<i class="fas fa-chevron-right"></i>'
           : '<span class="text-sm">(empty)</span>'
         }
         </div>
@@ -704,6 +706,48 @@ const initContactForm = () => {
         'p-2.5 rounded mt-2.5 bg-red-100 text-red-800 border border-red-200 dark:bg-red-900 dark:text-red-200 dark:border-red-800';
     }
   };
+};
+
+// ===============================
+// CONTRIBUTORS MODAL
+// ===============================
+const closeContributorsModal = () => {
+  const modal = document.getElementById('contributorsModal');
+  if (modal) {
+    modal.style.display = 'none';
+    document.body.style.overflow = '';
+    document.body.style.paddingRight = '';
+  }
+};
+
+const switchContributorTab = (tab) => {
+  const tabs = document.querySelectorAll('.contributor-tab');
+  tabs.forEach((btn) => btn.classList.remove('active'));
+
+  const activeTab = document.getElementById(tab + 'Tab');
+  if (activeTab) {
+    activeTab.classList.add('active');
+  }
+
+  const contents = document.querySelectorAll('.tab-content');
+  contents.forEach((content) => content.classList.add('hidden'));
+
+  const activeContent = document.getElementById(tab + 'Content');
+  if (activeContent) {
+    activeContent.classList.remove('hidden');
+  }
+};
+
+const openContributorsModal = () => {
+  const modal = document.getElementById('contributorsModal');
+  if (modal) {
+    modal.style.display = 'flex';
+
+    document.body.style.overflow = 'hidden';
+    const scrollBarWidth =
+      window.innerWidth - document.documentElement.clientWidth;
+    document.body.style.paddingRight = scrollBarWidth + 'px';
+  }
 };
 
 // ===============================

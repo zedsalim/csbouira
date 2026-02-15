@@ -19,7 +19,27 @@ Welcome to **CS Bouira**! This project is a centralized resource for Computer Sc
 
 **API Access:** All resources are served via our [CSBouira API](https://api.csbouira.xyz/). Developers and students are free to use it to access files directly or integrate it into their own projects.
 
-> **Note:** Please use the API responsibly and avoid excessive requests to ensure it remains fast and available for everyone.
+> ⚠️ Note: Please use the API responsibly and avoid excessive requests to ensure it remains fast and available for everyone.
+
+## 📱 Android App (APK Available)
+
+CS Bouira is now available as an Android application!
+
+You can download and install the official APK wrapper of the website directly from our GitHub Releases page:
+
+🔗 **Download here:**  
+https://github.com/zedsalim/csbouira/releases/tag/v1.0.0
+
+### 📦 About the App
+
+- Official Android APK wrapper of https://csbouira.xyz
+- Lightweight and fast
+- Easy access to all modules and resources
+- Direct connection to the CSBouira API
+
+> ⚠️ Note: You may need to enable "Install from Unknown Sources" in your Android settings to install the APK.
+
+We recommend downloading the APK only from the official GitHub releases page linked above.
 
 ## 🤝 Contributing
 
@@ -30,76 +50,80 @@ We welcome contributions to improve this project! If you have ideas, suggestions
 We appreciate the efforts of everyone who has contributed to the source code of this project. Here’s a list of contributors:
 
 <!-- START GITHUB_CONTRIBUTORS -->
-
 <table>
 <tr>
-<td style="text-align: center; width: 100px;"><a href="https://github.com/zedsalim/csbouira/graphs/contributors" target="_blank"><img src="https://avatars.githubusercontent.com/u/121177411?v=4" alt="zedsalim" style="width: 80px; height: 80px;"/></a><br/><span>219 commits</span></td>
+<td style="text-align: center; width: 100px;"><a href="https://github.com/zedsalim/csbouira/graphs/contributors" target="_blank"><img src="https://avatars.githubusercontent.com/u/121177411?v=4" alt="zedsalim" style="width: 80px; height: 80px;"/></a><br/><span>265 commits</span></td>
 <td style="text-align: center; width: 100px;"><a href="https://github.com/zedsalim/csbouira/graphs/contributors" target="_blank"><img src="https://avatars.githubusercontent.com/u/127874935?v=4" alt="magnetarstar-hub" style="width: 80px; height: 80px;"/></a><br/><span>10 commits</span></td>
 <td style="text-align: center; width: 100px;"><a href="https://github.com/zedsalim/csbouira/graphs/contributors" target="_blank"><img src="https://avatars.githubusercontent.com/u/123634915?v=4" alt="daaaaaaanyyyyy" style="width: 80px; height: 80px;"/></a><br/><span>1 commits</span></td>
+<td style="text-align: center; width: 100px;"><a href="https://github.com/zedsalim/csbouira/graphs/contributors" target="_blank"><img src="https://avatars.githubusercontent.com/u/144144223?v=4" alt="YacineDahmani" style="width: 80px; height: 80px;"/></a><br/><span>1 commits</span></td>
 </tr>
 </table>
-
 <!-- END GITHUB_CONTRIBUTORS -->
 
 ## 📤 Our File Uploaders
 
 A special thanks to those who have contributed by uploading valuable files and resources. Your contributions help make this hub more comprehensive and useful. Here are some of the key contributors:
 
-<ul>
-<li><strong><a href="https://github.com/daaaaaaanyyyyy" target="_blank">Dany Yakoubi</a></strong>: special uploader and core team member, total files uploaded (Unlimited).</li>
-</ul>
-
 <!-- START FILE_UPLOADS -->
-
+<h3>🔧 Maintainer</h3>
 <ul>
-<li><strong>Samy Bacha</strong>: total files uploaded (Unlimited).</li>
-<li><strong>Faid Djameleddine</strong>: total files uploaded (Unlimited).</li>
-<li><strong>Tamdjiat Med Gaya</strong>: total files uploaded (Unlimited).</li>
-<li><strong>Rayane Bouafia</strong>: total files uploaded (Unlimited).</li>
-<li><strong>Amara Sami Anis</strong>: total files uploaded (Unlimited).</li>
-<li><strong>Manel Ghazi</strong>: total files uploaded (Unlimited).</li>
-<li><strong>Marwa Adjou</strong>: total files uploaded (Unlimited).</li>
-<li><strong>Aldjia Arar</strong>: total files uploaded (Unlimited).</li>
-<li><strong>Nacerbey Amel</strong>: total files uploaded (Unlimited).</li>
-<li><strong>Alouache Lyna</strong>: total files uploaded (Unlimited).</li>
-<li><strong>Melouk Djouiria</strong>: total files uploaded (Unlimited).</li>
-<li><strong>Anonymous</strong>: total files uploaded (1).</li>
-<li><strong>Khellal Yacine</strong>: total files uploaded (3).</li>
-<li><strong>Bacha Samy</strong>: total files uploaded (51).</li>
-<li><strong>Aya</strong>: total files uploaded (20).</li>
-<li><strong>Larbi Mohand</strong>: total files uploaded (1).</li>
-<li><strong>Kemache Mahdi</strong>: total files uploaded (87).</li>
-<li><strong>Feradji Houria</strong>: total files uploaded (5).</li>
-<li><strong>Aissani Assia</strong>: total files uploaded (3).</li>
-<li><strong>Dribine Feriel</strong>: total files uploaded (1).</li>
-<li><strong>Abderraouf Belkacemi</strong>: total files uploaded (1).</li>
-<li><strong>Fatima</strong>: total files uploaded (7).</li>
-<li><strong>Bouadjina Haroun</strong>: total files uploaded (4).</li>
-<li><strong>Boukharouba Hanane</strong>: total files uploaded (1).</li>
-<li><strong>Ibtihal</strong>: total files uploaded (1).</li>
-<li><strong>Kenza</strong>: total files uploaded (11).</li>
-<li><strong>Salah</strong>: total files uploaded (1).</li>
-<li><strong>Raouf Rezouali</strong>: total files uploaded (10).</li>
-<li><strong>Slimani Wissal</strong>: total files uploaded (1).</li>
-<li><strong>Mohammed Ouail Saadi</strong>: total files uploaded (11).</li>
-<li><strong>Amanzougaghene Nacim</strong>: total files uploaded (2).</li>
-<li><strong>Madris Omega</strong>: total files uploaded (5).</li>
-<li><strong>Sara</strong>: total files uploaded (1).</li>
-<li><strong>Amira</strong>: total files uploaded (5).</li>
-<li><strong>Ritadje</strong>: total files uploaded (76).</li>
-<li><strong>Amara Anis Sami</strong>: total files uploaded (3).</li>
-<li><strong>Dina</strong>: total files uploaded (7).</li>
-<li><strong>Djalil</strong>: total files uploaded (1).</li>
-<li><strong>Dallal Oulefki</strong>: total files uploaded (1).</li>
-<li><strong>Moon</strong>: total files uploaded (13).</li>
-<li><strong>Nihad</strong>: total files uploaded (6).</li>
-<li><strong>Yasmine</strong>: total files uploaded (2).</li>
-<li><strong>Akkache Amira</strong>: total files uploaded (1).</li>
-<li><strong>Siham</strong>: total files uploaded (2).</li>
-<li><strong>Katia</strong>: total files uploaded (2).</li>
-<li><strong>Tibi</strong>: total files uploaded (1).</li>
+<li><strong><em>Salim Zaidi</em></strong></li>
 </ul>
-
+<h3>🌟 Core Team</h3>
+<ul>
+<li><strong>Amara Sami Anis</strong></li>
+<li><strong>Dany Yakoubi</strong></li>
+<li><strong>Manel Ghazi</strong></li>
+<li><strong>Marwa Adjou</strong></li>
+<li><strong>Melouk Djouiria</strong></li>
+<li><strong>Meriem Ritadje Zaoud</strong></li>
+<li><strong>Rayan Abbas</strong></li>
+<li><strong>Rayane Bouafia</strong></li>
+<li><strong>Samy Bacha</strong></li>
+</ul>
+<h3>⭐ Ex-Core Team</h3>
+<ul>
+<li><em>Aldjia Arar</em></li>
+<li><em>Alouache Lyna</em></li>
+<li><em>Faid Djameleddine</em></li>
+<li><em>Nacerbey Amel</em></li>
+<li><em>Tamdjiat Mohamed Gaya</em></li>
+</ul>
+<h3>👥 Contributors</h3>
+<ul>
+<li>Akkache Amira</li>
+<li>Amira</li>
+<li>Assia Aissani</li>
+<li>Aya</li>
+<li>Belkacemi Abderraouf</li>
+<li>Bouadjina Haroun</li>
+<li>Boukharouba Hanane</li>
+<li>Dina</li>
+<li>Djalil</li>
+<li>Dribine Feriel</li>
+<li>Fatima</li>
+<li>Feradji Houria</li>
+<li>Ibtihal</li>
+<li>Katia</li>
+<li>Kemache Mahdi</li>
+<li>Kenza</li>
+<li>Mohand Larbi</li>
+<li>Moon</li>
+<li>Nacim Amanzougaghene</li>
+<li>Nihad</li>
+<li>Omega Madris</li>
+<li>Oulefki Dallal</li>
+<li>Rezouali Raouf</li>
+<li>Saadi Mohammed Ouail</li>
+<li>Salah</li>
+<li>Sara</li>
+<li>Siham</li>
+<li>Taha Zerrouki</li>
+<li>Tibi</li>
+<li>Wissal Slimani</li>
+<li>Yacine Khellal</li>
+<li>Yasmine</li>
+</ul>
 <!-- END FILE_UPLOADS -->
 
 If you have contributed and are not listed, please let us know!

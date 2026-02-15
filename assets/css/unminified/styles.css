@@ -359,6 +359,20 @@ body.modal-open {
   right: 10px;
 }
 
+.contributor-tab {
+  border-bottom: 2px solid transparent;
+  color: var(--text-secondary);
+}
+
+.contributor-tab.active {
+  color: var(--primary);
+  border-bottom-color: var(--primary-dark);
+}
+
+.contributor-tab:hover:not(.active) {
+  color: var(--primary-dark);
+}
+
 /* ============================= */
 /*           BREADCRUMB          */
 /* ============================= */
@@ -562,7 +576,9 @@ html.dark #dhikrBox {
 }
 
 .favorite-remove-btn {
-  transition: opacity 0.2s ease, color 0.2s ease;
+  transition:
+    opacity 0.2s ease,
+    color 0.2s ease;
 }
 
 /* Show remove button on touch devices */
