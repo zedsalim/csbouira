@@ -52,7 +52,7 @@ We appreciate the efforts of everyone who has contributed to the source code of 
 <!-- START GITHUB_CONTRIBUTORS -->
 <table>
 <tr>
-<td style="text-align: center; width: 100px;"><a href="https://github.com/zedsalim/csbouira/graphs/contributors" target="_blank"><img src="https://avatars.githubusercontent.com/u/121177411?v=4" alt="zedsalim" style="width: 80px; height: 80px;"/></a><br/><span>265 commits</span></td>
+<td style="text-align: center; width: 100px;"><a href="https://github.com/zedsalim/csbouira/graphs/contributors" target="_blank"><img src="https://avatars.githubusercontent.com/u/121177411?v=4" alt="zedsalim" style="width: 80px; height: 80px;"/></a><br/><span>266 commits</span></td>
 <td style="text-align: center; width: 100px;"><a href="https://github.com/zedsalim/csbouira/graphs/contributors" target="_blank"><img src="https://avatars.githubusercontent.com/u/127874935?v=4" alt="magnetarstar-hub" style="width: 80px; height: 80px;"/></a><br/><span>10 commits</span></td>
 <td style="text-align: center; width: 100px;"><a href="https://github.com/zedsalim/csbouira/graphs/contributors" target="_blank"><img src="https://avatars.githubusercontent.com/u/123634915?v=4" alt="daaaaaaanyyyyy" style="width: 80px; height: 80px;"/></a><br/><span>1 commits</span></td>
 <td style="text-align: center; width: 100px;"><a href="https://github.com/zedsalim/csbouira/graphs/contributors" target="_blank"><img src="https://avatars.githubusercontent.com/u/144144223?v=4" alt="YacineDahmani" style="width: 80px; height: 80px;"/></a><br/><span>1 commits</span></td>
@@ -93,6 +93,8 @@ A special thanks to those who have contributed by uploading valuable files and r
 <ul>
 <li>Akkache Amira</li>
 <li>Amira</li>
+<li>Anber Aziz</li>
+<li>Aniss Kara</li>
 <li>Assia Aissani</li>
 <li>Aya</li>
 <li>Belkacemi Abderraouf</li>
