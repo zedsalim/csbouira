@@ -121,7 +121,7 @@ select {
   justify-content: space-between;
 }
 
-.file-item > div:first-child {
+.file-item>div:first-child {
   cursor: pointer;
 }
 
@@ -363,10 +363,12 @@ body.modal-open {
   border-bottom: 2px solid transparent;
   color: var(--text-secondary);
 }
+
 .contributor-tab.active {
   color: var(--primary);
   border-bottom-color: var(--primary-dark);
 }
+
 .contributor-tab:hover:not(.active) {
   color: var(--primary-dark);
 }
@@ -641,10 +643,50 @@ html.dark #dhikrBox {
   transform: translateX(4px);
 }
 
+.search-result-item:hover span,
+.search-result-item:hover .search-highlight,
+.search-result-item:hover .search-module-badge,
+.search-result-item:hover i {
+  color: white !important;
+}
+
+.search-result-item:hover .search-highlight {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+.search-result-item:hover .search-module-badge {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.search-module-badge {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 600;
+  padding: 0.15em 0.5em;
+  margin-top: 0.25rem;
+  border-radius: 4px;
+  background: rgba(0, 155, 214, 0.12);
+  color: var(--primary);
+  letter-spacing: 0.02em;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.search-filters {
+  flex-wrap: wrap;
+}
+
+.search-filter-select {
+  min-width: 0;
+}
+
 /* ============================= */
 /*           RESPONSIVE           */
 /* ============================= */
 @media (max-width: 640px) {
+
   .file-item span,
   .folder-item span {
     white-space: normal;
