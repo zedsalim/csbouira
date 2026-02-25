@@ -108,9 +108,7 @@ const extractModulesFromData = (data) => {
     }
   }
 
-  return Array.from(moduleMap.values()).sort((a, b) =>
-    a.localeCompare(b, 'fr', { sensitivity: 'base' }),
-  );
+  return Array.from(moduleMap.values());
 };
 
 const populateModuleFilter = () => {
