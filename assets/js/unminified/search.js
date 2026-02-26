@@ -115,7 +115,11 @@ const extractModulesFromData = (data) => {
         if (RESOURCE_TYPE_NAMES.has(lower)) continue;
         if (moduleName.trim().length < 3) continue;
         if (!moduleMap.has(lower)) {
-          moduleMap.set(lower, moduleName.trim());
+          moduleMap.set(lower, {
+            name: moduleName.trim(),
+            year: yearName,
+            semester: semName,
+          });
         }
       }
     }
@@ -124,20 +128,39 @@ const extractModulesFromData = (data) => {
   return Array.from(moduleMap.values());
 };
 
-const populateModuleFilter = () => {
-  if (!searchDataCache) return;
-  allModules = extractModulesFromData(searchDataCache);
-
+const populateModuleFilter = (filters = {}) => {
   const select = document.getElementById('searchFilterModule');
   if (!select) return;
 
-  select.innerHTML = '<option value="">All Modules</option>';
+  const currentValue = select.value;
 
-  for (const mod of allModules) {
+  let filtered = allModules;
+
+  if (filters.year) {
+    filtered = filtered.filter((m) => m.year === filters.year);
+  }
+
+  if (filters.semester) {
+    filtered = filtered.filter((m) => {
+      const semNum = parseInt(m.semester.replace(/\D/g, ''), 10);
+      if (isNaN(semNum)) return false;
+      if (filters.semester === 'S1') return semNum % 2 === 1;
+      if (filters.semester === 'S2') return semNum % 2 === 0;
+      return false;
+    });
+  }
+
+  select.innerHTML = '<option value="">All Modules</option>';
+  for (const mod of filtered) {
     const option = document.createElement('option');
-    option.value = mod;
-    option.textContent = mod;
+    option.value = mod.name;
+    option.textContent = mod.name;
     select.appendChild(option);
+  }
+
+  // restore selection if still valid
+  if ([...select.options].some((o) => o.value === currentValue)) {
+    select.value = currentValue;
   }
 };
 
@@ -358,6 +381,7 @@ const openSearchModal = async () => {
     try {
       const data = await fetchSearchData();
       searchIndex = buildSearchIndex(data);
+      allModules = extractModulesFromData(data);
       populateModuleFilter();
       resultsContainer.innerHTML = `
         <div class="empty-state">
@@ -615,12 +639,17 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  [
-    'searchFilterYear',
-    'searchFilterSemester',
-    'searchFilterType',
-    'searchFilterModule',
-  ].forEach((id) => {
+  ['searchFilterYear', 'searchFilterSemester'].forEach((id) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.addEventListener('change', () => {
+        populateModuleFilter(getSearchFilters());
+        triggerSearch();
+      });
+    }
+  });
+
+  ['searchFilterType', 'searchFilterModule'].forEach((id) => {
     const el = document.getElementById(id);
     if (el) el.addEventListener('change', triggerSearch);
   });
