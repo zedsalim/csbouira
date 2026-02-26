@@ -79,9 +79,22 @@ const extractMeta = (pathParts) => {
 
 // Module Filter — extracts only from semester subfolders (S01, S02...)
 const RESOURCE_TYPE_NAMES = new Set([
-  'cours', 'exams', 'exam', 'tests', 'test', 'tds', 'tps',
-  'tds & tps', 'td', 'tp', 'résumé', 'resume', 'résumés',
-  'books & exercices', 'books', 'exercices',
+  'cours',
+  'exams',
+  'exam',
+  'tests',
+  'test',
+  'tds',
+  'tps',
+  'tds & tps',
+  'td',
+  'tp',
+  'résumé',
+  'resume',
+  'résumés',
+  'books & exercices',
+  'books',
+  'exercices',
 ]);
 
 const extractModulesFromData = (data) => {
@@ -128,7 +141,7 @@ const populateModuleFilter = () => {
   }
 };
 
-// Fuzzy Matching 
+// Fuzzy Matching
 const levenshtein = (a, b) => {
   const m = a.length;
   const n = b.length;
@@ -165,7 +178,8 @@ const fuzzyMatch = (text, token, maxDist = 2) => {
 
   const words = textLower.split(/[\s\-_.,()]+/);
   for (const word of words) {
-    if (word.length > 0 && levenshtein(word, tokenLower) <= maxDist) return true;
+    if (word.length > 0 && levenshtein(word, tokenLower) <= maxDist)
+      return true;
   }
 
   return false;
@@ -184,20 +198,48 @@ const scoreItem = (item, tokens) => {
     const t = token.toLowerCase();
     let tokenMatched = false;
 
-    if (nameLower === t) { score += 15; tokenMatched = true; }
-    else if (nameLower.startsWith(t)) { score += 10; tokenMatched = true; }
-    else if (nameLower.includes(t)) { score += 5; tokenMatched = true; }
+    if (nameLower === t) {
+      score += 15;
+      tokenMatched = true;
+    } else if (nameLower.startsWith(t)) {
+      score += 10;
+      tokenMatched = true;
+    } else if (nameLower.includes(t)) {
+      score += 5;
+      tokenMatched = true;
+    }
 
-    if (moduleLower.includes(t)) { score += 4; tokenMatched = true; }
-    if (yearLower.includes(t)) { score += 2; tokenMatched = true; }
-    if (resourceLower.includes(t)) { score += 2; tokenMatched = true; }
+    if (moduleLower.includes(t)) {
+      score += 4;
+      tokenMatched = true;
+    }
+    if (yearLower.includes(t)) {
+      score += 2;
+      tokenMatched = true;
+    }
+    if (resourceLower.includes(t)) {
+      score += 2;
+      tokenMatched = true;
+    }
 
-    if (!tokenMatched && pathStr.includes(t)) { score += 1; tokenMatched = true; }
+    if (!tokenMatched && pathStr.includes(t)) {
+      score += 1;
+      tokenMatched = true;
+    }
 
     if (!tokenMatched) {
-      const fields = [nameLower, moduleLower, yearLower, resourceLower, pathStr];
+      const fields = [
+        nameLower,
+        moduleLower,
+        yearLower,
+        resourceLower,
+        pathStr,
+      ];
       for (const field of fields) {
-        if (field && fuzzyMatch(field, t)) { score += 0.5; break; }
+        if (field && fuzzyMatch(field, t)) {
+          score += 0.5;
+          break;
+        }
       }
     }
   }
@@ -209,7 +251,10 @@ const scoreItem = (item, tokens) => {
 // Search Logic — multi-term AND + fuzzy
 const tokenizeQuery = (query) => {
   if (!query || !query.trim()) return [];
-  return query.trim().split(/\s+/).filter((t) => t.length > 0);
+  return query
+    .trim()
+    .split(/\s+/)
+    .filter((t) => t.length > 0);
 };
 
 const itemMatchesTokens = (item, tokens) => {
@@ -222,15 +267,21 @@ const itemMatchesTokens = (item, tokens) => {
   for (const token of tokens) {
     const t = token.toLowerCase();
     const directMatch =
-      nameLower.includes(t) || moduleLower.includes(t) ||
-      yearLower.includes(t) || resourceLower.includes(t) || pathStr.includes(t);
+      nameLower.includes(t) ||
+      moduleLower.includes(t) ||
+      yearLower.includes(t) ||
+      resourceLower.includes(t) ||
+      pathStr.includes(t);
 
     if (directMatch) continue;
 
     const fields = [nameLower, moduleLower, yearLower, resourceLower, pathStr];
     let fuzzy = false;
     for (const field of fields) {
-      if (field && fuzzyMatch(field, t)) { fuzzy = true; break; }
+      if (field && fuzzyMatch(field, t)) {
+        fuzzy = true;
+        break;
+      }
     }
     if (!fuzzy) return false;
   }
@@ -256,7 +307,9 @@ const performSearch = (query, filters) => {
 
   if (filters.module) {
     results = results.filter(
-      (item) => item.module && item.module === filters.module,
+      (item) =>
+        item.module &&
+        item.module.toLowerCase().includes(filters.module.toLowerCase()),
     );
   }
 
@@ -430,8 +483,9 @@ const renderSearchResults = (results, query) => {
             </div>
             <i class="action-btn fas fa-eye flex-shrink-0"></i>
           </div>
-          ${item.downloadLink
-          ? `
+          ${
+            item.downloadLink
+              ? `
             <button 
               onclick='event.stopPropagation(); downloadFile("${item.downloadLink}", "${item.name.replace(/'/g, '&apos;')}")' 
               class="action-btn ml-2 flex-shrink-0"
@@ -439,8 +493,8 @@ const renderSearchResults = (results, query) => {
               <i class="fas fa-download"></i>
             </button>
           `
-          : ''
-        }
+              : ''
+          }
         </div>
       `;
     } else {
