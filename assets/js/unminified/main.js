@@ -292,9 +292,8 @@ const renderContent = (data) => {
         </h3>
         <div class="space-y-2">
     `;
-    data.files.forEach((file) => {
+    data.files.forEach((file, index) => {
       const icon = getFileIcon(file.name);
-      const escapedFile = JSON.stringify(file).replace(/'/g, "\\'");
       const fileFavData = {
         type: 'file',
         name: file.name,
@@ -307,14 +306,14 @@ const renderContent = (data) => {
       };
       html += `
         <div class="file-item group">
-          <div class="flex items-center gap-3 flex-1" onclick='openFile(${escapedFile})'>
+          <div class="flex items-center gap-3 flex-1" onclick="openFileByIndex(${index})">
             <i class="${icon}"></i>
             <span class="flex-1">${file.name}</span>
             <i class="action-btn fas fa-eye"></i>
           </div>
           ${typeof createStarButton === 'function' ? createStarButton(fileFavData) : ''}
           <button 
-            onclick='event.stopPropagation(); downloadFile("${file.downloadLink}", "${file.name}")' 
+            onclick="event.stopPropagation(); downloadFileByIndex(${index})" 
             class="action-btn ml-2"
             title="Download file">
             <i class="fas fa-download"></i>
@@ -478,6 +477,15 @@ const openFile = (file) => {
   } else {
     window.open(file.link, '_blank');
   }
+};
+
+const openFileByIndex = (index) => {
+  openFile(currentFiles[index]);
+};
+
+const downloadFileByIndex = (index) => {
+  const file = currentFiles[index];
+  if (file) downloadFile(file.downloadLink, file.name);
 };
 
 const downloadFile = (downloadLink, fileName) => {
