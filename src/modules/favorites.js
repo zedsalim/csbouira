@@ -145,7 +145,7 @@ export function renderFavoritesSection() {
 
       const removeBtn = document.createElement('button');
       removeBtn.className =
-        'btn btn-xs btn-ghost border-none btn-rounded rounded-full text-base-content/40 hover:text-error opacity-0 group-hover:opacity-100 transition-opacity';
+        'btn btn-xs btn-ghost border-none btn-rounded rounded-full text-base-content/40 hover:text-error transition-opacity';
       removeBtn.title = 'Remove from favorites';
       removeBtn.innerHTML = '<i class="fas fa-times"></i>';
       removeBtn.addEventListener('click', (e) => {
