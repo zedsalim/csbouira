@@ -1,0 +1,83 @@
+@import 'tailwindcss';
+@plugin "daisyui" {
+  themes: false;
+}
+
+@plugin "daisyui/theme" {
+  name: 'csb-light';
+  default: true;
+  color-scheme: light;
+
+  --color-primary: #009bd6;
+  --color-primary-content: #ffffff;
+  --color-secondary: #0369a1;
+  --color-secondary-content: #ffffff;
+  --color-accent: #0ea5e9;
+  --color-accent-content: #ffffff;
+  --color-base-100: #ffffff;
+  --color-base-200: #f1f5fa;
+  --color-base-300: #e2e8f0;
+  --color-base-content: #1e293b;
+  --color-neutral: #64748b;
+  --color-neutral-content: #ffffff;
+}
+
+@plugin "daisyui/theme" {
+  name: 'csb-dark';
+  color-scheme: dark;
+
+  --color-primary: #009bd6;
+  --color-primary-content: #ffffff;
+  --color-secondary: #0369a1;
+  --color-secondary-content: #ffffff;
+  --color-accent: #0ea5e9;
+  --color-accent-content: #ffffff;
+  --color-base-100: #0f172a;
+  --color-base-200: #1e293b;
+  --color-base-300: #334155;
+  --color-base-content: #f1f5f9;
+  --color-neutral: #94a3b8;
+  --color-neutral-content: #0f172a;
+}
+
+/* ── File viewer fullscreen ─────────────────────────────────────────────── */
+dialog#fileModal.fullscreen {
+  padding: 0;
+  max-width: 100vw;
+  max-height: 100vh;
+  width: 100vw;
+  height: 100vh;
+}
+dialog#fileModal.fullscreen .modal-box {
+  max-width: 100vw;
+  width: 100vw;
+  height: 100vh;
+  border-radius: 0;
+}
+
+/* Prevent icons from escaping their containers */
+.fa,
+.fas,
+.far,
+.fal,
+.fab,
+.fad,
+[class^='fa-'],
+[class*=' fa-'] {
+  display: inline-block;
+  position: static;
+}
+/* Ensure fixed-position buttons contain their icons properly */
+#backToTop,
+#dhikrBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* Contributor panels */
+.contributor-panel {
+  display: block;
+}
+.contributor-panel.hidden {
+  display: none;
+}
