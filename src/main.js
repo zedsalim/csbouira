@@ -458,7 +458,9 @@ function insertOnlineResources(year) {
 function openFile(file, index) {
   currentFileIndex = index;
   if (file.previewLink) {
-    document.getElementById('modalTitle').textContent = file.name;
+    const titleEl = document.getElementById('modalTitle');
+    titleEl.textContent = file.name;
+    titleEl.title = file.name;
     document.getElementById('fileViewer').src = file.previewLink;
     document.getElementById('fileModal')?.showModal();
     lockBody();
@@ -632,7 +634,9 @@ window.switchContributorTab = switchContributorTab;
 // Favorites bridge for search & favorites modules
 window._openSearchFile = (fileData) => {
   if (fileData.previewLink) {
-    document.getElementById('modalTitle').textContent = fileData.name;
+    const titleEl = document.getElementById('modalTitle');
+    titleEl.textContent = fileData.name;
+    titleEl.title = fileData.name;
     document.getElementById('fileViewer').src = fileData.previewLink;
     document.getElementById('fileModal')?.showModal();
     lockBody();

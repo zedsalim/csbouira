@@ -949,16 +949,18 @@
     <!-- File Viewer Modal -->
     <dialog id="fileModal" class="modal p-0">
       <div
-        class="modal-box w-full max-w-5xl h-[90vh] flex flex-col p-0 rounded-xl relative"
-        style="overflow: visible"
+        class="modal-box w-full max-w-5xl h-[90vh] flex flex-col p-0 rounded-xl relative overflow-hidden"
       >
         <div
-          class="flex justify-between items-center p-4 border-b border-base-300 rounded-t-xl overflow-hidden"
+          class="flex items-center gap-2 p-4 border-b border-base-300 rounded-t-xl min-w-0"
         >
-          <h3 class="text-lg sm:text-xl font-semibold" id="modalTitle">
+          <h3
+            class="text-lg sm:text-xl font-semibold flex-1 min-w-0 truncate"
+            id="modalTitle"
+          >
             Document Viewer
           </h3>
-          <div class="flex items-center gap-4">
+          <div class="flex items-center gap-2 flex-shrink-0">
             <button
               id="fullscreenBtn"
               onclick="toggleFullScreen()"
