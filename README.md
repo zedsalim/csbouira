@@ -91,6 +91,7 @@ A special thanks to those who have contributed by uploading valuable files and r
 </ul>
 <h3>👥 Contributors</h3>
 <ul>
+<li>Abdessamed Laidani</li>
 <li>Akkache Amira</li>
 <li>Amira</li>
 <li>Anber Aziz</li>
