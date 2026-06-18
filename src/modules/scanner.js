@@ -21,6 +21,7 @@ let perspectiveState = {
 let colorState = { brightness: 100, contrast: 100, saturation: 100, grayscale: 0 }
 
 let onFileReady = null
+let colorDirty = false
 
 export function initScanner() {
   window.openScannerModal = openScannerModal
@@ -60,7 +61,7 @@ export function initScanner() {
         colorState[id] = Number(e.target.value)
         const valEl = document.getElementById(id + 'Val')
         if (valEl) valEl.textContent = e.target.value + '%'
-        applyColorPreview()
+        scheduleColorRender()
       })
     }
   })
@@ -278,23 +279,65 @@ function renderEditor() {
   if (!editorCanvas || !editorCtx || !baseCanvas) return
 
   editorCtx.clearRect(0, 0, editorCanvas.width, editorCanvas.height)
-
-  if (activeTab === 'colors') {
-    const { brightness, contrast, saturation, grayscale } = colorState
-    editorCtx.filter = `brightness(${brightness}%) contrast(${contrast}%) saturate(${saturation}%) grayscale(${grayscale}%)`
-  } else {
-    editorCtx.filter = 'none'
-  }
-
   editorCtx.drawImage(baseCanvas, 0, 0, editorCanvas.width, editorCanvas.height)
-  editorCtx.filter = 'none'
 
   if (activeTab === 'crop') drawCropOverlay()
   else if (activeTab === 'perspective') drawPerspectiveOverlay()
+  else if (activeTab === 'colors') applyColorPreview()
+}
+
+function scheduleColorRender() {
+  if (colorDirty) return
+  colorDirty = true
+  requestAnimationFrame(() => {
+    colorDirty = false
+    renderEditor()
+  })
 }
 
 function applyColorPreview() {
-  renderEditor()
+  if (!editorCanvas || !editorCtx || !baseCanvas) return
+  const { brightness, contrast, saturation, grayscale } = colorState
+  if (brightness === 100 && contrast === 100 && saturation === 100 && grayscale === 0) {
+    editorCtx.drawImage(baseCanvas, 0, 0, editorCanvas.width, editorCanvas.height)
+    return
+  }
+
+  const tmp = document.createElement('canvas')
+  tmp.width = editorCanvas.width
+  tmp.height = editorCanvas.height
+  const tmpCtx = tmp.getContext('2d')
+  tmpCtx.drawImage(baseCanvas, 0, 0, editorCanvas.width, editorCanvas.height)
+  const imageData = tmpCtx.getImageData(0, 0, tmp.width, tmp.height)
+  const d = imageData.data
+
+  const bF = brightness / 100
+  const cF = (contrast / 100 + 0.5) / 0.5
+  const sF = saturation / 100
+  const gF = grayscale / 100
+
+  for (let i = 0; i < d.length; i += 4) {
+    let r = d[i] * bF
+    let g = d[i + 1] * bF
+    let b = d[i + 2] * bF
+    r = (r - 128) * cF + 128
+    g = (g - 128) * cF + 128
+    b = (b - 128) * cF + 128
+    const gray = 0.2126 * r + 0.7152 * g + 0.0722 * b
+    r = r * (1 - gF) + gray * gF
+    g = g * (1 - gF) + gray * gF
+    b = b * (1 - gF) + gray * gF
+    const avg = (r + g + b) / 3
+    r += (r - avg) * (sF - 1)
+    g += (g - avg) * (sF - 1)
+    b += (b - avg) * (sF - 1)
+    d[i] = r < 0 ? 0 : r > 255 ? 255 : r
+    d[i + 1] = g < 0 ? 0 : g > 255 ? 255 : g
+    d[i + 2] = b < 0 ? 0 : b > 255 ? 255 : b
+  }
+
+  tmpCtx.putImageData(imageData, 0, 0)
+  editorCtx.drawImage(tmp, 0, 0)
 }
 
 function drawCropOverlay() {
