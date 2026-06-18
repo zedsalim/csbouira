@@ -1,8 +1,21 @@
 import { CONFIG } from '../config.js'
 import { formatFileSize, readFileAsBase64 } from '../utils/helpers.js'
+import { setScannerCallback } from './scanner.js'
 
 let selectedFiles = []
 let isUploading = false
+
+export function addScannedFile(file) {
+  selectedFiles.push(file)
+  renderFilesList()
+  const filesInput = document.getElementById('files')
+  if (filesInput) {
+    const dt = new DataTransfer()
+    selectedFiles.forEach((f) => dt.items.add(f))
+    filesInput.files = dt.files
+    filesInput.removeAttribute('required')
+  }
+}
 
 export function initUpload() {
   // Expose modal open/close globally (called from inline HTML onclick)
@@ -40,6 +53,8 @@ export function initUpload() {
   })
 
   form.addEventListener('submit', handleUploadSubmit)
+
+  setScannerCallback(addScannedFile)
 }
 
 function openUploadModal() {

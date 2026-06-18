@@ -1154,6 +1154,21 @@
               </p>
               <div id="filesList" class="hidden mt-3"></div>
             </fieldset>
+
+            <fieldset class="fieldset">
+              <label class="fieldset-label">Or Scan a Document</label>
+              <button
+                type="button"
+                onclick="openScannerModal()"
+                class="btn btn-outline btn-secondary rounded-xl gap-2"
+              >
+                <i class="fas fa-camera"></i>
+                Scan Document
+              </button>
+              <p class="text-xs mt-2 text-base-content/60">
+                Use your camera or gallery to scan, crop, adjust, and save as PDF.
+              </p>
+            </fieldset>
             <div class="flex gap-3 pt-4">
               <button
                 type="submit"
@@ -1176,6 +1191,108 @@
             ></div>
             <div id="uploadProgress" class="hidden mt-4"></div>
           </form>
+        </div>
+      </div>
+    </dialog>
+
+    <!-- Scanner Modal -->
+    <dialog id="scannerModal" class="modal p-4">
+      <div class="modal-box w-full max-w-lg flex flex-col p-0 rounded-xl overflow-hidden">
+        <div class="flex justify-between items-center p-4 border-b border-base-300">
+          <h3 class="text-xl font-semibold flex items-center gap-2">
+            <i class="fas fa-camera text-secondary"></i>
+            Scan Document
+          </h3>
+          <button onclick="closeScannerModal()" class="btn btn-ghost btn-circle btn-sm">
+            <i class="fas fa-times text-xl"></i>
+          </button>
+        </div>
+        <div class="p-4 flex-1 flex flex-col items-center justify-center gap-4">
+          <div id="scannerPlaceholder" class="hidden w-full aspect-video bg-base-200 rounded-xl flex items-center justify-center">
+            <p id="scannerPlaceholderText" class="text-base-content/60 text-sm text-center p-4">
+              Camera not available. Use Gallery to pick an image.
+            </p>
+          </div>
+          <video id="scannerVideo" class="hidden w-full rounded-xl bg-black" playsinline></video>
+          <div class="flex gap-3 w-full">
+            <button onclick="scannerCapture()" class="btn btn-primary flex-1 rounded-xl gap-2">
+              <i class="fas fa-camera"></i> Capture
+            </button>
+            <button onclick="scannerGallery()" class="btn btn-outline btn-secondary flex-1 rounded-xl gap-2">
+              <i class="fas fa-images"></i> Gallery
+            </button>
+          </div>
+          <input type="file" id="scannerGalleryInput" accept="image/*" class="hidden" />
+        </div>
+      </div>
+    </dialog>
+
+    <!-- Editor Modal -->
+    <dialog id="editorModal" class="modal p-4">
+      <div class="modal-box w-full max-w-3xl h-[90vh] flex flex-col p-0 rounded-xl overflow-hidden">
+        <div class="flex justify-between items-center p-4 border-b border-base-300">
+          <h3 class="text-xl font-semibold flex items-center gap-2">
+            <i class="fas fa-crop-alt text-secondary"></i>
+            Edit Scan
+          </h3>
+          <button onclick="closeEditorModal()" class="btn btn-ghost btn-circle btn-sm">
+            <i class="fas fa-times text-xl"></i>
+          </button>
+        </div>
+
+        <div class="flex gap-1 p-2 border-b border-base-300">
+          <button data-tab="crop" class="editor-tab-btn btn btn-sm btn-ghost flex-1" onclick="switchEditorTab('crop')">
+            <i class="fas fa-crop-alt mr-1"></i> Crop
+          </button>
+          <button data-tab="perspective" class="editor-tab-btn btn btn-sm btn-ghost flex-1" onclick="switchEditorTab('perspective')">
+            <i class="fas fa-vector-square mr-1"></i> Perspective
+          </button>
+          <button data-tab="colors" class="editor-tab-btn btn btn-sm btn-ghost flex-1" onclick="switchEditorTab('colors')">
+            <i class="fas fa-adjust mr-1"></i> Colors
+          </button>
+        </div>
+
+        <div class="flex-1 overflow-auto p-4 flex flex-col items-center gap-3">
+          <canvas id="editorCanvas" class="max-w-full rounded-lg border border-base-300 cursor-crosshair"></canvas>
+
+          <div data-panel="crop" class="editor-tab-panel w-full text-xs text-base-content/60 text-center">
+            Drag the handles to adjust the crop area. The highlighted region will be saved.
+          </div>
+
+          <div data-panel="perspective" class="editor-tab-panel hidden w-full text-xs text-base-content/60 text-center">
+            Drag the four corner points to match the document edges. The perspective will be corrected.
+          </div>
+
+          <div data-panel="colors" class="editor-tab-panel hidden w-full space-y-3">
+            <div class="flex items-center gap-3">
+              <label class="w-24 text-xs font-medium">Brightness</label>
+              <input type="range" id="brightnessSlider" min="0" max="200" value="100" class="range range-sm range-primary flex-1" />
+              <span id="brightnessVal" class="text-xs w-10 text-right">100%</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <label class="w-24 text-xs font-medium">Contrast</label>
+              <input type="range" id="contrastSlider" min="0" max="200" value="100" class="range range-sm range-primary flex-1" />
+              <span id="contrastVal" class="text-xs w-10 text-right">100%</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <label class="w-24 text-xs font-medium">Saturation</label>
+              <input type="range" id="saturationSlider" min="0" max="200" value="100" class="range range-sm range-primary flex-1" />
+              <span id="saturationVal" class="text-xs w-10 text-right">100%</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <label class="w-24 text-xs font-medium">Grayscale</label>
+              <input type="range" id="grayscaleSlider" min="0" max="100" value="0" class="range range-sm range-primary flex-1" />
+              <span id="grayscaleVal" class="text-xs w-10 text-right">0%</span>
+            </div>
+            <button onclick="resetColorSliders()" class="btn btn-xs btn-ghost mt-1">Reset Colors</button>
+          </div>
+        </div>
+
+        <div class="p-4 border-t border-base-300 flex gap-3">
+          <button onclick="saveScannerPdf()" class="btn btn-primary flex-1 rounded-xl gap-2">
+            <i class="fas fa-file-pdf"></i> Save as PDF
+          </button>
+          <button onclick="closeEditorModal()" class="btn btn-ghost rounded-xl">Cancel</button>
         </div>
       </div>
     </dialog>

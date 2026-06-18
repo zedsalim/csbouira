@@ -8,7 +8,8 @@
   },
   "dependencies": {
     "canvas-confetti": "^1",
-    "daisyui": "^5",
+    "daisyui": "^5.5.23",
+    "jspdf": "^4.2.1",
     "lucide": "latest"
   },
   "devDependencies": {

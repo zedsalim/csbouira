@@ -95,3 +95,92 @@ export function unlockBodyScroll() {
   _bodyScrollLocked = false
   document.body.classList.remove('overflow-hidden', 'touch-none')
 }
+
+export function canvasToFile(canvas, filename = 'scan.pdf', mimeType = 'application/pdf') {
+  return new Promise((resolve) => {
+    canvas.toBlob((blob) => {
+      resolve(new File([blob], filename, { type: mimeType }))
+    }, mimeType === 'application/pdf' ? 'image/png' : mimeType, 0.92)
+  })
+}
+
+export function perspectiveTransform(srcCanvas, srcPoints, dstW, dstH) {
+  const dst = document.createElement('canvas')
+  dst.width = dstW
+  dst.height = dstH
+  const ctx = dst.getContext('2d')
+  const srcCtx = srcCanvas.getContext('2d')
+  const srcData = srcCtx.getImageData(0, 0, srcCanvas.width, srcCanvas.height)
+  const dstData = ctx.createImageData(dstW, dstH)
+
+  const [tl, tr, br, bl] = srcPoints
+
+  for (let y = 0; y < dstH; y++) {
+    for (let x = 0; x < dstW; x++) {
+      const u = x / dstW
+      const v = y / dstH
+
+      const srcX =
+        (1 - v) * ((1 - u) * tl.x + u * tr.x) +
+        v * ((1 - u) * bl.x + u * br.x)
+      const srcY =
+        (1 - v) * ((1 - u) * tl.y + u * tr.y) +
+        v * ((1 - u) * bl.y + u * br.y)
+
+      const sx = Math.round(srcX)
+      const sy = Math.round(srcY)
+
+      if (sx >= 0 && sx < srcCanvas.width && sy >= 0 && sy < srcCanvas.height) {
+        const srcIdx = (sy * srcCanvas.width + sx) * 4
+        const dstIdx = (y * dstW + x) * 4
+        dstData.data[dstIdx] = srcData.data[srcIdx]
+        dstData.data[dstIdx + 1] = srcData.data[srcIdx + 1]
+        dstData.data[dstIdx + 2] = srcData.data[srcIdx + 2]
+        dstData.data[dstIdx + 3] = srcData.data[srcIdx + 3]
+      }
+    }
+  }
+
+  ctx.putImageData(dstData, 0, 0)
+  return dst
+}
+
+export function applyColorAdjustments(canvas, { brightness = 100, contrast = 100, saturation = 100, grayscale = 0 }) {
+  const ctx = canvas.getContext('2d')
+  const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
+  const data = imageData.data
+
+  const bFactor = brightness / 100
+  const cFactor = (contrast / 100 + 0.5) / 0.5
+  const sFactor = saturation / 100
+
+  for (let i = 0; i < data.length; i += 4) {
+    let r = data[i]
+    let g = data[i + 1]
+    let b = data[i + 2]
+
+    r *= bFactor
+    g *= bFactor
+    b *= bFactor
+
+    r = (r - 128) * cFactor + 128
+    g = (g - 128) * cFactor + 128
+    b = (b - 128) * cFactor + 128
+
+    const gray = 0.2126 * r + 0.7152 * g + 0.0722 * b
+    r = r * (1 - grayscale / 100) + gray * (grayscale / 100)
+    g = g * (1 - grayscale / 100) + gray * (grayscale / 100)
+    b = b * (1 - grayscale / 100) + gray * (grayscale / 100)
+
+    const avg = (r + g + b) / 3
+    r = r + (r - avg) * (sFactor - 1)
+    g = g + (g - avg) * (sFactor - 1)
+    b = b + (b - avg) * (sFactor - 1)
+
+    data[i] = Math.max(0, Math.min(255, r))
+    data[i + 1] = Math.max(0, Math.min(255, g))
+    data[i + 2] = Math.max(0, Math.min(255, b))
+  }
+
+  ctx.putImageData(imageData, 0, 0)
+}

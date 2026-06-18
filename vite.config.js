@@ -3,6 +3,11 @@ import tailwindcss from '@tailwindcss/vite';
 import { createHtmlPlugin } from 'vite-plugin-html';
 
 export default defineConfig({
+  resolve: {
+    alias: {
+      daisyui: 'daisyui/index.js',
+    },
+  },
   plugins: [
     tailwindcss(),
     createHtmlPlugin({
