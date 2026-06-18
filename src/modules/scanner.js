@@ -435,6 +435,15 @@ function updateCropFromHandle(pos) {
 function applyCrop() {
   if (!baseCanvas || !editorCanvas) return
   const { x, y, w, h } = cropState
+
+  const isFullImage =
+    x <= 1 && y <= 1 &&
+    w >= editorCanvas.width - 2 && h >= editorCanvas.height - 2
+  if (isFullImage) {
+    showToast('Nothing to crop')
+    return
+  }
+
   const sx = (x / editorCanvas.width) * baseCanvas.width
   const sy = (y / editorCanvas.height) * baseCanvas.height
   const sw = (w / editorCanvas.width) * baseCanvas.width
@@ -450,13 +459,34 @@ function applyCrop() {
   editorCanvas.width = cropped.width
   editorCanvas.height = cropped.height
 
-  resetCropState()
+  cropState = {
+    x: 0, y: 0,
+    w: editorCanvas.width,
+    h: editorCanvas.height,
+    dragging: false, handle: null,
+  }
   renderEditor()
   showToast('Crop applied')
 }
 
 function applyPerspective() {
   if (!baseCanvas || !editorCanvas) return
+
+  const m = 30
+  const isDefault =
+    Math.abs(perspectiveState.points[0].x - m) < 5 &&
+    Math.abs(perspectiveState.points[0].y - m) < 5 &&
+    Math.abs(perspectiveState.points[1].x - (editorCanvas.width - m)) < 5 &&
+    Math.abs(perspectiveState.points[1].y - m) < 5 &&
+    Math.abs(perspectiveState.points[2].x - (editorCanvas.width - m)) < 5 &&
+    Math.abs(perspectiveState.points[2].y - (editorCanvas.height - m)) < 5 &&
+    Math.abs(perspectiveState.points[3].x - m) < 5 &&
+    Math.abs(perspectiveState.points[3].y - (editorCanvas.height - m)) < 5
+  if (isDefault) {
+    showToast('No perspective change')
+    return
+  }
+
   const scaleInvW = baseCanvas.width / editorCanvas.width
   const scaleInvH = baseCanvas.height / editorCanvas.height
   const srcPts = perspectiveState.points.map((p) => ({ x: p.x * scaleInvW, y: p.y * scaleInvH }))
@@ -483,6 +513,15 @@ function applyPerspective() {
 
 function applyColors() {
   if (!baseCanvas || !editorCanvas) return
+
+  const isDefault =
+    colorState.brightness === 100 && colorState.contrast === 100 &&
+    colorState.saturation === 100 && colorState.grayscale === 0
+  if (isDefault) {
+    showToast('No color changes')
+    return
+  }
+
   const tmp = document.createElement('canvas')
   tmp.width = baseCanvas.width
   tmp.height = baseCanvas.height
