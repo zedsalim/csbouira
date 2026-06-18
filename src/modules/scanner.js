@@ -377,13 +377,13 @@ function getCropHandles() {
 
 function drawPerspectiveOverlay() {
   const s = cssScale()
-  const { points } = perspectiveState
+  const { points, dragging } = perspectiveState
   editorCtx.save()
 
   const r = Math.max(8, 12 / s)
 
-  if (perspectiveState.dragging >= 0) {
-    drawMagnifier(editorCtx, points[perspectiveState.dragging], s)
+  if (dragging >= 0) {
+    drawMagnifier(editorCtx, points[dragging], dragging, s)
   }
 
   editorCtx.fillStyle = 'rgba(0,0,0,0.5)'
@@ -422,17 +422,26 @@ function drawPerspectiveOverlay() {
   editorCtx.restore()
 }
 
-function drawMagnifier(ctx, point, s) {
+function drawMagnifier(ctx, point, cornerIdx, s) {
   const zoom = 3
   const zoomR = Math.max(30, 50 / s)
-  const srcR = Math.max(10, zoomR / zoom / s)
+  const srcR = zoomR / zoom
+  const margin = zoomR + Math.max(16, 24 / s)
+
+  const corners = [
+    [editorCanvas.width - margin, margin],
+    [margin, margin],
+    [margin, margin],
+    [editorCanvas.width - margin, margin],
+  ]
+  const [cx, cy] = corners[cornerIdx] || corners[0]
 
   ctx.save()
   ctx.shadowColor = 'rgba(0,0,0,0.4)'
   ctx.shadowBlur = 10
 
   ctx.beginPath()
-  ctx.arc(point.x, point.y, zoomR, 0, Math.PI * 2)
+  ctx.arc(cx, cy, zoomR, 0, Math.PI * 2)
   ctx.fillStyle = '#1f2937'
   ctx.fill()
   ctx.strokeStyle = '#00ff88'
@@ -440,20 +449,25 @@ function drawMagnifier(ctx, point, s) {
   ctx.stroke()
 
   ctx.beginPath()
-  ctx.arc(point.x, point.y, zoomR, 0, Math.PI * 2)
+  ctx.arc(cx, cy, zoomR, 0, Math.PI * 2)
   ctx.clip()
 
   ctx.drawImage(editorCanvas,
     point.x - srcR, point.y - srcR, srcR * 2, srcR * 2,
-    point.x - zoomR, point.y - zoomR, zoomR * 2, zoomR * 2)
+    cx - zoomR, cy - zoomR, zoomR * 2, zoomR * 2)
 
   ctx.restore()
 
   ctx.save()
+  const cs = Math.max(4, 12 / s)
+  ctx.strokeStyle = '#ff4444'
+  ctx.lineWidth = 1.5
   ctx.beginPath()
-  ctx.arc(point.x, point.y, 4, 0, Math.PI * 2)
-  ctx.fillStyle = '#ff4444'
-  ctx.fill()
+  ctx.moveTo(cx - cs, cy)
+  ctx.lineTo(cx + cs, cy)
+  ctx.moveTo(cx, cy - cs)
+  ctx.lineTo(cx, cy + cs)
+  ctx.stroke()
   ctx.restore()
 }
 
@@ -534,6 +548,7 @@ function setupEditorEvents() {
     cropState.dragging = false
     cropState.handle = null
     perspectiveState.dragging = -1
+    renderEditor()
   }
 
   editorCanvas.addEventListener('mousedown', onPointerDown)
