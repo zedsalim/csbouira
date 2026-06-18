@@ -21,8 +21,6 @@ export function initUpload() {
   // Expose modal open/close globally (called from inline HTML onclick)
   window.openUploadModal = openUploadModal
   window.closeUploadModal = closeUploadModal
-  window.openUploadPreview = openUploadPreview
-  window.closeUploadPreview = closeUploadPreview
 
   const modal = document.getElementById('uploadModal')
   if (!modal) return
@@ -71,72 +69,6 @@ function closeUploadModal() {
   renderFilesList()
   const prog = document.getElementById('uploadProgress')
   if (prog) { prog.innerHTML = ''; prog.classList.add('hidden') }
-}
-
-function openUploadPreview() {
-  const container = document.getElementById('uploadPreviewList')
-  if (!container) return
-  container.innerHTML = ''
-
-  if (selectedFiles.length === 0) {
-    container.innerHTML = '<div class="text-center text-base-content/50 py-8"><i class="fas fa-file-circle-plus text-4xl mb-3 block"></i><p>No files selected yet.</p><p class="text-sm mt-1">Select files or scan a document to see them here.</p></div>'
-    document.getElementById('uploadPreviewModal')?.showModal()
-    return
-  }
-
-  const header = document.createElement('div')
-  header.className = 'flex items-center justify-between mb-2'
-  header.innerHTML = `<span class="font-semibold text-sm">${selectedFiles.length} file(s) selected</span><span class="text-xs text-base-content/60">Total: ${formatFileSize(selectedFiles.reduce((s, f) => s + f.size, 0))}</span>`
-  container.appendChild(header)
-
-  selectedFiles.forEach((file, index) => {
-    const card = document.createElement('div')
-    card.className = 'bg-base-200 rounded-xl p-3 flex items-center gap-3'
-
-    const isImage = file.type.startsWith('image/')
-    const isPdf = file.type === 'application/pdf'
-
-    if (isImage) {
-      const thumb = document.createElement('div')
-      thumb.className = 'w-16 h-16 rounded-lg overflow-hidden bg-base-300 flex-shrink-0 flex items-center justify-center'
-      const img = document.createElement('img')
-      img.className = 'w-full h-full object-cover'
-      img.src = URL.createObjectURL(file)
-      thumb.appendChild(img)
-      card.appendChild(thumb)
-    } else {
-      const icon = document.createElement('div')
-      icon.className = 'w-16 h-16 rounded-lg bg-base-300 flex-shrink-0 flex items-center justify-center text-2xl'
-      icon.innerHTML = isPdf ? '<i class="fas fa-file-pdf text-error"></i>' : '<i class="fas fa-file text-base-content/50"></i>'
-      card.appendChild(icon)
-    }
-
-    const info = document.createElement('div')
-    info.className = 'flex-1 min-w-0'
-    info.innerHTML = `
-      <div class="text-sm font-medium truncate" title="${file.name}">${file.name}</div>
-      <div class="text-xs text-base-content/60 mt-0.5">${formatFileSize(file.size)} &middot; ${file.type || 'Unknown type'}</div>
-    `
-    card.appendChild(info)
-
-    const removeBtn = document.createElement('button')
-    removeBtn.type = 'button'
-    removeBtn.className = 'btn btn-xs btn-ghost text-error flex-shrink-0'
-    removeBtn.innerHTML = '<i class="fas fa-trash"></i>'
-    removeBtn.addEventListener('click', () => {
-      window.removeFile(index)
-      openUploadPreview()
-    })
-    card.appendChild(removeBtn)
-
-    container.appendChild(card)
-  })
-
-  document.getElementById('uploadPreviewModal')?.showModal()
-}
-
-function closeUploadPreview() {
-  document.getElementById('uploadPreviewModal')?.close()
 }
 
 function renderFilesList() {

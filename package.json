@@ -10,7 +10,8 @@
     "canvas-confetti": "^1",
     "daisyui": "^5.5.23",
     "jspdf": "^4.2.1",
-    "lucide": "latest"
+    "lucide": "latest",
+    "pdfjs-dist": "^6.0.227"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4",
