@@ -233,13 +233,11 @@ function openEditor() {
 
 function closeEditorModal() {
   document.getElementById('editorModal')?.close()
-  if (editorCanvas) editorCanvas.style.filter = 'none'
   baseCanvas = null
 }
 
 function switchEditorTab(tab) {
   activeTab = tab
-  if (editorCanvas) editorCanvas.style.filter = 'none'
   document.querySelectorAll('.editor-tab-btn').forEach((btn) => {
     btn.classList.toggle('btn-active', btn.dataset.tab === tab)
   })
@@ -253,7 +251,6 @@ function switchEditorTab(tab) {
     resetColorSliderUI()
   }
   renderEditor()
-  if (tab === 'colors') applyColorPreview()
 }
 
 function resetCropState() {
@@ -281,19 +278,23 @@ function renderEditor() {
   if (!editorCanvas || !editorCtx || !baseCanvas) return
 
   editorCtx.clearRect(0, 0, editorCanvas.width, editorCanvas.height)
+
+  if (activeTab === 'colors') {
+    const { brightness, contrast, saturation, grayscale } = colorState
+    editorCtx.filter = `brightness(${brightness}%) contrast(${contrast}%) saturate(${saturation}%) grayscale(${grayscale}%)`
+  } else {
+    editorCtx.filter = 'none'
+  }
+
   editorCtx.drawImage(baseCanvas, 0, 0, editorCanvas.width, editorCanvas.height)
+  editorCtx.filter = 'none'
 
   if (activeTab === 'crop') drawCropOverlay()
   else if (activeTab === 'perspective') drawPerspectiveOverlay()
-
-  if (activeTab === 'colors') applyColorPreview()
 }
 
 function applyColorPreview() {
-  if (!editorCanvas) return
-  const { brightness, contrast, saturation, grayscale } = colorState
-  editorCanvas.style.filter =
-    `brightness(${brightness}%) contrast(${contrast}%) saturate(${saturation}%) grayscale(${grayscale}%)`
+  renderEditor()
 }
 
 function drawCropOverlay() {
@@ -592,7 +593,6 @@ function applyColors() {
 
   editorCanvas.width = tmp.width
   editorCanvas.height = tmp.height
-  editorCanvas.style.filter = 'none'
 
   colorState = { brightness: 100, contrast: 100, saturation: 100, grayscale: 0 }
   resetColorSliderUI()
