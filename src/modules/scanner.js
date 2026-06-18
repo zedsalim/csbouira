@@ -2,7 +2,7 @@ import { perspectiveTransform, applyColorAdjustments } from '../utils/helpers.js
 import { jsPDF } from 'jspdf'
 
 let cameraStream = null
-let originalImage = null
+let baseCanvas = null
 let editorCanvas = null
 let editorCtx = null
 let activeTab = 'crop'
@@ -30,6 +30,9 @@ export function initScanner() {
   window.switchEditorTab = switchEditorTab
   window.saveScannerPdf = saveScannerPdf
   window.resetColorSliders = resetColorSliders
+  window.applyCrop = applyCrop
+  window.applyPerspective = applyPerspective
+  window.applyColors = applyColors
 
   const galleryInput = document.getElementById('scannerGalleryInput')
   if (galleryInput) {
@@ -121,12 +124,7 @@ function scannerCapture() {
   stopCamera()
   closeScannerModal()
 
-  const img = new Image()
-  img.onload = () => {
-    originalImage = img
-    openEditor()
-  }
-  img.src = tempCanvas.toDataURL('image/png')
+  loadImageToEditor(tempCanvas.toDataURL('image/png'))
 }
 
 function scannerGallery() {
@@ -136,46 +134,36 @@ function scannerGallery() {
 function loadFromGallery(file) {
   const reader = new FileReader()
   reader.onload = (e) => {
-    const img = new Image()
-    img.onload = () => {
-      originalImage = img
-      closeScannerModal()
-      openEditor()
-    }
-    img.src = e.target.result
+    closeScannerModal()
+    loadImageToEditor(e.target.result)
   }
   reader.readAsDataURL(file)
 }
 
+function loadImageToEditor(src) {
+  const img = new Image()
+  img.onload = () => {
+    baseCanvas = document.createElement('canvas')
+    baseCanvas.width = img.width
+    baseCanvas.height = img.height
+    baseCanvas.getContext('2d').drawImage(img, 0, 0)
+    openEditor()
+  }
+  img.src = src
+}
+
 function openEditor() {
-  if (!originalImage || !editorCanvas) return
+  if (!baseCanvas || !editorCanvas) return
 
   const maxW = Math.min(800, window.innerWidth - 64)
-  const maxH = Math.min(500, window.innerHeight - 200)
-  const scale = Math.min(maxW / originalImage.width, maxH / originalImage.height, 1)
+  const maxH = Math.min(500, window.innerHeight - 260)
+  const scale = Math.min(maxW / baseCanvas.width, maxH / baseCanvas.height, 1)
 
-  editorCanvas.width = Math.round(originalImage.width * scale)
-  editorCanvas.height = Math.round(originalImage.height * scale)
+  editorCanvas.width = Math.round(baseCanvas.width * scale)
+  editorCanvas.height = Math.round(baseCanvas.height * scale)
 
-  const margin = 20
-  cropState = {
-    x: margin,
-    y: margin,
-    w: editorCanvas.width - margin * 2,
-    h: editorCanvas.height - margin * 2,
-    dragging: false,
-    handle: null,
-  }
-
-  const m = 30
-  perspectiveState.points = [
-    { x: m, y: m },
-    { x: editorCanvas.width - m, y: m },
-    { x: editorCanvas.width - m, y: editorCanvas.height - m },
-    { x: m, y: editorCanvas.height - m },
-  ]
-  perspectiveState.dragging = -1
-
+  resetCropState()
+  resetPerspectiveState()
   colorState = { brightness: 100, contrast: 100, saturation: 100, grayscale: 0 }
   resetColorSliderUI()
 
@@ -187,7 +175,7 @@ function openEditor() {
 
 function closeEditorModal() {
   document.getElementById('editorModal')?.close()
-  originalImage = null
+  baseCanvas = null
 }
 
 function switchEditorTab(tab) {
@@ -198,27 +186,52 @@ function switchEditorTab(tab) {
   document.querySelectorAll('.editor-tab-panel').forEach((panel) => {
     panel.classList.toggle('hidden', panel.dataset.panel !== tab)
   })
+  if (tab === 'crop') resetCropState()
+  if (tab === 'perspective') resetPerspectiveState()
+  if (tab === 'colors') {
+    colorState = { brightness: 100, contrast: 100, saturation: 100, grayscale: 0 }
+    resetColorSliderUI()
+  }
   renderEditor()
 }
 
+function resetCropState() {
+  const margin = 20
+  cropState = {
+    x: margin, y: margin,
+    w: editorCanvas.width - margin * 2,
+    h: editorCanvas.height - margin * 2,
+    dragging: false, handle: null,
+  }
+}
+
+function resetPerspectiveState() {
+  const m = 30
+  perspectiveState.points = [
+    { x: m, y: m },
+    { x: editorCanvas.width - m, y: m },
+    { x: editorCanvas.width - m, y: editorCanvas.height - m },
+    { x: m, y: editorCanvas.height - m },
+  ]
+  perspectiveState.dragging = -1
+}
+
 function renderEditor() {
-  if (!editorCanvas || !editorCtx || !originalImage) return
+  if (!editorCanvas || !editorCtx || !baseCanvas) return
 
   editorCtx.clearRect(0, 0, editorCanvas.width, editorCanvas.height)
-  editorCtx.drawImage(originalImage, 0, 0, editorCanvas.width, editorCanvas.height)
+  editorCtx.drawImage(baseCanvas, 0, 0, editorCanvas.width, editorCanvas.height)
 
   if (activeTab === 'crop') drawCropOverlay()
   else if (activeTab === 'perspective') drawPerspectiveOverlay()
-
-  if (activeTab === 'colors') {
-    const tempCanvas = document.createElement('canvas')
-    tempCanvas.width = editorCanvas.width
-    tempCanvas.height = editorCanvas.height
-    const tempCtx = tempCanvas.getContext('2d')
-    tempCtx.drawImage(editorCanvas, 0, 0)
-    applyColorAdjustments(tempCanvas, colorState)
+  else if (activeTab === 'colors') {
+    const tmp = document.createElement('canvas')
+    tmp.width = editorCanvas.width
+    tmp.height = editorCanvas.height
+    tmp.getContext('2d').drawImage(editorCanvas, 0, 0)
+    applyColorAdjustments(tmp, colorState)
     editorCtx.clearRect(0, 0, editorCanvas.width, editorCanvas.height)
-    editorCtx.drawImage(tempCanvas, 0, 0)
+    editorCtx.drawImage(tmp, 0, 0)
   }
 }
 
@@ -268,14 +281,10 @@ function drawCropOverlay() {
 function getCropHandles() {
   const { x, y, w, h } = cropState
   return {
-    tl: { x, y },
-    tr: { x: x + w, y },
-    bl: { x, y: y + h },
-    br: { x: x + w, y: y + h },
-    tm: { x: x + w / 2, y },
-    bm: { x: x + w / 2, y: y + h },
-    ml: { x, y: y + h / 2 },
-    mr: { x: x + w, y: y + h / 2 },
+    tl: { x, y }, tr: { x: x + w, y },
+    bl: { x, y: y + h }, br: { x: x + w, y: y + h },
+    tm: { x: x + w / 2, y }, bm: { x: x + w / 2, y: y + h },
+    ml: { x, y: y + h / 2 }, mr: { x: x + w, y: y + h / 2 },
   }
 }
 
@@ -335,7 +344,7 @@ function setupEditorEvents() {
     if (activeTab === 'crop') {
       const handles = getCropHandles()
       for (const [key, h] of Object.entries(handles)) {
-        if (Math.hypot(pos.x - h.x, pos.y - h.y) < 18) {
+        if (Math.hypot(pos.x - h.x, pos.y - h.y) < 22) {
           cropState.handle = key
           cropState.dragging = true
           e.preventDefault()
@@ -353,7 +362,7 @@ function setupEditorEvents() {
       }
     } else if (activeTab === 'perspective') {
       for (let i = 0; i < 4; i++) {
-        if (Math.hypot(pos.x - perspectiveState.points[i].x, pos.y - perspectiveState.points[i].y) < 20) {
+        if (Math.hypot(pos.x - perspectiveState.points[i].x, pos.y - perspectiveState.points[i].y) < 24) {
           perspectiveState.dragging = i
           e.preventDefault()
           return
@@ -423,67 +432,88 @@ function updateCropFromHandle(pos) {
   if (cropState.h < 20) { cropState.h = 20; cropState.y = old.y }
 }
 
-function getProcessedCanvas() {
-  if (!originalImage || !editorCanvas) return null
+function applyCrop() {
+  if (!baseCanvas || !editorCanvas) return
+  const { x, y, w, h } = cropState
+  const sx = (x / editorCanvas.width) * baseCanvas.width
+  const sy = (y / editorCanvas.height) * baseCanvas.height
+  const sw = (w / editorCanvas.width) * baseCanvas.width
+  const sh = (h / editorCanvas.height) * baseCanvas.height
 
-  const result = document.createElement('canvas')
-  result.width = editorCanvas.width
-  result.height = editorCanvas.height
-  const ctx = result.getContext('2d')
+  const cropped = document.createElement('canvas')
+  cropped.width = Math.round(sw)
+  cropped.height = Math.round(sh)
+  cropped.getContext('2d').drawImage(baseCanvas, sx, sy, sw, sh, 0, 0, sw, sh)
 
-  if (activeTab === 'crop') {
-    const { x, y, w, h } = cropState
-    const cropCanvas = document.createElement('canvas')
-    cropCanvas.width = Math.round(w)
-    cropCanvas.height = Math.round(h)
-    const cropCtx = cropCanvas.getContext('2d')
-    cropCtx.drawImage(originalImage, x / editorCanvas.width * originalImage.width, y / editorCanvas.height * originalImage.height, w / editorCanvas.width * originalImage.width, h / editorCanvas.height * originalImage.height, 0, 0, w, h)
+  baseCanvas = cropped
 
-    if (colorState.brightness !== 100 || colorState.contrast !== 100 || colorState.saturation !== 100 || colorState.grayscale !== 0) {
-      applyColorAdjustments(cropCanvas, colorState)
-    }
-    return cropCanvas
-  }
+  editorCanvas.width = cropped.width
+  editorCanvas.height = cropped.height
 
-  if (activeTab === 'perspective') {
-    const scaleInvW = originalImage.width / editorCanvas.width
-    const scaleInvH = originalImage.height / editorCanvas.height
-    const srcPts = perspectiveState.points.map((p) => ({ x: p.x * scaleInvW, y: p.y * scaleInvH }))
+  resetCropState()
+  renderEditor()
+  showToast('Crop applied')
+}
 
-    const dstW = Math.round(Math.max(
-      Math.hypot(srcPts[1].x - srcPts[0].x, srcPts[1].y - srcPts[0].y),
-      Math.hypot(srcPts[2].x - srcPts[3].x, srcPts[2].y - srcPts[3].y)
-    ))
-    const dstH = Math.round(Math.max(
-      Math.hypot(srcPts[3].x - srcPts[0].x, srcPts[3].y - srcPts[0].y),
-      Math.hypot(srcPts[2].x - srcPts[1].x, srcPts[2].y - srcPts[1].y)
-    ))
+function applyPerspective() {
+  if (!baseCanvas || !editorCanvas) return
+  const scaleInvW = baseCanvas.width / editorCanvas.width
+  const scaleInvH = baseCanvas.height / editorCanvas.height
+  const srcPts = perspectiveState.points.map((p) => ({ x: p.x * scaleInvW, y: p.y * scaleInvH }))
 
-    const warped = perspectiveTransform(originalImage, srcPts, dstW, dstH)
+  const dstW = Math.round(Math.max(
+    Math.hypot(srcPts[1].x - srcPts[0].x, srcPts[1].y - srcPts[0].y),
+    Math.hypot(srcPts[2].x - srcPts[3].x, srcPts[2].y - srcPts[3].y)
+  ))
+  const dstH = Math.round(Math.max(
+    Math.hypot(srcPts[3].x - srcPts[0].x, srcPts[3].y - srcPts[0].y),
+    Math.hypot(srcPts[2].x - srcPts[1].x, srcPts[2].y - srcPts[1].y)
+  ))
 
-    if (colorState.brightness !== 100 || colorState.contrast !== 100 || colorState.saturation !== 100 || colorState.grayscale !== 0) {
-      applyColorAdjustments(warped, colorState)
-    }
-    return warped
-  }
+  const warped = perspectiveTransform(baseCanvas, srcPts, dstW, dstH)
+  baseCanvas = warped
 
-  if (activeTab === 'colors') {
-    ctx.drawImage(editorCanvas, 0, 0)
-    applyColorAdjustments(result, colorState)
-    return result
-  }
+  editorCanvas.width = warped.width
+  editorCanvas.height = warped.height
 
-  ctx.drawImage(editorCanvas, 0, 0)
-  return result
+  resetPerspectiveState()
+  renderEditor()
+  showToast('Perspective applied')
+}
+
+function applyColors() {
+  if (!baseCanvas || !editorCanvas) return
+  const tmp = document.createElement('canvas')
+  tmp.width = baseCanvas.width
+  tmp.height = baseCanvas.height
+  tmp.getContext('2d').drawImage(baseCanvas, 0, 0)
+  applyColorAdjustments(tmp, colorState)
+  baseCanvas = tmp
+
+  editorCanvas.width = tmp.width
+  editorCanvas.height = tmp.height
+
+  colorState = { brightness: 100, contrast: 100, saturation: 100, grayscale: 0 }
+  resetColorSliderUI()
+  renderEditor()
+  showToast('Colors applied')
+}
+
+function showToast(msg) {
+  const toast = document.createElement('div')
+  toast.className = 'fixed bottom-6 left-1/2 -translate-x-1/2 bg-base-content text-base-100 px-4 py-2 rounded-lg text-sm font-medium z-[9999] shadow-lg transition-opacity'
+  toast.textContent = msg
+  document.body.appendChild(toast)
+  setTimeout(() => { toast.style.opacity = '0' }, 1200)
+  setTimeout(() => toast.remove(), 1500)
 }
 
 async function saveScannerPdf() {
-  const processed = getProcessedCanvas()
-  if (!processed) return
+  if (!baseCanvas) return
 
-  const imgData = processed.toDataURL('image/png')
-  const pxW = processed.width
-  const pxH = processed.height
+  const imgData = baseCanvas.toDataURL('image/png')
+  const pxW = baseCanvas.width
+  const pxH = baseCanvas.height
 
   const pdf = new jsPDF({
     orientation: pxW > pxH ? 'landscape' : 'portrait',
@@ -496,7 +526,6 @@ async function saveScannerPdf() {
   const pdfFile = new File([pdfBlob], `scan_${Date.now()}.pdf`, { type: 'application/pdf' })
 
   closeEditorModal()
-
   if (onFileReady) onFileReady(pdfFile)
 }
 
@@ -511,5 +540,10 @@ function resetColorSliderUI() {
   Object.entries(map).forEach(([id, val]) => {
     const el = document.getElementById(id)
     if (el) el.value = val
+  })
+  Object.entries(map).forEach(([id, val]) => {
+    const label = id.replace('Slider', 'Val')
+    const el = document.getElementById(label)
+    if (el) el.textContent = val + '%'
   })
 }

@@ -1,6 +1,7 @@
 import { CONFIG } from '../config.js'
 import { formatFileSize, readFileAsBase64 } from '../utils/helpers.js'
 import { setScannerCallback } from './scanner.js'
+import { openPdfViewer } from './pdfViewer.js'
 
 let selectedFiles = []
 let isUploading = false
@@ -41,6 +42,10 @@ export function initUpload() {
     const dt = new DataTransfer()
     selectedFiles.forEach((f) => dt.items.add(f))
     filesInput.files = dt.files
+  }
+
+  window.previewFile = (index) => {
+    if (selectedFiles[index]) openPdfViewer(selectedFiles[index])
   }
 
   // Clear button
@@ -99,6 +104,14 @@ function renderFilesList() {
       <span class="flex-1 truncate" title="${file.name}">${file.name}</span>
       <span class="text-xs text-base-content/60 mx-1">${formatFileSize(file.size)}</span>
     `
+    const previewBtn = document.createElement('button')
+    previewBtn.type = 'button'
+    previewBtn.className = 'btn btn-xs btn-ghost text-info'
+    previewBtn.innerHTML = '<i class="fas fa-eye"></i>'
+    previewBtn.title = 'Preview'
+    previewBtn.addEventListener('click', () => window.previewFile(index))
+    row.appendChild(previewBtn)
+
     const removeBtn = document.createElement('button')
     removeBtn.type = 'button'
     removeBtn.className = 'btn btn-xs btn-ghost text-error'
