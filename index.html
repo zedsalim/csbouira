@@ -1171,6 +1171,14 @@
             </fieldset>
             <div class="flex gap-3 pt-4">
               <button
+                type="button"
+                id="uploadPreviewBtn"
+                onclick="openUploadPreview()"
+                class="btn btn-outline btn-secondary rounded-xl gap-2"
+              >
+                <i class="fas fa-eye"></i> Preview
+              </button>
+              <button
                 type="submit"
                 id="uploadSubmitBtn"
                 class="btn btn-primary flex-1 rounded-xl"
@@ -1243,24 +1251,37 @@
         <div class="flex gap-1 p-2 border-b border-base-300">
           <button data-tab="crop" class="editor-tab-btn btn btn-sm btn-ghost flex-1" onclick="switchEditorTab('crop')">
             <i class="fas fa-crop-alt mr-1"></i> Crop
+            <span class="apply-dot hidden badge badge-xs badge-success ml-1">Applied</span>
           </button>
           <button data-tab="perspective" class="editor-tab-btn btn btn-sm btn-ghost flex-1" onclick="switchEditorTab('perspective')">
             <i class="fas fa-vector-square mr-1"></i> Perspective
+            <span class="apply-dot hidden badge badge-xs badge-success ml-1">Applied</span>
           </button>
           <button data-tab="colors" class="editor-tab-btn btn btn-sm btn-ghost flex-1" onclick="switchEditorTab('colors')">
             <i class="fas fa-adjust mr-1"></i> Colors
+            <span class="apply-dot hidden badge badge-xs badge-success ml-1">Applied</span>
           </button>
         </div>
 
         <div class="flex-1 overflow-auto p-4 flex flex-col items-center gap-3">
           <canvas id="editorCanvas" class="max-w-full rounded-lg border border-base-300 cursor-crosshair"></canvas>
 
-          <div data-panel="crop" class="editor-tab-panel w-full text-xs text-base-content/60 text-center">
-            Drag the handles to adjust the crop area. The highlighted region will be saved.
+          <div data-panel="crop" class="editor-tab-panel w-full flex flex-col items-center gap-3">
+            <p class="text-xs text-base-content/60 text-center">
+              Drag the handles to adjust the crop area. Click Apply to commit.
+            </p>
+            <button onclick="applyEditorTab()" class="btn btn-sm btn-outline btn-success rounded-xl gap-2">
+              <i class="fas fa-check"></i> Apply Crop
+            </button>
           </div>
 
-          <div data-panel="perspective" class="editor-tab-panel hidden w-full text-xs text-base-content/60 text-center">
-            Drag the four corner points to match the document edges. The perspective will be corrected.
+          <div data-panel="perspective" class="editor-tab-panel hidden w-full flex flex-col items-center gap-3">
+            <p class="text-xs text-base-content/60 text-center">
+              Drag the four corner points to match the document edges. Click Apply to correct perspective.
+            </p>
+            <button onclick="applyEditorTab()" class="btn btn-sm btn-outline btn-success rounded-xl gap-2">
+              <i class="fas fa-check"></i> Apply Perspective
+            </button>
           </div>
 
           <div data-panel="colors" class="editor-tab-panel hidden w-full space-y-3">
@@ -1284,7 +1305,12 @@
               <input type="range" id="grayscaleSlider" min="0" max="100" value="0" class="range range-sm range-primary flex-1" />
               <span id="grayscaleVal" class="text-xs w-10 text-right">0%</span>
             </div>
-            <button onclick="resetColorSliders()" class="btn btn-xs btn-ghost mt-1">Reset Colors</button>
+            <div class="flex items-center gap-3 pt-1">
+              <button onclick="resetColorSliders()" class="btn btn-xs btn-ghost">Reset Colors</button>
+              <button onclick="applyEditorTab()" class="btn btn-sm btn-outline btn-success rounded-xl gap-2 ml-auto">
+                <i class="fas fa-check"></i> Apply Colors
+              </button>
+            </div>
           </div>
         </div>
 
@@ -1293,6 +1319,25 @@
             <i class="fas fa-file-pdf"></i> Save as PDF
           </button>
           <button onclick="closeEditorModal()" class="btn btn-ghost rounded-xl">Cancel</button>
+        </div>
+      </div>
+    </dialog>
+
+    <!-- Upload Preview Modal -->
+    <dialog id="uploadPreviewModal" class="modal p-4">
+      <div class="modal-box w-full max-w-2xl h-[80vh] flex flex-col p-0 rounded-xl overflow-hidden">
+        <div class="flex justify-between items-center p-4 border-b border-base-300">
+          <h3 class="text-xl font-semibold flex items-center gap-2">
+            <i class="fas fa-eye text-secondary"></i>
+            Preview Upload Files
+          </h3>
+          <button onclick="closeUploadPreview()" class="btn btn-ghost btn-circle btn-sm">
+            <i class="fas fa-times text-xl"></i>
+          </button>
+        </div>
+        <div id="uploadPreviewList" class="flex-1 overflow-auto p-4 space-y-3"></div>
+        <div class="p-4 border-t border-base-300 flex gap-3">
+          <button onclick="closeUploadPreview()" class="btn btn-ghost flex-1 rounded-xl">Close</button>
         </div>
       </div>
     </dialog>

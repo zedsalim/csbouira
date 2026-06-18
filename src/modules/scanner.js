@@ -5,7 +5,9 @@ let cameraStream = null
 let originalImage = null
 let editorCanvas = null
 let editorCtx = null
+let committedCanvas = null
 let activeTab = 'crop'
+let appliedTabs = { crop: false, perspective: false, colors: false }
 
 let cropState = { x: 0, y: 0, w: 0, h: 0, dragging: false, handle: null }
 let perspectiveState = {
@@ -28,6 +30,7 @@ export function initScanner() {
   window.scannerGallery = scannerGallery
   window.closeEditorModal = closeEditorModal
   window.switchEditorTab = switchEditorTab
+  window.applyEditorTab = applyEditorTab
   window.saveScannerPdf = saveScannerPdf
   window.resetColorSliders = resetColorSliders
 
@@ -55,7 +58,7 @@ export function initScanner() {
         colorState[id] = Number(e.target.value)
         const valEl = document.getElementById(id + 'Val')
         if (valEl) valEl.textContent = e.target.value + '%'
-        renderEditor()
+        renderEditorPreview()
       })
     }
   })
@@ -151,12 +154,31 @@ function openEditor() {
   if (!originalImage || !editorCanvas) return
 
   const maxW = Math.min(800, window.innerWidth - 64)
-  const maxH = Math.min(500, window.innerHeight - 200)
+  const maxH = Math.min(500, window.innerHeight - 260)
   const scale = Math.min(maxW / originalImage.width, maxH / originalImage.height, 1)
 
   editorCanvas.width = Math.round(originalImage.width * scale)
   editorCanvas.height = Math.round(originalImage.height * scale)
 
+  committedCanvas = document.createElement('canvas')
+  committedCanvas.width = editorCanvas.width
+  committedCanvas.height = editorCanvas.height
+  committedCanvas.getContext('2d').drawImage(editorCanvas, 0, 0)
+
+  resetCropState()
+  resetPerspectiveState()
+  colorState = { brightness: 100, contrast: 100, saturation: 100, grayscale: 0 }
+  resetColorSliderUI()
+  appliedTabs = { crop: false, perspective: false, colors: false }
+  updateApplyIndicators()
+
+  activeTab = 'crop'
+  switchEditorTab('crop')
+  renderEditorPreview()
+  document.getElementById('editorModal')?.showModal()
+}
+
+function resetCropState() {
   const margin = 20
   cropState = {
     x: margin,
@@ -166,7 +188,9 @@ function openEditor() {
     dragging: false,
     handle: null,
   }
+}
 
+function resetPerspectiveState() {
   const m = 30
   perspectiveState.points = [
     { x: m, y: m },
@@ -175,19 +199,12 @@ function openEditor() {
     { x: m, y: editorCanvas.height - m },
   ]
   perspectiveState.dragging = -1
-
-  colorState = { brightness: 100, contrast: 100, saturation: 100, grayscale: 0 }
-  resetColorSliderUI()
-
-  activeTab = 'crop'
-  switchEditorTab('crop')
-  renderEditor()
-  document.getElementById('editorModal')?.showModal()
 }
 
 function closeEditorModal() {
   document.getElementById('editorModal')?.close()
   originalImage = null
+  committedCanvas = null
 }
 
 function switchEditorTab(tab) {
@@ -198,14 +215,14 @@ function switchEditorTab(tab) {
   document.querySelectorAll('.editor-tab-panel').forEach((panel) => {
     panel.classList.toggle('hidden', panel.dataset.panel !== tab)
   })
-  renderEditor()
+  renderEditorPreview()
 }
 
-function renderEditor() {
-  if (!editorCanvas || !editorCtx || !originalImage) return
+function renderEditorPreview() {
+  if (!editorCanvas || !editorCtx || !committedCanvas) return
 
   editorCtx.clearRect(0, 0, editorCanvas.width, editorCanvas.height)
-  editorCtx.drawImage(originalImage, 0, 0, editorCanvas.width, editorCanvas.height)
+  editorCtx.drawImage(committedCanvas, 0, 0)
 
   if (activeTab === 'crop') drawCropOverlay()
   else if (activeTab === 'perspective') drawPerspectiveOverlay()
@@ -215,7 +232,7 @@ function renderEditor() {
     tempCanvas.width = editorCanvas.width
     tempCanvas.height = editorCanvas.height
     const tempCtx = tempCanvas.getContext('2d')
-    tempCtx.drawImage(editorCanvas, 0, 0)
+    tempCtx.drawImage(committedCanvas, 0, 0)
     applyColorAdjustments(tempCanvas, colorState)
     editorCtx.clearRect(0, 0, editorCanvas.width, editorCanvas.height)
     editorCtx.drawImage(tempCanvas, 0, 0)
@@ -375,13 +392,13 @@ function setupEditorEvents() {
       } else {
         updateCropFromHandle(pos)
       }
-      renderEditor()
+      renderEditorPreview()
     } else if (activeTab === 'perspective' && perspectiveState.dragging >= 0) {
       e.preventDefault()
       const i = perspectiveState.dragging
       perspectiveState.points[i].x = Math.max(0, Math.min(editorCanvas.width, pos.x))
       perspectiveState.points[i].y = Math.max(0, Math.min(editorCanvas.height, pos.y))
-      renderEditor()
+      renderEditorPreview()
     }
   }
 
@@ -423,13 +440,10 @@ function updateCropFromHandle(pos) {
   if (cropState.h < 20) { cropState.h = 20; cropState.y = old.y }
 }
 
-function getProcessedCanvas() {
-  if (!originalImage || !editorCanvas) return null
+function applyEditorTab() {
+  if (!committedCanvas || !editorCanvas) return
 
-  const result = document.createElement('canvas')
-  result.width = editorCanvas.width
-  result.height = editorCanvas.height
-  const ctx = result.getContext('2d')
+  const ctx = committedCanvas.getContext('2d')
 
   if (activeTab === 'crop') {
     const { x, y, w, h } = cropState
@@ -437,19 +451,18 @@ function getProcessedCanvas() {
     cropCanvas.width = Math.round(w)
     cropCanvas.height = Math.round(h)
     const cropCtx = cropCanvas.getContext('2d')
-    cropCtx.drawImage(originalImage, x / editorCanvas.width * originalImage.width, y / editorCanvas.height * originalImage.height, w / editorCanvas.width * originalImage.width, h / editorCanvas.height * originalImage.height, 0, 0, w, h)
-
-    if (colorState.brightness !== 100 || colorState.contrast !== 100 || colorState.saturation !== 100 || colorState.grayscale !== 0) {
-      applyColorAdjustments(cropCanvas, colorState)
-    }
-    return cropCanvas
-  }
-
-  if (activeTab === 'perspective') {
-    const scaleInvW = originalImage.width / editorCanvas.width
-    const scaleInvH = originalImage.height / editorCanvas.height
-    const srcPts = perspectiveState.points.map((p) => ({ x: p.x * scaleInvW, y: p.y * scaleInvH }))
-
+    cropCtx.drawImage(
+      committedCanvas,
+      x, y, w, h,
+      0, 0, w, h
+    )
+    committedCanvas.width = cropCanvas.width
+    committedCanvas.height = cropCanvas.height
+    ctx.drawImage(cropCanvas, 0, 0)
+    resetCropState()
+    appliedTabs.crop = true
+  } else if (activeTab === 'perspective') {
+    const srcPts = perspectiveState.points.map((p) => ({ ...p }))
     const dstW = Math.round(Math.max(
       Math.hypot(srcPts[1].x - srcPts[0].x, srcPts[1].y - srcPts[0].y),
       Math.hypot(srcPts[2].x - srcPts[3].x, srcPts[2].y - srcPts[3].y)
@@ -458,32 +471,44 @@ function getProcessedCanvas() {
       Math.hypot(srcPts[3].x - srcPts[0].x, srcPts[3].y - srcPts[0].y),
       Math.hypot(srcPts[2].x - srcPts[1].x, srcPts[2].y - srcPts[1].y)
     ))
-
-    const warped = perspectiveTransform(originalImage, srcPts, dstW, dstH)
-
-    if (colorState.brightness !== 100 || colorState.contrast !== 100 || colorState.saturation !== 100 || colorState.grayscale !== 0) {
-      applyColorAdjustments(warped, colorState)
-    }
-    return warped
+    const warped = perspectiveTransform(committedCanvas, srcPts, dstW, dstH)
+    committedCanvas.width = warped.width
+    committedCanvas.height = warped.height
+    ctx.drawImage(warped, 0, 0)
+    resetPerspectiveState()
+    appliedTabs.perspective = true
+  } else if (activeTab === 'colors') {
+    applyColorAdjustments(committedCanvas, colorState)
+    colorState = { brightness: 100, contrast: 100, saturation: 100, grayscale: 0 }
+    resetColorSliderUI()
+    appliedTabs.colors = true
   }
 
-  if (activeTab === 'colors') {
-    ctx.drawImage(editorCanvas, 0, 0)
-    applyColorAdjustments(result, colorState)
-    return result
-  }
+  editorCanvas.width = committedCanvas.width
+  editorCanvas.height = committedCanvas.height
+  updateApplyIndicators()
+  renderEditorPreview()
+}
 
-  ctx.drawImage(editorCanvas, 0, 0)
-  return result
+function updateApplyIndicators() {
+  document.querySelectorAll('.editor-tab-btn').forEach((btn) => {
+    const tab = btn.dataset.tab
+    const dot = btn.querySelector('.apply-dot')
+    if (dot) dot.classList.toggle('hidden', !appliedTabs[tab])
+  })
+}
+
+function getFinalCanvas() {
+  return committedCanvas
 }
 
 async function saveScannerPdf() {
-  const processed = getProcessedCanvas()
-  if (!processed) return
+  const finalCanvas = getFinalCanvas()
+  if (!finalCanvas) return
 
-  const imgData = processed.toDataURL('image/png')
-  const pxW = processed.width
-  const pxH = processed.height
+  const imgData = finalCanvas.toDataURL('image/png')
+  const pxW = finalCanvas.width
+  const pxH = finalCanvas.height
 
   const pdf = new jsPDF({
     orientation: pxW > pxH ? 'landscape' : 'portrait',
@@ -503,7 +528,7 @@ async function saveScannerPdf() {
 function resetColorSliders() {
   colorState = { brightness: 100, contrast: 100, saturation: 100, grayscale: 0 }
   resetColorSliderUI()
-  renderEditor()
+  renderEditorPreview()
 }
 
 function resetColorSliderUI() {
@@ -511,5 +536,10 @@ function resetColorSliderUI() {
   Object.entries(map).forEach(([id, val]) => {
     const el = document.getElementById(id)
     if (el) el.value = val
+  })
+  const labels = { brightness: '100%', contrast: '100%', saturation: '100%', grayscale: '0%' }
+  Object.entries(labels).forEach(([id, val]) => {
+    const el = document.getElementById(id + 'Val')
+    if (el) el.textContent = val
   })
 }
