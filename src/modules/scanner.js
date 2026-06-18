@@ -550,9 +550,20 @@ function showToast(msg) {
 async function saveScannerPdf() {
   if (!baseCanvas) return
 
-  const imgData = baseCanvas.toDataURL('image/png')
-  const pxW = baseCanvas.width
-  const pxH = baseCanvas.height
+  let src = baseCanvas
+  const maxDim = 2000
+  if (src.width > maxDim || src.height > maxDim) {
+    const scale = maxDim / Math.max(src.width, src.height)
+    const resized = document.createElement('canvas')
+    resized.width = Math.round(src.width * scale)
+    resized.height = Math.round(src.height * scale)
+    resized.getContext('2d').drawImage(src, 0, 0, resized.width, resized.height)
+    src = resized
+  }
+
+  const imgData = src.toDataURL('image/jpeg', 0.82)
+  const pxW = src.width
+  const pxH = src.height
 
   const pdf = new jsPDF({
     orientation: pxW > pxH ? 'landscape' : 'portrait',
@@ -560,7 +571,7 @@ async function saveScannerPdf() {
     format: [pxW, pxH],
   })
 
-  pdf.addImage(imgData, 'PNG', 0, 0, pxW, pxH)
+  pdf.addImage(imgData, 'JPEG', 0, 0, pxW, pxH)
   const pdfBlob = pdf.output('blob')
   const pdfFile = new File([pdfBlob], `scan_${Date.now()}.pdf`, { type: 'application/pdf' })
 
