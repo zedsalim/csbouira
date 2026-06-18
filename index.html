@@ -1213,7 +1213,12 @@
               Camera not available. Use Gallery to pick an image.
             </p>
           </div>
-          <video id="scannerVideo" class="hidden w-full rounded-xl bg-black" playsinline></video>
+          <div class="relative w-full">
+            <video id="scannerVideo" class="hidden w-full rounded-xl bg-black" playsinline></video>
+            <button id="torchBtn" onclick="toggleTorch()" class="hidden absolute top-2 right-2 btn btn-circle btn-sm bg-base-content/50 hover:bg-base-content/70 text-base-100 border-none backdrop-blur-sm" title="Toggle flashlight">
+              <i id="torchIcon" class="fas fa-bolt text-base-content/60"></i>
+            </button>
+          </div>
           <div class="flex gap-3 w-full">
             <button onclick="scannerCapture()" class="btn btn-primary flex-1 rounded-xl gap-2">
               <i class="fas fa-camera"></i> Capture

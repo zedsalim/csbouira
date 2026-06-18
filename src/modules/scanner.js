@@ -3,6 +3,7 @@ import { jsPDF } from 'jspdf'
 
 let cameraStream = null
 let baseCanvas = null
+let torchOn = false
 let editorCanvas = null
 let editorCtx = null
 let activeTab = 'crop'
@@ -33,6 +34,7 @@ export function initScanner() {
   window.applyCrop = applyCrop
   window.applyPerspective = applyPerspective
   window.applyColors = applyColors
+  window.toggleTorch = toggleTorch
 
   const galleryInput = document.getElementById('scannerGalleryInput')
   if (galleryInput) {
@@ -82,20 +84,76 @@ function closeScannerModal() {
 
 async function startCamera() {
   const video = document.getElementById('scannerVideo')
+  const torchBtn = document.getElementById('torchBtn')
   if (!video) return
+  torchOn = false
+  updateTorchUI()
+
   try {
-    cameraStream = await navigator.mediaDevices.getUserMedia({
-      video: { facingMode: 'environment', width: { ideal: 1920 }, height: { ideal: 1080 } },
-    })
+    const devices = await navigator.mediaDevices.enumerateDevices()
+    const rearCameras = devices.filter(
+      (d) => d.kind === 'videoinput' && d.label.toLowerCase().includes('back')
+    )
+
+    if (rearCameras.length > 0) {
+      const mainCamera = rearCameras.find((c) =>
+        c.getCapabilities?.().torch ?? false
+      ) || rearCameras[rearCameras.length - 1]
+
+      cameraStream = await navigator.mediaDevices.getUserMedia({
+        video: { deviceId: { exact: mainCamera.deviceId }, width: { ideal: 1920 }, height: { ideal: 1080 } },
+      })
+    } else {
+      cameraStream = await navigator.mediaDevices.getUserMedia({
+        video: { facingMode: 'environment', width: { ideal: 1920 }, height: { ideal: 1080 } },
+      })
+    }
+
     video.srcObject = cameraStream
     await video.play()
     document.getElementById('scannerPlaceholder')?.classList.add('hidden')
     video.classList.remove('hidden')
+
+    const track = cameraStream.getVideoTracks()[0]
+    const caps = track.getCapabilities?.() || {}
+    if (torchBtn) {
+      if (caps.torch) torchBtn.classList.remove('hidden')
+      else torchBtn.classList.add('hidden')
+    }
   } catch {
-    document.getElementById('scannerPlaceholder')?.classList.remove('hidden')
-    document.getElementById('scannerPlaceholderText').textContent =
-      'Camera not available. Use Gallery to pick an image.'
+    try {
+      cameraStream = await navigator.mediaDevices.getUserMedia({
+        video: { facingMode: 'environment', width: { ideal: 1920 }, height: { ideal: 1080 } },
+      })
+      video.srcObject = cameraStream
+      await video.play()
+      document.getElementById('scannerPlaceholder')?.classList.add('hidden')
+      video.classList.remove('hidden')
+      if (torchBtn) torchBtn.classList.add('hidden')
+    } catch {
+      document.getElementById('scannerPlaceholder')?.classList.remove('hidden')
+      document.getElementById('scannerPlaceholderText').textContent =
+        'Camera not available. Use Gallery to pick an image.'
+      if (torchBtn) torchBtn.classList.add('hidden')
+    }
   }
+}
+
+async function toggleTorch() {
+  const track = cameraStream?.getVideoTracks()[0]
+  if (!track) return
+  const caps = track.getCapabilities?.() || {}
+  if (!caps.torch) return
+
+  torchOn = !torchOn
+  await track.applyConstraints({ advanced: [{ torch: torchOn }] })
+  updateTorchUI()
+}
+
+function updateTorchUI() {
+  const icon = document.getElementById('torchIcon')
+  if (!icon) return
+  icon.className = torchOn ? 'fas fa-bolt text-yellow-400' : 'fas fa-bolt text-base-content/60'
 }
 
 function stopCamera() {
