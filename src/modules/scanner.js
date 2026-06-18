@@ -22,8 +22,6 @@ let colorState = { brightness: 100, contrast: 100, saturation: 100, grayscale: 0
 
 let onFileReady = null
 let colorDirty = false
-let previewCanvas = null
-let previewCtx = null
 
 export function initScanner() {
   window.openScannerModal = openScannerModal
@@ -104,11 +102,11 @@ async function startCamera() {
       ) || rearCameras[rearCameras.length - 1]
 
       cameraStream = await navigator.mediaDevices.getUserMedia({
-        video: { deviceId: { exact: mainCamera.deviceId }, width: { ideal: 1920 }, height: { ideal: 1080 } },
+        video: { deviceId: { exact: mainCamera.deviceId }, width: { ideal: 1920, max: 1920 }, height: { ideal: 1080, max: 1080 } },
       })
     } else {
       cameraStream = await navigator.mediaDevices.getUserMedia({
-        video: { facingMode: 'environment', width: { ideal: 1920 }, height: { ideal: 1080 } },
+        video: { facingMode: 'environment', width: { ideal: 1920, max: 1920 }, height: { ideal: 1080, max: 1080 } },
       })
     }
 
@@ -126,7 +124,7 @@ async function startCamera() {
   } catch {
     try {
       cameraStream = await navigator.mediaDevices.getUserMedia({
-        video: { facingMode: 'environment', width: { ideal: 1920 }, height: { ideal: 1080 } },
+        video: { facingMode: 'environment', width: { ideal: 1920, max: 1920 }, height: { ideal: 1080, max: 1080 } },
       })
       video.srcObject = cameraStream
       await video.play()
@@ -176,16 +174,14 @@ function scannerCapture() {
   const video = document.getElementById('scannerVideo')
   if (!video || !cameraStream) return
 
-  const tempCanvas = document.createElement('canvas')
-  tempCanvas.width = video.videoWidth
-  tempCanvas.height = video.videoHeight
-  const tempCtx = tempCanvas.getContext('2d')
-  tempCtx.drawImage(video, 0, 0)
+  baseCanvas = document.createElement('canvas')
+  baseCanvas.width = video.videoWidth
+  baseCanvas.height = video.videoHeight
+  baseCanvas.getContext('2d').drawImage(video, 0, 0)
 
   stopCamera()
   closeScannerModal()
-
-  loadImageToEditor(tempCanvas.toDataURL('image/png'))
+  openEditor()
 }
 
 function scannerGallery() {
@@ -193,41 +189,40 @@ function scannerGallery() {
 }
 
 function loadFromGallery(file) {
-  const reader = new FileReader()
-  reader.onload = (e) => {
-    closeScannerModal()
-    loadImageToEditor(e.target.result)
-  }
-  reader.readAsDataURL(file)
+  closeScannerModal()
+  const url = URL.createObjectURL(file)
+  loadImageToEditor(url, () => URL.revokeObjectURL(url))
 }
 
-function loadImageToEditor(src) {
+function loadImageToEditor(src, cleanup) {
   const img = new Image()
   img.onload = () => {
     baseCanvas = document.createElement('canvas')
     baseCanvas.width = img.width
     baseCanvas.height = img.height
     baseCanvas.getContext('2d').drawImage(img, 0, 0)
+    if (cleanup) cleanup()
     openEditor()
   }
   img.src = src
 }
 
-function openEditor() {
-  if (!baseCanvas || !editorCanvas) return
-
+function fitEditorToViewport() {
   const maxW = Math.min(800, window.innerWidth - 64)
   const maxH = Math.min(500, window.innerHeight - 260)
   const scale = Math.min(maxW / baseCanvas.width, maxH / baseCanvas.height, 1)
-
   editorCanvas.width = Math.round(baseCanvas.width * scale)
   editorCanvas.height = Math.round(baseCanvas.height * scale)
+}
+
+function openEditor() {
+  if (!baseCanvas || !editorCanvas) return
+
+  fitEditorToViewport()
 
   resetCropState()
   resetPerspectiveState()
   colorState = { brightness: 100, contrast: 100, saturation: 100, grayscale: 0, sharpness: 0, clarity: 0, highlights: 0 }
-  previewCanvas = null
-  previewCtx = null
   resetColorSliderUI()
 
   activeTab = 'crop'
@@ -253,8 +248,6 @@ function switchEditorTab(tab) {
   if (tab === 'perspective') resetPerspectiveState()
   if (tab === 'colors') {
     colorState = { brightness: 100, contrast: 100, saturation: 100, grayscale: 0, sharpness: 0, clarity: 0, highlights: 0 }
-    previewCanvas = null
-    previewCtx = null
     resetColorSliderUI()
   }
   renderEditor()
@@ -297,24 +290,12 @@ function scheduleColorRender() {
   colorDirty = true
   requestAnimationFrame(() => {
     colorDirty = false
-    applyColorPreview()
+    renderEditor()
   })
-}
-
-function ensurePreviewCanvas() {
-  if (previewCanvas) return
-  const maxPreview = 400
-  const scale = Math.min(maxPreview / baseCanvas.width, maxPreview / baseCanvas.height, 1)
-  previewCanvas = document.createElement('canvas')
-  previewCanvas.width = Math.round(baseCanvas.width * scale)
-  previewCanvas.height = Math.round(baseCanvas.height * scale)
-  previewCtx = previewCanvas.getContext('2d', { willReadFrequently: true })
 }
 
 function applyColorPreview() {
   if (!editorCanvas || !editorCtx || !baseCanvas) return
-  ensurePreviewCanvas()
-
   const { brightness, contrast, saturation, grayscale, sharpness, clarity, highlights } = colorState
   const isDefault = brightness === 100 && contrast === 100 && saturation === 100 &&
     grayscale === 0 && sharpness === 0 && clarity === 0 && highlights === 0
@@ -325,106 +306,23 @@ function applyColorPreview() {
     return
   }
 
-  previewCtx.drawImage(baseCanvas, 0, 0, previewCanvas.width, previewCanvas.height)
-  const imageData = previewCtx.getImageData(0, 0, previewCanvas.width, previewCanvas.height)
-  const d = imageData.data
-  const len = d.length
+  const w = editorCanvas.width, h = editorCanvas.height
+  const tmp = document.createElement('canvas')
+  tmp.width = w
+  tmp.height = h
+  const tc = tmp.getContext('2d')
+  tc.drawImage(baseCanvas, 0, 0, w, h)
+  applyColorAdjustments(tmp, colorState)
+  editorCtx.clearRect(0, 0, w, h)
+  editorCtx.drawImage(tmp, 0, 0)
+}
 
-  const bF = brightness / 100
-  const cF = (contrast / 100 + 0.5) / 0.5
-  const sF = saturation / 100
-  const gF = grayscale / 100
-  const hF = highlights / 100
-  const cStrength = clarity / 100
-
-  if (clarity !== 0 || highlights !== 0) {
-    const lum = new Float32Array(len / 4)
-    for (let i = 0; i < len; i += 4) {
-      lum[i >> 2] = 0.2126 * d[i] + 0.7152 * d[i + 1] + 0.0722 * d[i + 2]
-    }
-    if (clarity !== 0) {
-      const w = previewCanvas.width
-      for (let i = 0; i < len; i += 4) {
-        const idx = i >> 2
-        const x = idx % w
-        const y = (idx / w) | 0
-        let sum = 0, cnt = 0
-        for (let dy = -1; dy <= 1; dy++) {
-          for (let dx = -1; dx <= 1; dx++) {
-            const nx = x + dx, ny = y + dy
-            if (nx >= 0 && nx < w && ny >= 0 && ny < (previewCanvas.height)) {
-              sum += lum[ny * w + nx]
-              cnt++
-            }
-          }
-        }
-        const local = lum[idx]
-        const avg = sum / cnt
-        const diff = (local - avg) * cStrength
-        d[i] += diff
-        d[i + 1] += diff
-        d[i + 2] += diff
-      }
-    }
-    if (highlights !== 0) {
-      for (let i = 0; i < len; i += 4) {
-        const l = lum[i >> 2]
-        const factor = hF * (1 - l / 255)
-        d[i] += factor * 40
-        d[i + 1] += factor * 40
-        d[i + 2] += factor * 40
-      }
-    }
-  }
-
-  for (let i = 0; i < len; i += 4) {
-    let r = d[i] * bF
-    let g = d[i + 1] * bF
-    let b = d[i + 2] * bF
-    r = (r - 128) * cF + 128
-    g = (g - 128) * cF + 128
-    b = (b - 128) * cF + 128
-    const gray = 0.2126 * r + 0.7152 * g + 0.0722 * b
-    r = r * (1 - gF) + gray * gF
-    g = g * (1 - gF) + gray * gF
-    b = b * (1 - gF) + gray * gF
-    const avg = (r + g + b) / 3
-    r += (r - avg) * (sF - 1)
-    g += (g - avg) * (sF - 1)
-    b += (b - avg) * (sF - 1)
-    d[i] = r < 0 ? 0 : r > 255 ? 255 : r
-    d[i + 1] = g < 0 ? 0 : g > 255 ? 255 : g
-    d[i + 2] = b < 0 ? 0 : b > 255 ? 255 : b
-  }
-
-  if (sharpness !== 0) {
-    const w = previewCanvas.width
-    const h = previewCanvas.height
-    const orig = new Uint8ClampedArray(d)
-    const amount = sharpness / 100 * 2
-    for (let y = 1; y < h - 1; y++) {
-      for (let x = 1; x < w - 1; x++) {
-        const idx = (y * w + x) * 4
-        for (let c = 0; c < 3; c++) {
-          const center = orig[idx + c] * 5
-          const neighbors =
-            orig[((y - 1) * w + x) * 4 + c] +
-            orig[((y + 1) * w + x) * 4 + c] +
-            orig[(y * w + x - 1) * 4 + c] +
-            orig[(y * w + x + 1) * 4 + c]
-          const laplacian = center - neighbors
-          d[idx + c] = Math.max(0, Math.min(255, orig[idx + c] + laplacian * amount))
-        }
-      }
-    }
-  }
-
-  previewCtx.putImageData(imageData, 0, 0)
-  editorCtx.clearRect(0, 0, editorCanvas.width, editorCanvas.height)
-  editorCtx.drawImage(previewCanvas, 0, 0, editorCanvas.width, editorCanvas.height)
+function cssScale() {
+  return editorCanvas.getBoundingClientRect().width / editorCanvas.width
 }
 
 function drawCropOverlay() {
+  const s = cssScale()
   const { x, y, w, h } = cropState
   editorCtx.save()
   editorCtx.fillStyle = 'rgba(0,0,0,0.5)'
@@ -454,14 +352,14 @@ function drawCropOverlay() {
     editorCtx.stroke()
   }
 
-  const handleSize = 12
+  const r = Math.max(8, 14 / s)
   editorCtx.fillStyle = '#ffffff'
   editorCtx.shadowColor = 'rgba(0,0,0,0.5)'
   editorCtx.shadowBlur = 4
   const handles = getCropHandles()
   Object.values(handles).forEach((pos) => {
     editorCtx.beginPath()
-    editorCtx.arc(pos.x, pos.y, handleSize / 2, 0, Math.PI * 2)
+    editorCtx.arc(pos.x, pos.y, r, 0, Math.PI * 2)
     editorCtx.fill()
   })
   editorCtx.restore()
@@ -478,8 +376,15 @@ function getCropHandles() {
 }
 
 function drawPerspectiveOverlay() {
+  const s = cssScale()
   const { points } = perspectiveState
   editorCtx.save()
+
+  const r = Math.max(8, 12 / s)
+
+  if (perspectiveState.dragging >= 0) {
+    drawMagnifier(editorCtx, points[perspectiveState.dragging], s)
+  }
 
   editorCtx.fillStyle = 'rgba(0,0,0,0.5)'
   editorCtx.beginPath()
@@ -505,19 +410,59 @@ function drawPerspectiveOverlay() {
   }
   editorCtx.stroke()
 
-  const handleR = 10
   editorCtx.fillStyle = '#00ff88'
   editorCtx.shadowColor = 'rgba(0,0,0,0.5)'
   editorCtx.shadowBlur = 4
   points.forEach((p) => {
     editorCtx.beginPath()
-    editorCtx.arc(p.x, p.y, handleR, 0, Math.PI * 2)
+    editorCtx.arc(p.x, p.y, r, 0, Math.PI * 2)
     editorCtx.fill()
   })
+
   editorCtx.restore()
 }
 
+function drawMagnifier(ctx, point, s) {
+  const zoom = 3
+  const zoomR = Math.max(30, 50 / s)
+  const srcR = Math.max(10, zoomR / zoom / s)
+
+  ctx.save()
+  ctx.shadowColor = 'rgba(0,0,0,0.4)'
+  ctx.shadowBlur = 10
+
+  ctx.beginPath()
+  ctx.arc(point.x, point.y, zoomR, 0, Math.PI * 2)
+  ctx.fillStyle = '#1f2937'
+  ctx.fill()
+  ctx.strokeStyle = '#00ff88'
+  ctx.lineWidth = 2
+  ctx.stroke()
+
+  ctx.beginPath()
+  ctx.arc(point.x, point.y, zoomR, 0, Math.PI * 2)
+  ctx.clip()
+
+  ctx.drawImage(editorCanvas,
+    point.x - srcR, point.y - srcR, srcR * 2, srcR * 2,
+    point.x - zoomR, point.y - zoomR, zoomR * 2, zoomR * 2)
+
+  ctx.restore()
+
+  ctx.save()
+  ctx.beginPath()
+  ctx.arc(point.x, point.y, 4, 0, Math.PI * 2)
+  ctx.fillStyle = '#ff4444'
+  ctx.fill()
+  ctx.restore()
+}
+
 function setupEditorEvents() {
+  const hitThreshold = () => {
+    const s = editorCanvas.getBoundingClientRect().width / editorCanvas.width
+    return Math.max(22, 30 / s)
+  }
+
   const getPos = (e) => {
     const rect = editorCanvas.getBoundingClientRect()
     const touch = e.touches ? e.touches[0] : e
@@ -532,8 +477,9 @@ function setupEditorEvents() {
 
     if (activeTab === 'crop') {
       const handles = getCropHandles()
+      const hT = hitThreshold()
       for (const [key, h] of Object.entries(handles)) {
-        if (Math.hypot(pos.x - h.x, pos.y - h.y) < 22) {
+        if (Math.hypot(pos.x - h.x, pos.y - h.y) < hT) {
           cropState.handle = key
           cropState.dragging = true
           e.preventDefault()
@@ -550,8 +496,9 @@ function setupEditorEvents() {
         e.preventDefault()
       }
     } else if (activeTab === 'perspective') {
+      const hT = hitThreshold()
       for (let i = 0; i < 4; i++) {
-        if (Math.hypot(pos.x - perspectiveState.points[i].x, pos.y - perspectiveState.points[i].y) < 24) {
+        if (Math.hypot(pos.x - perspectiveState.points[i].x, pos.y - perspectiveState.points[i].y) < hT) {
           perspectiveState.dragging = i
           e.preventDefault()
           return
@@ -645,8 +592,7 @@ function applyCrop() {
 
   baseCanvas = cropped
 
-  editorCanvas.width = cropped.width
-  editorCanvas.height = cropped.height
+  fitEditorToViewport()
 
   cropState = {
     x: 0, y: 0,
@@ -692,8 +638,7 @@ function applyPerspective() {
   const warped = perspectiveTransform(baseCanvas, srcPts, dstW, dstH)
   baseCanvas = warped
 
-  editorCanvas.width = warped.width
-  editorCanvas.height = warped.height
+  fitEditorToViewport()
 
   resetPerspectiveState()
   renderEditor()
@@ -719,12 +664,9 @@ function applyColors() {
   applyColorAdjustments(tmp, colorState)
   baseCanvas = tmp
 
-  editorCanvas.width = tmp.width
-  editorCanvas.height = tmp.height
+  fitEditorToViewport()
 
   colorState = { brightness: 100, contrast: 100, saturation: 100, grayscale: 0, sharpness: 0, clarity: 0, highlights: 0 }
-  previewCanvas = null
-  previewCtx = null
   resetColorSliderUI()
   renderEditor()
   showToast('Colors applied')
@@ -753,7 +695,7 @@ async function saveScannerPdf() {
     src = resized
   }
 
-  const imgData = src.toDataURL('image/jpeg', 0.82)
+  const imgData = src.toDataURL('image/jpeg', 0.9)
   const pxW = src.width
   const pxH = src.height
 
@@ -773,8 +715,6 @@ async function saveScannerPdf() {
 
 function resetColorSliders() {
   colorState = { brightness: 100, contrast: 100, saturation: 100, grayscale: 0, sharpness: 0, clarity: 0, highlights: 0 }
-  previewCanvas = null
-  previewCtx = null
   resetColorSliderUI()
   renderEditor()
 }
