@@ -60,7 +60,7 @@ export function initScanner() {
         colorState[id] = Number(e.target.value)
         const valEl = document.getElementById(id + 'Val')
         if (valEl) valEl.textContent = e.target.value + '%'
-        renderEditor()
+        applyColorPreview()
       })
     }
   })
@@ -233,11 +233,13 @@ function openEditor() {
 
 function closeEditorModal() {
   document.getElementById('editorModal')?.close()
+  if (editorCanvas) editorCanvas.style.filter = 'none'
   baseCanvas = null
 }
 
 function switchEditorTab(tab) {
   activeTab = tab
+  if (editorCanvas) editorCanvas.style.filter = 'none'
   document.querySelectorAll('.editor-tab-btn').forEach((btn) => {
     btn.classList.toggle('btn-active', btn.dataset.tab === tab)
   })
@@ -251,6 +253,7 @@ function switchEditorTab(tab) {
     resetColorSliderUI()
   }
   renderEditor()
+  if (tab === 'colors') applyColorPreview()
 }
 
 function resetCropState() {
@@ -282,15 +285,15 @@ function renderEditor() {
 
   if (activeTab === 'crop') drawCropOverlay()
   else if (activeTab === 'perspective') drawPerspectiveOverlay()
-  else if (activeTab === 'colors') {
-    const tmp = document.createElement('canvas')
-    tmp.width = editorCanvas.width
-    tmp.height = editorCanvas.height
-    tmp.getContext('2d').drawImage(editorCanvas, 0, 0)
-    applyColorAdjustments(tmp, colorState)
-    editorCtx.clearRect(0, 0, editorCanvas.width, editorCanvas.height)
-    editorCtx.drawImage(tmp, 0, 0)
-  }
+
+  if (activeTab === 'colors') applyColorPreview()
+}
+
+function applyColorPreview() {
+  if (!editorCanvas) return
+  const { brightness, contrast, saturation, grayscale } = colorState
+  editorCanvas.style.filter =
+    `brightness(${brightness}%) contrast(${contrast}%) saturate(${saturation}%) grayscale(${grayscale}%)`
 }
 
 function drawCropOverlay() {
@@ -589,6 +592,7 @@ function applyColors() {
 
   editorCanvas.width = tmp.width
   editorCanvas.height = tmp.height
+  editorCanvas.style.filter = 'none'
 
   colorState = { brightness: 100, contrast: 100, saturation: 100, grayscale: 0 }
   resetColorSliderUI()
