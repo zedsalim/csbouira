@@ -1213,7 +1213,12 @@
               Camera not available. Use Gallery to pick an image.
             </p>
           </div>
-          <video id="scannerVideo" class="hidden w-full rounded-xl bg-black" playsinline></video>
+          <div class="relative w-full">
+            <video id="scannerVideo" class="hidden w-full rounded-xl bg-black" playsinline></video>
+            <button id="switchCameraBtn" onclick="switchCamera()" class="hidden absolute top-2 right-2 btn btn-circle btn-sm bg-base-content/50 hover:bg-base-content/70 text-base-100 border-none backdrop-blur-sm" title="Switch camera">
+              <i class="fas fa-sync-alt"></i>
+            </button>
+          </div>
           <div class="flex gap-3 w-full">
             <button onclick="scannerCapture()" class="btn btn-primary flex-1 rounded-xl gap-2">
               <i class="fas fa-camera"></i> Capture
@@ -1309,39 +1314,53 @@
     </dialog>
 
     <!-- PDF Viewer Modal -->
-    <dialog id="pdfViewerModal" class="modal p-0 sm:p-4">
-      <div class="modal-box w-full max-w-4xl h-screen sm:h-[90vh] flex flex-col p-0 rounded-none sm:rounded-xl overflow-hidden">
-        <div class="flex justify-between items-center p-3 border-b border-base-300">
+    <dialog id="pdfViewerModal" class="modal p-0">
+      <div class="modal-box w-full max-w-4xl h-dvh sm:h-[90vh] flex flex-col p-0 rounded-none sm:rounded-xl overflow-hidden">
+        <!-- Header -->
+        <div class="flex items-center justify-between px-4 py-2.5 border-b border-base-300 shrink-0">
           <h3 id="pdfViewerTitle" class="text-sm font-semibold flex-1 truncate pr-2">
             <i class="fas fa-file-pdf text-error mr-1"></i> Preview
           </h3>
-          <div class="flex items-center gap-1">
-            <button id="pdfPrevBtn" onclick="pdfViewerPrev()" class="btn btn-ghost btn-sm btn-circle" disabled>
-              <i class="fas fa-chevron-left"></i>
-            </button>
-            <span id="pdfPageInfo" class="text-xs text-base-content/60 min-w-[60px] text-center">1 / 1</span>
-            <button id="pdfNextBtn" onclick="pdfViewerNext()" class="btn btn-ghost btn-sm btn-circle" disabled>
-              <i class="fas fa-chevron-right"></i>
-            </button>
-            <div class="w-px h-5 bg-base-300 mx-1"></div>
-            <button onclick="pdfViewerZoomOut()" class="btn btn-ghost btn-sm btn-circle">
-              <i class="fas fa-search-minus"></i>
-            </button>
-            <span id="pdfZoomLevel" class="text-xs text-base-content/60 min-w-[40px] text-center">100%</span>
-            <button onclick="pdfViewerZoomIn()" class="btn btn-ghost btn-sm btn-circle">
-              <i class="fas fa-search-plus"></i>
-            </button>
-            <div class="w-px h-5 bg-base-300 mx-1"></div>
-            <button onclick="closePdfViewer()" class="btn btn-ghost btn-sm btn-circle">
-              <i class="fas fa-times text-lg"></i>
-            </button>
+          <button onclick="closePdfViewer()" class="btn btn-ghost btn-sm btn-circle shrink-0">
+            <i class="fas fa-times text-lg"></i>
+          </button>
+        </div>
+
+        <!-- Canvas area with loading spinner -->
+        <div id="pdfViewerContainer" class="flex-1 overflow-auto bg-base-300 relative">
+          <div id="pdfViewerSpinner" class="absolute inset-0 flex flex-col items-center justify-center gap-3">
+            <span class="loading loading-spinner loading-lg text-primary"></span>
+            <span class="text-xs text-base-content/60">Loading PDF...</span>
+          </div>
+          <div class="flex items-start justify-center p-2 min-h-full">
+            <canvas id="pdfViewerCanvas" class="shadow-lg rounded hidden"></canvas>
           </div>
         </div>
-        <div id="pdfViewerContainer" class="flex-1 overflow-auto bg-base-300 flex items-start justify-center p-2">
-          <canvas id="pdfViewerCanvas" class="shadow-lg rounded"></canvas>
-        </div>
+
+        <!-- Fallback for non-PDF files -->
         <div id="pdfViewerFallback" class="flex-1 hidden flex items-center justify-center p-4">
           <p class="text-base-content/60 text-sm">Cannot preview this file type.</p>
+        </div>
+
+        <!-- Bottom nav bar -->
+        <div class="flex items-center justify-between px-4 py-2.5 border-t border-base-300 bg-base-100 shrink-0">
+          <button id="pdfPrevBtn" onclick="pdfViewerPrev()" class="btn btn-ghost btn-sm gap-1" disabled>
+            <i class="fas fa-chevron-left"></i> <span class="hidden sm:inline">Prev</span>
+          </button>
+          <div class="flex items-center gap-2">
+            <span id="pdfPageInfo" class="text-xs text-base-content/60 tabular-nums">1 / 1</span>
+            <div class="w-px h-4 bg-base-300"></div>
+            <button onclick="pdfViewerZoomOut()" class="btn btn-ghost btn-xs btn-circle">
+              <i class="fas fa-minus text-xs"></i>
+            </button>
+            <span id="pdfZoomLevel" class="text-xs text-base-content/60 min-w-[36px] text-center tabular-nums">100%</span>
+            <button onclick="pdfViewerZoomIn()" class="btn btn-ghost btn-xs btn-circle">
+              <i class="fas fa-plus text-xs"></i>
+            </button>
+          </div>
+          <button id="pdfNextBtn" onclick="pdfViewerNext()" class="btn btn-ghost btn-sm gap-1" disabled>
+            <span class="hidden sm:inline">Next</span> <i class="fas fa-chevron-right"></i>
+          </button>
         </div>
       </div>
     </dialog>

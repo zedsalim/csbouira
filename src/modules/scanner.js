@@ -2,6 +2,7 @@ import { perspectiveTransform, applyColorAdjustments } from '../utils/helpers.js
 import { jsPDF } from 'jspdf'
 
 let cameraStream = null
+let currentFacing = 'environment'
 let baseCanvas = null
 let editorCanvas = null
 let editorCtx = null
@@ -33,6 +34,7 @@ export function initScanner() {
   window.applyCrop = applyCrop
   window.applyPerspective = applyPerspective
   window.applyColors = applyColors
+  window.switchCamera = switchCamera
 
   const galleryInput = document.getElementById('scannerGalleryInput')
   if (galleryInput) {
@@ -82,20 +84,40 @@ function closeScannerModal() {
 
 async function startCamera() {
   const video = document.getElementById('scannerVideo')
+  const switchBtn = document.getElementById('switchCameraBtn')
   if (!video) return
   try {
     cameraStream = await navigator.mediaDevices.getUserMedia({
-      video: { facingMode: 'environment', width: { ideal: 1920 }, height: { ideal: 1080 } },
+      video: { facingMode: { exact: currentFacing }, width: { ideal: 1920 }, height: { ideal: 1080 } },
     })
     video.srcObject = cameraStream
     await video.play()
     document.getElementById('scannerPlaceholder')?.classList.add('hidden')
     video.classList.remove('hidden')
+    if (switchBtn) switchBtn.classList.remove('hidden')
   } catch {
-    document.getElementById('scannerPlaceholder')?.classList.remove('hidden')
-    document.getElementById('scannerPlaceholderText').textContent =
-      'Camera not available. Use Gallery to pick an image.'
+    try {
+      cameraStream = await navigator.mediaDevices.getUserMedia({
+        video: { width: { ideal: 1920 }, height: { ideal: 1080 } },
+      })
+      video.srcObject = cameraStream
+      await video.play()
+      document.getElementById('scannerPlaceholder')?.classList.add('hidden')
+      video.classList.remove('hidden')
+      if (switchBtn) switchBtn.classList.add('hidden')
+    } catch {
+      document.getElementById('scannerPlaceholder')?.classList.remove('hidden')
+      document.getElementById('scannerPlaceholderText').textContent =
+        'Camera not available. Use Gallery to pick an image.'
+      if (switchBtn) switchBtn.classList.add('hidden')
+    }
   }
+}
+
+async function switchCamera() {
+  currentFacing = currentFacing === 'environment' ? 'user' : 'environment'
+  stopCamera()
+  await startCamera()
 }
 
 function stopCamera() {

@@ -1,0 +1,10 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "devtool": {
+      "type": "local",
+      "command": ["npx", "-y", "@anthropic-ai/devtool-mcp"],
+      "enabled": true
+    }
+  }
+}

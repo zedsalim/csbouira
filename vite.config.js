@@ -1,6 +1,7 @@
 import { defineConfig } from "vite";
 import tailwindcss from "@tailwindcss/vite";
 import { createHtmlPlugin } from "vite-plugin-html";
+import basicSsl from "@vitejs/plugin-basic-ssl";
 
 export default defineConfig({
   resolve: {
@@ -13,6 +14,7 @@ export default defineConfig({
     port: 3000,
   },
   plugins: [
+    basicSsl(),
     tailwindcss(),
     createHtmlPlugin({
       minify: {

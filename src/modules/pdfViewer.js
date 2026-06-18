@@ -9,6 +9,9 @@ let currentPdf = null
 let currentPage = 1
 let totalPages = 0
 let currentScale = 1.0
+let isLoading = false
+let touchStartX = 0
+let touchStartY = 0
 
 export function initPdfViewer() {
   window.closePdfViewer = closePdfViewer
@@ -16,6 +19,23 @@ export function initPdfViewer() {
   window.pdfViewerNext = pdfViewerNext
   window.pdfViewerZoomIn = pdfViewerZoomIn
   window.pdfViewerZoomOut = pdfViewerZoomOut
+
+  const container = document.getElementById('pdfViewerContainer')
+  if (container) {
+    container.addEventListener('touchstart', (e) => {
+      touchStartX = e.touches[0].clientX
+      touchStartY = e.touches[0].clientY
+    }, { passive: true })
+
+    container.addEventListener('touchend', (e) => {
+      const dx = e.changedTouches[0].clientX - touchStartX
+      const dy = e.changedTouches[0].clientY - touchStartY
+      if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+        if (dx < 0) pdfViewerNext()
+        else pdfViewerPrev()
+      }
+    }, { passive: true })
+  }
 }
 
 export function openPdfViewer(file) {
@@ -23,6 +43,21 @@ export function openPdfViewer(file) {
     previewGenericFile(file)
     return
   }
+
+  const spinner = document.getElementById('pdfViewerSpinner')
+  const canvas = document.getElementById('pdfViewerCanvas')
+  const container = document.getElementById('pdfViewerContainer')
+  const fallback = document.getElementById('pdfViewerFallback')
+
+  if (spinner) spinner.classList.remove('hidden')
+  if (canvas) canvas.classList.add('hidden')
+  container?.classList.remove('hidden')
+  fallback?.classList.add('hidden')
+
+  document.getElementById('pdfViewerTitle').innerHTML =
+    `<i class="fas fa-file-pdf text-error mr-1"></i> ${escapeHtml(file.name)}`
+
+  document.getElementById('pdfViewerModal')?.showModal()
 
   const reader = new FileReader()
   reader.onload = async (e) => {
@@ -33,16 +68,13 @@ export function openPdfViewer(file) {
       currentPage = 1
       currentScale = 1.0
 
-      document.getElementById('pdfViewerTitle').innerHTML =
-        `<i class="fas fa-file-pdf text-error mr-1"></i> ${escapeHtml(file.name)}`
-      document.getElementById('pdfViewerFallback')?.classList.add('hidden')
-      document.getElementById('pdfViewerContainer')?.classList.remove('hidden')
-
       updatePageInfo()
       await renderPage(currentPage)
 
-      document.getElementById('pdfViewerModal')?.showModal()
+      if (spinner) spinner.classList.add('hidden')
+      if (canvas) canvas.classList.remove('hidden')
     } catch {
+      if (spinner) spinner.classList.add('hidden')
       previewGenericFile(file)
     }
   }
@@ -53,26 +85,29 @@ function previewGenericFile(file) {
   const container = document.getElementById('pdfViewerContainer')
   const fallback = document.getElementById('pdfViewerFallback')
   const canvas = document.getElementById('pdfViewerCanvas')
+  const spinner = document.getElementById('pdfViewerSpinner')
 
+  spinner?.classList.add('hidden')
   container?.classList.add('hidden')
   fallback?.classList.remove('hidden')
-  if (canvas) canvas.style.display = 'none'
+  if (canvas) canvas.classList.add('hidden')
 
   document.getElementById('pdfViewerTitle').innerHTML =
     `<i class="fas fa-file text-base-content/60 mr-1"></i> ${escapeHtml(file.name)}`
-  document.getElementById('pdfViewerModal')?.showModal()
+
+  if (!document.getElementById('pdfViewerModal')?.open) {
+    document.getElementById('pdfViewerModal')?.showModal()
+  }
 }
 
 async function renderPage(num) {
   if (!currentPdf) return
   const page = await currentPdf.getPage(num)
-  const viewport = page.getViewport({ scale: currentScale * (window.devicePixelRatio || 1) })
-
-  const canvas = document.getElementById('pdfViewerCanvas')
-  if (!canvas) return
-  canvas.style.display = 'block'
 
   const container = document.getElementById('pdfViewerContainer')
+  const canvas = document.getElementById('pdfViewerCanvas')
+  if (!canvas || !container) return
+
   const maxW = container.clientWidth - 16
   const baseViewport = page.getViewport({ scale: 1.0 })
   const fitScale = Math.min(maxW / baseViewport.width, 2.0)
@@ -138,11 +173,13 @@ function closePdfViewer() {
   totalPages = 0
   currentScale = 1.0
   const canvas = document.getElementById('pdfViewerCanvas')
+  const spinner = document.getElementById('pdfViewerSpinner')
   if (canvas) {
-    canvas.style.display = 'block'
+    canvas.classList.add('hidden')
     const ctx = canvas.getContext('2d')
     ctx?.clearRect(0, 0, canvas.width, canvas.height)
   }
+  spinner?.classList.remove('hidden')
 }
 
 function escapeHtml(str) {
