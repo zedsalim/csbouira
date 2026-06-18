@@ -18,10 +18,12 @@ let perspectiveState = {
   ],
   dragging: -1,
 }
-let colorState = { brightness: 100, contrast: 100, saturation: 100, grayscale: 0 }
+let colorState = { brightness: 100, contrast: 100, saturation: 100, grayscale: 0, sharpness: 0, clarity: 0, highlights: 0 }
 
 let onFileReady = null
 let colorDirty = false
+let previewCanvas = null
+let previewCtx = null
 
 export function initScanner() {
   window.openScannerModal = openScannerModal
@@ -53,7 +55,7 @@ export function initScanner() {
     setupEditorEvents()
   }
 
-  const colorSliders = ['brightness', 'contrast', 'saturation', 'grayscale']
+  const colorSliders = ['brightness', 'contrast', 'saturation', 'grayscale', 'sharpness', 'clarity', 'highlights']
   colorSliders.forEach((id) => {
     const el = document.getElementById(id + 'Slider')
     if (el) {
@@ -223,7 +225,9 @@ function openEditor() {
 
   resetCropState()
   resetPerspectiveState()
-  colorState = { brightness: 100, contrast: 100, saturation: 100, grayscale: 0 }
+  colorState = { brightness: 100, contrast: 100, saturation: 100, grayscale: 0, sharpness: 0, clarity: 0, highlights: 0 }
+  previewCanvas = null
+  previewCtx = null
   resetColorSliderUI()
 
   activeTab = 'crop'
@@ -248,7 +252,9 @@ function switchEditorTab(tab) {
   if (tab === 'crop') resetCropState()
   if (tab === 'perspective') resetPerspectiveState()
   if (tab === 'colors') {
-    colorState = { brightness: 100, contrast: 100, saturation: 100, grayscale: 0 }
+    colorState = { brightness: 100, contrast: 100, saturation: 100, grayscale: 0, sharpness: 0, clarity: 0, highlights: 0 }
+    previewCanvas = null
+    previewCtx = null
     resetColorSliderUI()
   }
   renderEditor()
@@ -291,32 +297,87 @@ function scheduleColorRender() {
   colorDirty = true
   requestAnimationFrame(() => {
     colorDirty = false
-    renderEditor()
+    applyColorPreview()
   })
+}
+
+function ensurePreviewCanvas() {
+  if (previewCanvas) return
+  const maxPreview = 400
+  const scale = Math.min(maxPreview / baseCanvas.width, maxPreview / baseCanvas.height, 1)
+  previewCanvas = document.createElement('canvas')
+  previewCanvas.width = Math.round(baseCanvas.width * scale)
+  previewCanvas.height = Math.round(baseCanvas.height * scale)
+  previewCtx = previewCanvas.getContext('2d', { willReadFrequently: true })
 }
 
 function applyColorPreview() {
   if (!editorCanvas || !editorCtx || !baseCanvas) return
-  const { brightness, contrast, saturation, grayscale } = colorState
-  if (brightness === 100 && contrast === 100 && saturation === 100 && grayscale === 0) {
+  ensurePreviewCanvas()
+
+  const { brightness, contrast, saturation, grayscale, sharpness, clarity, highlights } = colorState
+  const isDefault = brightness === 100 && contrast === 100 && saturation === 100 &&
+    grayscale === 0 && sharpness === 0 && clarity === 0 && highlights === 0
+
+  if (isDefault) {
+    editorCtx.clearRect(0, 0, editorCanvas.width, editorCanvas.height)
     editorCtx.drawImage(baseCanvas, 0, 0, editorCanvas.width, editorCanvas.height)
     return
   }
 
-  const tmp = document.createElement('canvas')
-  tmp.width = editorCanvas.width
-  tmp.height = editorCanvas.height
-  const tmpCtx = tmp.getContext('2d')
-  tmpCtx.drawImage(baseCanvas, 0, 0, editorCanvas.width, editorCanvas.height)
-  const imageData = tmpCtx.getImageData(0, 0, tmp.width, tmp.height)
+  previewCtx.drawImage(baseCanvas, 0, 0, previewCanvas.width, previewCanvas.height)
+  const imageData = previewCtx.getImageData(0, 0, previewCanvas.width, previewCanvas.height)
   const d = imageData.data
+  const len = d.length
 
   const bF = brightness / 100
   const cF = (contrast / 100 + 0.5) / 0.5
   const sF = saturation / 100
   const gF = grayscale / 100
+  const hF = highlights / 100
+  const cStrength = clarity / 100
 
-  for (let i = 0; i < d.length; i += 4) {
+  if (clarity !== 0 || highlights !== 0) {
+    const lum = new Float32Array(len / 4)
+    for (let i = 0; i < len; i += 4) {
+      lum[i >> 2] = 0.2126 * d[i] + 0.7152 * d[i + 1] + 0.0722 * d[i + 2]
+    }
+    if (clarity !== 0) {
+      const w = previewCanvas.width
+      for (let i = 0; i < len; i += 4) {
+        const idx = i >> 2
+        const x = idx % w
+        const y = (idx / w) | 0
+        let sum = 0, cnt = 0
+        for (let dy = -1; dy <= 1; dy++) {
+          for (let dx = -1; dx <= 1; dx++) {
+            const nx = x + dx, ny = y + dy
+            if (nx >= 0 && nx < w && ny >= 0 && ny < (previewCanvas.height)) {
+              sum += lum[ny * w + nx]
+              cnt++
+            }
+          }
+        }
+        const local = lum[idx]
+        const avg = sum / cnt
+        const diff = (local - avg) * cStrength
+        d[i] += diff
+        d[i + 1] += diff
+        d[i + 2] += diff
+      }
+    }
+    if (highlights !== 0) {
+      for (let i = 0; i < len; i += 4) {
+        const l = lum[i >> 2]
+        const factor = hF * (1 - l / 255)
+        d[i] += factor * 40
+        d[i + 1] += factor * 40
+        d[i + 2] += factor * 40
+      }
+    }
+  }
+
+  for (let i = 0; i < len; i += 4) {
     let r = d[i] * bF
     let g = d[i + 1] * bF
     let b = d[i + 2] * bF
@@ -336,8 +397,31 @@ function applyColorPreview() {
     d[i + 2] = b < 0 ? 0 : b > 255 ? 255 : b
   }
 
-  tmpCtx.putImageData(imageData, 0, 0)
-  editorCtx.drawImage(tmp, 0, 0)
+  if (sharpness !== 0) {
+    const w = previewCanvas.width
+    const h = previewCanvas.height
+    const orig = new Uint8ClampedArray(d)
+    const amount = sharpness / 100 * 2
+    for (let y = 1; y < h - 1; y++) {
+      for (let x = 1; x < w - 1; x++) {
+        const idx = (y * w + x) * 4
+        for (let c = 0; c < 3; c++) {
+          const center = orig[idx + c] * 5
+          const neighbors =
+            orig[((y - 1) * w + x) * 4 + c] +
+            orig[((y + 1) * w + x) * 4 + c] +
+            orig[(y * w + x - 1) * 4 + c] +
+            orig[(y * w + x + 1) * 4 + c]
+          const laplacian = center - neighbors
+          d[idx + c] = Math.max(0, Math.min(255, orig[idx + c] + laplacian * amount))
+        }
+      }
+    }
+  }
+
+  previewCtx.putImageData(imageData, 0, 0)
+  editorCtx.clearRect(0, 0, editorCanvas.width, editorCanvas.height)
+  editorCtx.drawImage(previewCanvas, 0, 0, editorCanvas.width, editorCanvas.height)
 }
 
 function drawCropOverlay() {
@@ -621,7 +705,8 @@ function applyColors() {
 
   const isDefault =
     colorState.brightness === 100 && colorState.contrast === 100 &&
-    colorState.saturation === 100 && colorState.grayscale === 0
+    colorState.saturation === 100 && colorState.grayscale === 0 &&
+    colorState.sharpness === 0 && colorState.clarity === 0 && colorState.highlights === 0
   if (isDefault) {
     showToast('No color changes')
     return
@@ -637,7 +722,9 @@ function applyColors() {
   editorCanvas.width = tmp.width
   editorCanvas.height = tmp.height
 
-  colorState = { brightness: 100, contrast: 100, saturation: 100, grayscale: 0 }
+  colorState = { brightness: 100, contrast: 100, saturation: 100, grayscale: 0, sharpness: 0, clarity: 0, highlights: 0 }
+  previewCanvas = null
+  previewCtx = null
   resetColorSliderUI()
   renderEditor()
   showToast('Colors applied')
@@ -685,13 +772,15 @@ async function saveScannerPdf() {
 }
 
 function resetColorSliders() {
-  colorState = { brightness: 100, contrast: 100, saturation: 100, grayscale: 0 }
+  colorState = { brightness: 100, contrast: 100, saturation: 100, grayscale: 0, sharpness: 0, clarity: 0, highlights: 0 }
+  previewCanvas = null
+  previewCtx = null
   resetColorSliderUI()
   renderEditor()
 }
 
 function resetColorSliderUI() {
-  const map = { brightnessSlider: 100, contrastSlider: 100, saturationSlider: 100, grayscaleSlider: 0 }
+  const map = { brightnessSlider: 100, contrastSlider: 100, saturationSlider: 100, grayscaleSlider: 0, sharpnessSlider: 0, claritySlider: 0, highlightsSlider: 0 }
   Object.entries(map).forEach(([id, val]) => {
     const el = document.getElementById(id)
     if (el) el.value = val

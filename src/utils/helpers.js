@@ -145,41 +145,96 @@ export function perspectiveTransform(srcCanvas, srcPoints, dstW, dstH) {
   return dst
 }
 
-export function applyColorAdjustments(canvas, { brightness = 100, contrast = 100, saturation = 100, grayscale = 0 }) {
+export function applyColorAdjustments(canvas, { brightness = 100, contrast = 100, saturation = 100, grayscale = 0, sharpness = 0, clarity = 0, highlights = 0 }) {
   const ctx = canvas.getContext('2d')
   const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
   const data = imageData.data
+  const len = data.length
 
-  const bFactor = brightness / 100
-  const cFactor = (contrast / 100 + 0.5) / 0.5
-  const sFactor = saturation / 100
+  const bF = brightness / 100
+  const cF = (contrast / 100 + 0.5) / 0.5
+  const sF = saturation / 100
+  const gF = grayscale / 100
+  const hF = highlights / 100
+  const cStrength = clarity / 100
 
-  for (let i = 0; i < data.length; i += 4) {
-    let r = data[i]
-    let g = data[i + 1]
-    let b = data[i + 2]
+  if (clarity !== 0 || highlights !== 0) {
+    const lum = new Float32Array(len / 4)
+    for (let i = 0; i < len; i += 4) {
+      lum[i >> 2] = 0.2126 * data[i] + 0.7152 * data[i + 1] + 0.0722 * data[i + 2]
+    }
+    if (clarity !== 0) {
+      const w = canvas.width
+      const h = canvas.height
+      for (let i = 0; i < len; i += 4) {
+        const idx = i >> 2
+        const x = idx % w
+        const y = (idx / w) | 0
+        let sum = 0, cnt = 0
+        for (let dy = -1; dy <= 1; dy++) {
+          for (let dx = -1; dx <= 1; dx++) {
+            const nx = x + dx, ny = y + dy
+            if (nx >= 0 && nx < w && ny >= 0 && ny < h) {
+              sum += lum[ny * w + nx]
+              cnt++
+            }
+          }
+        }
+        const diff = (lum[idx] - sum / cnt) * cStrength
+        data[i] += diff
+        data[i + 1] += diff
+        data[i + 2] += diff
+      }
+    }
+    if (highlights !== 0) {
+      for (let i = 0; i < len; i += 4) {
+        const factor = hF * (1 - lum[i >> 2] / 255)
+        data[i] += factor * 40
+        data[i + 1] += factor * 40
+        data[i + 2] += factor * 40
+      }
+    }
+  }
 
-    r *= bFactor
-    g *= bFactor
-    b *= bFactor
-
-    r = (r - 128) * cFactor + 128
-    g = (g - 128) * cFactor + 128
-    b = (b - 128) * cFactor + 128
-
+  for (let i = 0; i < len; i += 4) {
+    let r = data[i] * bF
+    let g = data[i + 1] * bF
+    let b = data[i + 2] * bF
+    r = (r - 128) * cF + 128
+    g = (g - 128) * cF + 128
+    b = (b - 128) * cF + 128
     const gray = 0.2126 * r + 0.7152 * g + 0.0722 * b
-    r = r * (1 - grayscale / 100) + gray * (grayscale / 100)
-    g = g * (1 - grayscale / 100) + gray * (grayscale / 100)
-    b = b * (1 - grayscale / 100) + gray * (grayscale / 100)
-
+    r = r * (1 - gF) + gray * gF
+    g = g * (1 - gF) + gray * gF
+    b = b * (1 - gF) + gray * gF
     const avg = (r + g + b) / 3
-    r = r + (r - avg) * (sFactor - 1)
-    g = g + (g - avg) * (sFactor - 1)
-    b = b + (b - avg) * (sFactor - 1)
-
+    r += (r - avg) * (sF - 1)
+    g += (g - avg) * (sF - 1)
+    b += (b - avg) * (sF - 1)
     data[i] = Math.max(0, Math.min(255, r))
     data[i + 1] = Math.max(0, Math.min(255, g))
     data[i + 2] = Math.max(0, Math.min(255, b))
+  }
+
+  if (sharpness !== 0) {
+    const w = canvas.width
+    const h = canvas.height
+    const orig = new Uint8ClampedArray(data)
+    const amount = sharpness / 100 * 2
+    for (let y = 1; y < h - 1; y++) {
+      for (let x = 1; x < w - 1; x++) {
+        const idx = (y * w + x) * 4
+        for (let c = 0; c < 3; c++) {
+          const center = orig[idx + c] * 5
+          const neighbors =
+            orig[((y - 1) * w + x) * 4 + c] +
+            orig[((y + 1) * w + x) * 4 + c] +
+            orig[(y * w + x - 1) * 4 + c] +
+            orig[(y * w + x + 1) * 4 + c]
+          data[idx + c] = Math.max(0, Math.min(255, orig[idx + c] + (center - neighbors) * amount))
+        }
+      }
+    }
   }
 
   ctx.putImageData(imageData, 0, 0)
