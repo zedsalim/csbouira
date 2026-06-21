@@ -5,4 +5,4 @@ dist/
 node_modules/
 
 # opencode
-.opencode/
+opencode.json
