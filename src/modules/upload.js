@@ -2,6 +2,7 @@ import { CONFIG } from '../config.js'
 import { formatFileSize, readFileAsBase64 } from '../utils/helpers.js'
 import { setScannerCallback } from './scanner.js'
 import { openPdfViewer } from './pdfViewer.js'
+import { triggerCelebration } from './celebration.js'
 
 let selectedFiles = []
 let isUploading = false
@@ -31,7 +32,16 @@ export function initUpload() {
   if (!form || !filesInput) return
 
   filesInput.addEventListener('change', (e) => {
-    selectedFiles = Array.from(e.target.files)
+    const newFiles = Array.from(e.target.files)
+    for (const f of newFiles) {
+      const exists = selectedFiles.some(
+        (existing) => existing.name === f.name && existing.size === f.size && existing.lastModified === f.lastModified,
+      )
+      if (!exists) selectedFiles.push(f)
+    }
+    const dt = new DataTransfer()
+    selectedFiles.forEach((f) => dt.items.add(f))
+    filesInput.files = dt.files
     renderFilesList()
   })
 
@@ -234,6 +244,7 @@ async function handleUploadSubmit(e) {
     selectedFiles = []
     renderFilesList()
     setTimeout(() => progressContainer.classList.add('hidden'), 5000)
+    setTimeout(showThankYouPopup, 300)
   } else if (successCount > 0) {
     showUploadMessage(`⚠ ${successCount} file(s) uploaded, ${failCount} failed`, 'error')
   } else {
@@ -260,4 +271,27 @@ function showUploadMessage(text, type) {
   el.className = `alert mt-3 ${type === 'success' ? 'alert-success' : 'alert-error'}`
   el.classList.remove('hidden')
   if (type === 'success') setTimeout(() => el.classList.add('hidden'), 5000)
+}
+
+function showThankYouPopup() {
+  closeUploadModal()
+  try { triggerCelebration() } catch {}
+  const existing = document.getElementById('thankYouToast')
+  if (existing) existing.remove()
+
+  const toast = document.createElement('div')
+  toast.id = 'thankYouToast'
+  toast.className = 'fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[99999] flex flex-col items-center gap-3 bg-base-100 border border-base-300 shadow-2xl rounded-2xl px-8 py-10 text-center'
+  toast.innerHTML = `
+    <div class="w-16 h-16 rounded-full bg-success/20 flex items-center justify-center">
+      <i class="fas fa-heart text-3xl text-success"></i>
+    </div>
+    <h3 class="text-2xl font-bold">Thank You!</h3>
+    <p class="text-base-content/70 max-w-xs">Your files have been uploaded successfully. We appreciate your contribution!</p>
+    <button class="btn btn-primary btn-sm rounded-xl mt-2" onclick="this.closest('#thankYouToast').remove()">
+      <i class="fas fa-check"></i> Got it
+    </button>
+  `
+  document.body.appendChild(toast)
+  setTimeout(() => toast.remove(), 6000)
 }
