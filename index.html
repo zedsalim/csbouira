@@ -1146,9 +1146,16 @@
                 type="file"
                 id="files"
                 multiple
-                class="file-input file-input-bordered border border-base-300 w-full rounded-xl"
+                class="hidden"
                 required
               />
+              <label
+                for="files"
+                class="btn btn-outline btn-primary w-full rounded-xl h-auto min-h-[3rem] py-2.5 cursor-pointer gap-2"
+              >
+                <i class="fas fa-folder-open"></i>
+                Choose Files
+              </label>
               <p class="text-xs mt-2 text-base-content/60">
                 Max file size per file: 25MB. You can select multiple files.
               </p>

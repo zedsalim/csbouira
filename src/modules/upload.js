@@ -281,14 +281,14 @@ function showThankYouPopup() {
 
   const toast = document.createElement('div')
   toast.id = 'thankYouToast'
-  toast.className = 'fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[99999] flex flex-col items-center gap-3 bg-base-100 border border-base-300 shadow-2xl rounded-2xl px-8 py-10 text-center'
+  toast.className = 'fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[99999] flex flex-col items-center gap-4 bg-base-100 border border-base-300 shadow-2xl rounded-2xl px-14 py-12 text-center w-[420px]'
   toast.innerHTML = `
-    <div class="w-16 h-16 rounded-full bg-success/20 flex items-center justify-center">
-      <i class="fas fa-heart text-3xl text-success"></i>
+    <div class="w-20 h-20 rounded-full bg-success/20 flex items-center justify-center">
+      <i class="fas fa-heart text-4xl text-success"></i>
     </div>
-    <h3 class="text-2xl font-bold">Thank You!</h3>
-    <p class="text-base-content/70 max-w-xs">Your files have been uploaded successfully. We appreciate your contribution!</p>
-    <button class="btn btn-primary btn-sm rounded-xl mt-2" onclick="this.closest('#thankYouToast').remove()">
+    <h3 class="text-3xl font-bold">Thank You!</h3>
+    <p class="text-base-content/70 max-w-sm">Your files have been uploaded successfully. We appreciate your contribution!</p>
+    <button class="btn btn-primary rounded-xl mt-3" onclick="this.closest('#thankYouToast').remove()">
       <i class="fas fa-check"></i> Got it
     </button>
   `
