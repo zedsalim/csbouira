@@ -91,6 +91,7 @@ A special thanks to those who have contributed by uploading valuable files and r
 </ul>
 <h3>👥 Contributors</h3>
 <ul>
+<li>A7med</li>
 <li>Abdessamed Laidani</li>
 <li>Akkache Amira</li>
 <li>Amira</li>
@@ -108,6 +109,7 @@ A special thanks to those who have contributed by uploading valuable files and r
 <li>Fatima</li>
 <li>Feradji Houria</li>
 <li>Grine Ines</li>
+<li>Hke Hke</li>
 <li>Ibtihal</li>
 <li>Ithar</li>
 <li>Katia</li>
@@ -118,6 +120,7 @@ A special thanks to those who have contributed by uploading valuable files and r
 <li>Moon</li>
 <li>Nacim Amanzougaghene</li>
 <li>Nihad</li>
+<li>Ojgohg</li>
 <li>Omega Madris</li>
 <li>Oulefki Dallal</li>
 <li>Rania</li>
@@ -129,10 +132,13 @@ A special thanks to those who have contributed by uploading valuable files and r
 <li>Taha Zerrouki</li>
 <li>Test</li>
 <li>Tibi</li>
+<li>Vasco</li>
+<li>Wahab Rafa</li>
 <li>Wissal Slimani</li>
 <li>Yacine Khellal</li>
 <li>Yasmine</li>
 <li>Zineb Hammoudi</li>
+<li>غاا</li>
 </ul>
 <!-- END FILE_UPLOADS -->
 
