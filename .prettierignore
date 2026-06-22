@@ -1,0 +1,6 @@
+dist/
+node_modules/
+package-lock.json
+
+# Large hand-maintained markup; left untouched to keep diffs reviewable.
+index.html
