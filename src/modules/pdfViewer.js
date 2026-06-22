@@ -17,7 +17,6 @@ let currentPdf = null
 let currentPage = 1
 let totalPages = 0
 let currentScale = 1.0
-let isLoading = false
 let touchStartX = 0
 let touchStartY = 0
 
