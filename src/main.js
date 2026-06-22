@@ -1,6 +1,8 @@
 import './style.css';
 import { initSearch, openSearchModal } from './modules/search.js';
 import { initUpload } from './modules/upload.js';
+import { initScanner } from './modules/scanner.js';
+import { initPdfViewer } from './modules/pdfViewer.js';
 import {
   initFavorites,
   toggleFavorite,
@@ -681,6 +683,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initLoader();
   initSearch();
   initUpload();
+  initScanner();
+  initPdfViewer();
   initFavorites();
   initContact();
   initDhikr();

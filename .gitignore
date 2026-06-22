@@ -3,3 +3,6 @@ dist/
 
 # dependencies
 node_modules/
+
+# opencode
+opencode.json

@@ -8,13 +8,19 @@
   },
   "dependencies": {
     "canvas-confetti": "^1",
-    "daisyui": "^5",
-    "lucide": "latest"
+    "daisyui": "^5.5.23",
+    "jspdf": "^4.2.1",
+    "lucide": "latest",
+    "pdfjs-dist": "^6.0.227"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4",
+    "@vitejs/plugin-basic-ssl": "^2.3.0",
     "tailwindcss": "^4",
     "vite": "^8",
     "vite-plugin-html": "^3.2.2"
+  },
+  "engines": {
+    "node": "22.14.0"
   }
 }
