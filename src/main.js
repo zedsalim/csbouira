@@ -7,7 +7,6 @@ import {
   initFavorites,
   toggleFavorite,
   isFavorite,
-  renderFavoritesSection,
 } from './modules/favorites.js';
 import { initLoader } from './modules/loader.js';
 import { initContact } from './modules/contact.js';

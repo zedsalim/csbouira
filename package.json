@@ -1,10 +1,14 @@
 {
   "name": "csbouira",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "dependencies": {
     "canvas-confetti": "^1",
@@ -14,7 +18,11 @@
     "pdfjs-dist": "^6.0.227"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@tailwindcss/vite": "^4",
+    "eslint": "^10.5.0",
+    "globals": "^17.6.0",
+    "prettier": "^3.8.4",
     "tailwindcss": "^4",
     "vite": "^8",
     "vite-plugin-html": "^3.2.2"
