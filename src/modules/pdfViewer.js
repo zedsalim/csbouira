@@ -1,9 +1,17 @@
-import * as pdfjsLib from 'pdfjs-dist'
+// pdfjs-dist is heavy, so it is loaded on demand the first time a PDF is opened
+// rather than being pulled into the initial bundle.
+let pdfjsLib = null
 
-pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(
-  'pdfjs-dist/build/pdf.worker.min.mjs',
-  import.meta.url,
-).href
+async function getPdfjs() {
+  if (!pdfjsLib) {
+    pdfjsLib = await import('pdfjs-dist')
+    pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(
+      'pdfjs-dist/build/pdf.worker.min.mjs',
+      import.meta.url,
+    ).href
+  }
+  return pdfjsLib
+}
 
 let currentPdf = null
 let currentPage = 1
@@ -62,8 +70,9 @@ export function openPdfViewer(file) {
   const reader = new FileReader()
   reader.onload = async (e) => {
     try {
+      const pdfjs = await getPdfjs()
       const typedarray = new Uint8Array(e.target.result)
-      currentPdf = await pdfjsLib.getDocument({ data: typedarray }).promise
+      currentPdf = await pdfjs.getDocument({ data: typedarray }).promise
       totalPages = currentPdf.numPages
       currentPage = 1
       currentScale = 1.0

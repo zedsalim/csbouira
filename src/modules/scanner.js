@@ -1,5 +1,4 @@
 import { perspectiveTransform, applyColorAdjustments } from '../utils/helpers.js'
-import { jsPDF } from 'jspdf'
 
 let cameraStream = null
 let baseCanvas = null
@@ -713,6 +712,9 @@ async function saveScannerPdf() {
   const imgData = src.toDataURL('image/jpeg', 0.9)
   const pxW = src.width
   const pxH = src.height
+
+  // Load jsPDF on demand so it stays out of the initial bundle.
+  const { jsPDF } = await import('jspdf')
 
   const pdf = new jsPDF({
     orientation: pxW > pxH ? 'landscape' : 'portrait',
