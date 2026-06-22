@@ -1,17 +1,15 @@
 export function debounce(fn, delay = 300) {
   let timer
-  return function (...args) {
+  function debounced(...args) {
     clearTimeout(timer)
     timer = setTimeout(() => fn.apply(this, args), delay)
   }
+  debounced.cancel = () => clearTimeout(timer)
+  return debounced
 }
 
 export function validateEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
-}
-
-export function formatDate(dateStr) {
-  return new Date(dateStr).toLocaleDateString()
 }
 
 export function formatFileSize(bytes) {
@@ -94,14 +92,6 @@ export function lockBodyScroll() {
 export function unlockBodyScroll() {
   _bodyScrollLocked = false
   document.body.classList.remove('overflow-hidden', 'touch-none')
-}
-
-export function canvasToFile(canvas, filename = 'scan.pdf', mimeType = 'application/pdf') {
-  return new Promise((resolve) => {
-    canvas.toBlob((blob) => {
-      resolve(new File([blob], filename, { type: mimeType }))
-    }, mimeType === 'application/pdf' ? 'image/png' : mimeType, 0.92)
-  })
 }
 
 export function perspectiveTransform(srcCanvas, srcPoints, dstW, dstH) {

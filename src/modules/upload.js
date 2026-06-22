@@ -275,7 +275,7 @@ function showUploadMessage(text, type) {
 
 function showThankYouPopup() {
   closeUploadModal()
-  try { triggerCelebration() } catch {}
+  triggerCelebration().catch(() => {})
   const existing = document.getElementById('thankYouToast')
   if (existing) existing.remove()
 

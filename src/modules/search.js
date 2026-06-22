@@ -336,7 +336,7 @@ export function initSearch() {
     const debouncedSearch = debounce(triggerSearch, 300)
     searchInput.addEventListener('input', debouncedSearch)
     searchInput.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') { clearTimeout(debouncedSearch._timer); triggerSearch() }
+      if (e.key === 'Enter') { debouncedSearch.cancel(); triggerSearch() }
     })
   }
 

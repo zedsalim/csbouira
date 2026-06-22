@@ -14,7 +14,11 @@ import { initContact } from './modules/contact.js';
 import { initDhikr } from './modules/dhikr.js';
 import { initTheme } from './modules/theme.js';
 import { CONFIG } from './config.js';
-import { getFileIconClass } from './utils/helpers.js';
+import {
+  getFileIconClass,
+  lockBodyScroll,
+  unlockBodyScroll,
+} from './utils/helpers.js';
 
 // ── State ──────────────────────────────────────────────────────────────────
 let currentPath = [];
@@ -29,12 +33,9 @@ const yearList = [
 ];
 
 // ── Body scroll lock ───────────────────────────────────────────────────────
-function lockBody() {
-  document.body.classList.add('overflow-hidden');
-}
-function unlockBody() {
-  document.body.classList.remove('overflow-hidden');
-}
+// Shared with the rest of the app via helpers (also locks touch scrolling).
+const lockBody = lockBodyScroll;
+const unlockBody = unlockBodyScroll;
 
 // ── Year cards ─────────────────────────────────────────────────────────────
 function renderYearCards(years, containerId, icon) {
@@ -108,8 +109,8 @@ async function loadYears() {
     'master2-cards',
     'fas fa-user-graduate',
   );
-  await loadAllFileCounts();
-  await loadOnlineResources();
+  // Independent requests — fetch them in parallel.
+  await Promise.all([loadAllFileCounts(), loadOnlineResources()]);
 }
 
 // ── Year modal ─────────────────────────────────────────────────────────────
@@ -696,29 +697,4 @@ document.addEventListener('DOMContentLoaded', () => {
   // Footer year
   const yearEl = document.getElementById('currentYear');
   if (yearEl) yearEl.textContent = `© ${new Date().getFullYear()}`;
-
-  // Theme persistence: sync all toggle checkboxes to saved theme & save on change
-  const savedTheme = localStorage.getItem('theme');
-  const htmlEl = document.documentElement;
-  if (savedTheme) htmlEl.setAttribute('data-theme', savedTheme);
-
-  function syncThemeToggles() {
-    const isDark = htmlEl.getAttribute('data-theme') === CONFIG.theme.dark;
-    document.querySelectorAll('[data-theme="toggle"]').forEach((cb) => {
-      cb.checked = isDark;
-    });
-  }
-  syncThemeToggles();
-
-  document.querySelectorAll('[data-theme="toggle"]').forEach((cb) => {
-    cb.addEventListener('change', () => {
-      const newTheme = cb.checked ? CONFIG.theme.dark : CONFIG.theme.light;
-      htmlEl.setAttribute('data-theme', newTheme);
-      localStorage.setItem('theme', newTheme);
-      // keep all toggles in sync
-      document.querySelectorAll('[data-theme="toggle"]').forEach((other) => {
-        if (other !== cb) other.checked = cb.checked;
-      });
-    });
-  });
 });
