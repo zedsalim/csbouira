@@ -52,7 +52,8 @@ We appreciate the efforts of everyone who has contributed to the source code of 
 <!-- START GITHUB_CONTRIBUTORS -->
 <table>
 <tr>
-<td style="text-align: center; width: 100px;"><a href="https://github.com/zedsalim/csbouira/graphs/contributors" target="_blank"><img src="https://avatars.githubusercontent.com/u/121177411?v=4" alt="zedsalim" style="width: 80px; height: 80px;"/></a><br/><span>280 commits</span></td>
+<td style="text-align: center; width: 100px;"><a href="https://github.com/zedsalim/csbouira/graphs/contributors" target="_blank"><img src="https://avatars.githubusercontent.com/u/121177411?v=4" alt="zedsalim" style="width: 80px; height: 80px;"/></a><br/><span>287 commits</span></td>
+<td style="text-align: center; width: 100px;"><a href="https://github.com/zedsalim/csbouira/graphs/contributors" target="_blank"><img src="https://avatars.githubusercontent.com/u/140296603?v=4" alt="A7medAmine" style="width: 80px; height: 80px;"/></a><br/><span>21 commits</span></td>
 <td style="text-align: center; width: 100px;"><a href="https://github.com/zedsalim/csbouira/graphs/contributors" target="_blank"><img src="https://avatars.githubusercontent.com/u/127874935?v=4" alt="magnetarstar-hub" style="width: 80px; height: 80px;"/></a><br/><span>10 commits</span></td>
 <td style="text-align: center; width: 100px;"><a href="https://github.com/zedsalim/csbouira/graphs/contributors" target="_blank"><img src="https://avatars.githubusercontent.com/u/144144223?v=4" alt="YacineDahmani" style="width: 80px; height: 80px;"/></a><br/><span>4 commits</span></td>
 <td style="text-align: center; width: 100px;"><a href="https://github.com/zedsalim/csbouira/graphs/contributors" target="_blank"><img src="https://avatars.githubusercontent.com/u/123634915?v=4" alt="daaaaaaanyyyyy" style="width: 80px; height: 80px;"/></a><br/><span>1 commits</span></td>
@@ -93,6 +94,7 @@ A special thanks to those who have contributed by uploading valuable files and r
 <ul>
 <li>A7med</li>
 <li>Abdessamed Laidani</li>
+<li>Ahmed Abd</li>
 <li>Akkache Amira</li>
 <li>Amira</li>
 <li>Anber Aziz</li>
@@ -109,7 +111,6 @@ A special thanks to those who have contributed by uploading valuable files and r
 <li>Fatima</li>
 <li>Feradji Houria</li>
 <li>Grine Ines</li>
-<li>Hke Hke</li>
 <li>Ibtihal</li>
 <li>Ithar</li>
 <li>Katia</li>
@@ -120,7 +121,6 @@ A special thanks to those who have contributed by uploading valuable files and r
 <li>Moon</li>
 <li>Nacim Amanzougaghene</li>
 <li>Nihad</li>
-<li>Ojgohg</li>
 <li>Omega Madris</li>
 <li>Oulefki Dallal</li>
 <li>Rania</li>
@@ -130,15 +130,11 @@ A special thanks to those who have contributed by uploading valuable files and r
 <li>Sara</li>
 <li>Siham</li>
 <li>Taha Zerrouki</li>
-<li>Test</li>
 <li>Tibi</li>
-<li>Vasco</li>
-<li>Wahab Rafa</li>
 <li>Wissal Slimani</li>
 <li>Yacine Khellal</li>
 <li>Yasmine</li>
 <li>Zineb Hammoudi</li>
-<li>غاا</li>
 </ul>
 <!-- END FILE_UPLOADS -->
 
