@@ -95,6 +95,8 @@ A special thanks to those who have contributed by uploading valuable files and r
 <li>A7med</li>
 <li>Abdessamed Laidani</li>
 <li>Ahmed Abd</li>
+<li>Ahmed Amine Abdesselam</li>
+<li>Ahmednew</li>
 <li>Akkache Amira</li>
 <li>Amira</li>
 <li>Anber Aziz</li>
@@ -111,11 +113,13 @@ A special thanks to those who have contributed by uploading valuable files and r
 <li>Fatima</li>
 <li>Feradji Houria</li>
 <li>Grine Ines</li>
+<li>Guest</li>
 <li>Ibtihal</li>
 <li>Ithar</li>
 <li>Katia</li>
 <li>Kemache Mahdi</li>
 <li>Kenza</li>
+<li>Kvjbi</li>
 <li>Mohand Larbi</li>
 <li>Mohhamed</li>
 <li>Moon</li>
