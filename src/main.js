@@ -608,9 +608,99 @@ function initBackToTop() {
   );
 }
 
+function triggerYearModalUpload() {
+  const prefill = {
+    grade: currentYear || '',
+    semester: '',
+    moduleName: '',
+    fileType: '',
+  };
+
+  if (currentPath && currentPath.length > 1) {
+    // Find Semester (e.g., S1/S2)
+    for (let i = 1; i < currentPath.length; i++) {
+      const pathEl = currentPath[i].toLowerCase();
+      if (
+        pathEl.startsWith('s') ||
+        pathEl.includes('semest') ||
+        pathEl.includes('semester')
+      ) {
+        const match = pathEl.match(/\d+/);
+        if (match) {
+          const num = parseInt(match[0], 10);
+          prefill.semester = num % 2 !== 0 ? 'S1' : 'S2';
+          break;
+        }
+      }
+    }
+
+    // Fallback to first folder name if semester not found
+    if (!prefill.semester) {
+      const firstFolder = currentPath[1].toLowerCase();
+      const match = firstFolder.match(/\d+/);
+      if (match) {
+        const num = parseInt(match[0], 10);
+        prefill.semester = num % 2 !== 0 ? 'S1' : 'S2';
+      }
+    }
+
+    // Find File Type by matching known keywords
+    const typeMapping = {
+      Cours: ['cour', 'lecture', 'lesson'],
+      Summary: ['summary', 'résumé', 'resume'],
+      TP: ['tp', 'travaux pratique'],
+      TD: ['td', 'travaux dirigé'],
+      Test: ['test', 'quiz', 'interro'],
+      Exam: ['exam', 'éval', 'contrôle', 'controle'],
+    };
+
+    for (let i = 1; i < currentPath.length; i++) {
+      const pathEl = currentPath[i].toLowerCase();
+      for (const [key, keywords] of Object.entries(typeMapping)) {
+        if (keywords.some((kw) => pathEl.includes(kw))) {
+          prefill.fileType = key;
+          break;
+        }
+      }
+      if (prefill.fileType) break;
+    }
+
+    // Find Module Name (index 2 in path)
+    if (currentPath.length >= 3) {
+      const candidate = currentPath[2];
+      const candLower = candidate.toLowerCase();
+
+      const isSemester =
+        candLower.startsWith('s') &&
+        (candLower.includes('1') || candLower.includes('2'));
+      const isType = [
+        'cour',
+        'lecture',
+        'lesson',
+        'summary',
+        'résumé',
+        'resume',
+        'tp',
+        'td',
+        'test',
+        'quiz',
+        'exam',
+        'éval',
+      ].some((kw) => candLower.includes(kw));
+
+      if (!isSemester && !isType) {
+        prefill.moduleName = candidate;
+      }
+    }
+  }
+
+  window.openUploadModal?.(prefill);
+}
+
 // ── Expose globals ──────────────────────────────────────────────────────────
 window.openYear = openYear;
 window.openSearchModal = openSearchModal;
+window.triggerYearModalUpload = triggerYearModalUpload;
 window.closeYearModal = () => {
   document.getElementById('yearModal')?.close();
   unlockBody();

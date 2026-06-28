@@ -327,10 +327,20 @@ function triggerSearch() {
   if (results.length === 0) {
     const hasFuzzyHint = tokenizeQuery(query).some((t) => t.length > 3);
     resultsEl.innerHTML = `
-      <div class="text-center py-12 text-base-content/50">
+      <div class="text-center py-12 text-base-content/50 flex flex-col items-center justify-center">
         <i class="fas fa-search text-6xl mb-4 block"></i>
         <p class="text-xl">No results found</p>
-        <p class="mt-2 text-sm">${hasFuzzyHint ? 'Fuzzy matching was applied but no matches were found. ' : ''}Try different keywords or adjust your filters</p>
+        <p class="mt-2 text-sm max-w-md">${hasFuzzyHint ? 'Fuzzy matching was applied but no matches were found. ' : ''}Try different keywords or adjust your filters</p>
+        <div class="mt-8 pt-6 border-t border-base-300 w-full max-w-sm">
+          <p class="text-xs text-base-content/60 mb-3">Can't find the academic file you need? Help the community by uploading it!</p>
+          <button
+            onclick="closeSearchModal(); openUploadModal();"
+            class="btn btn-outline btn-primary btn-sm rounded-lg gap-1.5 cursor-pointer shadow-sm hover:shadow transition-all"
+          >
+            <i class="fas fa-upload"></i>
+            <span>Upload New Files</span>
+          </button>
+        </div>
       </div>`;
     if (countEl) countEl.textContent = '0 results';
     return;

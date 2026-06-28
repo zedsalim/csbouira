@@ -78,7 +78,25 @@ export function initUpload() {
   setScannerCallback(addScannedFile);
 }
 
-function openUploadModal() {
+function openUploadModal(prefill = {}) {
+  if (prefill) {
+    if (prefill.grade) {
+      const el = document.getElementById('grade');
+      if (el) el.value = prefill.grade;
+    }
+    if (prefill.semester) {
+      const el = document.getElementById('semester');
+      if (el) el.value = prefill.semester;
+    }
+    if (prefill.moduleName) {
+      const el = document.getElementById('moduleName');
+      if (el) el.value = prefill.moduleName;
+    }
+    if (prefill.fileType) {
+      const el = document.getElementById('fileType');
+      if (el) el.value = prefill.fileType;
+    }
+  }
   document.getElementById('uploadModal')?.showModal();
 }
 
@@ -255,8 +273,9 @@ async function handleUploadSubmit(e) {
       if (result.status === 'success') {
         updateProgress(i, 100, '✓ Upload successful', true);
         successCount++;
+        const savedName = result.fileName || file.name;
         uploadedFiles.push({
-          name: result.fileName || file.name,
+          name: savedName,
           url: result.fileUrl || '',
         });
       } else {

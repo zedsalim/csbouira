@@ -375,6 +375,21 @@
             class="block px-4 py-2 rounded hover:bg-base-300 transition"
             >Contact</a
           >
+
+          <div class="px-4 py-2 border-t border-base-300 mt-2">
+            <a
+              href="#"
+              onclick="
+                openUploadModal();
+                document.getElementById('mobileMenuBtn')?.click();
+                return false;
+              "
+              class="btn btn-primary w-full rounded-xl flex items-center justify-center gap-2 py-2 shadow-sm text-primary-content"
+            >
+              <i class="fas fa-upload"></i>
+              <span>Upload Resources</span>
+            </a>
+          </div>
         </div>
       </div>
     </header>
@@ -709,14 +724,18 @@
               </p>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
                 <div
-                  class="card bg-base-100 shadow-sm text-center p-6 rounded-2xl"
+                  onclick="openUploadModal(); return false;"
+                  class="card bg-base-100 shadow-sm text-center p-6 rounded-2xl cursor-pointer hover:shadow-md hover:scale-[1.02] border border-transparent hover:border-primary/20 transition-all duration-300 group"
                 >
-                  <i class="fas fa-upload text-4xl text-primary mb-4 block"></i>
-                  <h3 class="font-semibold mb-2">Share Resources</h3>
+                  <i class="fas fa-upload text-4xl text-primary mb-4 block group-hover:scale-110 transition-transform duration-300"></i>
+                  <h3 class="font-semibold mb-2 group-hover:text-primary transition-colors">Share Resources</h3>
                   <p class="text-sm text-base-content/60">
                     Upload your notes, summaries, and study materials to help
                     others learn.
                   </p>
+                  <span class="text-primary text-xs font-semibold mt-3 inline-flex items-center justify-center gap-1 opacity-80 group-hover:opacity-100 transition-opacity">
+                    Upload Now <i class="fas fa-arrow-right text-[10px] group-hover:translate-x-0.5 transition-transform"></i>
+                  </span>
                 </div>
                 <div
                   class="card bg-base-100 shadow-sm text-center p-6 rounded-2xl"
@@ -1016,12 +1035,23 @@
           >
             Year Details
           </h3>
-          <button
-            onclick="closeYearModal()"
-            class="btn btn-ghost btn-circle btn-sm"
-          >
-            <i class="fas fa-times text-xl"></i>
-          </button>
+          <div class="flex items-center gap-2">
+            <button
+              id="yearModalUploadBtn"
+              onclick="triggerYearModalUpload()"
+              class="btn btn-success btn-sm rounded-lg flex items-center gap-1.5 shadow-sm hover:shadow-md transition-all duration-200 text-success-content"
+              title="Upload files to this section"
+            >
+              <i class="fas fa-upload"></i>
+              <span class="hidden xs:inline">Upload Files</span>
+            </button>
+            <button
+              onclick="closeYearModal()"
+              class="btn btn-ghost btn-circle btn-sm"
+            >
+              <i class="fas fa-times text-xl"></i>
+            </button>
+          </div>
         </div>
         <div class="p-6 overflow-auto flex-1">
           <div
