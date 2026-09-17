@@ -15,7 +15,7 @@
     "daisyui": "^5",
     "jspdf": "^4.2.1",
     "lucide": "latest",
-    "pdfjs-dist": "^6.0.227"
+    "pdfjs-dist": "^6.2.108"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
