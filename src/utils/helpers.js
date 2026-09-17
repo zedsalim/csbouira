@@ -74,6 +74,21 @@ export function getFileIconClass(filename) {
   return icons[ext] || 'fas fa-file text-gray-500';
 }
 
+const EMPTY_MARKER_RE = /\s*\(empty\)\s*$/i;
+
+// Legacy Drive folders were manually suffixed with " (empty)". The build script
+// now strips that and exposes isEmpty/fileCount, so these only handle display
+// and fall back to the old marker for JSON produced before the API update.
+export function stripEmptyMarker(name = '') {
+  return name.replace(EMPTY_MARKER_RE, '').trim();
+}
+
+export function isFolderEmpty(name, folder = {}) {
+  if (typeof folder.isEmpty === 'boolean') return folder.isEmpty;
+  if (typeof folder.fileCount === 'number') return folder.fileCount === 0;
+  return EMPTY_MARKER_RE.test(name);
+}
+
 export function readFileAsBase64(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();

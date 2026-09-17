@@ -1,5 +1,10 @@
 import { CONFIG } from '../config.js';
-import { debounce, getFileIconClass } from '../utils/helpers.js';
+import {
+  debounce,
+  getFileIconClass,
+  isFolderEmpty,
+  stripEmptyMarker,
+} from '../utils/helpers.js';
 
 let searchIndex = [];
 let searchDataCache = null;
@@ -20,12 +25,12 @@ function buildSearchIndex(data) {
   const walk = (node, year, pathParts) => {
     if (node.subfolders && typeof node.subfolders === 'object') {
       for (const [folderName, folderData] of Object.entries(node.subfolders)) {
-        if (folderName.includes('(empty)')) continue;
+        if (isFolderEmpty(folderName, folderData)) continue;
         const newPath = [...pathParts, folderName];
         const meta = extractMeta(newPath);
         index.push({
           type: 'folder',
-          name: folderName,
+          name: stripEmptyMarker(folderName),
           year,
           ...meta,
           path: newPath,
@@ -96,14 +101,17 @@ function extractModulesFromData(data) {
     for (const [semName, semData] of Object.entries(yearData.subfolders)) {
       if (!/^S\d/i.test(semName)) continue;
       if (!semData.subfolders) continue;
-      for (const moduleName of Object.keys(semData.subfolders)) {
-        if (moduleName.includes('(empty)')) continue;
+      for (const [moduleName, moduleData] of Object.entries(
+        semData.subfolders,
+      )) {
+        if (isFolderEmpty(moduleName, moduleData)) continue;
         const lower = moduleName.trim().toLowerCase();
         if (RESOURCE_TYPE_NAMES.has(lower)) continue;
-        if (moduleName.trim().length < 3) continue;
+        const name = stripEmptyMarker(moduleName);
+        if (name.length < 3) continue;
         if (!moduleMap.has(lower))
           moduleMap.set(lower, {
-            name: moduleName.trim(),
+            name,
             year: yearName,
             semester: semName,
           });

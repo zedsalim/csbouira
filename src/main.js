@@ -15,7 +15,9 @@ import { initTheme } from './modules/theme.js';
 import { CONFIG } from './config.js';
 import {
   getFileIconClass,
+  isFolderEmpty,
   lockBodyScroll,
+  stripEmptyMarker,
   unlockBodyScroll,
 } from './utils/helpers.js';
 
@@ -195,7 +197,7 @@ function updateBreadcrumb() {
   currentPath.forEach((item, index) => {
     const span = document.createElement('span');
     span.className = `breadcrumb-item cursor-pointer hover:text-primary transition-colors ${index === currentPath.length - 1 ? 'font-semibold text-base-content' : 'text-base-content/60'}`;
-    span.textContent = item;
+    span.textContent = stripEmptyMarker(item);
     span.addEventListener('click', () => navigateToBreadcrumb(index));
     breadcrumb.appendChild(span);
     if (index < currentPath.length - 1) {
@@ -224,6 +226,20 @@ function renderContent(data) {
         <i class="fas fa-folder-open text-6xl mb-4 block"></i>
         <p class="text-xl">No content available</p>
       </div>`;
+    if (data.link) {
+      const wrap = document.createElement('div');
+      wrap.className = 'flex justify-center';
+      const a = document.createElement('a');
+      a.href = data.link;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      a.className =
+        'btn btn-sm gap-2 rounded-xl bg-primary text-primary-content hover:opacity-90';
+      a.innerHTML =
+        '<i class="fab fa-google-drive"></i><span>Open in Drive</span>';
+      wrap.appendChild(a);
+      content.appendChild(wrap);
+    }
     return;
   }
 
@@ -238,10 +254,11 @@ function renderContent(data) {
     list.className = 'space-y-2';
 
     for (const [name, folderData] of Object.entries(data.subfolders)) {
-      const isEmpty = name.includes('(empty)');
+      const isEmpty = isFolderEmpty(name, folderData);
+      const label = stripEmptyMarker(name);
       const folderFavData = {
         type: 'folder',
-        name,
+        name: label,
         year: currentYear,
         folderPath: [...currentPath, name],
         link: folderData.link || '',
@@ -251,39 +268,35 @@ function renderContent(data) {
         isFavorite(key) || isFavorite(folderFavData.folderPath.join('>'));
 
       const item = document.createElement('div');
-      item.className = `flex items-center justify-between gap-3 p-3 rounded-lg cursor-pointer transition-all ${isEmpty ? 'opacity-50 cursor-not-allowed bg-base-200' : 'bg-base-200 hover:bg-primary hover:text-primary-content group'}`;
+      item.className = `flex items-center justify-between gap-3 p-3 rounded-lg cursor-pointer transition-all bg-base-200 hover:bg-primary hover:text-primary-content group ${isEmpty ? 'opacity-70' : ''}`;
 
-      if (!isEmpty) {
-        item.addEventListener('click', () => {
-          currentPath = [...currentPath, name];
-          const path = [currentYear, ...currentPath.slice(1)].join(
-            '>subfolders>',
-          );
-          loadContent(currentYear, path);
-        });
-      }
+      item.addEventListener('click', () => {
+        currentPath = [...currentPath, name];
+        const path = [currentYear, ...currentPath.slice(1)].join(
+          '>subfolders>',
+        );
+        loadContent(currentYear, path);
+      });
 
       item.innerHTML = `
         <div class="flex items-center gap-3 flex-1 min-w-0">
           <i class="fas fa-folder text-yellow-500 flex-shrink-0 group-hover:text-white transition-colors"></i>
-          <span class="truncate">${name}</span>
+          <span class="truncate">${label}</span>
           ${isEmpty ? '<span class="badge badge-sm badge-ghost">empty</span>' : ''}
         </div>
       `;
 
-      if (!isEmpty) {
-        const starBtn = document.createElement('button');
-        starBtn.className = `btn btn-xs btn-ghost ${starred ? 'text-yellow-400' : 'text-base-content/30'} hover:text-yellow-400`;
-        starBtn.title = starred ? 'Remove from favorites' : 'Add to favorites';
-        starBtn.innerHTML = `<i class="${starred ? 'fas' : 'far'} fa-star"></i>`;
-        starBtn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          const isNow = toggleFavorite(folderFavData);
-          starBtn.className = `btn btn-xs btn-ghost ${isNow ? 'text-yellow-400' : 'text-base-content/30'} hover:text-yellow-400`;
-          starBtn.innerHTML = `<i class="${isNow ? 'fas' : 'far'} fa-star"></i>`;
-        });
-        item.appendChild(starBtn);
-      }
+      const starBtn = document.createElement('button');
+      starBtn.className = `btn btn-xs btn-ghost ${starred ? 'text-yellow-400' : 'text-base-content/30'} hover:text-yellow-400`;
+      starBtn.title = starred ? 'Remove from favorites' : 'Add to favorites';
+      starBtn.innerHTML = `<i class="${starred ? 'fas' : 'far'} fa-star"></i>`;
+      starBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isNow = toggleFavorite(folderFavData);
+        starBtn.className = `btn btn-xs btn-ghost ${isNow ? 'text-yellow-400' : 'text-base-content/30'} hover:text-yellow-400`;
+        starBtn.innerHTML = `<i class="${isNow ? 'fas' : 'far'} fa-star"></i>`;
+      });
+      item.appendChild(starBtn);
 
       list.appendChild(item);
     }
