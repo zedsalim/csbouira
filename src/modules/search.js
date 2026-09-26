@@ -321,9 +321,9 @@ function triggerSearch() {
     !filters.module
   ) {
     resultsEl.innerHTML = `
-      <div class="text-center py-12 text-base-content/50">
-        <i class="fas fa-search text-6xl mb-4 block"></i>
-        <p class="text-xl">Search across all resources</p>
+      <div class="empty-state">
+        <i class="fas fa-search empty-icon"></i>
+        <p class="empty-title">Search across all resources</p>
         <p class="mt-2 text-sm">Multi-word search supported — e.g. "algo exam" finds results matching both words</p>
       </div>`;
     if (countEl) countEl.textContent = '';
@@ -335,9 +335,9 @@ function triggerSearch() {
   if (results.length === 0) {
     const hasFuzzyHint = tokenizeQuery(query).some((t) => t.length > 3);
     resultsEl.innerHTML = `
-      <div class="text-center py-12 text-base-content/50">
-        <i class="fas fa-search text-6xl mb-4 block"></i>
-        <p class="text-xl">No results found</p>
+      <div class="empty-state">
+        <i class="fas fa-search empty-icon"></i>
+        <p class="empty-title">No results found</p>
         <p class="mt-2 text-sm">${hasFuzzyHint ? 'Fuzzy matching was applied but no matches were found. ' : ''}Try different keywords or adjust your filters</p>
       </div>`;
     if (countEl) countEl.textContent = '0 results';
@@ -363,14 +363,14 @@ function triggerSearch() {
     const highlightedName = highlightMatch(item.name, query);
     const breadcrumb = [item.year, ...item.path].join(' › ');
     const moduleBadge = item.module
-      ? `<span class="badge badge-sm bg-primary/10 text-primary border-0 mt-1">${item.module}</span>`
+      ? `<span class="count-chip mt-1">${item.module}</span>`
       : '';
 
     if (item.type === 'file' && tplFile) {
       const clone = tplFile.content.cloneNode(true);
       const row = clone.querySelector('[data-field="row"]');
       clone.querySelector('[data-field="icon"]').className =
-        icon + ' flex-shrink-0';
+        'row-icon ' + icon + ' flex-shrink-0';
       clone.querySelector('[data-field="name"]').innerHTML = highlightedName;
       clone.querySelector('[data-field="breadcrumb"]').textContent = breadcrumb;
       clone.querySelector('[data-field="badge"]').innerHTML = moduleBadge;
@@ -401,7 +401,7 @@ function triggerSearch() {
     } else if (item.type === 'folder' && tplFolder) {
       const clone = tplFolder.content.cloneNode(true);
       clone.querySelector('[data-field="icon"]').className =
-        icon + ' flex-shrink-0';
+        'row-icon ' + icon + ' flex-shrink-0';
       clone.querySelector('[data-field="name"]').innerHTML = highlightedName;
       clone.querySelector('[data-field="breadcrumb"]').textContent = breadcrumb;
       clone.querySelector('[data-field="badge"]').innerHTML = moduleBadge;
@@ -428,8 +428,8 @@ async function ensureSearchIndex() {
   const resultsEl = document.getElementById('searchResults');
   if (resultsEl) {
     resultsEl.innerHTML = `
-      <div class="flex flex-col items-center gap-3 py-12 text-base-content/50">
-        <span class="loading loading-spinner loading-lg"></span>
+      <div class="empty-state">
+        <span class="loading loading-spinner loading-lg text-primary"></span>
         <p>Building search index...</p>
       </div>`;
   }
@@ -442,9 +442,9 @@ async function ensureSearchIndex() {
   } catch (error) {
     if (resultsEl)
       resultsEl.innerHTML = `
-      <div class="text-center py-12 text-error">
-        <i class="fas fa-exclamation-circle text-6xl mb-4 block"></i>
-        <p class="text-xl">Error loading search index</p>
+      <div class="error-state">
+        <i class="fas fa-exclamation-circle empty-icon"></i>
+        <p class="empty-title">Error loading search index</p>
         <p class="mt-2 text-sm">${error.message}</p>
       </div>`;
   } finally {

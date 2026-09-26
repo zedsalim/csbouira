@@ -99,7 +99,7 @@ export function renderFavoritesSection() {
 
   const clearBtn = document.createElement('button');
   clearBtn.className =
-    'btn btn-sm btn-ghost btn-error btn-rounded rounded-xl self-center sm:self-auto';
+    'btn btn-sm btn-ghost btn-error rounded-full self-center sm:self-auto';
   clearBtn.innerHTML = '<i class="fas fa-trash-alt mr-1"></i> Clear All';
   clearBtn.addEventListener('click', clearAllFavorites);
   header.appendChild(clearBtn);
@@ -110,8 +110,7 @@ export function renderFavoritesSection() {
     yearSection.className = 'mb-6';
 
     const yearTitle = document.createElement('h3');
-    yearTitle.className =
-      'text-lg font-semibold mb-3 text-primary flex items-center gap-2';
+    yearTitle.className = 'subhead subhead-row';
     yearTitle.innerHTML = `<i class="fas fa-graduation-cap"></i> ${year}`;
     yearSection.appendChild(yearTitle);
 
@@ -124,11 +123,10 @@ export function renderFavoritesSection() {
           ? 'fas fa-folder text-yellow-500'
           : getFileIconClass(fav.name);
       const card = document.createElement('div');
-      card.className =
-        'card bg-base-200 shadow-sm hover:-translate-y-0.5 hover:shadow-lg transition-all cursor-pointer group rounded-2xl';
+      card.className = 'surface surface-sheen cursor-pointer group';
 
       const cardBody = document.createElement('div');
-      cardBody.className = 'card-body';
+      cardBody.className = 'p-5';
 
       const topRow = document.createElement('div');
       topRow.className = 'flex items-start gap-3';
@@ -145,7 +143,7 @@ export function renderFavoritesSection() {
 
       const removeBtn = document.createElement('button');
       removeBtn.className =
-        'btn btn-xs btn-ghost border-none btn-rounded rounded-full text-base-content/40 hover:text-error transition-opacity';
+        'btn btn-xs btn-ghost rounded-full text-base-content/40 hover:text-error';
       removeBtn.title = 'Remove from favorites';
       removeBtn.innerHTML = '<i class="fas fa-times"></i>';
       removeBtn.addEventListener('click', (e) => {
@@ -157,12 +155,11 @@ export function renderFavoritesSection() {
 
       const actions = document.createElement('div');
       actions.className =
-        'card-actions justify-end mt-2 pt-2 border-t border-base-300';
+        'row-actions justify-end mt-3 pt-3 border-t border-base-300';
 
       if (fav.type === 'file') {
         const viewBtn = document.createElement('button');
-        viewBtn.className =
-          'btn btn-primary btn-xs btn-rounded rounded border-none flex-1';
+        viewBtn.className = 'btn btn-gradient btn-xs rounded-full flex-1';
         viewBtn.innerHTML = '<i class="fas fa-eye mr-1"></i> View';
         viewBtn.addEventListener('click', (e) => {
           e.stopPropagation();
@@ -172,8 +169,7 @@ export function renderFavoritesSection() {
 
         if (fav.downloadLink) {
           const dlBtn = document.createElement('button');
-          dlBtn.className =
-            'btn btn-ghost border-none btn-rounded rounded-full btn-xs';
+          dlBtn.className = 'btn btn-ghost rounded-full btn-xs';
           dlBtn.innerHTML = '<i class="fas fa-download"></i>';
           dlBtn.addEventListener('click', (e) => {
             e.stopPropagation();
@@ -184,8 +180,7 @@ export function renderFavoritesSection() {
         }
       } else {
         const openBtn = document.createElement('button');
-        openBtn.className =
-          'btn btn-primary btn-xs btn-rounded rounded border-none flex-1';
+        openBtn.className = 'btn btn-gradient btn-xs rounded-full flex-1';
         openBtn.innerHTML = '<i class="fas fa-folder-open mr-1"></i> Open';
         openBtn.addEventListener('click', (e) => {
           e.stopPropagation();

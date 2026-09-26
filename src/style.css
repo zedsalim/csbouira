@@ -3,9 +3,16 @@
   themes: false;
 }
 
+/* Lets any utility vary per theme without a second stylesheet. */
+@custom-variant dark (&:where([data-theme=csb-dark], [data-theme=csb-dark] *));
+
+/* ── Light theme ────────────────────────────────────────────────────────────
+   The brand palette (primary / secondary / accent / base-*) is unchanged.
+   Added: the daisyUI effect + shape tokens that were never set, the semantic
+   colours that were silently falling back to daisyUI's light defaults, and a
+   depth/glass/hairline token set tuned for a light background.            */
 @plugin "daisyui/theme" {
   name: 'csb-light';
-  default: true;
   color-scheme: light;
 
   --color-primary: #009bd6;
@@ -20,10 +27,57 @@
   --color-base-content: #1e293b;
   --color-neutral: #64748b;
   --color-neutral-content: #ffffff;
+
+  /* Semantic colours were never declared, so btn-success / text-warning /
+     alert-error were all borrowing daisyUI's light defaults. Declared here
+     with the same hues so dark mode stops inheriting light-mode values. */
+  --color-info: #0284c7;
+  --color-info-content: #ffffff;
+  --color-success: #16a34a;
+  --color-success-content: #ffffff;
+  --color-warning: #f59e0b;
+  --color-warning-content: #451a03;
+  --color-error: #dc2626;
+  --color-error-content: #ffffff;
+
+  /* Shape + sizing */
+  --radius-selector: 0.75rem;
+  --radius-field: 0.85rem;
+  --radius-box: 1.5rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.28125rem;
+  --border: 1px;
+
+  /* Effects — this is what removes the flat look. */
+  --depth: 1;
+  --noise: 1;
+
+  /* Depth tokens */
+  --page-bg: #f1f5fa;
+  --hairline: rgb(15 23 42 / 0.08);
+  --elev-1: 0 1px 2px 0 rgb(15 23 42 / 0.05), 0 1px 3px 0 rgb(15 23 42 / 0.06);
+  --elev-2:
+    0 2px 4px -1px rgb(15 23 42 / 0.06), 0 10px 20px -6px rgb(15 23 42 / 0.12);
+  --elev-3:
+    0 4px 8px -2px rgb(15 23 42 / 0.07), 0 22px 40px -10px rgb(15 23 42 / 0.16);
+  --glow-primary: 0 10px 28px -12px
+    color-mix(in oklab, var(--color-primary) 55%, transparent);
+  --glass-bg: rgb(255 255 255 / 0.75);
+
+  /* Hero ambience */
+  --hero-glow-1: rgb(0 155 214 / 0.22);
+  --hero-glow-2: rgb(14 165 233 / 0.15);
+  --hero-glow-3: rgb(3 105 161 / 0.1);
+  --grid-line: rgb(15 23 42 / 0.05);
 }
 
+/* ── Dark theme ─────────────────────────────────────────────────────────────
+   Same palette. Depth comes from deeper shadows plus a light rim (inset
+   top highlight), because a dark surface needs a lit edge to separate from
+   the page rather than a cast shadow.                                    */
 @plugin "daisyui/theme" {
   name: 'csb-dark';
+  default: true;
   color-scheme: dark;
 
   --color-primary: #009bd6;
@@ -38,6 +92,1332 @@
   --color-base-content: #f1f5f9;
   --color-neutral: #94a3b8;
   --color-neutral-content: #0f172a;
+
+  --color-info: #38bdf8;
+  --color-info-content: #082f49;
+  --color-success: #4ade80;
+  --color-success-content: #052e16;
+  --color-warning: #fbbf24;
+  --color-warning-content: #451a03;
+  --color-error: #f87171;
+  --color-error-content: #450a0a;
+
+  --radius-selector: 0.75rem;
+  --radius-field: 0.85rem;
+  --radius-box: 1.5rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.28125rem;
+  --border: 1px;
+
+  --depth: 1;
+  --noise: 1;
+
+  --page-bg: #0b1220;
+  --hairline: rgb(148 163 184 / 0.16);
+  --elev-1:
+    0 1px 2px 0 rgb(0 0 0 / 0.35), inset 0 1px 0 0 rgb(255 255 255 / 0.04);
+  --elev-2:
+    0 2px 6px -1px rgb(0 0 0 / 0.45), 0 12px 24px -8px rgb(0 0 0 / 0.5),
+    inset 0 1px 0 0 rgb(255 255 255 / 0.05);
+  --elev-3:
+    0 4px 10px -2px rgb(0 0 0 / 0.5), 0 26px 48px -12px rgb(0 0 0 / 0.6),
+    inset 0 1px 0 0 rgb(255 255 255 / 0.07);
+  --glow-primary: 0 10px 30px -12px
+    color-mix(in oklab, var(--color-primary) 60%, transparent);
+  --glass-bg: rgb(15 23 42 / 0.72);
+
+  --hero-glow-1: rgb(0 155 214 / 0.3);
+  --hero-glow-2: rgb(14 165 233 / 0.16);
+  --hero-glow-3: rgb(56 189 248 / 0.07);
+  --grid-line: rgb(148 163 184 / 0.06);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Base
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+html {
+  scroll-padding-top: 5.5rem;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background-color: var(--page-bg);
+  color: var(--color-base-content);
+  font-family:
+    'Plus Jakarta Sans',
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    'Helvetica Neue',
+    Arial,
+    sans-serif;
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Theme cross-fade: covers colour, background, border and shadow. */
+  transition:
+    background-color 0.35s ease,
+    color 0.35s ease,
+    border-color 0.35s ease;
+}
+
+/* The dhikr strings (config.js) are Arabic, and the display face has no
+   Arabic glyphs, so give that box an explicit Arabic-capable stack. */
+#dhikrText {
+  font-family:
+    'Noto Sans Arabic', 'Plus Jakarta Sans', ui-sans-serif, system-ui,
+    sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  letter-spacing: -0.022em;
+  text-wrap: balance;
+}
+
+::selection {
+  background-color: color-mix(in oklab, var(--color-primary) 28%, transparent);
+  color: var(--color-base-content);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* ── Scrollbar ──────────────────────────────────────────────────────────── */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in oklab, var(--color-primary) 45%, transparent)
+    transparent;
+}
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: color-mix(in oklab, var(--color-primary) 40%, transparent);
+  border: 2px solid transparent;
+  border-radius: 9999px;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: color-mix(in oklab, var(--color-primary) 65%, transparent);
+}
+
+/* ── Motion ─────────────────────────────────────────────────────────────── */
+@keyframes csb-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+@keyframes csb-shine {
+  from {
+    transform: translateX(-130%);
+  }
+  to {
+    transform: translateX(130%);
+  }
+}
+@keyframes csb-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.55;
+  }
+  50% {
+    transform: translateY(7px);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   App chrome
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.app-nav {
+  background-color: var(--glass-bg);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border-bottom: 1px solid var(--hairline);
+  box-shadow: var(--elev-1);
+  transition:
+    background-color 0.35s ease,
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+}
+
+.app-nav .nav-link {
+  font-weight: 600;
+  border-radius: 9999px;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+.app-nav .nav-link:hover {
+  background-color: color-mix(in oklab, var(--color-primary) 12%, transparent);
+  color: var(--color-primary);
+}
+
+.app-footer {
+  background-color: color-mix(in oklab, var(--color-base-100) 55%, transparent);
+  border-top: 1px solid var(--hairline);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.footer-link {
+  display: inline-grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 9999px;
+  color: color-mix(in oklab, var(--color-base-content) 65%, transparent);
+  border: 1px solid transparent;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+.footer-link:hover {
+  color: var(--color-primary);
+  transform: translateY(-3px);
+  border-color: color-mix(in oklab, var(--color-primary) 30%, transparent);
+  background-color: color-mix(in oklab, var(--color-primary) 10%, transparent);
+  box-shadow: var(--glow-primary);
+}
+
+.dropdown-panel {
+  background-color: color-mix(in oklab, var(--color-base-100) 92%, transparent);
+  backdrop-filter: blur(18px) saturate(180%);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-box);
+  box-shadow: var(--elev-3);
+  padding: 0.375rem;
+}
+.dropdown-panel a {
+  border-radius: calc(var(--radius-box) - 0.5rem);
+  font-weight: 600;
+  transition:
+    background-color 0.18s ease,
+    color 0.18s ease;
+}
+.dropdown-panel a:hover {
+  background-color: color-mix(in oklab, var(--color-primary) 14%, transparent);
+  color: var(--color-primary);
+}
+
+.mobile-panel {
+  background-color: color-mix(in oklab, var(--color-base-100) 94%, transparent);
+  backdrop-filter: blur(18px) saturate(180%);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  border-bottom: 1px solid var(--hairline);
+  box-shadow: var(--elev-2);
+}
+.mobile-panel a,
+.mobile-panel > div > button {
+  border-radius: calc(var(--radius-box) - 0.5rem);
+  font-weight: 600;
+  transition:
+    background-color 0.18s ease,
+    color 0.18s ease;
+}
+.mobile-panel a:hover,
+.mobile-panel > div > button:hover {
+  background-color: color-mix(in oklab, var(--color-primary) 14%, transparent);
+  color: var(--color-primary);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Hero
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.hero-surface {
+  position: relative;
+  isolation: isolate;
+  background-color: var(--color-base-100);
+  background-image:
+    radial-gradient(
+      62rem 42rem at 14% -12%,
+      var(--hero-glow-1),
+      transparent 62%
+    ),
+    radial-gradient(52rem 36rem at 86% 4%, var(--hero-glow-2), transparent 64%),
+    radial-gradient(
+      44rem 32rem at 50% 112%,
+      var(--hero-glow-3),
+      transparent 62%
+    );
+  transition: background-color 0.35s ease;
+}
+.hero-surface > * {
+  position: relative;
+  z-index: 1;
+}
+/* Faint technical grid, faded out towards the edges. */
+.hero-surface::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  background-size: 58px 58px;
+  -webkit-mask-image: radial-gradient(
+    72% 62% at 50% 34%,
+    #000 18%,
+    transparent 78%
+  );
+  mask-image: radial-gradient(72% 62% at 50% 34%, #000 18%, transparent 78%);
+}
+/* Blend the band into the page below it. */
+.hero-surface::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 30%;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(to bottom, transparent, var(--page-bg));
+}
+
+.hero-logo {
+  animation: csb-float 7s ease-in-out infinite;
+  filter: drop-shadow(
+    0 20px 38px color-mix(in oklab, var(--color-primary) 38%, transparent)
+  );
+}
+
+.text-gradient {
+  background-image: linear-gradient(
+    115deg,
+    var(--color-secondary) 0%,
+    var(--color-primary) 38%,
+    var(--color-accent) 72%,
+    var(--color-primary) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+@supports not ((-webkit-background-clip: text) or (background-clip: text)) {
+  .text-gradient {
+    color: var(--color-primary);
+  }
+}
+
+.hero-lede {
+  color: color-mix(in oklab, var(--color-base-content) 72%, transparent);
+}
+
+/* Down arrow: a shaft with a chevron head, bobbing to invite the scroll. */
+.scroll-cue {
+  position: relative;
+  display: block;
+  width: 1.75rem;
+  height: 2.75rem;
+  margin-inline: auto;
+  color: var(--color-primary);
+  animation: csb-bob 2.2s ease-in-out infinite;
+}
+/* Shaft */
+.scroll-cue::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 2px;
+  height: 1.5rem;
+  border-radius: 9999px;
+  background-image: linear-gradient(
+    to bottom,
+    transparent,
+    color-mix(in oklab, currentColor 85%, transparent)
+  );
+  transform: translateX(-50%);
+}
+/* Chevron head */
+.scroll-cue::after {
+  content: '';
+  position: absolute;
+  bottom: 0.35rem;
+  left: 50%;
+  width: 0.75rem;
+  height: 0.75rem;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  border-radius: 2px;
+  transform: translateX(-50%) rotate(45deg);
+  filter: drop-shadow(
+    0 2px 5px color-mix(in oklab, currentColor 45%, transparent)
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Buttons
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.btn {
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.25s ease,
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    color 0.2s ease;
+}
+.btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+.btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn-gradient {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid transparent;
+  color: var(--color-primary-content);
+  background-image: linear-gradient(
+    120deg,
+    var(--color-secondary) 0%,
+    var(--color-primary) 52%,
+    var(--color-accent) 100%
+  );
+  box-shadow: var(--elev-2), var(--glow-primary);
+}
+.btn-gradient::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    100deg,
+    transparent 22%,
+    rgb(255 255 255 / 0.38) 50%,
+    transparent 78%
+  );
+  transform: translateX(-130%);
+}
+.btn-gradient:hover {
+  box-shadow: var(--elev-3), var(--glow-primary);
+  transform: translateY(-2px);
+}
+.btn-gradient:hover::after {
+  animation: csb-shine 0.75s ease;
+}
+
+/* Warm accent used by the two "Our Amazing Contributors" calls to action. */
+.btn-warm {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid transparent;
+  color: #ffffff;
+  background-image: linear-gradient(120deg, #ef4444, #ec4899);
+  box-shadow: 0 10px 28px -12px rgb(236 72 153 / 0.6);
+}
+.btn-warm::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    100deg,
+    transparent 22%,
+    rgb(255 255 255 / 0.35) 50%,
+    transparent 78%
+  );
+  transform: translateX(-130%);
+}
+.btn-warm:hover {
+  background-image: linear-gradient(120deg, #dc2626, #db2777);
+  box-shadow: 0 14px 34px -12px rgb(236 72 153 / 0.7);
+  transform: translateY(-2px);
+}
+.btn-warm:hover::after {
+  animation: csb-shine 0.75s ease;
+}
+
+.btn-glass {
+  border: 1px solid var(--hairline);
+  color: var(--color-primary);
+  background-color: color-mix(in oklab, var(--color-base-100) 80%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: var(--elev-1);
+}
+.btn-glass:hover {
+  border-color: color-mix(in oklab, var(--color-primary) 40%, transparent);
+  background-color: color-mix(in oklab, var(--color-primary) 10%, transparent);
+  box-shadow: var(--elev-2), var(--glow-primary);
+}
+
+.btn-soft {
+  border: 1px solid transparent;
+  color: var(--color-primary);
+  background-color: color-mix(in oklab, var(--color-primary) 12%, transparent);
+  box-shadow: none;
+}
+.btn-soft:hover {
+  background-color: color-mix(in oklab, var(--color-primary) 20%, transparent);
+}
+
+.btn-outline-primary,
+.btn-outline-secondary {
+  border-width: 1.5px;
+  box-shadow: none;
+}
+.btn-outline-primary:hover,
+.btn-outline-secondary:hover {
+  box-shadow: var(--glow-primary);
+}
+
+.btn-ghost:hover:not(:disabled) {
+  background-color: color-mix(in oklab, var(--color-primary) 12%, transparent);
+  color: var(--color-primary);
+}
+
+/* The daisyUI swap used for the theme toggle. */
+.swap.btn:hover {
+  transform: none;
+}
+
+#backToTop {
+  border: 1px solid color-mix(in oklab, var(--color-primary) 45%, transparent);
+  color: var(--color-primary-content);
+  background-image: linear-gradient(
+    135deg,
+    var(--color-primary),
+    var(--color-accent)
+  );
+  box-shadow: var(--elev-2), var(--glow-primary);
+  transition:
+    opacity 0.3s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+#backToTop:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: var(--elev-3), var(--glow-primary);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Surfaces
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.surface {
+  position: relative;
+  background-color: var(--color-base-100);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-box);
+  box-shadow: var(--elev-1);
+  transition:
+    box-shadow 0.3s ease,
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    background-color 0.35s ease;
+}
+
+.surface-lift {
+  transition:
+    box-shadow 0.3s ease,
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    background-color 0.35s ease;
+}
+.surface-lift:hover {
+  transform: translateY(-4px);
+  border-color: color-mix(in oklab, var(--color-primary) 32%, var(--hairline));
+  box-shadow: var(--elev-3), var(--glow-primary);
+}
+
+.surface-inset {
+  background-color: color-mix(in oklab, var(--color-base-100) 92%, transparent);
+  border: 1px solid var(--hairline);
+  border-radius: calc(var(--radius-box) - 0.35rem);
+  box-shadow: var(--elev-1);
+}
+
+/* A lit top edge gives the card a physical, slightly glassy feel. */
+.surface-sheen::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in oklab, var(--color-primary) 30%, transparent),
+    transparent
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.surface-sheen:hover::before {
+  opacity: 1;
+}
+
+/* The year cards: gradient hairline on hover plus a brand glow. */
+.year-card {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--color-base-100);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-box);
+  box-shadow: var(--elev-1);
+  cursor: pointer;
+  transition:
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+.year-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  pointer-events: none;
+  background: linear-gradient(
+    135deg,
+    var(--color-primary),
+    var(--color-accent) 50%,
+    transparent
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.year-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--elev-3), var(--glow-primary);
+}
+.year-card:hover::before {
+  opacity: 1;
+}
+.year-card .year-icon {
+  background-image: linear-gradient(
+    140deg,
+    var(--color-secondary),
+    var(--color-primary) 55%,
+    var(--color-accent)
+  );
+  box-shadow: var(--glow-primary);
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.year-card:hover .year-icon {
+  transform: scale(1.07) rotate(-4deg);
+}
+.year-card .year-cta i {
+  transition: transform 0.3s ease;
+}
+.year-card:hover .year-cta i {
+  transform: translateX(5px);
+}
+
+/* The four contribute tiles. */
+.tile-icon {
+  display: grid;
+  place-items: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  margin: 0 auto 1rem;
+  border-radius: var(--radius-box);
+  font-size: 1.5rem;
+  line-height: 1;
+  border: 1px solid transparent;
+  transition:
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.3s ease;
+}
+.tile-icon-primary {
+  color: var(--color-primary);
+  background-color: color-mix(in oklab, var(--color-primary) 12%, transparent);
+  border-color: color-mix(in oklab, var(--color-primary) 24%, transparent);
+}
+.tile-icon-success {
+  color: var(--color-success);
+  background-color: color-mix(in oklab, var(--color-success) 14%, transparent);
+  border-color: color-mix(in oklab, var(--color-success) 26%, transparent);
+}
+.tile-icon-warning {
+  color: var(--color-warning);
+  background-color: color-mix(in oklab, var(--color-warning) 16%, transparent);
+  border-color: color-mix(in oklab, var(--color-warning) 28%, transparent);
+}
+.tile-icon-secondary {
+  color: var(--color-secondary);
+  background-color: color-mix(
+    in oklab,
+    var(--color-secondary) 12%,
+    transparent
+  );
+  border-color: color-mix(in oklab, var(--color-secondary) 24%, transparent);
+}
+.surface-lift:hover .tile-icon {
+  transform: translateY(-3px) scale(1.06);
+  box-shadow: var(--elev-2);
+}
+
+/* ── Similar Projects ────────────────────────────────────────────────────────
+   All six cards live in ONE grid and are pinned to explicit cells, so every
+   card shares a row with its counterpart. Equal height is therefore structural
+   rather than a stretch hack: two separate per-column grids cannot do this,
+   because each grid only ever balances its own rows. The order-* classes on
+   the markup restore the left-then-right reading order on narrow screens,
+   where the explicit cell placement is inactive. */
+.about-grid {
+  display: grid;
+  gap: 0.75rem;
+}
+.about-card {
+  min-height: 8.5rem;
+}
+@media (min-width: 48rem) {
+  .about-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: auto repeat(3, minmax(0, 1fr));
+    column-gap: 2rem;
+  }
+  .about-head-l {
+    grid-area: 1 / 1;
+  }
+  .about-head-r {
+    grid-area: 1 / 2;
+  }
+  .about-l1 {
+    grid-area: 2 / 1;
+  }
+  .about-r1 {
+    grid-area: 2 / 2;
+  }
+  .about-l2 {
+    grid-area: 3 / 1;
+  }
+  .about-r2 {
+    grid-area: 3 / 2;
+  }
+  .about-l3 {
+    grid-area: 4 / 1;
+  }
+  .about-r3 {
+    grid-area: 4 / 2;
+  }
+  .about-card {
+    min-height: 0;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Section headings
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.section-head {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.875rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+.section-title {
+  font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2.05rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+}
+.section-icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 2.875rem;
+  height: 2.875rem;
+  border-radius: var(--radius-box);
+  font-size: 1.15rem;
+  color: var(--color-primary);
+  background-image: linear-gradient(
+    140deg,
+    color-mix(in oklab, var(--color-primary) 18%, var(--color-base-100)),
+    color-mix(in oklab, var(--color-accent) 10%, var(--color-base-100))
+  );
+  border: 1px solid color-mix(in oklab, var(--color-primary) 22%, transparent);
+  box-shadow: var(--elev-1);
+}
+.subhead {
+  position: relative;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  margin-bottom: 1.35rem;
+}
+.subhead::after {
+  content: '';
+  display: block;
+  width: 2.25rem;
+  height: 3px;
+  margin-top: 0.5rem;
+  border-radius: 9999px;
+  background-image: linear-gradient(
+    90deg,
+    var(--color-primary),
+    var(--color-accent)
+  );
+}
+/* Icon + title on one line. The underline is taken out of the flex flow so it
+   still sits under the row instead of becoming a third flex item. */
+.subhead-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding-bottom: 0.7rem;
+}
+.subhead-row::after {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  margin-top: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Rows — folder / file / online-resource lists
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.surface-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.75rem 0.875rem;
+  overflow: hidden;
+  background-color: var(--color-base-100);
+  border: 1px solid var(--hairline);
+  border-radius: calc(var(--radius-box) - 0.3rem);
+  box-shadow: var(--elev-1);
+  cursor: pointer;
+  transition:
+    background-color 0.22s ease,
+    border-color 0.22s ease,
+    box-shadow 0.22s ease,
+    transform 0.22s ease;
+}
+/* Accent rail that wipes in on hover. */
+.surface-row::before {
+  content: '';
+  position: absolute;
+  inset-block: 0;
+  left: 0;
+  width: 3px;
+  background-image: linear-gradient(
+    to bottom,
+    var(--color-primary),
+    var(--color-accent)
+  );
+  transform: scaleY(0);
+  transition: transform 0.25s ease;
+}
+.surface-row:hover {
+  transform: translateX(3px);
+  background-color: color-mix(
+    in oklab,
+    var(--color-primary) 7%,
+    var(--color-base-100)
+  );
+  border-color: color-mix(in oklab, var(--color-primary) 30%, var(--hairline));
+  box-shadow: var(--elev-2);
+}
+.surface-row:hover::before {
+  transform: scaleY(1);
+}
+.surface-row .row-icon {
+  transition: transform 0.22s ease;
+}
+.surface-row:hover .row-icon {
+  transform: scale(1.12);
+}
+/* Dimmed folders (no files) stay clickable, just quieter. */
+.surface-row.is-empty {
+  opacity: 0.68;
+}
+.surface-row.is-empty:hover {
+  opacity: 1;
+}
+
+.row-crumb {
+  display: block;
+  margin-top: 0.125rem;
+  font-size: 0.72rem;
+  color: color-mix(in oklab, var(--color-base-content) 52%, transparent);
+  transition: color 0.22s ease;
+}
+.surface-row:hover .row-crumb {
+  color: color-mix(in oklab, var(--color-primary) 75%, transparent);
+}
+
+.row-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.125rem;
+  flex-shrink: 0;
+}
+
+/* Accordion of online resources. */
+.collapse-panel {
+  background-color: var(--color-base-100);
+  border: 1px solid var(--hairline);
+  border-radius: calc(var(--radius-box) - 0.3rem);
+  box-shadow: var(--elev-1);
+  overflow: hidden;
+  transition:
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+.collapse-panel:hover {
+  border-color: color-mix(in oklab, var(--color-primary) 26%, var(--hairline));
+  box-shadow: var(--elev-2);
+}
+.collapse-panel .collapse-title {
+  font-weight: 700;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+.collapse-panel .collapse-title:hover {
+  background-color: color-mix(in oklab, var(--color-primary) 7%, transparent);
+  color: var(--color-primary);
+}
+.collapse-panel .collapse-content {
+  background-color: color-mix(in oklab, var(--color-base-200) 45%, transparent);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Pills & badges
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.2rem 0.6rem;
+  border: 1px solid transparent;
+  border-radius: 9999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  line-height: 1.35;
+  white-space: nowrap;
+  color: color-mix(
+    in oklab,
+    var(--color-primary) 82%,
+    var(--color-base-content)
+  );
+  background-color: color-mix(in oklab, var(--color-primary) 12%, transparent);
+  border-color: color-mix(in oklab, var(--color-primary) 24%, transparent);
+}
+.pill-lg {
+  padding: 0.35rem 0.8rem;
+  font-size: 0.78rem;
+}
+.pill-neutral {
+  color: color-mix(in oklab, var(--color-base-content) 70%, transparent);
+  background-color: color-mix(
+    in oklab,
+    var(--color-base-content) 8%,
+    transparent
+  );
+  border-color: var(--hairline);
+}
+.pill-info {
+  color: color-mix(in oklab, var(--color-info) 85%, var(--color-base-content));
+  background-color: color-mix(in oklab, var(--color-info) 14%, transparent);
+  border-color: color-mix(in oklab, var(--color-info) 28%, transparent);
+}
+.pill-success {
+  color: color-mix(
+    in oklab,
+    var(--color-success) 82%,
+    var(--color-base-content)
+  );
+  background-color: color-mix(in oklab, var(--color-success) 14%, transparent);
+  border-color: color-mix(in oklab, var(--color-success) 28%, transparent);
+}
+.pill-warning {
+  color: color-mix(
+    in oklab,
+    var(--color-warning) 55%,
+    var(--color-base-content)
+  );
+  background-color: color-mix(in oklab, var(--color-warning) 18%, transparent);
+  border-color: color-mix(in oklab, var(--color-warning) 32%, transparent);
+}
+.pill-accent {
+  color: color-mix(
+    in oklab,
+    var(--color-accent) 85%,
+    var(--color-base-content)
+  );
+  background-color: color-mix(in oklab, var(--color-accent) 14%, transparent);
+  border-color: color-mix(in oklab, var(--color-accent) 28%, transparent);
+}
+
+/* The year card's file-count chip. */
+.count-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 9999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  background-color: color-mix(in oklab, var(--color-primary) 12%, transparent);
+  border: 1px solid color-mix(in oklab, var(--color-primary) 26%, transparent);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+/* Marked search terms. */
+mark {
+  padding: 0 0.15em;
+  border-radius: 0.3em;
+  font-weight: 700;
+  color: var(--color-primary);
+  background-color: color-mix(in oklab, var(--color-primary) 20%, transparent);
+}
+
+/* Star (favourite) toggles. */
+.star-btn {
+  border-radius: 9999px;
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+.star-btn:hover {
+  transform: scale(1.18);
+  background-color: color-mix(in oklab, #f59e0b 18%, transparent);
+}
+.star-btn.is-on {
+  color: #f59e0b;
+  filter: drop-shadow(0 2px 6px rgb(245 158 11 / 0.45));
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Empty & error states
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 3rem 1rem;
+  text-align: center;
+  color: color-mix(in oklab, var(--color-base-content) 55%, transparent);
+}
+.empty-icon {
+  display: grid;
+  place-items: center;
+  width: 4.5rem;
+  height: 4.5rem;
+  margin-bottom: 0.75rem;
+  border-radius: 9999px;
+  font-size: 1.75rem;
+  color: color-mix(in oklab, var(--color-primary) 70%, transparent);
+  background-color: color-mix(in oklab, var(--color-primary) 10%, transparent);
+  border: 1px solid color-mix(in oklab, var(--color-primary) 20%, transparent);
+}
+.empty-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: color-mix(in oklab, var(--color-base-content) 80%, transparent);
+}
+.error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 3rem 1rem;
+  text-align: center;
+  color: var(--color-error);
+}
+.error-state .empty-icon {
+  color: var(--color-error);
+  background-color: color-mix(in oklab, var(--color-error) 12%, transparent);
+  border-color: color-mix(in oklab, var(--color-error) 24%, transparent);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Forms
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* daisyUI routes .input / .select / .textarea borders and focus outlines
+   through --input-color, so overriding that one variable restyles the whole
+   control consistently, including the search field wrapped in a <label>. */
+.input,
+.select,
+.textarea {
+  --input-color: color-mix(
+    in oklab,
+    var(--color-base-content) 16%,
+    transparent
+  );
+  border-color: var(--hairline);
+  background-color: var(--color-base-100);
+  box-shadow: var(--elev-1);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.35s ease;
+}
+.input:focus,
+.input:focus-within,
+.select:focus,
+.textarea:focus {
+  --input-color: var(--color-primary);
+  border-color: var(--color-primary);
+  box-shadow: var(--elev-1), var(--glow-primary);
+}
+.input::placeholder,
+.textarea::placeholder {
+  color: color-mix(in oklab, var(--color-base-content) 40%, transparent);
+}
+
+.fieldset-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.055em;
+  text-transform: uppercase;
+  color: color-mix(in oklab, var(--color-base-content) 62%, transparent);
+}
+
+.field-error,
+.field-success {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.8rem;
+  border-radius: calc(var(--radius-field) - 0.15rem);
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: 1px solid transparent;
+}
+.field-error {
+  color: color-mix(in oklab, var(--color-error) 80%, var(--color-base-content));
+  background-color: color-mix(in oklab, var(--color-error) 10%, transparent);
+  border-color: color-mix(in oklab, var(--color-error) 28%, transparent);
+}
+.field-success {
+  color: color-mix(
+    in oklab,
+    var(--color-success) 80%,
+    var(--color-base-content)
+  );
+  background-color: color-mix(in oklab, var(--color-success) 10%, transparent);
+  border-color: color-mix(in oklab, var(--color-success) 28%, transparent);
+}
+
+.alert {
+  border-radius: var(--radius-box);
+  box-shadow: var(--elev-1);
+}
+
+/* Breadcrumb trail in the year modal. */
+.breadcrumb-trail {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 0.9rem;
+  border-radius: calc(var(--radius-box) - 0.35rem);
+  background-color: color-mix(in oklab, var(--color-primary) 7%, transparent);
+  border: 1px solid color-mix(in oklab, var(--color-primary) 16%, transparent);
+}
+
+.breadcrumb-item {
+  border-radius: 0.45rem;
+  padding: 0.15rem 0.4rem;
+  color: color-mix(in oklab, var(--color-base-content) 62%, transparent);
+  transition:
+    color 0.18s ease,
+    background-color 0.18s ease;
+}
+.breadcrumb-item:hover {
+  color: var(--color-primary);
+  background-color: color-mix(in oklab, var(--color-primary) 10%, transparent);
+}
+.breadcrumb-item.is-current {
+  color: var(--color-base-content);
+  font-weight: 600;
+}
+
+.drive-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border-radius: 9999px;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-primary-content);
+  background-image: linear-gradient(
+    135deg,
+    var(--color-primary),
+    var(--color-secondary)
+  );
+  box-shadow: var(--shadow-soft);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    filter 0.2s ease;
+}
+.drive-pill:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-glow);
+  filter: saturate(1.1);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Modals
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+dialog.modal::backdrop {
+  background-color: color-mix(
+    in oklab,
+    var(--color-base-content) 45%,
+    transparent
+  );
+  backdrop-filter: blur(6px) saturate(130%);
+  -webkit-backdrop-filter: blur(6px) saturate(130%);
+}
+
+.modal-box {
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-box);
+  box-shadow: var(--elev-3);
+  background-color: var(--color-base-100);
+  overflow: hidden;
+}
+
+.modal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-shrink: 0;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--hairline);
+  background-color: color-mix(in oklab, var(--color-base-100) 92%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.modal-head h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  min-width: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+.modal-head-sm {
+  padding: 0.55rem 0.9rem;
+}
+.modal-head-sm h3 {
+  font-size: 0.85rem;
+}
+.modal-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  flex-shrink: 0;
+  padding: 0.6rem 1rem;
+  border-top: 1px solid var(--hairline);
+  background-color: color-mix(in oklab, var(--color-base-100) 92%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.modal-head .modal-icon {
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  flex-shrink: 0;
+  border-radius: calc(var(--radius-box) - 0.5rem);
+  color: var(--color-primary);
+  background-color: color-mix(in oklab, var(--color-primary) 12%, transparent);
+  border: 1px solid color-mix(in oklab, var(--color-primary) 22%, transparent);
+}
+.modal-body {
+  flex: 1;
+  overflow: auto;
+  padding: 1.25rem;
+}
+
+/* Tabs used in the contributors modal. */
+.tabs-boxed {
+  display: inline-flex;
+  gap: 0.25rem;
+  padding: 0.3rem;
+  border-radius: var(--radius-field);
+  background-color: color-mix(in oklab, var(--color-base-200) 70%, transparent);
+  border: 1px solid var(--hairline);
+}
+.tabs-boxed .tab {
+  gap: 0.5rem;
+  border-radius: calc(var(--radius-field) - 0.2rem);
+  font-weight: 600;
+  opacity: 0.65;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    opacity 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.tabs-boxed .tab:hover {
+  opacity: 1;
+  color: var(--color-primary);
+}
+.tabs-boxed .tab.tab-active {
+  opacity: 1;
+  color: var(--color-primary);
+  background-color: var(--color-base-100);
+  box-shadow: var(--elev-1);
 }
 
 /* ── File viewer fullscreen ─────────────────────────────────────────────── */
@@ -55,29 +1435,296 @@ dialog#fileModal.fullscreen .modal-box {
   border-radius: 0;
 }
 
-/* Prevent icons from escaping their containers */
-.fa,
-.fas,
-.far,
-.fal,
-.fab,
-.fad,
-[class^='fa-'],
-[class*=' fa-'] {
-  display: inline-block;
-  position: static;
+/* ── PDF viewer ─────────────────────────────────────────────────────────── */
+/* #pdfViewerContainer.clientWidth drives the PDF fit scale in pdfViewer.js,
+   so its box metrics must stay exactly as they are. */
+#pdfViewerCanvas {
+  background-color: #ffffff;
+  box-shadow: var(--elev-3);
 }
+
+/* The PDF and search dialogs go edge-to-edge on small screens (they are
+   full-height there), so they opt out of the rounded box. */
+#pdfViewerModal .modal-box,
+#searchModal .modal-box {
+  border-radius: 0;
+}
+@media (width >= 40rem) {
+  #pdfViewerModal .modal-box,
+  #searchModal .modal-box {
+    border-radius: var(--radius-box);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Scanner / editor
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.seg-tabs {
+  display: flex;
+  gap: 0.25rem;
+  padding: 0.35rem;
+  flex-shrink: 0;
+  border-bottom: 1px solid var(--hairline);
+  background-color: color-mix(in oklab, var(--color-base-200) 55%, transparent);
+}
+.editor-tab-btn {
+  border-radius: calc(var(--radius-field) - 0.15rem);
+  font-weight: 600;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.editor-tab-btn.btn-active {
+  color: var(--color-primary);
+  background-color: var(--color-base-100);
+  box-shadow: var(--elev-1);
+}
+.editor-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 1;
+  overflow: auto;
+  padding: 1rem;
+  background-color: color-mix(in oklab, var(--color-base-200) 60%, transparent);
+}
+#editorCanvas {
+  background-color: #ffffff;
+  box-shadow: var(--elev-2);
+  touch-action: none;
+}
+.slider-row {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+}
+.slider-row label {
+  flex-shrink: 0;
+  width: 4.5rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: color-mix(in oklab, var(--color-base-content) 65%, transparent);
+}
+.slider-row output,
+.slider-row .slider-val {
+  width: 2.75rem;
+  flex-shrink: 0;
+  text-align: right;
+  font-size: 0.7rem;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in oklab, var(--color-base-content) 60%, transparent);
+}
+
+.range {
+  --range-fill: 0;
+}
+.range-sm {
+  height: 1.15rem;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Upload
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.file-chip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.5rem 0.7rem;
+  font-size: 0.82rem;
+  background-color: var(--color-base-100);
+  border: 1px solid var(--hairline);
+  border-radius: calc(var(--radius-field) - 0.15rem);
+  box-shadow: var(--elev-1);
+}
+
+.progress-row {
+  margin-bottom: 0.75rem;
+  padding: 0.75rem 0.9rem;
+  background-color: var(--color-base-100);
+  border: 1px solid var(--hairline);
+  border-radius: calc(var(--radius-box) - 0.4rem);
+  box-shadow: var(--elev-1);
+}
+.progress {
+  height: 0.5rem;
+}
+
+.thanks-popup {
+  background-color: var(--color-base-100);
+  border: 1px solid var(--hairline);
+  box-shadow: var(--elev-3);
+}
+.thanks-heart {
+  display: grid;
+  place-items: center;
+  width: 5rem;
+  height: 5rem;
+  border-radius: 9999px;
+  color: var(--color-success);
+  background-color: color-mix(in oklab, var(--color-success) 16%, transparent);
+  border: 1px solid color-mix(in oklab, var(--color-success) 30%, transparent);
+  animation: csb-float 4s ease-in-out infinite;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Avatars & contributor lists
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.avatar-ring {
+  border: 2px solid transparent;
+  background-image: linear-gradient(
+    135deg,
+    var(--color-primary),
+    var(--color-accent)
+  );
+  background-origin: border-box;
+  transition:
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.3s ease;
+}
+.avatar-ring:hover {
+  transform: scale(1.09);
+  box-shadow: var(--glow-primary);
+}
+
+.name-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.6rem;
+  border-radius: calc(var(--radius-field) - 0.2rem);
+  transition: background-color 0.2s ease;
+}
+.name-list li:hover {
+  background-color: color-mix(in oklab, var(--color-primary) 8%, transparent);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Dhikr box
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* dhikr.js sets an inline style.display, which beats this display value —
+   that is intentional and unchanged. */
+#dhikrBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: color-mix(in oklab, var(--color-base-100) 82%, transparent);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid color-mix(in oklab, var(--color-primary) 22%, transparent);
+  border-radius: var(--radius-box);
+  box-shadow: var(--elev-3), var(--glow-primary);
+  transition:
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
+}
+#dhikrBox:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--elev-3), var(--glow-primary);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Toasts
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.toast-pop {
+  background-color: var(--color-base-content);
+  color: var(--color-base-100);
+  border-radius: calc(var(--radius-field) + 0.15rem);
+  box-shadow: var(--elev-3);
+}
+
+/* ── `hidden` vs our own display rules ───────────────────────────────────────
+   Everything above is deliberately unlayered so it can override daisyUI and
+   Tailwind utilities. The flip side is that a class of ours which sets
+   `display` outranks Tailwind's `.hidden` utility (which lives in
+   @layer utilities), so the JS that toggles `hidden` would leave the element
+   on screen.
+
+   Overriding `.hidden` itself is NOT an option: `hidden md:flex` (the nav
+   links, the mobile menu) depends on `hidden` losing to a later utility at the
+   md breakpoint, and `!important` would kill that. So the guard enumerates the
+   custom classes that own `display` instead. */
+.field-error.hidden,
+.field-success.hidden,
+.contributor-panel.hidden,
+.stage-center.hidden,
+.stage-col.hidden,
+.empty-state.hidden,
+.error-state.hidden,
+.alert.hidden,
+.surface-row.hidden,
+.file-chip.hidden,
+.progress-row.hidden {
+  display: none;
+}
+
+/* Shared stage boxes. These replace a `flex` utility that sat next to `hidden`
+   on the same element: two utilities in the same layer means the later one
+   wins, so the element could never actually hide. */
+.stage-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.stage-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Font Awesome draws its glyph from a ::before on the element itself, so the
+   element has to be a predictable box. Left alone, an icon is a blockified
+   inline box sitting on the text baseline: solid glyphs land slightly high and
+   brand glyphs (wider, taller metrics) visibly drift toward the bottom-right
+   of their cell. Making the icon a centred inline-flex box removes the
+   baseline dependency entirely. The :not() guards leave our own icon boxes in
+   charge of their own display, and keep `hidden` authoritative. */
+i[class*='fa-']:not(.section-icon):not(.tile-icon):not(.hidden),
+i[class^='fa']:not(.section-icon):not(.tile-icon):not(.hidden) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  flex-shrink: 0;
+  vertical-align: middle;
+}
+
+/* ── daisyUI `.fab` vs Font Awesome `.fab` ─────────────────────────────────────
+   daisyUI ships a floating-action-button *component* whose class name is
+   exactly `.fab`, which is also Font Awesome's shorthand for the Brands family.
+   Every `fab fa-github`, `fab fa-youtube`, `fab fa-google-drive` icon on the
+   page therefore matched the component and inherited
+
+       position: fixed; bottom: 1rem; inset-inline-end: 1rem;
+       pointer-events: none; z-index: 999;
+
+   which pulled all of them out of the flow and stacked them in the bottom-right
+   corner of the viewport (and made them unclickable). The markup now uses
+   Font Awesome's canonical `fa-brands` family class; this guard makes the
+   collision harmless if a `fab fa-*` is ever pasted in again. */
+i.fab[class*='fa-'] {
+  position: static;
+  inset-inline-end: auto;
+  bottom: auto;
+  pointer-events: auto;
+  z-index: auto;
+  white-space: normal;
+  flex-direction: row;
+  gap: normal;
+}
+
 /* Ensure fixed-position buttons contain their icons properly */
 #backToTop,
 #dhikrBox {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-/* Contributor panels */
-.contributor-panel {
-  display: block;
-}
-.contributor-panel.hidden {
-  display: none;
 }

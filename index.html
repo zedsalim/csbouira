@@ -1,10 +1,16 @@
 <!doctype html>
-<html lang="en" data-theme="csb-light" class="scroll-smooth">
+<html lang="en" data-theme="csb-dark" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CS Bouira - Academic Resources</title>
     <link rel="icon" href="/images/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Noto+Sans+Arabic:wght@400;700&display=swap"
+    />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -36,11 +42,11 @@
     </script>
   </head>
 
-  <body class="bg-base-100 text-base-content transition-colors duration-300">
+  <body class="text-base-content transition-colors duration-300">
     <!-- ══ FAKE LOADER ══════════════════════════════════════════════════════ -->
     <div
       data-module="loader"
-      class="fixed inset-0 z-[9999999] flex flex-col items-center justify-center bg-primary transition-opacity duration-500"
+      class="fixed inset-0 z-[9999999] flex flex-col items-center justify-center bg-linear-to-br from-secondary via-primary to-accent transition-opacity duration-500"
     >
       <span
         class="loading loading-spinner loading-lg text-primary-content"
@@ -53,16 +59,14 @@
     <!-- ══ DHIKR BOX ════════════════════════════════════════════════════════ -->
     <div
       id="dhikrBox"
-      class="fixed bottom-[23px] left-5 w-auto max-w-[275px] px-4 py-3 sm:p-4 text-base sm:text-lg border border-base-300 bg-base-100 shadow-lg hover:shadow-xl rounded-xl opacity-0 transition-opacity duration-700 cursor-pointer z-[999999] text-center select-none"
+      class="fixed bottom-[23px] left-5 w-auto max-w-[275px] px-4 py-3 sm:p-4 text-base sm:text-lg opacity-0 transition-opacity duration-700 cursor-pointer z-[999999] text-center select-none"
       style="display: none"
     >
       <p id="dhikrText" class="text-xl font-bold leading-snug"></p>
     </div>
 
     <!-- ══ NAVBAR ═══════════════════════════════════════════════════════════ -->
-    <header
-      class="navbar z-[99999] bg-base-200 border-b border-base-300 sticky top-0 z-40 shadow-sm px-4 sm:px-6 lg:px-8"
-    >
+    <header class="navbar app-nav sticky top-0 z-40 px-4 sm:px-6 lg:px-8">
       <div class="navbar-start">
         <img
           src="/images/csb-nav-logo.png"
@@ -79,7 +83,7 @@
         <div class="hidden md:flex items-center gap-1">
           <a
             href="#home"
-            class="btn btn-ghost btn btn-rounded rounded-lg border-none"
+            class="btn btn-ghost nav-link"
             >Home</a
           >
 
@@ -87,13 +91,13 @@
           <div class="relative" id="yearsDropdownWrapper">
             <button
               id="yearsDropdownBtn"
-              class="btn btn-ghost btn btn-rounded rounded-lg border-none gap-1"
+              class="btn btn-ghost nav-link gap-1"
             >
               Years <i class="fas fa-chevron-down text-xs"></i>
             </button>
             <ul
               id="yearsDropdown"
-              class="absolute right-0 top-full mt-1 menu bg-base-200 border border-base-300 rounded-lg shadow-lg z-50 w-48 p-1 hidden"
+              class="dropdown-panel menu absolute right-0 top-full mt-1 z-50 w-48 hidden"
             >
               <li>
                 <a
@@ -190,28 +194,28 @@
 
           <a
             href="#about"
-            class="btn btn-ghost btn btn-rounded rounded-lg border-none"
+            class="btn btn-ghost nav-link"
             >About</a
           >
           <a
             href="#similar-projects"
-            class="btn btn-ghost btn btn-rounded rounded-lg border-none"
+            class="btn btn-ghost nav-link"
             >Similar</a
           >
           <a
             href="#contribute"
-            class="btn btn-ghost btn btn-rounded rounded-lg border-none"
+            class="btn btn-ghost nav-link"
             >Contribute</a
           >
           <a
             href="#contact"
-            class="btn btn-ghost btn btn-rounded rounded-lg border-none"
+            class="btn btn-ghost nav-link"
             >Contact</a
           >
 
           <button
             onclick="openSearchModal()"
-            class="btn btn-ghost btn-circle btn-sm border-none"
+            class="btn btn-ghost btn-circle btn-sm"
             title="Search"
           >
             <i class="fas fa-search"></i>
@@ -219,7 +223,7 @@
 
           <!-- Theme Toggle -->
           <label
-            class="swap swap-rotate btn btn-ghost btn-circle btn-sm border-none"
+            class="swap swap-rotate btn btn-ghost btn-circle btn-sm"
             data-module="theme"
           >
             <input type="checkbox" data-theme="toggle" />
@@ -254,19 +258,19 @@
       <!-- Mobile Menu -->
       <div
         id="mobileMenu"
-        class="hidden md:hidden absolute top-full left-0 w-full bg-base-200 border-b border-base-300 shadow-lg transform origin-top scale-y-95 opacity-0 -translate-y-2 transition-all duration-200 ease-in-out z-50"
+        class="mobile-panel hidden md:hidden absolute top-full left-0 w-full transform origin-top scale-y-95 opacity-0 -translate-y-2 transition-all duration-200 ease-in-out z-50"
       >
         <div class="px-4 py-2 space-y-1">
           <a
             href="#home"
-            class="block px-4 py-2 rounded hover:bg-base-300 transition"
+            class="block px-4 py-2"
             >Home</a
           >
 
           <div>
             <button
               id="mobileYearsBtn"
-              class="w-full text-left px-4 py-2 rounded flex justify-between items-center hover:bg-base-300 transition"
+              class="w-full text-left px-4 py-2 flex justify-between items-center"
             >
               Years <i class="fas fa-chevron-down"></i>
             </button>
@@ -277,7 +281,7 @@
                   openYear('Licence 1');
                   return false;
                 "
-                class="block px-4 py-2 rounded hover:bg-base-300 transition"
+                class="block px-4 py-2"
                 >Licence 1</a
               >
               <a
@@ -286,7 +290,7 @@
                   openYear('Licence 2');
                   return false;
                 "
-                class="block px-4 py-2 rounded hover:bg-base-300 transition"
+                class="block px-4 py-2"
                 >Licence 2</a
               >
               <a
@@ -295,7 +299,7 @@
                   openYear('Licence 3 SI');
                   return false;
                 "
-                class="block px-4 py-2 rounded hover:bg-base-300 transition"
+                class="block px-4 py-2"
                 >Licence 3 SI</a
               >
               <a
@@ -304,7 +308,7 @@
                   openYear('Master 1 GSI');
                   return false;
                 "
-                class="block px-4 py-2 rounded hover:bg-base-300 transition"
+                class="block px-4 py-2"
                 >Master 1 GSI</a
               >
               <a
@@ -313,7 +317,7 @@
                   openYear('Master 1 ISIL');
                   return false;
                 "
-                class="block px-4 py-2 rounded hover:bg-base-300 transition"
+                class="block px-4 py-2"
                 >Master 1 ISIL</a
               >
               <a
@@ -322,7 +326,7 @@
                   openYear('Master 1 IA');
                   return false;
                 "
-                class="block px-4 py-2 rounded hover:bg-base-300 transition"
+                class="block px-4 py-2"
                 >Master 1 IA</a
               >
               <a
@@ -331,7 +335,7 @@
                   openYear('Master 2 GSI');
                   return false;
                 "
-                class="block px-4 py-2 rounded hover:bg-base-300 transition"
+                class="block px-4 py-2"
                 >Master 2 GSI</a
               >
               <a
@@ -340,7 +344,7 @@
                   openYear('Master 2 ISIL');
                   return false;
                 "
-                class="block px-4 py-2 rounded hover:bg-base-300 transition"
+                class="block px-4 py-2"
                 >Master 2 ISIL</a
               >
               <a
@@ -349,7 +353,7 @@
                   openYear('Master 2 IA');
                   return false;
                 "
-                class="block px-4 py-2 rounded hover:bg-base-300 transition"
+                class="block px-4 py-2"
                 >Master 2 IA</a
               >
             </div>
@@ -357,22 +361,22 @@
 
           <a
             href="#about"
-            class="block px-4 py-2 rounded hover:bg-base-300 transition"
+            class="block px-4 py-2"
             >About</a
           >
           <a
             href="#similar-projects"
-            class="block px-4 py-2 rounded hover:bg-base-300 transition"
+            class="block px-4 py-2"
             >Similar</a
           >
           <a
             href="#contribute"
-            class="block px-4 py-2 rounded hover:bg-base-300 transition"
+            class="block px-4 py-2"
             >Contribute</a
           >
           <a
             href="#contact"
-            class="block px-4 py-2 rounded hover:bg-base-300 transition"
+            class="block px-4 py-2"
             >Contact</a
           >
         </div>
@@ -381,7 +385,7 @@
 
     <!-- ══ HERO SECTION ═════════════════════════════════════════════════════ -->
     <section id="home">
-      <div class="hero min-h-screen bg-base-200">
+      <div class="hero-surface hero min-h-screen">
         <div class="hero-content text-center flex flex-col items-center gap-6">
           <img
             src="/images/csb-hero-logo.png"
@@ -389,12 +393,14 @@
             width="256"
             height="256"
             loading="lazy"
-            class="w-40 sm:w-52 md:w-64 h-auto"
+            class="hero-logo w-40 sm:w-52 md:w-64 h-auto"
           />
-          <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold">
+          <h1
+            class="text-gradient text-3xl sm:text-4xl md:text-5xl font-extrabold"
+          >
             Welcome to CS Bouira
           </h1>
-          <p class="text-base sm:text-lg md:text-xl opacity-90 max-w-xl">
+          <p class="hero-lede text-base sm:text-lg md:text-xl max-w-xl">
             Your comprehensive academic resource platform for Computer Science
             studies of Bouira University
           </p>
@@ -406,24 +412,24 @@
                   openUploadModal();
                   return false;
                 "
-                class="btn btn-lg btn-rounded bg-base-100 text-primary border-none hover:bg-primary hover:text-primary-content shadow-md hover:shadow-lg transition-all rounded-full"
+                class="btn btn-lg btn-rounded btn-glass gap-2"
               >
-                Upload Resources <i class="fas fa-arrow-right ml-2"></i>
+                Upload Resources <i class="fas fa-arrow-right"></i>
               </a>
               <a
                 href="https://github.com/zedsalim/csbouira/releases/tag/v1.0.0"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="btn btn-lg btn-success shadow-md hover:shadow-lg transition-all rounded-full"
+                class="btn btn-lg btn-success rounded-full gap-2 shadow-lg"
               >
-                Download APK <i class="fas fa-download ml-2"></i>
+                Download APK <i class="fas fa-download"></i>
               </a>
             </div>
             <a
               href="https://techforpalestine.org/"
               target="_blank"
               rel="noopener noreferrer"
-              class="transition hover:scale-105"
+              class="transition-transform duration-300 hover:scale-105"
             >
               <img
                 src="https://img.shields.io/badge/🇵🇸%20Tech%20For%20Palestine-black?style=for-the-badge"
@@ -435,6 +441,7 @@
               />
             </a>
           </div>
+          <span class="scroll-cue" aria-hidden="true"></span>
         </div>
       </div>
     </section>
@@ -449,14 +456,14 @@
       <!-- Academic Years Section -->
       <section id="years" class="mb-12">
         <h2
-          class="text-3xl font-bold mb-8 flex items-center justify-center gap-3 text-center"
+          class="section-head section-title"
         >
-          <i class="fas fa-book text-primary"></i>
+          <i class="fas fa-book section-icon"></i>
           Academic Years
         </h2>
 
         <div class="mb-8">
-          <h3 class="text-2xl font-semibold mb-4 text-primary">Licence</h3>
+          <h3 class="subhead mb-4 text-primary">Licence</h3>
           <div
             class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
             id="licence-cards"
@@ -464,7 +471,7 @@
         </div>
 
         <div class="mb-8">
-          <h3 class="text-2xl font-semibold mb-4 text-primary">Master 1</h3>
+          <h3 class="subhead mb-4 text-primary">Master 1</h3>
           <div
             class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
             id="master1-cards"
@@ -472,7 +479,7 @@
         </div>
 
         <div class="mb-8">
-          <h3 class="text-2xl font-semibold mb-4 text-primary">Master 2</h3>
+          <h3 class="subhead mb-4 text-primary">Master 2</h3>
           <div
             class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
             id="master2-cards"
@@ -483,12 +490,12 @@
       <!-- About Section -->
       <section id="about" class="mb-12">
         <h2
-          class="text-3xl font-bold mb-8 flex items-center justify-center gap-3 text-center mt-20"
+          class="section-head section-title mt-20"
         >
-          <i class="fas fa-info-circle text-primary"></i>
+          <i class="fas fa-info-circle section-icon"></i>
           About CS Bouira
         </h2>
-        <div class="card bg-base-200 shadow-sm rounded-2xl">
+        <div class="surface surface-sheen">
           <div class="card-body p-8 md:p-16 md:py-20">
             <div class="grid lg:grid-cols-2 gap-10 items-center">
               <div class="space-y-4 text-lg order-2 lg:order-1">
@@ -529,32 +536,29 @@
       <!-- Similar Projects Section -->
       <section id="similar-projects" class="mb-12">
         <h2
-          class="text-3xl font-bold mt-20 mb-8 flex items-center justify-center gap-3 text-center"
+          class="section-head section-title mt-20"
         >
-          <i class="fas fa-link text-primary"></i>
+          <i class="fas fa-link section-icon"></i>
           Similar Projects
         </h2>
-        <div class="card bg-base-200 shadow-sm rounded-2xl">
+        <div class="surface surface-sheen">
           <div class="card-body p-8 md:p-12">
-            <div class="grid md:grid-cols-2 gap-8">
-              <!-- Educational Platforms -->
-              <div class="space-y-4">
-                <h3 class="text-2xl font-semibold mb-4 flex items-center gap-2">
+            <div class="about-grid">
+<h3 class="about-head about-head-l order-1 text-2xl font-semibold mb-1 flex items-center gap-2">
                   <i class="fas fa-graduation-cap text-primary"></i>
                   Educational Platforms
                 </h3>
-                <div class="space-y-3">
-                  <div
-                    class="card bg-base-100 shadow-sm hover:shadow-md transition-shadow rounded-2xl"
+<div
+                    class="surface surface-lift about-card about-l1 order-2 h-full"
                   >
-                    <div class="card-body p-4">
+                    <div class="card-body p-4 h-full">
                       <h4 class="font-semibold mb-2">
                         <a
                           href="https://play.google.com/store/apps/details?id=m.ify.computersciencebouira&hl=en&pli=1"
                           target="_blank"
                           class="text-primary hover:underline flex items-center gap-2"
                         >
-                          <i class="fab fa-android"></i>
+                          <i class="fa-brands fa-android"></i>
                           BCS - Bouira Computer Society
                           <i class="fas fa-external-link-alt text-xs"></i>
                         </a>
@@ -565,10 +569,10 @@
                       </p>
                     </div>
                   </div>
-                  <div
-                    class="card bg-base-100 shadow-sm hover:shadow-md transition-shadow rounded-2xl"
+<div
+                    class="surface surface-lift about-card about-l2 order-3 h-full"
                   >
-                    <div class="card-body p-4">
+                    <div class="card-body p-4 h-full">
                       <h4 class="font-semibold mb-2">
                         <a
                           href="https://tahadz.com/khbich/"
@@ -585,10 +589,10 @@
                       </p>
                     </div>
                   </div>
-                  <div
-                    class="card bg-base-100 shadow-sm hover:shadow-md transition-shadow rounded-2xl"
+<div
+                    class="surface surface-lift about-card about-l3 order-4 h-full"
                   >
-                    <div class="card-body p-4">
+                    <div class="card-body p-4 h-full">
                       <h4 class="font-semibold mb-2">
                         <a
                           href="https://rayaneca.github.io/rayane.github.io/"
@@ -605,20 +609,14 @@
                       </p>
                     </div>
                   </div>
-                </div>
-              </div>
-
-              <!-- Tools & Community -->
-              <div class="space-y-4">
-                <h3 class="text-2xl font-semibold mb-4 flex items-center gap-2">
+<h3 class="about-head about-head-r order-5 text-2xl font-semibold mb-1 flex items-center gap-2">
                   <i class="fas fa-tools text-primary"></i>
                   Tools & Community
                 </h3>
-                <div class="space-y-3">
-                  <div
-                    class="card bg-base-100 shadow-sm hover:shadow-md transition-shadow rounded-2xl"
+<div
+                    class="surface surface-lift about-card about-r1 order-6 h-full"
                   >
-                    <div class="card-body p-4">
+                    <div class="card-body p-4 h-full">
                       <h4 class="font-semibold mb-2">
                         <a
                           href="https://moadaly.vercel.app/"
@@ -638,22 +636,22 @@
                         target="_blank"
                         class="text-xs text-primary hover:underline flex items-center gap-1"
                       >
-                        <i class="fab fa-android"></i>
+                        <i class="fa-brands fa-android"></i>
                         Also available as mobile app
                       </a>
                     </div>
                   </div>
-                  <div
-                    class="card bg-base-100 shadow-sm hover:shadow-md transition-shadow rounded-2xl"
+<div
+                    class="surface surface-lift about-card about-r2 order-7 h-full"
                   >
-                    <div class="card-body p-4">
+                    <div class="card-body p-4 h-full">
                       <h4 class="font-semibold mb-2">
                         <a
                           href="https://github.com/zedsalim/moodle-scraper"
                           target="_blank"
                           class="text-primary hover:underline flex items-center gap-2"
                         >
-                          <i class="fab fa-python"></i>
+                          <i class="fa-brands fa-python"></i>
                           Moodle Scraper
                           <i class="fas fa-external-link-alt text-xs"></i>
                         </a>
@@ -664,17 +662,17 @@
                       </p>
                     </div>
                   </div>
-                  <div
-                    class="card bg-base-100 shadow-sm hover:shadow-md transition-shadow rounded-2xl"
+<div
+                    class="surface surface-lift about-card about-r3 order-8 h-full"
                   >
-                    <div class="card-body p-4">
+                    <div class="card-body p-4 h-full">
                       <h4 class="font-semibold mb-2">
                         <a
                           href="https://discord.gg/wbubXFaFJg"
                           target="_blank"
                           class="text-primary hover:underline flex items-center gap-2"
                         >
-                          <i class="fab fa-discord"></i>
+                          <i class="fa-brands fa-discord"></i>
                           Discord Community
                           <i class="fas fa-external-link-alt text-xs"></i>
                         </a>
@@ -685,8 +683,6 @@
                       </p>
                     </div>
                   </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -695,12 +691,12 @@
       <!-- Contribute Section -->
       <section id="contribute" class="mb-12">
         <h2
-          class="text-3xl font-bold mb-8 flex items-center justify-center gap-3 text-center mt-20"
+          class="section-head section-title mt-20"
         >
-          <i class="fas fa-hands-helping text-primary"></i>
+          <i class="fas fa-hands-helping section-icon"></i>
           Contribute
         </h2>
-        <div class="card bg-base-200 shadow-sm rounded-2xl">
+        <div class="surface surface-sheen">
           <div class="card-body p-8 md:p-16 md:py-20">
             <div class="space-y-4 text-lg">
               <p>
@@ -709,9 +705,9 @@
               </p>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
                 <div
-                  class="card bg-base-100 shadow-sm text-center p-6 rounded-2xl"
+                  class="surface surface-lift text-center p-6"
                 >
-                  <i class="fas fa-upload text-4xl text-primary mb-4 block"></i>
+                  <i class="fas fa-upload tile-icon tile-icon-primary"></i>
                   <h3 class="font-semibold mb-2">Share Resources</h3>
                   <p class="text-sm text-base-content/60">
                     Upload your notes, summaries, and study materials to help
@@ -719,10 +715,10 @@
                   </p>
                 </div>
                 <div
-                  class="card bg-base-100 shadow-sm text-center p-6 rounded-2xl"
+                  class="surface surface-lift text-center p-6"
                 >
                   <i
-                    class="fas fa-code-branch text-4xl text-success mb-4 block"
+                    class="fas fa-code-branch tile-icon tile-icon-success"
                   ></i>
                   <h3 class="font-semibold mb-2">Code Contribute</h3>
                   <p class="text-sm text-base-content/60">
@@ -731,9 +727,9 @@
                   </p>
                 </div>
                 <div
-                  class="card bg-base-100 shadow-sm text-center p-6 rounded-2xl"
+                  class="surface surface-lift text-center p-6"
                 >
-                  <i class="fas fa-plug text-4xl text-warning mb-4 block"></i>
+                  <i class="fas fa-plug tile-icon tile-icon-warning"></i>
                   <h3 class="font-semibold mb-2">API Reference</h3>
                   <p class="text-sm text-base-content/60">
                     Access our academic resources programmatically.<br />
@@ -746,10 +742,10 @@
                   </p>
                 </div>
                 <div
-                  class="card bg-base-100 shadow-sm text-center p-6 rounded-2xl"
+                  class="surface surface-lift text-center p-6"
                 >
                   <i
-                    class="fas fa-users text-4xl text-secondary mb-4 block"
+                    class="fas fa-users tile-icon tile-icon-secondary"
                   ></i>
                   <h3 class="font-semibold mb-2">Community of Uploaders</h3>
                   <p class="text-sm text-base-content/60">
@@ -764,7 +760,7 @@
                       openContributorsModal();
                       return false;
                     "
-                    class="btn bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 text-white border-none shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 rounded-full"
+                    class="btn btn-warm btn-lg rounded-full gap-2"
                   >
                     <i class="fas fa-trophy"></i>
                     Our Amazing Contributors
@@ -779,12 +775,12 @@
       <!-- Contact Section -->
       <section id="contact" class="mb-12" data-module="contact">
         <h2
-          class="text-3xl font-bold mb-8 flex items-center justify-center gap-3 text-center mt-20"
+          class="section-head section-title mt-20"
         >
-          <i class="fas fa-envelope text-primary"></i>
+          <i class="fas fa-envelope section-icon"></i>
           Contact Us
         </h2>
-        <div class="card bg-base-200 shadow-sm rounded-2xl">
+        <div class="surface surface-sheen">
           <div class="card-body p-8 md:p-16 md:py-20">
             <div class="grid md:grid-cols-2 gap-8">
               <!-- Contact Info -->
@@ -805,7 +801,7 @@
                     >
                   </div>
                   <div class="flex items-center gap-3">
-                    <i class="fab fa-github text-primary"></i>
+                    <i class="fa-brands fa-github text-primary"></i>
                     <a
                       href="https://github.com/zedsalim/csbouira"
                       target="_blank"
@@ -833,11 +829,11 @@
                     <input
                       type="text"
                       data-contact="name"
-                      class="input input-bordered border border-base-300 w-full rounded-xl"
+                      class="input w-full"
                       placeholder="Your name"
                     />
                     <div
-                      class="alert alert-error hidden mt-1 py-1 text-sm rounded-xl"
+                      class="field-error hidden mt-1"
                       data-contact="name-error"
                     ></div>
                   </fieldset>
@@ -846,11 +842,11 @@
                     <input
                       type="email"
                       data-contact="email"
-                      class="input input-bordered border border-base-300 w-full rounded-xl"
+                      class="input w-full"
                       placeholder="you@example.com"
                     />
                     <div
-                      class="alert alert-error hidden mt-1 py-1 text-sm rounded-xl"
+                      class="field-error hidden mt-1"
                       data-contact="email-error"
                     ></div>
                   </fieldset>
@@ -858,23 +854,23 @@
                     <label class="fieldset-label">Message</label>
                     <textarea
                       data-contact="message"
-                      class="textarea textarea-bordered border border-base-300 w-full rounded-xl"
+                      class="textarea w-full"
                       rows="4"
                       placeholder="Your message..."
                     ></textarea>
                     <div
-                      class="alert alert-error hidden mt-1 py-1 text-sm rounded-xl"
+                      class="field-error hidden mt-1"
                       data-contact="message-error"
                     ></div>
                   </fieldset>
                   <div
-                    class="alert alert-success hidden rounded-xl"
+                    class="field-success hidden"
                     data-contact="success"
                   ></div>
                   <button
                     type="submit"
                     data-contact="submit"
-                    class="btn btn-primary w-full rounded-xl"
+                    class="btn btn-gradient w-full"
                   >
                     Send Message
                   </button>
@@ -888,31 +884,31 @@
 
     <!-- ══ FOOTER ════════════════════════════════════════════════════════════ -->
     <footer
-      class="bg-base-200 text-base-content border-t border-base-300 py-8 mt-12"
+      class="app-footer text-base-content py-8 mt-12"
     >
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <p class="text-base-content/60">
           <span id="currentYear"></span> CS Bouira
         </p>
-        <div class="mt-4 flex justify-center gap-6">
+        <div class="mt-4 flex justify-center gap-3">
           <a
             href="https://salimzaidi.pages.dev"
             target="_blank"
-            class="inline-flex items-center justify-center w-8 h-8 hover:text-primary transition"
+            class="footer-link"
           >
             <i class="fas fa-globe text-xl"></i>
           </a>
           <a
             href="https://github.com/zedsalim/csbouira"
             target="_blank"
-            class="inline-flex items-center justify-center w-8 h-8 hover:text-primary transition"
+            class="footer-link"
           >
-            <i class="fab fa-github text-xl"></i>
+            <i class="fa-brands fa-github text-xl"></i>
           </a>
           <a
             href="mailto:csbouira@proton.me"
             target="_blank"
-            class="inline-flex items-center justify-center w-8 h-8 hover:text-primary transition"
+            class="footer-link"
           >
             <i class="fas fa-envelope text-xl"></i>
           </a>
@@ -924,7 +920,7 @@
               openContributorsModal();
               return false;
             "
-            class="btn bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 text-white border-none shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 btn-sm sm:btn-md rounded-full"
+            class="btn btn-warm btn-sm sm:btn-md rounded-full gap-2"
           >
             <i class="fas fa-trophy"></i>
             Our Amazing Contributors
@@ -936,7 +932,7 @@
     <!-- ══ BACK TO TOP ═══════════════════════════════════════════════════════ -->
     <button
       id="backToTop"
-      class="btn btn-primary btn-circle fixed bottom-6 right-6 shadow-lg opacity-0 pointer-events-none transition-opacity duration-300 z-50"
+      class="btn btn-circle fixed bottom-6 right-6 opacity-0 pointer-events-none transition-opacity duration-300 z-50"
       title="Back to Top"
     >
       <i class="fas fa-arrow-up"></i>
@@ -949,15 +945,12 @@
     <!-- File Viewer Modal -->
     <dialog id="fileModal" class="modal p-0">
       <div
-        class="modal-box w-full max-w-5xl h-[90vh] flex flex-col p-0 rounded-xl relative overflow-hidden"
+        class="modal-box w-full max-w-5xl h-[90vh] flex flex-col p-0 relative"
       >
         <div
-          class="flex items-center gap-2 p-4 border-b border-base-300 rounded-t-xl min-w-0"
+          class="modal-head gap-2"
         >
-          <h3
-            class="text-lg sm:text-xl font-semibold flex-1 min-w-0 truncate"
-            id="modalTitle"
-          >
+          <h3 id="modalTitle" class="truncate">
             Document Viewer
           </h3>
           <div class="flex items-center gap-2 flex-shrink-0">
@@ -978,7 +971,7 @@
             </button>
           </div>
         </div>
-        <div class="flex-1 relative overflow-hidden rounded-b-xl">
+        <div class="flex-1 relative">
           <iframe
             id="fileViewer"
             class="w-full h-full border-0"
@@ -1005,15 +998,12 @@
     <!-- Year Detail Modal -->
     <dialog id="yearModal" class="modal p-4">
       <div
-        class="modal-box w-full max-w-5xl h-[90vh] flex flex-col p-0 rounded-xl overflow-hidden"
+        class="modal-box w-full max-w-5xl h-[90vh] flex flex-col p-0"
       >
         <div
-          class="flex justify-between items-center p-4 border-b border-base-300"
+          class="modal-head"
         >
-          <h3
-            class="text-xl font-semibold flex items-center gap-3"
-            id="yearModalTitle"
-          >
+          <h3 id="yearModalTitle">
             Year Details
           </h3>
           <button
@@ -1023,10 +1013,10 @@
             <i class="fas fa-times text-xl"></i>
           </button>
         </div>
-        <div class="p-6 overflow-auto flex-1">
+        <div class="modal-body">
           <div
             id="breadcrumb"
-            class="flex flex-wrap items-center gap-2 p-3 bg-base-200 rounded-lg mb-4"
+            class="breadcrumb-trail mb-4"
           ></div>
           <div id="yearContent"></div>
         </div>
@@ -1036,13 +1026,13 @@
     <!-- Upload Modal -->
     <dialog id="uploadModal" class="modal p-4">
       <div
-        class="modal-box w-full max-w-3xl h-[90vh] flex flex-col p-0 rounded-xl overflow-hidden"
+        class="modal-box w-full max-w-3xl h-[90vh] flex flex-col p-0"
       >
         <div
-          class="flex justify-between items-center p-4 border-b border-base-300"
+          class="modal-head"
         >
-          <h3 class="text-xl font-semibold flex items-center gap-2">
-            <i class="fas fa-upload text-primary"></i>
+          <h3>
+            <i class="fas fa-upload modal-icon"></i>
             Upload Educational Files
           </h3>
           <button
@@ -1052,14 +1042,14 @@
             <i class="fas fa-times text-xl"></i>
           </button>
         </div>
-        <div class="p-6 overflow-auto flex-1">
+        <div class="modal-body">
           <form id="uploadForm" class="space-y-4">
             <fieldset class="fieldset">
               <label class="fieldset-label">Full Name *</label>
               <input
                 type="text"
                 id="fullName"
-                class="input input-bordered border border-base-300 w-full rounded-xl"
+                class="input w-full"
                 placeholder="Your Full Name"
                 required
               />
@@ -1069,7 +1059,7 @@
               <input
                 type="email"
                 id="uploadEmail"
-                class="input input-bordered border border-base-300 w-full rounded-xl"
+                class="input w-full"
                 placeholder="your@email.com"
                 required
               />
@@ -1078,7 +1068,7 @@
               <label class="fieldset-label">File Type *</label>
               <select
                 id="fileType"
-                class="select select-bordered border border-base-300 w-full rounded-xl"
+                class="select w-full"
                 required
               >
                 <option value="">-- Select File Type --</option>
@@ -1096,7 +1086,7 @@
               <input
                 type="text"
                 id="moduleName"
-                class="input input-bordered border border-base-300 w-full rounded-xl"
+                class="input w-full"
                 placeholder="e.g., Algorithmique et structure de données"
                 required
               />
@@ -1105,7 +1095,7 @@
               <label class="fieldset-label">Grade/Level *</label>
               <select
                 id="grade"
-                class="select select-bordered border border-base-300 w-full rounded-xl"
+                class="select w-full"
                 required
               >
                 <option value="">-- Select Grade --</option>
@@ -1130,7 +1120,7 @@
               <label class="fieldset-label">Semester *</label>
               <select
                 id="semester"
-                class="select select-bordered border border-base-300 w-full rounded-xl"
+                class="select w-full"
                 required
               >
                 <option value="">-- Select Semester --</option>
@@ -1151,7 +1141,7 @@
               />
               <label
                 for="files"
-                class="btn btn-outline btn-primary w-full rounded-xl h-auto min-h-[3rem] py-2.5 cursor-pointer gap-2"
+                class="btn btn-outline btn-primary w-full h-auto min-h-[3rem] py-2.5 cursor-pointer gap-2"
               >
                 <i class="fas fa-folder-open"></i>
                 Choose Files
@@ -1167,7 +1157,7 @@
               <button
                 type="button"
                 onclick="openScannerModal()"
-                class="btn btn-outline btn-secondary rounded-xl gap-2"
+                class="btn btn-soft gap-2"
               >
                 <i class="fas fa-camera"></i>
                 Scan Document
@@ -1180,21 +1170,17 @@
               <button
                 type="submit"
                 id="uploadSubmitBtn"
-                class="btn btn-primary flex-1 rounded-xl"
+                class="btn btn-gradient flex-1"
               >
                 Upload Files
               </button>
-              <button
-                type="button"
-                id="uploadClearBtn"
-                class="btn btn-ghost rounded-xl"
-              >
+              <button type="button" id="uploadClearBtn" class="btn btn-ghost">
                 Clear
               </button>
             </div>
             <div
               id="uploadResponseMessage"
-              class="hidden alert rounded-xl"
+              class="hidden alert"
             ></div>
             <div id="uploadProgress" class="hidden mt-4"></div>
           </form>
@@ -1204,18 +1190,18 @@
 
     <!-- Scanner Modal -->
     <dialog id="scannerModal" class="modal p-4">
-      <div class="modal-box w-full max-w-lg flex flex-col p-0 rounded-xl overflow-hidden">
-        <div class="flex justify-between items-center p-4 border-b border-base-300">
-          <h3 class="text-xl font-semibold flex items-center gap-2">
-            <i class="fas fa-camera text-secondary"></i>
+      <div class="modal-box w-full max-w-lg flex flex-col p-0">
+        <div class="modal-head">
+          <h3>
+            <i class="fas fa-camera modal-icon"></i>
             Scan Document
           </h3>
           <button onclick="closeScannerModal()" class="btn btn-ghost btn-circle btn-sm">
             <i class="fas fa-times text-xl"></i>
           </button>
         </div>
-        <div class="p-4 flex-1 flex flex-col items-center justify-center gap-4">
-          <div id="scannerPlaceholder" class="hidden w-full aspect-video bg-base-200 rounded-xl flex items-center justify-center">
+        <div class="modal-body flex flex-col items-center justify-center gap-4">
+          <div id="scannerPlaceholder" class="surface-inset stage-center hidden w-full aspect-video rounded-xl">
             <p id="scannerPlaceholderText" class="text-base-content/60 text-sm text-center p-4">
               Camera not available. Use Gallery to pick an image.
             </p>
@@ -1227,10 +1213,10 @@
             </button>
           </div>
           <div class="flex gap-3 w-full">
-            <button onclick="scannerCapture()" class="btn btn-primary flex-1 rounded-xl gap-2">
+            <button onclick="scannerCapture()" class="btn btn-gradient flex-1 gap-2">
               <i class="fas fa-camera"></i> Capture
             </button>
-            <button onclick="scannerGallery()" class="btn btn-outline btn-secondary flex-1 rounded-xl gap-2">
+            <button onclick="scannerGallery()" class="btn btn-soft flex-1 gap-2">
               <i class="fas fa-images"></i> Gallery
             </button>
           </div>
@@ -1241,10 +1227,10 @@
 
     <!-- Editor Modal -->
     <dialog id="editorModal" class="modal p-4">
-      <div class="modal-box w-full max-w-3xl h-[90vh] flex flex-col p-0 rounded-xl overflow-hidden">
-        <div class="flex justify-between items-center p-4 border-b border-base-300">
-          <h3 class="text-xl font-semibold flex items-center gap-2">
-            <i class="fas fa-crop-alt text-secondary"></i>
+      <div class="modal-box w-full max-w-3xl h-[90vh] flex flex-col p-0">
+        <div class="modal-head">
+          <h3>
+            <i class="fas fa-crop-alt modal-icon"></i>
             Edit Scan
           </h3>
           <button onclick="closeEditorModal()" class="btn btn-ghost btn-circle btn-sm">
@@ -1252,7 +1238,7 @@
           </button>
         </div>
 
-        <div class="flex gap-1 p-2 border-b border-base-300">
+        <div class="seg-tabs">
           <button data-tab="crop" class="editor-tab-btn btn btn-sm btn-ghost flex-1" onclick="switchEditorTab('crop')">
             <i class="fas fa-crop-alt mr-1"></i> Crop
           </button>
@@ -1264,85 +1250,85 @@
           </button>
         </div>
 
-        <div class="flex-1 overflow-auto p-4 flex flex-col items-center gap-3">
-          <canvas id="editorCanvas" class="max-w-full rounded-lg border border-base-300 cursor-crosshair"></canvas>
+        <div class="editor-stage">
+          <canvas id="editorCanvas" class="max-w-full rounded-lg cursor-crosshair"></canvas>
 
-          <div data-panel="crop" class="editor-tab-panel w-full flex flex-col items-center gap-2">
+          <div data-panel="crop" class="editor-tab-panel stage-col w-full">
             <p class="text-xs text-base-content/60 text-center">Drag the handles to adjust the crop area.</p>
-            <button onclick="applyCrop()" class="btn btn-sm btn-secondary rounded-lg gap-1">
+            <button onclick="applyCrop()" class="btn btn-sm btn-soft gap-1">
               <i class="fas fa-check"></i> Apply Crop
             </button>
           </div>
 
-          <div data-panel="perspective" class="editor-tab-panel hidden w-full flex flex-col items-center gap-2">
+          <div data-panel="perspective" class="editor-tab-panel stage-col hidden w-full">
             <p class="text-xs text-base-content/60 text-center">Drag the four corner points to match the document edges.</p>
-            <button onclick="applyPerspective()" class="btn btn-sm btn-secondary rounded-lg gap-1">
+            <button onclick="applyPerspective()" class="btn btn-sm btn-soft gap-1">
               <i class="fas fa-check"></i> Apply Perspective
             </button>
           </div>
 
           <div data-panel="colors" class="editor-tab-panel hidden w-full space-y-2.5">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2">
-              <div class="flex items-center gap-2">
-                <label class="w-20 text-xs font-medium shrink-0">Brightness</label>
+              <div class="slider-row">
+                <label>Brightness</label>
                 <input type="range" id="brightnessSlider" min="0" max="200" value="100" class="range range-sm range-primary flex-1" />
-                <span id="brightnessVal" class="text-xs w-9 text-right">100%</span>
+                <span id="brightnessVal" class="slider-val">100%</span>
               </div>
-              <div class="flex items-center gap-2">
-                <label class="w-20 text-xs font-medium shrink-0">Contrast</label>
+              <div class="slider-row">
+                <label>Contrast</label>
                 <input type="range" id="contrastSlider" min="0" max="200" value="100" class="range range-sm range-primary flex-1" />
-                <span id="contrastVal" class="text-xs w-9 text-right">100%</span>
+                <span id="contrastVal" class="slider-val">100%</span>
               </div>
-              <div class="flex items-center gap-2">
-                <label class="w-20 text-xs font-medium shrink-0">Saturation</label>
+              <div class="slider-row">
+                <label>Saturation</label>
                 <input type="range" id="saturationSlider" min="0" max="200" value="100" class="range range-sm range-primary flex-1" />
-                <span id="saturationVal" class="text-xs w-9 text-right">100%</span>
+                <span id="saturationVal" class="slider-val">100%</span>
               </div>
-              <div class="flex items-center gap-2">
-                <label class="w-20 text-xs font-medium shrink-0">Grayscale</label>
+              <div class="slider-row">
+                <label>Grayscale</label>
                 <input type="range" id="grayscaleSlider" min="0" max="100" value="0" class="range range-sm range-primary flex-1" />
-                <span id="grayscaleVal" class="text-xs w-9 text-right">0%</span>
+                <span id="grayscaleVal" class="slider-val">0%</span>
               </div>
-              <div class="flex items-center gap-2">
-                <label class="w-20 text-xs font-medium shrink-0">Sharpness</label>
+              <div class="slider-row">
+                <label>Sharpness</label>
                 <input type="range" id="sharpnessSlider" min="0" max="100" value="0" class="range range-sm range-secondary flex-1" />
-                <span id="sharpnessVal" class="text-xs w-9 text-right">0%</span>
+                <span id="sharpnessVal" class="slider-val">0%</span>
               </div>
-              <div class="flex items-center gap-2">
-                <label class="w-20 text-xs font-medium shrink-0">Clarity</label>
+              <div class="slider-row">
+                <label>Clarity</label>
                 <input type="range" id="claritySlider" min="0" max="100" value="0" class="range range-sm range-secondary flex-1" />
-                <span id="clarityVal" class="text-xs w-9 text-right">0%</span>
+                <span id="clarityVal" class="slider-val">0%</span>
               </div>
-              <div class="flex items-center gap-2">
-                <label class="w-20 text-xs font-medium shrink-0">Highlights</label>
+              <div class="slider-row">
+                <label>Highlights</label>
                 <input type="range" id="highlightsSlider" min="0" max="100" value="0" class="range range-sm range-secondary flex-1" />
-                <span id="highlightsVal" class="text-xs w-9 text-right">0%</span>
+                <span id="highlightsVal" class="slider-val">0%</span>
               </div>
             </div>
             <div class="flex gap-2 pt-1">
               <button onclick="resetColorSliders()" class="btn btn-xs btn-ghost">Reset</button>
-              <button onclick="applyColors()" class="btn btn-sm btn-secondary rounded-lg gap-1">
+              <button onclick="applyColors()" class="btn btn-sm btn-soft gap-1">
                 <i class="fas fa-check"></i> Apply Colors
               </button>
             </div>
           </div>
         </div>
 
-        <div class="p-4 border-t border-base-300 flex gap-3">
-          <button onclick="saveScannerPdf()" class="btn btn-primary flex-1 rounded-xl gap-2">
+        <div class="modal-foot !justify-end gap-3">
+          <button onclick="saveScannerPdf()" class="btn btn-gradient flex-1 gap-2">
             <i class="fas fa-file-pdf"></i> Save as PDF
           </button>
-          <button onclick="closeEditorModal()" class="btn btn-ghost rounded-xl">Cancel</button>
+          <button onclick="closeEditorModal()" class="btn btn-ghost">Cancel</button>
         </div>
       </div>
     </dialog>
 
     <!-- PDF Viewer Modal -->
     <dialog id="pdfViewerModal" class="modal p-0">
-      <div class="modal-box w-full max-w-4xl h-dvh sm:h-[90vh] flex flex-col p-0 rounded-none sm:rounded-xl overflow-hidden">
+      <div class="modal-box w-full max-w-4xl h-dvh sm:h-[90vh] flex flex-col p-0">
         <!-- Header -->
-        <div class="flex items-center justify-between px-4 py-2.5 border-b border-base-300 shrink-0">
-          <h3 id="pdfViewerTitle" class="text-sm font-semibold flex-1 truncate pr-2">
+        <div class="modal-head modal-head-sm gap-2">
+          <h3 id="pdfViewerTitle" class="truncate">
             <i class="fas fa-file-pdf text-error mr-1"></i> Preview
           </h3>
           <button onclick="closePdfViewer()" class="btn btn-ghost btn-sm btn-circle shrink-0">
@@ -1357,17 +1343,17 @@
             <span class="text-xs text-base-content/60">Loading PDF...</span>
           </div>
           <div class="flex items-start justify-center p-2 min-h-full">
-            <canvas id="pdfViewerCanvas" class="shadow-lg rounded hidden"></canvas>
+            <canvas id="pdfViewerCanvas" class="rounded hidden"></canvas>
           </div>
         </div>
 
         <!-- Fallback for non-PDF files -->
-        <div id="pdfViewerFallback" class="flex-1 hidden flex items-center justify-center p-4">
+        <div id="pdfViewerFallback" class="flex-1 stage-center hidden p-4">
           <p class="text-base-content/60 text-sm">Cannot preview this file type.</p>
         </div>
 
         <!-- Bottom nav bar -->
-        <div class="flex items-center justify-between px-4 py-2.5 border-t border-base-300 bg-base-100 shrink-0">
+        <div class="modal-foot">
           <button id="pdfPrevBtn" onclick="pdfViewerPrev()" class="btn btn-ghost btn-sm gap-1" disabled>
             <i class="fas fa-chevron-left"></i> <span class="hidden sm:inline">Prev</span>
           </button>
@@ -1392,13 +1378,13 @@
     <!-- Search Modal -->
     <dialog id="searchModal" class="modal p-0 sm:p-4">
       <div
-        class="modal-box w-full max-w-4xl h-screen sm:h-[90vh] flex flex-col p-0 rounded-none sm:rounded-xl overflow-hidden"
+        class="modal-box w-full max-w-4xl h-screen sm:h-[90vh] flex flex-col p-0"
       >
         <div
-          class="flex justify-between items-center p-4 border-b border-base-300"
+          class="modal-head"
         >
-          <h3 class="text-xl font-semibold flex items-center gap-2">
-            <i class="fas fa-search text-primary"></i>
+          <h3>
+            <i class="fas fa-search modal-icon"></i>
             Search Resources
           </h3>
           <button
@@ -1408,9 +1394,9 @@
             <i class="fas fa-times text-xl"></i>
           </button>
         </div>
-        <div class="p-4 sm:p-6 overflow-auto flex-1 flex flex-col gap-4">
+        <div class="modal-body flex flex-col gap-4">
           <label
-            class="input input-bordered border border-base-300 flex items-center gap-2 w-full rounded-xl"
+            class="input flex items-center gap-2 w-full"
           >
             <i class="fas fa-search text-base-content/50"></i>
             <input
@@ -1425,7 +1411,7 @@
           <div class="flex flex-col sm:flex-row flex-wrap gap-3">
             <select
               id="searchFilterYear"
-              class="select select-bordered border border-base-300 select-sm flex-1 rounded-xl w-full md:w-auto"
+              class="select select-sm flex-1 w-full md:w-auto"
             >
               <option value="">All Years</option>
               <optgroup label="Licence">
@@ -1446,7 +1432,7 @@
             </select>
             <select
               id="searchFilterSemester"
-              class="select select-bordered border border-base-300 select-sm flex-1 rounded-xl w-full md:w-auto"
+              class="select select-sm flex-1 w-full md:w-auto"
             >
               <option value="">All Semesters</option>
               <option value="S1">Semester 1</option>
@@ -1454,13 +1440,13 @@
             </select>
             <select
               id="searchFilterModule"
-              class="select select-bordered border border-base-300 select-sm flex-1 rounded-xl w-full md:w-auto"
+              class="select select-sm flex-1 w-full md:w-auto"
             >
               <option value="">All Modules</option>
             </select>
             <select
               id="searchFilterType"
-              class="select select-bordered border border-base-300 select-sm flex-1 rounded-xl w-full md:w-auto"
+              class="select select-sm flex-1 w-full md:w-auto"
             >
               <option value="">All Types</option>
               <option value="Cours">Cours (Lectures)</option>
@@ -1477,9 +1463,9 @@
           ></p>
 
           <div id="searchResults" class="flex-1">
-            <div class="text-center py-12 text-base-content/50">
-              <i class="fas fa-search text-6xl mb-4 block"></i>
-              <p class="text-xl">Search across all resources</p>
+            <div class="empty-state">
+              <i class="fas fa-search empty-icon"></i>
+              <p class="empty-title">Search across all resources</p>
               <p class="mt-2 text-sm">
                 Type a filename, module, or keyword to find resources
               </p>
@@ -1493,13 +1479,13 @@
     <!-- Contributors Modal -->
     <dialog id="contributorsModal" class="modal p-4">
       <div
-        class="modal-box w-full max-w-5xl h-[90vh] flex flex-col p-0 rounded-xl overflow-hidden"
+        class="modal-box w-full max-w-5xl h-[90vh] flex flex-col p-0"
       >
         <div
-          class="flex justify-between items-center p-4 border-b border-base-300"
+          class="modal-head"
         >
-          <h3 class="text-xl font-semibold flex items-center gap-2">
-            <i class="fas fa-trophy text-red-500"></i>
+          <h3>
+            <i class="fas fa-trophy modal-icon"></i>
             Our Amazing Contributors
           </h3>
           <button
@@ -1509,15 +1495,15 @@
             <i class="fas fa-times text-xl"></i>
           </button>
         </div>
-        <div class="p-6 overflow-auto flex-1">
-          <div role="tablist" class="tabs tabs-bordered tabs-lg mb-6">
+        <div class="modal-body">
+          <div role="tablist" class="tabs-boxed mb-6">
             <button
               id="githubTab"
               role="tab"
               onclick="switchContributorTab('github')"
               class="tab contributor-tab tab-active"
             >
-              <i class="fab fa-github mr-2"></i> Code Contributors
+              <i class="fa-brands fa-github mr-2"></i> Code Contributors
             </button>
             <button
               id="uploadsTab"
@@ -1536,7 +1522,7 @@
               project! 💻
             </p>
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-              <div class="card bg-base-200 shadow-sm flex flex-col items-center p-4">
+              <div class="surface surface-sheen flex flex-col items-center p-5">
                 <a href="https://github.com/zedsalim" target="_blank" class="group">
                   <img
                     src="https://avatars.githubusercontent.com/u/121177411?v=4"
@@ -1544,7 +1530,7 @@
                     width="80"
                     height="80"
                     loading="lazy"
-                    class="w-20 h-20 rounded-full border-2 border-primary group-hover:scale-110 transition"
+                    class="avatar-ring w-20 h-20 rounded-full group-hover:scale-110 transition"
                   />
                 </a>
                 <h4 class="mt-3 font-semibold">zedsalim</h4>
@@ -1552,12 +1538,12 @@
                 <a
                   href="https://github.com/zedsalim"
                   target="_blank"
-                  class="mt-2 text-primary hover:text-primary/80 text-sm"
+                  class="mt-2 text-primary hover:text-primary/70 text-sm font-semibold transition-colors"
                 >
-                  <i class="fab fa-github"></i> View Profile
+                  <i class="fa-brands fa-github"></i> View Profile
                 </a>
               </div>
-              <div class="card bg-base-200 shadow-sm flex flex-col items-center p-4">
+              <div class="surface surface-sheen flex flex-col items-center p-5">
                 <a href="https://github.com/A7medAmine" target="_blank" class="group">
                   <img
                     src="https://avatars.githubusercontent.com/u/140296603?v=4"
@@ -1565,7 +1551,7 @@
                     width="80"
                     height="80"
                     loading="lazy"
-                    class="w-20 h-20 rounded-full border-2 border-primary group-hover:scale-110 transition"
+                    class="avatar-ring w-20 h-20 rounded-full group-hover:scale-110 transition"
                   />
                 </a>
                 <h4 class="mt-3 font-semibold">A7medAmine</h4>
@@ -1573,12 +1559,12 @@
                 <a
                   href="https://github.com/A7medAmine"
                   target="_blank"
-                  class="mt-2 text-primary hover:text-primary/80 text-sm"
+                  class="mt-2 text-primary hover:text-primary/70 text-sm font-semibold transition-colors"
                 >
-                  <i class="fab fa-github"></i> View Profile
+                  <i class="fa-brands fa-github"></i> View Profile
                 </a>
               </div>
-              <div class="card bg-base-200 shadow-sm flex flex-col items-center p-4">
+              <div class="surface surface-sheen flex flex-col items-center p-5">
                 <a href="https://github.com/magnetarstar-hub" target="_blank" class="group">
                   <img
                     src="https://avatars.githubusercontent.com/u/127874935?v=4"
@@ -1586,7 +1572,7 @@
                     width="80"
                     height="80"
                     loading="lazy"
-                    class="w-20 h-20 rounded-full border-2 border-primary group-hover:scale-110 transition"
+                    class="avatar-ring w-20 h-20 rounded-full group-hover:scale-110 transition"
                   />
                 </a>
                 <h4 class="mt-3 font-semibold">magnetarstar-hub</h4>
@@ -1594,12 +1580,12 @@
                 <a
                   href="https://github.com/magnetarstar-hub"
                   target="_blank"
-                  class="mt-2 text-primary hover:text-primary/80 text-sm"
+                  class="mt-2 text-primary hover:text-primary/70 text-sm font-semibold transition-colors"
                 >
-                  <i class="fab fa-github"></i> View Profile
+                  <i class="fa-brands fa-github"></i> View Profile
                 </a>
               </div>
-              <div class="card bg-base-200 shadow-sm flex flex-col items-center p-4">
+              <div class="surface surface-sheen flex flex-col items-center p-5">
                 <a href="https://github.com/YacineDahmani" target="_blank" class="group">
                   <img
                     src="https://avatars.githubusercontent.com/u/144144223?v=4"
@@ -1607,7 +1593,7 @@
                     width="80"
                     height="80"
                     loading="lazy"
-                    class="w-20 h-20 rounded-full border-2 border-primary group-hover:scale-110 transition"
+                    class="avatar-ring w-20 h-20 rounded-full group-hover:scale-110 transition"
                   />
                 </a>
                 <h4 class="mt-3 font-semibold">YacineDahmani</h4>
@@ -1615,12 +1601,12 @@
                 <a
                   href="https://github.com/YacineDahmani"
                   target="_blank"
-                  class="mt-2 text-primary hover:text-primary/80 text-sm"
+                  class="mt-2 text-primary hover:text-primary/70 text-sm font-semibold transition-colors"
                 >
-                  <i class="fab fa-github"></i> View Profile
+                  <i class="fa-brands fa-github"></i> View Profile
                 </a>
               </div>
-              <div class="card bg-base-200 shadow-sm flex flex-col items-center p-4">
+              <div class="surface surface-sheen flex flex-col items-center p-5">
                 <a href="https://github.com/daaaaaaanyyyyy" target="_blank" class="group">
                   <img
                     src="https://avatars.githubusercontent.com/u/123634915?v=4"
@@ -1628,7 +1614,7 @@
                     width="80"
                     height="80"
                     loading="lazy"
-                    class="w-20 h-20 rounded-full border-2 border-primary group-hover:scale-110 transition"
+                    class="avatar-ring w-20 h-20 rounded-full group-hover:scale-110 transition"
                   />
                 </a>
                 <h4 class="mt-3 font-semibold">daaaaaaanyyyyy</h4>
@@ -1636,9 +1622,9 @@
                 <a
                   href="https://github.com/daaaaaaanyyyyy"
                   target="_blank"
-                  class="mt-2 text-primary hover:text-primary/80 text-sm"
+                  class="mt-2 text-primary hover:text-primary/70 text-sm font-semibold transition-colors"
                 >
-                  <i class="fab fa-github"></i> View Profile
+                  <i class="fa-brands fa-github"></i> View Profile
                 </a>
               </div>
             </div>
@@ -1646,9 +1632,9 @@
               <a
                 href="https://github.com/zedsalim/csbouira/graphs/contributors"
                 target="_blank"
-                class="btn btn-primary rounded-xl"
+                class="btn btn-gradient gap-2"
               >
-                <i class="fab fa-github"></i> View All on GitHub
+                <i class="fa-brands fa-github"></i> View All on GitHub
               </a>
             </div>
           </div>
@@ -1664,7 +1650,7 @@
                 <h4 class="text-lg font-semibold text-primary mb-3 flex items-center gap-2">
                   <i class="fas fa-wrench"></i> Maintainer
                 </h4>
-                <ul class="space-y-2">
+                <ul class="name-list space-y-2">
                   <li class="flex items-center gap-2"><i class="fas fa-wrench text-yellow-500"></i><span class="font-semibold">Salim Zaidi</span></li>
                 </ul>
               </div>
@@ -1672,7 +1658,7 @@
                 <h4 class="text-lg font-semibold text-primary mb-3 flex items-center gap-2">
                   <i class="fas fa-star"></i> Core Team
                 </h4>
-                <ul class="space-y-2">
+                <ul class="name-list space-y-2">
                   <li class="flex items-center gap-2"><i class="fas fa-star text-primary"></i><span class="font-semibold">Amara Sami Anis</span></li>
                   <li class="flex items-center gap-2"><i class="fas fa-star text-primary"></i><span class="font-semibold">Dany Yakoubi</span></li>
                   <li class="flex items-center gap-2"><i class="fas fa-star text-primary"></i><span class="font-semibold">Manel Ghazi</span></li>
@@ -1688,7 +1674,7 @@
                 <h4 class="text-lg font-semibold text-primary mb-3 flex items-center gap-2">
                   <i class="fas fa-star-half-alt"></i> Ex-Core Team
                 </h4>
-                <ul class="space-y-2">
+                <ul class="name-list space-y-2">
                   <li class="flex items-center gap-2"><i class="fas fa-star-half-alt text-base-content/50"></i><span>Aldjia Arar</span></li>
                   <li class="flex items-center gap-2"><i class="fas fa-star-half-alt text-base-content/50"></i><span>Alouache Lyna</span></li>
                   <li class="flex items-center gap-2"><i class="fas fa-star-half-alt text-base-content/50"></i><span>Faid Djameleddine</span></li>
@@ -1700,7 +1686,7 @@
                 <h4 class="text-lg font-semibold text-primary mb-3 flex items-center gap-2">
                   <i class="fas fa-users"></i> Contributors
                 </h4>
-                <ul class="space-y-2 columns-2">
+                <ul class="name-list columns-2">
                   <li class="flex items-center gap-2"><i class="fas fa-user text-success"></i>A7med</li>
                   <li class="flex items-center gap-2"><i class="fas fa-user text-success"></i>Abdessamed Laidani</li>
                   <li class="flex items-center gap-2"><i class="fas fa-user text-success"></i>Ahmed Abd</li>
@@ -1761,18 +1747,12 @@
 
     <!-- Year card template -->
     <template id="tpl-year-card">
-      <div
-        class="card bg-base-200 shadow-sm hover:-translate-y-1 hover:shadow-lg transition-all cursor-pointer relative group rounded-2xl"
-        data-field="card"
-      >
-        <div class="card-body p-6">
-          <span
-            data-field="badge"
-            class="badge badge-primary absolute top-3 right-3 gap-1 font-semibold px-3 py-3 rounded-full"
-          ></span>
+      <div class="year-card" data-field="card">
+        <div class="p-6">
+          <span data-field="badge" class="count-chip absolute top-4 right-4"></span>
           <div class="flex items-center gap-4 mb-4">
             <div
-              class="w-12 h-12 bg-primary rounded-xl flex items-center justify-center"
+              class="year-icon w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
             >
               <i data-field="icon" class="text-white text-xl"></i>
             </div>
@@ -1781,7 +1761,7 @@
           <p class="text-sm text-base-content/60">
             Click to explore semesters and modules
           </p>
-          <div class="mt-4 flex items-center text-primary font-semibold">
+          <div class="year-cta mt-4 flex items-center text-primary font-semibold">
             View Resources <i class="fas fa-arrow-right ml-2"></i>
           </div>
         </div>
@@ -1790,21 +1770,15 @@
 
     <!-- Search result — file template -->
     <template id="tpl-search-file">
-      <div
-        class="flex items-center justify-between gap-3 p-3 rounded-lg bg-base-200 hover:bg-primary hover:text-primary-content group cursor-pointer transition-all"
-        data-field="row"
-      >
+      <div class="surface-row group" data-field="row">
         <div class="flex items-center gap-3 flex-1 min-w-0" data-action="view">
-          <i data-field="icon" class="flex-shrink-0"></i>
+          <i data-field="icon" class="row-icon flex-shrink-0"></i>
           <div class="flex-1 min-w-0">
             <span class="block truncate" data-field="name"></span>
-            <span
-              class="block text-xs mt-0.5 truncate text-base-content/60 group-hover:text-primary-content/80"
-              data-field="breadcrumb"
-            ></span>
+            <span class="row-crumb block truncate" data-field="breadcrumb"></span>
             <span data-field="badge"></span>
           </div>
-          <i class="fas fa-eye flex-shrink-0 opacity-60"></i>
+          <i class="fas fa-eye flex-shrink-0 opacity-50"></i>
         </div>
         <button
           class="btn btn-xs btn-ghost flex-shrink-0"
@@ -1818,20 +1792,14 @@
 
     <!-- Search result — folder template -->
     <template id="tpl-search-folder">
-      <div
-        class="flex items-center gap-3 p-3 rounded-lg bg-base-200 hover:bg-primary hover:text-primary-content group cursor-pointer transition-all"
-        data-field="row"
-      >
-        <i data-field="icon" class="flex-shrink-0"></i>
+      <div class="surface-row group" data-field="row">
+        <i data-field="icon" class="row-icon flex-shrink-0"></i>
         <div class="flex-1 min-w-0">
           <span class="block truncate" data-field="name"></span>
-          <span
-            class="block text-xs mt-0.5 truncate text-base-content/60 group-hover:text-primary-content/80"
-            data-field="breadcrumb"
-          ></span>
+          <span class="row-crumb block truncate" data-field="breadcrumb"></span>
           <span data-field="badge"></span>
         </div>
-        <i class="fas fa-chevron-right flex-shrink-0 opacity-60"></i>
+        <i class="fas fa-chevron-right flex-shrink-0 opacity-50"></i>
       </div>
     </template>
   </body>

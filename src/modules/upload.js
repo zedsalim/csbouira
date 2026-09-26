@@ -109,7 +109,7 @@ function renderFilesList() {
   container.innerHTML = '';
 
   const wrapper = document.createElement('div');
-  wrapper.className = 'bg-base-200 rounded-lg p-3 space-y-2';
+  wrapper.className = 'surface-inset p-4 space-y-2';
 
   const title = document.createElement('div');
   title.className = 'font-semibold text-sm mb-2';
@@ -118,11 +118,10 @@ function renderFilesList() {
 
   selectedFiles.forEach((file, index) => {
     const row = document.createElement('div');
-    row.className =
-      'flex items-center justify-between bg-base-100 rounded p-2 text-sm gap-2';
+    row.className = 'file-chip';
     row.innerHTML = `
       <span class="flex-1 truncate" title="${file.name}">${file.name}</span>
-      <span class="text-xs text-base-content/60 mx-1">${formatFileSize(file.size)}</span>
+      <span class="text-xs text-base-content/55 mx-1 tabular-nums">${formatFileSize(file.size)}</span>
     `;
     const previewBtn = document.createElement('button');
     previewBtn.type = 'button';
@@ -203,7 +202,7 @@ async function handleUploadSubmit(e) {
   selectedFiles.forEach((file, i) => {
     const item = document.createElement('div');
     item.id = `progress-${i}`;
-    item.className = 'mb-3 p-3 rounded-md bg-base-200';
+    item.className = 'progress-row';
     item.innerHTML = `
       <div class="text-sm font-medium mb-2 truncate" title="${file.name}">${file.name}</div>
       <progress id="progress-bar-${i}" class="progress progress-primary w-full" value="0" max="100"></progress>
@@ -325,9 +324,10 @@ function updateProgress(index, value, status, isSuccess = null) {
   if (bar) bar.value = value;
   if (statusEl) {
     statusEl.textContent = status;
-    if (isSuccess === true) statusEl.className = 'text-xs mt-1 text-success';
+    if (isSuccess === true)
+      statusEl.className = 'text-xs mt-1 text-success font-semibold';
     else if (isSuccess === false)
-      statusEl.className = 'text-xs mt-1 text-error';
+      statusEl.className = 'text-xs mt-1 text-error font-semibold';
     else statusEl.className = 'text-xs mt-1 text-base-content/60';
   }
 }
@@ -350,14 +350,14 @@ function showThankYouPopup() {
   const toast = document.createElement('div');
   toast.id = 'thankYouToast';
   toast.className =
-    'fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[99999] flex flex-col items-center gap-4 bg-base-100 border border-base-300 shadow-2xl rounded-2xl px-14 py-12 text-center w-[420px]';
+    'thanks-popup fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[99999] flex flex-col items-center gap-4 rounded-2xl px-14 py-12 text-center w-[420px] max-w-[90vw]';
   toast.innerHTML = `
-    <div class="w-20 h-20 rounded-full bg-success/20 flex items-center justify-center">
-      <i class="fas fa-heart text-4xl text-success"></i>
+    <div class="thanks-heart">
+      <i class="fas fa-heart text-4xl"></i>
     </div>
     <h3 class="text-3xl font-bold">Thank You!</h3>
     <p class="text-base-content/70 max-w-sm">Your files have been uploaded successfully. We appreciate your contribution!</p>
-    <button class="btn btn-primary rounded-xl mt-3" onclick="this.closest('#thankYouToast').remove()">
+    <button class="btn btn-gradient rounded-full mt-3" onclick="this.closest('#thankYouToast').remove()">
       <i class="fas fa-check"></i> Got it
     </button>
   `;

@@ -1,12 +1,11 @@
 import { CONFIG } from '../config.js';
 
 // ── Theme persistence ──────────────────────────────────────────────────────
-const savedTheme = localStorage.getItem('theme');
 const htmlEl = document.documentElement;
+// Dark is the default look; a stored choice still wins.
+const savedTheme = localStorage.getItem('theme') || CONFIG.theme.dark;
 
-if (savedTheme) {
-  htmlEl.setAttribute('data-theme', savedTheme);
-}
+htmlEl.setAttribute('data-theme', savedTheme);
 
 function syncThemeToggles() {
   const isDark = htmlEl.getAttribute('data-theme') === CONFIG.theme.dark;

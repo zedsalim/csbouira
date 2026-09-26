@@ -61,6 +61,14 @@ export function initScanner() {
     editorCanvas = editorCanvasEl;
     editorCtx = editorCanvas.getContext('2d');
     setupEditorEvents();
+
+    // Repaint the overlay when the color scheme flips so the editor chrome
+    // never lags behind the active theme.
+    new MutationObserver(() => {
+      if (baseCanvas) renderEditor();
+    }).observe(document.documentElement, {
+      attributeFilter: ['data-theme'],
+    });
   }
 
   const colorSliders = [
@@ -398,17 +406,43 @@ function cssScale() {
   return editorCanvas.getBoundingClientRect().width / editorCanvas.width;
 }
 
+// ── Theme-aware overlay palette ─────────────────────────────────────────────
+// Canvas can't read CSS custom properties, so resolve the design tokens once
+// per repaint and reuse them. Keeping the strokes on the brand tokens means the
+// editor chrome stays on-brand instead of using a hardcoded neon green, and the
+// scrim deepens slightly in dark mode where it sits on a darker backdrop.
+function cssVar(name, fallback) {
+  const value = getComputedStyle(document.documentElement)
+    .getPropertyValue(name)
+    .trim();
+  return value || fallback;
+}
+
+function overlayPalette() {
+  const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+  return {
+    dim: dark ? 'rgba(2, 6, 23, 0.58)' : 'rgba(15, 23, 42, 0.5)',
+    guide: dark ? 'rgba(255, 255, 255, 0.38)' : 'rgba(255, 255, 255, 0.3)',
+    stroke: cssVar('--color-primary', '#009bd6'),
+    handle: cssVar('--color-accent', '#0ea5e9'),
+    handleShadow: dark ? 'rgba(0, 0, 0, 0.7)' : 'rgba(0, 0, 0, 0.5)',
+    magnifier: dark ? '#0b1220' : '#1f2937',
+    crosshair: '#ff4444',
+  };
+}
+
 function drawCropOverlay() {
   const s = cssScale();
   const { x, y, w, h } = cropState;
+  const palette = overlayPalette();
   editorCtx.save();
-  editorCtx.fillStyle = 'rgba(0,0,0,0.5)';
+  editorCtx.fillStyle = palette.dim;
   editorCtx.fillRect(0, 0, editorCanvas.width, y);
   editorCtx.fillRect(0, y, x, h);
   editorCtx.fillRect(x + w, y, editorCanvas.width - x - w, h);
   editorCtx.fillRect(0, y + h, editorCanvas.width, editorCanvas.height - y - h);
 
-  editorCtx.strokeStyle = '#ffffff';
+  editorCtx.strokeStyle = palette.stroke;
   editorCtx.lineWidth = 2;
   editorCtx.setLineDash([6, 3]);
   editorCtx.strokeRect(x, y, w, h);
@@ -416,7 +450,7 @@ function drawCropOverlay() {
   editorCtx.setLineDash([]);
   const thirdW = w / 3;
   const thirdH = h / 3;
-  editorCtx.strokeStyle = 'rgba(255,255,255,0.3)';
+  editorCtx.strokeStyle = palette.guide;
   editorCtx.lineWidth = 1;
   for (let i = 1; i < 3; i++) {
     editorCtx.beginPath();
@@ -430,8 +464,8 @@ function drawCropOverlay() {
   }
 
   const r = Math.max(8, 14 / s);
-  editorCtx.fillStyle = '#ffffff';
-  editorCtx.shadowColor = 'rgba(0,0,0,0.5)';
+  editorCtx.fillStyle = palette.handle;
+  editorCtx.shadowColor = palette.handleShadow;
   editorCtx.shadowBlur = 4;
   const handles = getCropHandles();
   Object.values(handles).forEach((pos) => {
@@ -462,12 +496,13 @@ function drawPerspectiveOverlay() {
   editorCtx.save();
 
   const r = Math.max(8, 12 / s);
+  const palette = overlayPalette();
 
   if (dragging >= 0) {
     drawMagnifier(editorCtx, points[dragging], dragging, s);
   }
 
-  editorCtx.fillStyle = 'rgba(0,0,0,0.5)';
+  editorCtx.fillStyle = palette.dim;
   editorCtx.beginPath();
   editorCtx.moveTo(0, 0);
   editorCtx.lineTo(editorCanvas.width, 0);
@@ -481,7 +516,7 @@ function drawPerspectiveOverlay() {
   editorCtx.closePath();
   editorCtx.fill('evenodd');
 
-  editorCtx.strokeStyle = '#00ff88';
+  editorCtx.strokeStyle = palette.stroke;
   editorCtx.lineWidth = 2;
   editorCtx.setLineDash([]);
   editorCtx.beginPath();
@@ -491,8 +526,8 @@ function drawPerspectiveOverlay() {
   }
   editorCtx.stroke();
 
-  editorCtx.fillStyle = '#00ff88';
-  editorCtx.shadowColor = 'rgba(0,0,0,0.5)';
+  editorCtx.fillStyle = palette.handle;
+  editorCtx.shadowColor = palette.handleShadow;
   editorCtx.shadowBlur = 4;
   points.forEach((p) => {
     editorCtx.beginPath();
@@ -517,15 +552,17 @@ function drawMagnifier(ctx, point, cornerIdx, s) {
   ];
   const [cx, cy] = corners[cornerIdx] || corners[0];
 
+  const palette = overlayPalette();
+
   ctx.save();
-  ctx.shadowColor = 'rgba(0,0,0,0.4)';
+  ctx.shadowColor = palette.handleShadow;
   ctx.shadowBlur = 10;
 
   ctx.beginPath();
   ctx.arc(cx, cy, zoomR, 0, Math.PI * 2);
-  ctx.fillStyle = '#1f2937';
+  ctx.fillStyle = palette.magnifier;
   ctx.fill();
-  ctx.strokeStyle = '#00ff88';
+  ctx.strokeStyle = palette.stroke;
   ctx.lineWidth = 2;
   ctx.stroke();
 
@@ -549,7 +586,7 @@ function drawMagnifier(ctx, point, cornerIdx, s) {
 
   ctx.save();
   const cs = Math.max(4, 12 / s);
-  ctx.strokeStyle = '#ff4444';
+  ctx.strokeStyle = palette.crosshair;
   ctx.lineWidth = 1.5;
   ctx.beginPath();
   ctx.moveTo(cx - cs, cy);

@@ -129,7 +129,7 @@ function setYearModalTitle(year, driveLink = '') {
   if (!titleEl) return;
   titleEl.innerHTML = '';
   const span = document.createElement('span');
-  span.className = 'text-xl font-semibold';
+  span.className = 'truncate';
   span.textContent = year;
   titleEl.appendChild(span);
 
@@ -139,10 +139,9 @@ function setYearModalTitle(year, driveLink = '') {
     a.target = '_blank';
     a.id = 'driveLink';
     a.title = 'Open in Google Drive';
-    a.className =
-      'hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 text-xs sm:gap-2 sm:px-3 sm:py-1.5 sm:text-sm rounded-md bg-primary text-primary-content font-medium shadow-md hover:shadow-lg hover:opacity-90 transition-all duration-200';
+    a.className = 'drive-pill hidden sm:inline-flex';
     a.innerHTML =
-      '<i class="fab fa-google-drive text-base sm:text-lg"></i><span class="hidden xs:inline sm:inline">Open in Drive</span>';
+      '<i class="fa-brands fa-google-drive text-base sm:text-lg"></i><span>Open in Drive</span>';
     titleEl.appendChild(a);
   }
 }
@@ -151,9 +150,9 @@ async function loadContent(year, path = '') {
   const content = document.getElementById('yearContent');
   if (!content) return;
   content.innerHTML = `
-    <div class="flex flex-col items-center gap-3 py-8 text-base-content/50">
-      <span class="loading loading-spinner loading-lg"></span>
-      <p>Loading...</p>
+    <div class="empty-state">
+      <span class="loading loading-spinner loading-lg text-primary"></span>
+      <p class="empty-title">Loading...</p>
     </div>`;
 
   try {
@@ -182,9 +181,9 @@ async function loadContent(year, path = '') {
     if (currentPath.length === 1) insertOnlineResources(year);
   } catch (error) {
     content.innerHTML = `
-      <div class="text-center py-12 text-error">
-        <i class="fas fa-exclamation-circle text-6xl mb-4 block"></i>
-        <p class="text-xl">Error loading content</p>
+      <div class="error-state">
+        <i class="fas fa-exclamation-circle empty-icon"></i>
+        <p class="empty-title">Error loading content</p>
         <p class="mt-2 text-sm">${error.message}</p>
       </div>`;
   }
@@ -196,13 +195,14 @@ function updateBreadcrumb() {
   breadcrumb.innerHTML = '';
   currentPath.forEach((item, index) => {
     const span = document.createElement('span');
-    span.className = `breadcrumb-item cursor-pointer hover:text-primary transition-colors ${index === currentPath.length - 1 ? 'font-semibold text-base-content' : 'text-base-content/60'}`;
+    span.className = `breadcrumb-item cursor-pointer ${index === currentPath.length - 1 ? 'is-current' : ''}`;
     span.textContent = stripEmptyMarker(item);
     span.addEventListener('click', () => navigateToBreadcrumb(index));
     breadcrumb.appendChild(span);
     if (index < currentPath.length - 1) {
       const sep = document.createElement('i');
-      sep.className = 'fas fa-chevron-right mx-2 text-xs text-base-content/40';
+      sep.className =
+        'fas fa-chevron-right mx-1.5 text-xs text-base-content/40';
       breadcrumb.appendChild(sep);
     }
   });
@@ -222,21 +222,20 @@ function renderContent(data) {
 
   if (!hasFolders && !hasFiles) {
     content.innerHTML = `
-      <div class="text-center py-12 text-base-content/50">
-        <i class="fas fa-folder-open text-6xl mb-4 block"></i>
-        <p class="text-xl">No content available</p>
+      <div class="empty-state">
+        <i class="fas fa-folder-open empty-icon"></i>
+        <p class="empty-title">No content available</p>
       </div>`;
     if (data.link) {
       const wrap = document.createElement('div');
-      wrap.className = 'flex justify-center';
+      wrap.className = 'flex justify-center mt-5';
       const a = document.createElement('a');
       a.href = data.link;
       a.target = '_blank';
       a.rel = 'noopener noreferrer';
-      a.className =
-        'btn btn-sm gap-2 rounded-xl bg-primary text-primary-content hover:opacity-90';
+      a.className = 'btn btn-sm btn-gradient gap-2';
       a.innerHTML =
-        '<i class="fab fa-google-drive"></i><span>Open in Drive</span>';
+        '<i class="fa-brands fa-google-drive"></i><span>Open in Drive</span>';
       wrap.appendChild(a);
       content.appendChild(wrap);
     }
@@ -249,7 +248,7 @@ function renderContent(data) {
     const section = document.createElement('div');
     section.className = 'mb-6';
     section.innerHTML =
-      '<h3 class="text-xl font-semibold mb-4 flex items-center gap-2"><i class="fas fa-folder text-yellow-500"></i>Folders</h3>';
+      '<h3 class="subhead subhead-row"><i class="fas fa-folder text-yellow-500"></i>Folders</h3>';
     const list = document.createElement('div');
     list.className = 'space-y-2';
 
@@ -268,7 +267,7 @@ function renderContent(data) {
         isFavorite(key) || isFavorite(folderFavData.folderPath.join('>'));
 
       const item = document.createElement('div');
-      item.className = `flex items-center justify-between gap-3 p-3 rounded-lg cursor-pointer transition-all bg-base-200 hover:bg-primary hover:text-primary-content group ${isEmpty ? 'opacity-70' : ''}`;
+      item.className = `surface-row group cursor-pointer ${isEmpty ? 'is-empty' : ''}`;
 
       item.addEventListener('click', () => {
         currentPath = [...currentPath, name];
@@ -280,20 +279,20 @@ function renderContent(data) {
 
       item.innerHTML = `
         <div class="flex items-center gap-3 flex-1 min-w-0">
-          <i class="fas fa-folder text-yellow-500 flex-shrink-0 group-hover:text-white transition-colors"></i>
+          <i class="row-icon fas fa-folder text-yellow-500"></i>
           <span class="truncate">${label}</span>
-          ${isEmpty ? '<span class="badge badge-sm badge-ghost">empty</span>' : ''}
+          ${isEmpty ? '<span class="pill pill-neutral">empty</span>' : ''}
         </div>
       `;
 
       const starBtn = document.createElement('button');
-      starBtn.className = `btn btn-xs btn-ghost ${starred ? 'text-yellow-400' : 'text-base-content/30'} hover:text-yellow-400`;
+      starBtn.className = `btn btn-xs btn-ghost star-btn ${starred ? 'is-on' : ''}`;
       starBtn.title = starred ? 'Remove from favorites' : 'Add to favorites';
       starBtn.innerHTML = `<i class="${starred ? 'fas' : 'far'} fa-star"></i>`;
       starBtn.addEventListener('click', (e) => {
         e.stopPropagation();
         const isNow = toggleFavorite(folderFavData);
-        starBtn.className = `btn btn-xs btn-ghost ${isNow ? 'text-yellow-400' : 'text-base-content/30'} hover:text-yellow-400`;
+        starBtn.className = `btn btn-xs btn-ghost star-btn ${isNow ? 'is-on' : ''}`;
         starBtn.innerHTML = `<i class="${isNow ? 'fas' : 'far'} fa-star"></i>`;
       });
       item.appendChild(starBtn);
@@ -309,7 +308,7 @@ function renderContent(data) {
     const section = document.createElement('div');
     section.className = 'mb-6';
     section.innerHTML =
-      '<h3 class="text-xl font-semibold mb-4 flex items-center gap-2"><i class="fas fa-file text-primary"></i>Files</h3>';
+      '<h3 class="subhead subhead-row"><i class="fas fa-file text-primary"></i>Files</h3>';
     const list = document.createElement('div');
     list.className = 'space-y-2';
     currentFiles = data.files;
@@ -330,17 +329,16 @@ function renderContent(data) {
       const starred = isFavorite(favKey);
 
       const item = document.createElement('div');
-      item.className =
-        'flex items-center justify-between gap-3 p-3 rounded-lg bg-base-200 hover:bg-primary hover:text-primary-content group cursor-pointer transition-all';
+      item.className = 'surface-row group cursor-pointer';
 
       const left = document.createElement('div');
       left.className = 'flex items-center gap-3 flex-1 min-w-0';
-      left.innerHTML = `<i class="${icon} flex-shrink-0 group-hover:text-white transition-colors"></i><span class="truncate">${file.name}</span>`;
+      left.innerHTML = `<i class="row-icon ${icon}"></i><span class="truncate">${file.name}</span>`;
       left.addEventListener('click', () => openFile(file, index));
       item.appendChild(left);
 
       const actions = document.createElement('div');
-      actions.className = 'flex items-center gap-1 flex-shrink-0';
+      actions.className = 'row-actions';
 
       const eyeBtn = document.createElement('button');
       eyeBtn.className = 'btn btn-xs btn-ghost';
@@ -370,7 +368,7 @@ function renderContent(data) {
       starBtn.addEventListener('click', (e) => {
         e.stopPropagation();
         const isNow = toggleFavorite(fileFavData);
-        starBtn.className = `btn btn-xs btn-ghost ${isNow ? 'text-yellow-400' : 'text-base-content/30'} hover:text-yellow-400`;
+        starBtn.className = `btn btn-xs btn-ghost star-btn ${isNow ? 'is-on' : ''}`;
         starBtn.innerHTML = `<i class="${isNow ? 'fas' : 'far'} fa-star"></i>`;
       });
       actions.appendChild(starBtn);
@@ -393,7 +391,7 @@ function insertOnlineResources(year) {
   const section = document.createElement('div');
   section.className = 'mb-6 mt-6';
   section.innerHTML =
-    '<h3 class="text-xl font-semibold mb-4 flex items-center gap-2"><i class="fas fa-globe text-blue-500"></i> Online Resources</h3>';
+    '<h3 class="subhead subhead-row"><i class="fas fa-globe text-blue-500"></i> Online Resources</h3>';
 
   const accordion = document.createElement('div');
   accordion.className = 'space-y-2';
@@ -403,8 +401,7 @@ function insertOnlineResources(year) {
     const itemsArr = Array.isArray(items) ? items : [items];
 
     const item = document.createElement('div');
-    item.className =
-      'collapse collapse-arrow bg-base-200 rounded-lg border border-base-300';
+    item.className = 'collapse collapse-arrow collapse-panel';
 
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
@@ -426,11 +423,11 @@ function insertOnlineResources(year) {
 
     for (const res of itemsArr) {
       const typeIconMap = {
-        'Youtube Playlist': 'fab fa-youtube text-red-500',
-        'Youtube Video': 'fab fa-youtube text-red-500',
+        'Youtube Playlist': 'fa-brands fa-youtube text-red-500',
+        'Youtube Video': 'fa-brands fa-youtube text-red-500',
         Website: 'fas fa-globe text-blue-500',
         PDF: 'fas fa-file-pdf text-red-400',
-        GitHub: 'fab fa-github text-base-content',
+        GitHub: 'fa-brands fa-github text-base-content',
       };
       const langColorMap = {
         AR: 'badge-warning',
@@ -449,10 +446,9 @@ function insertOnlineResources(year) {
       row.href = res.url || '#';
       row.target = '_blank';
       row.rel = 'noopener noreferrer';
-      row.className =
-        'flex items-center gap-3 p-3 rounded-lg bg-base-100 hover:bg-primary hover:text-primary-content transition-all group';
+      row.className = 'surface-row group';
       row.innerHTML = `
-        <i class="${icon} flex-shrink-0 text-lg group-hover:text-white"></i>
+        <i class="row-icon ${icon} text-lg"></i>
         <span class="flex-1 font-medium text-sm truncate">${res.name}</span>
         <div class="flex items-center gap-1 flex-shrink-0">${typeBadge}${langBadge}</div>
         <i class="fas fa-external-link-alt flex-shrink-0 text-xs opacity-50 group-hover:opacity-100"></i>
