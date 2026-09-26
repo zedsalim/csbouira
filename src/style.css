@@ -410,11 +410,35 @@ h4 {
   background: linear-gradient(to bottom, transparent, var(--page-bg));
 }
 
-.hero-logo {
+/* The float lives on the wrapper, not the logo, so the flag pinned to its
+   corner travels with the logo instead of drifting against it. */
+.hero-logo-float {
+  position: relative;
+  display: inline-flex;
   animation: csb-float 7s ease-in-out infinite;
+}
+.hero-logo {
   filter: drop-shadow(
     0 20px 38px color-mix(in oklab, var(--color-primary) 38%, transparent)
   );
+}
+/* Algerian flag icon riding along with the floating hero logo. The artwork
+   carries its own rounded frame, so only the offset and a soft shadow live
+   here; `height: auto` keeps the file's own 513x357 aspect ratio intact. */
+.hero-flag {
+  position: absolute;
+  top: -0.375rem;
+  inset-inline-end: -0.5rem;
+  width: 1.5rem;
+  height: auto;
+  box-shadow: 0 8px 20px -8px rgb(0 0 0 / 0.5);
+}
+@media (min-width: 40rem) {
+  .hero-flag {
+    top: -0.5rem;
+    inset-inline-end: -0.625rem;
+    width: 1.75rem;
+  }
 }
 
 .text-gradient {
