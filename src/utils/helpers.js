@@ -264,3 +264,11 @@ export function applyColorAdjustments(
 
   ctx.putImageData(imageData, 0, 0);
 }
+
+// ── Analytics ───────────────────────────────────────────────────────────────
+// gtag queues into dataLayer, so this is safe while the Google tag is still
+// loading, and a no-op when an ad blocker removes it entirely.
+export function trackEvent(name, params = {}) {
+  if (typeof window.gtag !== 'function') return;
+  window.gtag('event', name, params);
+}

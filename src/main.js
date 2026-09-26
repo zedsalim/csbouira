@@ -18,6 +18,7 @@ import {
   isFolderEmpty,
   lockBodyScroll,
   stripEmptyMarker,
+  trackEvent,
   unlockBodyScroll,
 } from './utils/helpers.js';
 
@@ -116,6 +117,7 @@ async function loadYears() {
 
 // ── Year modal ─────────────────────────────────────────────────────────────
 function openYear(year) {
+  trackEvent('year_click', { year_name: year });
   currentYear = year;
   currentPath = [year];
   setYearModalTitle(year);
