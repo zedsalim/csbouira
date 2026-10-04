@@ -691,6 +691,54 @@ document.addEventListener('click', (e) => {
     window.closeContributorsModal();
 });
 
+// ── Android app announcement (one time per browser) ───────────────────────
+function showAppAnnouncementOnce() {
+  const KEY = 'csbouira_android_app_announced';
+  const dialog = document.getElementById('appAnnouncementModal');
+  try {
+    if (!dialog || localStorage.getItem(KEY)) return;
+  } catch {
+    return; // storage blocked: skip rather than nag on every visit
+  }
+  dialog.addEventListener('close', () => {
+    try {
+      localStorage.setItem(KEY, '1');
+    } catch {
+      /* ignore */
+    }
+  });
+  document
+    .getElementById('appAnnouncementDownload')
+    ?.addEventListener('click', () =>
+      trackEvent('android_app_download', { source: 'announcement' }),
+    );
+
+  // Only the close button closes it, and only after a 10s countdown:
+  // block Esc, there is no backdrop form.
+  const WAIT = 10_000;
+  const closeBtn = document.getElementById('appAnnouncementClose');
+  const bar = document.getElementById('appAnnouncementProgress');
+  dialog.addEventListener('cancel', (e) => e.preventDefault());
+  closeBtn.addEventListener('click', () => dialog.close());
+
+  setTimeout(() => {
+    dialog.showModal();
+    const start = Date.now();
+    const tick = () => {
+      const left = WAIT - (Date.now() - start);
+      bar.value = Math.min(100, ((WAIT - left) / WAIT) * 100);
+      if (left > 0) {
+        closeBtn.textContent = `Close (${Math.ceil(left / 1000)})`;
+        requestAnimationFrame(tick);
+      } else {
+        closeBtn.textContent = 'Close';
+        closeBtn.disabled = false;
+      }
+    };
+    tick();
+  }, 1500);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initLoader();
   initSearch();
@@ -705,6 +753,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initNavbar();
   initBackToTop();
   loadYears();
+
+  showAppAnnouncementOnce();
 
   // Footer year
   const yearEl = document.getElementById('currentYear');

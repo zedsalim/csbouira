@@ -438,12 +438,12 @@
                 Upload Resources <i class="fas fa-arrow-right"></i>
               </a>
               <a
-                href="https://github.com/zedsalim/csbouira/releases/tag/v1.0.0"
+                href="https://github.com/zedsalim/csbouira/releases/latest/download/csbouira-app.apk"
                 target="_blank"
                 rel="noopener noreferrer"
                 class="btn btn-lg btn-success rounded-full gap-2 shadow-lg"
               >
-                Download APK <i class="fas fa-download"></i>
+                Download Android App <i class="fas fa-download"></i>
               </a>
             </div>
             <a
@@ -586,6 +586,9 @@
                     "
                     >Click here</a
                   >
+                </p>
+                <p class="text-gradient text-xl font-bold">
+                  Built by students, for students
                 </p>
               </div>
               <div class="order-1 lg:order-2">
@@ -958,7 +961,10 @@
     >
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <p class="text-base-content/60">
-          <span id="currentYear"></span> CS Bouira
+          <span id="currentYear"></span> CS Bouira · Since 2023
+        </p>
+        <p class="text-base-content/60 text-sm mt-1">
+          Built by students, for students
         </p>
         <div class="mt-4 flex justify-center gap-3">
           <a
@@ -1011,6 +1017,41 @@
     <!-- ══════════════════════════════════════════════════════════════════════ -->
     <!--  MODALS                                                               -->
     <!-- ══════════════════════════════════════════════════════════════════════ -->
+
+    <!-- Android App Announcement (shown once, see main.js) -->
+    <dialog id="appAnnouncementModal" class="modal p-4">
+      <div class="modal-box max-w-md text-center">
+        <i class="fa-brands fa-android text-5xl text-success"></i>
+        <h3 class="text-2xl font-bold mt-4">CS Bouira is now on Android!</h3>
+        <p class="mt-3 text-base-content/70">
+          We have officially released the CS Bouira Android app. Browse
+          modules, search files, calculate your average and upload resources,
+          fast, and even offline.
+        </p>
+        <div class="mt-6 flex flex-col sm:flex-row justify-center gap-3">
+          <a
+            id="appAnnouncementDownload"
+            href="https://github.com/zedsalim/csbouira/releases/download/v2.0.0/csbouira-app.apk"
+            class="btn btn-success rounded-full gap-2"
+          >
+            <i class="fas fa-download"></i> Download the app
+          </a>
+          <button
+            id="appAnnouncementClose"
+            class="btn btn-ghost rounded-full"
+            disabled
+          >
+            Close (10)
+          </button>
+        </div>
+        <progress
+          id="appAnnouncementProgress"
+          class="progress progress-success w-full mt-5"
+          value="0"
+          max="100"
+        ></progress>
+      </div>
+    </dialog>
 
     <!-- File Viewer Modal -->
     <dialog id="fileModal" class="modal p-0">
