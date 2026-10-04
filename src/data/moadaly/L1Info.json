@@ -1,0 +1,330 @@
+{
+  "name": "L1Info",
+  "fullname": "Informatique",
+  "domain": "Mathematiques et Informatique",
+  "startdate": "2025",
+  "expired": "",
+  "cycle": "licence",
+  "level": "1",
+  "branch": "informatique",
+  "universities": [],
+  "semestre1": {
+    "name": "S1",
+    "unites": [
+      {
+        "name": "U1_S1",
+        "title": "Fondamentale1",
+        "modules": [
+          {
+            "name": "analyse1",
+            "title": "Analyse1",
+            "coef": 4,
+            "credit": 6,
+            "poids": [
+              60,
+              40,
+              0
+            ],
+            "poids_tp": 0,
+            "poids_td": 0.4,
+            "poids_exam": 0.6,
+            "moy": 0
+          },
+          {
+            "name": "algebre1",
+            "title": "Algèbre1",
+            "coef": 2,
+            "credit": 4,
+            "poids": [
+              60,
+              40,
+              0
+            ],
+            "poids_tp": 0,
+            "poids_td": 0.4,
+            "poids_exam": 0.6,
+            "moy": 0
+          }
+        ],
+        "coef": 6,
+        "credit": 0,
+        "credits_origine": 10,
+        "moy": 0
+      },
+      {
+        "name": "U2_S1",
+        "title": "Fondamentale2",
+        "modules": [
+          {
+            "name": "Algo1",
+            "title": "Algorithmique et structure de données 1",
+            "coef": 5,
+            "credit": 7,
+            "poids": [
+              60,
+              20,
+              20
+            ],
+            "poids_tp": 0.2,
+            "poids_td": 0.2,
+            "poids_exam": 0.6,
+            "moy": 0
+          },
+          {
+            "name": "STRM1",
+            "title": " Structure machine 1",
+            "coef": 3,
+            "credit": 5,
+            "poids": [
+              60,
+              40,
+              0
+            ],
+            "poids_tp": 0,
+            "poids_td": 0.4,
+            "poids_exam": 0.6,
+            "moy": 0
+          }
+        ],
+        "coef": 8,
+        "credit": 0,
+        "credits_origine": 12,
+        "moy": 0
+      },
+      {
+        "name": "U3_S1",
+        "title": "Méthodologique",
+        "modules": [
+          {
+            "name": "OpenSource",
+            "title": "Logiciels libres (Open source)",
+            "coef": 1,
+            "credit": 2,
+            "poids": [
+              100,
+              0,
+              0
+            ],
+            "poids_tp": 0,
+            "poids_td": 0,
+            "poids_exam": 1,
+            "moy": 0
+          }
+        ],
+        "coef": 1,
+        "credit": 0,
+        "credits_origine": 2,
+        "moy": 0
+      },
+      {
+        "name": "U4_S1",
+        "title": "Transversal",
+        "modules": [
+          {
+            "name": "Anglais1",
+            "title": "Langue Etrangère",
+            "coef": 1,
+            "credit": 2,
+            "poids": [
+              100,
+              0,
+              0
+            ],
+            "poids_tp": 0,
+            "poids_td": 0,
+            "poids_exam": 1,
+            "moy": 0
+          }
+        ],
+        "coef": 1,
+        "credit": 0,
+        "credits_origine": 2,
+        "moy": 0
+      },
+      {
+        "name": "U5_S1",
+        "title": "Découverte",
+        "modules": [
+          {
+            "name": "Pḧys1",
+            "title": "Electricité générale",
+            "coef": 2,
+            "credit": 4,
+            "poids": [
+              60,
+              40,
+              0
+            ],
+            "poids_tp": 0,
+            "poids_td": 0.4,
+            "poids_exam": 0.6,
+            "moy": 0
+          }
+        ],
+        "coef": 2,
+        "credit": 0,
+        "credits_origine": 4,
+        "moy": 0
+      }
+    ],
+    "moy": 0,
+    "coef": 18,
+    "credits_origine": 30,
+    "credits": 0
+  },
+  "semestre2": {
+    "name": "S2",
+    "unites": [
+      {
+        "name": "U1_S2",
+        "title": "Fondamentale1",
+        "modules": [
+          {
+            "name": "Analyse2",
+            "title": "Analyse 2",
+            "coef": 4,
+            "credit": 6,
+            "poids": [
+              60,
+              40,
+              0
+            ],
+            "poids_tp": 0,
+            "poids_td": 0.4,
+            "poids_exam": 0.6,
+            "moy": 0
+          },
+          {
+            "name": "Algb2",
+            "title": "Algèbre 2",
+            "coef": 2,
+            "credit": 4,
+            "poids": [
+              60,
+              40,
+              0
+            ],
+            "poids_tp": 0,
+            "poids_td": 0.4,
+            "poids_exam": 0.6,
+            "moy": 0
+          }
+        ],
+        "coef": 6,
+        "credit": 0,
+        "credits_origine": 10,
+        "moy": 0
+      },
+      {
+        "name": "U2_S2",
+        "title": "Fondamentale2",
+        "modules": [
+          {
+            "name": "Algo2",
+            "title": "Algorithmique et structure de données 2",
+            "coef": 5,
+            "credit": 7,
+            "poids": [
+              60,
+              20,
+              20
+            ],
+            "poids_tp": 0.2,
+            "poids_td": 0.2,
+            "poids_exam": 0.6,
+            "moy": 0
+          },
+          {
+            "name": "STRM2",
+            "title": "Structure machine 2",
+            "coef": 3,
+            "credit": 5,
+            "poids": [
+              60,
+              40,
+              0
+            ],
+            "poids_tp": 0,
+            "poids_td": 0.4,
+            "poids_exam": 0.6,
+            "moy": 0
+          }
+        ],
+        "coef": 8,
+        "credit": 0,
+        "credits_origine": 12,
+        "moy": 0
+      },
+      {
+        "name": "U3_S2",
+        "title": "Méthodologique",
+        "modules": [
+          {
+            "name": "logicM",
+            "title": "Logique Mathématique ",
+            "coef": 1,
+            "credit": 2,
+            "poids": [
+              60,
+              40,
+              0
+            ],
+            "poids_tp": 0,
+            "poids_td": 0.4,
+            "poids_exam": 0.6,
+            "moy": 0
+          },
+          {
+            "name": "IIA",
+            "title": "Introduction à l'Intelligence Artificielle",
+            "coef": 1,
+            "credit": 2,
+            "poids": [
+              60,
+              0,
+              40
+            ],
+            "poids_tp": 0.4,
+            "poids_td": 0,
+            "poids_exam": 0.6,
+            "moy": 0
+          }
+        ],
+        "coef": 2,
+        "credit": 0,
+        "credits_origine": 4,
+        "moy": 0
+      },
+      {
+        "name": "U4_S2",
+        "title": "Découverte",
+        "modules": [
+          {
+            "name": "Elect",
+            "title": "Electronique fondamentale",
+            "coef": 2,
+            "credit": 4,
+            "poids": [
+              60,
+              40,
+              0
+            ],
+            "poids_tp": 0,
+            "poids_td": 0.4,
+            "poids_exam": 0.6,
+            "moy": 0
+          }
+        ],
+        "coef": 2,
+        "credit": 0,
+        "credits_origine": 4,
+        "moy": 0
+      }
+    ],
+    "moy": 0,
+    "coef": 18,
+    "credits_origine": 30,
+    "credits": 0
+  },
+  "moy": 0
+}

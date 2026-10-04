@@ -1,0 +1,111 @@
+{
+   "name":"M1IA",
+  "fullname": "Intelligence artificielle",
+   "domain":"Mathematiques et Informatique",
+"startdate":"2025",
+"expired":"",
+"cycle":"master",
+"level":"1",
+"branch":"Informatique",
+  "universities": [],
+  "semestre1":{
+  "name":"S1",
+  "unites":[
+   {
+    "name":"UEF1_S1",
+    "title":"Fondamentales",
+    "modules":[
+     {"name":"AlgoAdv","title":"Algorithmique avancée et complexité","coef":3,"credit":5,"poids":[60,20,20],"moy":0},
+     {"name":"DBAdv","title":"Bases de données avancées","coef":3,"credit":5,"poids":[60,20,20],"moy":0}
+    ],
+    "coef":6,"credits_origine":10,"moy":0
+   },
+   {
+    "name":"UEF2_S1",
+    "title":"Fondamentales IA",
+    "modules":[
+     {"name":"ML","title":"Machine Learning","coef":3,"credit":4,"poids":[60,0,40],"moy":0},
+     {"name":"KR","title":"Représentation des connaissances et raisonnement","coef":3,"credit":4,"poids":[60,0,40],"moy":0}
+    ],
+    "coef":6,"credits_origine":8,"moy":0
+   },
+   {
+    "name":"UEM_S1",
+    "title":"Méthodologie",
+    "modules":[
+     {"name":"DataAnalysis","title":"Analyse de données","coef":2,"credit":5,"poids":[60,40,0],"moy":0},
+     {"name":"Optim","title":"Méthodes d'optimisation","coef":2,"credit":4,"poids":[60,40,0],"moy":0}
+    ],
+    "coef":4,"credits_origine":9,"moy":0
+   },
+   {
+    "name":"UET_S1",
+    "title":"Transversale",
+    "modules":[
+     {"name":"Networks","title":"Réseaux avancés","coef":1,"credit":2,"poids":[60,0,40],"moy":0}
+    ],
+    "coef":1,"credits_origine":2,"moy":0
+   },
+   {
+    "name":"UED_S1",
+    "title":"Découverte",
+    "modules":[
+     {"name":"Option1","title":"Module au choix","coef":1,"credit":1,"poids":[100,0,0],"moy":0}
+    ],
+    "coef":1,"credits_origine":1,"moy":0
+   }
+  ],
+  "coef":18,"credits_origine":30,"moy":0
+ },
+
+ "semestre2":{
+  "name":"S2",
+  "unites":[
+   {
+    "name":"UEF1_S2",
+    "title":"Fondamentales",
+    "modules":[
+     {"name":"DL","title":"Deep Learning","coef":3,"credit":5,"poids":[60,20,20],"moy":0},
+     {"name":"MAS","title":"Systèmes Multi-Agents","coef":3,"credit":4,"poids":[60,0,40],"moy":0}
+    ],
+    "coef":6,"credits_origine":9,"moy":0
+   },
+   {
+    "name":"UEF2_S2",
+    "title":"Fondamentales IA",
+    "modules":[
+     {"name":"Vision","title":"Vision par ordinateur","coef":3,"credit":5,"poids":[60,20,20],"moy":0},
+     {"name":"Uncertain","title":"Gestion de l'incertain","coef":3,"credit":4,"poids":[60,40,0],"moy":0}
+    ],
+    "coef":6,"credits_origine":9,"moy":0
+   },
+   {
+    "name":"UEM_S2",
+    "title":"Méthodologie",
+    "modules":[
+     {"name":"ModelSim","title":"Modélisation et simulation","coef":2,"credit":5,"poids":[60,20,20],"moy":0},
+     {"name":"Cloud","title":"Virtualisation et Cloud","coef":2,"credit":4,"poids":[60,0,40],"moy":0}
+    ],
+    "coef":4,"credits_origine":9,"moy":0
+   },
+   {
+    "name":"UET_S2",
+    "title":"Transversale",
+    "modules":[
+     {"name":"PM","title":"Gestion de projets informatiques","coef":1,"credit":2,"poids":[60,0,40],"moy":0}
+    ],
+    "coef":1,"credits_origine":2,"moy":0
+   },
+   {
+    "name":"UED_S2",
+    "title":"Découverte",
+    "modules":[
+     {"name":"Option2","title":"Module au choix","coef":1,"credit":1,"poids":[100,0,0],"moy":0}
+    ],
+    "coef":1,"credits_origine":1,"moy":0
+   }
+  ],
+  "coef":18,"credits_origine":30,"moy":0
+ },
+ "moy":0
+ }

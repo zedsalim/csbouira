@@ -12,6 +12,7 @@ import { initLoader } from './modules/loader.js';
 import { initContact } from './modules/contact.js';
 import { initDhikr } from './modules/dhikr.js';
 import { initTheme } from './modules/theme.js';
+import { initMoadaly } from './modules/moadaly.js';
 import { CONFIG } from './config.js';
 import {
   getFileIconClass,
@@ -700,6 +701,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initContact();
   initDhikr();
   initTheme();
+  initMoadaly();
   initNavbar();
   initBackToTop();
   loadYears();

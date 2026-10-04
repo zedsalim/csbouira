@@ -1685,6 +1685,7 @@ dialog#fileModal.fullscreen .modal-box {
 .alert.hidden,
 .surface-row.hidden,
 .file-chip.hidden,
+.pill.hidden,
 .progress-row.hidden {
   display: none;
 }
@@ -1751,4 +1752,130 @@ i.fab[class*='fa-'] {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Grade calculator (Moadaly)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+#moadaly .tile-icon {
+  margin: 0;
+}
+
+.moadaly-unit {
+  margin-bottom: 0.875rem;
+  overflow: hidden;
+}
+.moadaly-unit-head {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1rem;
+  border-bottom: 1px solid var(--hairline);
+  background-color: color-mix(in oklab, var(--color-primary) 6%, transparent);
+}
+
+.moadaly-module {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 0.75rem 1rem;
+  padding: 0.85rem 1rem;
+}
+.moadaly-module + .moadaly-module {
+  border-top: 1px solid var(--hairline);
+}
+.moadaly-inputs {
+  display: flex;
+  gap: 0.5rem;
+  grid-column: 1 / -1;
+  grid-row: 2;
+}
+@media (width >= 48rem) {
+  .moadaly-module {
+    grid-template-columns: minmax(0, 1fr) auto 5.5rem;
+  }
+  .moadaly-inputs {
+    grid-column: auto;
+    grid-row: auto;
+  }
+}
+
+.moadaly-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  flex: 1;
+  min-width: 0;
+}
+.moadaly-field span {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: color-mix(in oklab, var(--color-base-content) 60%, transparent);
+}
+.moadaly-field b {
+  font-weight: 600;
+  opacity: 0.7;
+}
+.moadaly-field .input {
+  width: 100%;
+  font-variant-numeric: tabular-nums;
+}
+@media (width >= 48rem) {
+  .moadaly-field {
+    flex: none;
+    width: 5.25rem;
+  }
+}
+
+.moadaly-score {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  grid-column: 2;
+  grid-row: 1;
+}
+@media (width >= 48rem) {
+  .moadaly-score {
+    grid-column: auto;
+    grid-row: auto;
+  }
+}
+.moadaly-avg {
+  font-size: 1.15rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-primary);
+}
+
+.moadaly-summary {
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 0.5rem 1.25rem;
+}
+.moadaly-stat {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+.moadaly-stat span {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: color-mix(in oklab, var(--color-base-content) 55%, transparent);
+}
+.moadaly-stat b {
+  font-size: 1.15rem;
+  font-variant-numeric: tabular-nums;
+}
+.moadaly-stat small {
+  font-size: 0.7rem;
+  color: color-mix(in oklab, var(--color-base-content) 55%, transparent);
+}
+.moadaly-stat.is-year b {
+  font-size: 1.4rem;
+  color: var(--color-primary);
 }

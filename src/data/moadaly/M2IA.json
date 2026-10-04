@@ -1,0 +1,78 @@
+{
+   "name":"M2IA",
+  "fullname": "Intelligence artificielle",
+   "domain":"Mathematiques et Informatique",
+"startdate":"2026",
+"expired":"",
+"cycle":"master",
+"level":"2",
+"branch":"Informatique",
+
+  "universities": [],
+  
+ "semestre1":{
+  "name":"S3",
+  "unites":[
+   {
+    "name":"UEF1_S3",
+    "title":"Fondamentales",
+    "modules":[
+     {"name":"GenAI","title":"IA générative","coef":3,"credit":5,"poids":[60,20,20],"moy":0},
+     {"name":"MetaHeur","title":"Méta-heuristiques et algorithmes évolutionnaires","coef":3,"credit":5,"poids":[60,20,20],"moy":0}
+    ],
+    "coef":6,"credits_origine":10,"moy":0
+   },
+   {
+    "name":"UEF2_S3",
+    "title":"Fondamentales IA",
+    "modules":[
+     {"name":"RL","title":"Apprentissage par renforcement","coef":3,"credit":5,"poids":[60,20,20],"moy":0},
+     {"name":"Pattern","title":"Reconnaissance des formes","coef":3,"credit":3,"poids":[60,0,40],"moy":0}
+    ],
+    "coef":6,"credits_origine":8,"moy":0
+   },
+   {
+    "name":"UEM_S3",
+    "title":"Méthodologie",
+    "modules":[
+     {"name":"NLP","title":"Natural Language Processing","coef":2,"credit":5,"poids":[60,20,20],"moy":0},
+     {"name":"Constraints","title":"Programmation par contraintes","coef":2,"credit":4,"poids":[60,40,0],"moy":0}
+    ],
+    "coef":4,"credits_origine":9,"moy":0
+   },
+   {
+    "name":"UET_S3",
+    "title":"Transversale",
+    "modules":[
+     {"name":"Research","title":"Méthodologies de recherche","coef":1,"credit":2,"poids":[100,0,0],"moy":0}
+    ],
+    "coef":1,"credits_origine":2,"moy":0
+   },
+   {
+    "name":"UED_S3",
+    "title":"Découverte",
+    "modules":[
+     {"name":"Option3","title":"Module au choix","coef":1,"credit":1,"poids":[100,0,0],"moy":0}
+    ],
+    "coef":1,"credits_origine":1,"moy":0
+   }
+  ],
+  "coef":18,"credits_origine":30,"moy":0
+ },
+
+ "semestre2":{
+  "name":"S4",
+  "unites":[
+   {
+    "name":"PFE",
+    "title":"Projet de fin d'études",
+    "modules":[
+     {"name":"Memoire","title":"Mémoire + Stage","coef":18,"credit":30,"poids":[100,0,0],"moy":0}
+    ],
+    "coef":18,"credits_origine":30,"moy":0
+   }
+  ],
+  "coef":18,"credits_origine":30,"moy":0
+ },
+   "moy":0
+}

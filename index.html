@@ -193,6 +193,11 @@
           </div>
 
           <a
+            href="#moadaly"
+            class="btn btn-ghost nav-link"
+            >Calculator</a
+          >
+          <a
             href="#about"
             class="btn btn-ghost nav-link"
             >About</a
@@ -360,6 +365,11 @@
           </div>
 
           <a
+            href="#moadaly"
+            class="block px-4 py-2"
+            >Calculator</a
+          >
+          <a
             href="#about"
             class="block px-4 py-2"
             >About</a
@@ -462,6 +472,55 @@
       <!-- Favorites Section -->
       <section id="favorites" class="mb-12 hidden">
         <div id="favorites-container"></div>
+      </section>
+
+      <!-- Grade Calculator (Moadaly) Section -->
+      <section id="moadaly" class="mb-12">
+        <h2 class="section-head section-title">
+          <i class="fas fa-calculator section-icon"></i>
+          Grade Calculator
+        </h2>
+        <div class="surface surface-sheen p-6 sm:p-8">
+          <div class="flex flex-col md:flex-row md:items-center gap-6">
+            <div class="flex items-start gap-4 flex-1">
+              <div class="tile-icon tile-icon-primary flex-shrink-0">
+                <i class="fas fa-square-root-variable"></i>
+              </div>
+              <div>
+                <h3 class="text-xl font-semibold mb-1">
+                  Calculate your moyenne
+                </h3>
+                <p class="text-sm text-base-content/60">
+                  Enter your marks to see your averages, credits and any modules to
+                  retake.
+                </p>
+              </div>
+            </div>
+            <div class="flex flex-col sm:flex-row gap-3 md:w-auto">
+              <select
+                id="moadalyPicker"
+                class="select w-full sm:w-64"
+                aria-label="Choose your year"
+              ></select>
+              <button
+                onclick="openMoadaly()"
+                class="btn btn-gradient gap-2"
+              >
+                Calculate <i class="fas fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+          <p class="text-xs text-base-content/50 mt-5">
+            Inspired by and built on
+            <a
+              href="https://github.com/madjsmail/moadaly"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="link link-primary"
+              >Moadaly</a
+            >.
+          </p>
+        </div>
       </section>
 
       <!-- Academic Years Section -->
@@ -1030,6 +1089,67 @@
             class="breadcrumb-trail mb-4"
           ></div>
           <div id="yearContent"></div>
+        </div>
+      </div>
+    </dialog>
+
+    <!-- Grade Calculator Modal -->
+    <dialog id="moadalyModal" class="modal p-0 sm:p-4">
+      <div
+        class="modal-box w-full max-w-5xl h-full sm:h-[90vh] max-h-none sm:max-h-[90vh] flex flex-col p-0"
+      >
+        <div class="modal-head">
+          <h3 class="min-w-0">
+            <i class="fas fa-calculator modal-icon"></i>
+            <span class="flex flex-col min-w-0">
+              <span class="truncate">Grade Calculator</span>
+              <span
+                id="moadalySubtitle"
+                class="text-xs font-normal text-base-content/55 truncate"
+              ></span>
+            </span>
+          </h3>
+          <div class="flex items-center gap-2">
+            <select
+              id="moadalySelect"
+              class="select select-sm w-36 sm:w-56"
+              aria-label="Choose your year"
+            ></select>
+            <button
+              onclick="closeMoadaly()"
+              class="btn btn-ghost btn-circle btn-sm"
+            >
+              <i class="fas fa-times text-xl"></i>
+            </button>
+          </div>
+        </div>
+        <div id="moadalyContent" class="modal-body"></div>
+        <div class="modal-foot moadaly-summary">
+          <div class="moadaly-stat">
+            <span id="moadalyS1Label">S1</span>
+            <b data-sem-avg="0">0.00</b>
+            <small><span data-sem-cr="0">0/30</span> cr</small>
+          </div>
+          <div class="moadaly-stat">
+            <span id="moadalyS2Label">S2</span>
+            <b data-sem-avg="1">0.00</b>
+            <small><span data-sem-cr="1">0/30</span> cr</small>
+          </div>
+          <div class="moadaly-stat is-year">
+            <span>Year</span>
+            <b data-sem-avg="year">0.00</b>
+            <small><span data-sem-cr="year">0/60</span> cr</small>
+          </div>
+          <div class="flex flex-col items-end gap-1.5 ml-auto">
+            <span id="moadalyStatus" class="pill pill-lg pill-neutral"></span>
+            <button
+              id="moadalyReset"
+              class="btn btn-ghost btn-xs gap-1"
+              title="Clear all marks for this year"
+            >
+              <i class="fas fa-rotate-left"></i> Reset
+            </button>
+          </div>
         </div>
       </div>
     </dialog>

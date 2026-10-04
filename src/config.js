@@ -55,4 +55,30 @@ export const CONFIG = {
   favorites: {
     storageKey: 'csbouira_favorites',
   },
+  // Grade calculator (ported from Moadaly). Ids match src/data/moadaly/*.json
+  moadaly: {
+    storageKey: 'csbouira_moadaly',
+    groups: {
+      Licence: {
+        L1Info: 'Licence 1',
+        L1MI: 'Licence 1 MI (before 2025)',
+        L2Info: 'Licence 2',
+        'L2Info-old': 'Licence 2 (before 2025)',
+        L3SI: 'Licence 3 SI',
+        'L3SI-old': 'Licence 3 SI (before 2025)',
+        L3ISIL: 'Licence 3 ISIL',
+      },
+      'Master 1': {
+        M1GSI: 'Master 1 GSI',
+        M1ISIL: 'Master 1 ISIL',
+        M1IA: 'Master 1 IA',
+      },
+      'Master 2': {
+        M2GSI: 'Master 2 GSI',
+        M2ISIL: 'Master 2 ISIL',
+        M2IA: 'Master 2 IA',
+        'M2IA-old': 'Master 2 IA (before 2026)',
+      },
+    },
+  },
 };
