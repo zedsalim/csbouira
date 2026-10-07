@@ -32,14 +32,14 @@ Welcome to **CS Bouira**! This project is a centralized resource for Computer Sc
 
 CS Bouira is now available as an Android application!
 
-You can download and install the official APK wrapper of the website directly from our GitHub Releases page:
+You can download and install the official Android Application directly from our GitHub Releases page:
 
 🔗 **Download here:**  
-https://github.com/zedsalim/csbouira/releases/tag/v1.0.0
+[https://github.com/zedsalim/csbouira/releases/latest](https://github.com/zedsalim/csbouira/releases/latest)
 
 ### 📦 About the App
 
-- Official Android APK wrapper of https://csbouira.xyz
+- Official Android Application of https://csbouira.xyz
 - Lightweight and fast
 - Easy access to all modules and resources
 - Direct connection to the CSBouira API
