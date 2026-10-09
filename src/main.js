@@ -713,30 +713,12 @@ function showAppAnnouncementOnce() {
       trackEvent('android_app_download', { source: 'announcement' }),
     );
 
-  // Only the close button closes it, and only after a 10s countdown:
-  // block Esc, there is no backdrop form.
-  const WAIT = 10_000;
+  // Only the close button closes it; block Esc, there is no backdrop form.
   const closeBtn = document.getElementById('appAnnouncementClose');
-  const bar = document.getElementById('appAnnouncementProgress');
   dialog.addEventListener('cancel', (e) => e.preventDefault());
   closeBtn.addEventListener('click', () => dialog.close());
 
-  setTimeout(() => {
-    dialog.showModal();
-    const start = Date.now();
-    const tick = () => {
-      const left = WAIT - (Date.now() - start);
-      bar.value = Math.min(100, ((WAIT - left) / WAIT) * 100);
-      if (left > 0) {
-        closeBtn.textContent = `Close (${Math.ceil(left / 1000)})`;
-        requestAnimationFrame(tick);
-      } else {
-        closeBtn.textContent = 'Close';
-        closeBtn.disabled = false;
-      }
-    };
-    tick();
-  }, 1500);
+  setTimeout(() => dialog.showModal(), 1500);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
